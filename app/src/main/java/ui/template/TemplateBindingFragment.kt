@@ -49,7 +49,7 @@ class TemplateBindingFragment : BaseFragment<FragmentTemplateBindingBinding, Tem
     private fun setBackHandler() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                baseActivity.binding.baseNvNavigation.selectedItemId = R.id.navigation_one
+         //       baseActivity.binding.baseNvNavigation.selectedItemId = R.id.navigation_one
             }
         })
     }
