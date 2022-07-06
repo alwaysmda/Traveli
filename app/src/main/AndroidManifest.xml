@@ -10,9 +10,6 @@
             tools:ignore="ScopedStorage" />
 
     <queries>
-        <package android:name="com.farsitel.bazaar" />
-        <package android:name="ir.mservices.market" />
-        <package android:name="ir.tgbs.android.iranapp" />
         <package android:name="com.android.vending" />
     </queries>
 

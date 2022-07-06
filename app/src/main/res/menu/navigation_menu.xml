@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
             android:id="@+id/homeFragment"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@drawable/ic_compass"
             android:title="One" />
 
     <item
             android:id="@+id/navigation_two"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@drawable/ic_add_circle"
             android:title="Two" />
     <item
             android:id="@+id/chatFragment"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@drawable/ic_compass"
             android:title="Three" />
 </menu>

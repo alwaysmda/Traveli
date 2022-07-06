@@ -16,7 +16,6 @@
         <item name="colorButtonBackground">@color/darkBlueButtonBackground</item>
         <item name="colorButtonText">@color/darkBlueButtonText</item>
         <item name="colorRipple">@color/darkBlueRipple</item>
-
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">false</item>
@@ -55,10 +54,13 @@
 
     <style name="BottomNavigationViewFontedFa" parent="Widget.Design.BottomNavigationView">
         <item name="fontFamily">@font/font_fa_medium</item>
+
     </style>
 
-    <style name="BottomNavigationViewFontedEn" parent="Widget.Design.BottomNavigationView">
+    <style name="BottomNavigationViewFontedEn" >
         <item name="fontFamily">@font/font_en_medium</item>
+
+
     </style>
 
     <style name="ToolbarButton" parent="Widget.MaterialComponents.Button.TextButton">

@@ -22,5 +22,9 @@ interface LanguageInterface {
     val loading: String
     val download: String
 
+
+
+    val search:String
+
     fun paramString(param: String) = "$appName $param"
 }

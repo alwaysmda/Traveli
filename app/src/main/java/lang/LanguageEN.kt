@@ -23,5 +23,7 @@ class LanguageEN(private val app: ApplicationClass) : LanguageInterface {
     override val pressBackAgainToExit = "Press back again to exit"
     override val loading = "Loading..."
     override val download = "Download"
+    override val search: String = "Search"
+
 
 }

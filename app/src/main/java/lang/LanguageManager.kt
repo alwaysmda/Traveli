@@ -8,7 +8,7 @@ import javax.inject.Inject
 class LanguageManager @Inject constructor(app: ApplicationClass, private val prefManager: PrefManager) {
     lateinit var main: LanguageInterface
     private val en: LanguageInterface = LanguageEN(app)
-    private val fa: LanguageInterface = LanguageFA(app)
+   // private val fa: LanguageInterface = LanguageFA(app)
 
     var currentLanguage = Constant.Languages.DEFAULT_LANGUAGE
     fun changeLang(lang: Constant.Languages) {
@@ -16,7 +16,7 @@ class LanguageManager @Inject constructor(app: ApplicationClass, private val pre
         prefManager.setPref(Constant.PREF_LANGUAGE, lang.value)
         main = when (lang) {
             Constant.Languages.DEFAULT_LANGUAGE,
-            Constant.Languages.FA -> fa
+            Constant.Languages.FA -> en
             Constant.Languages.EN -> en
         }
     }
