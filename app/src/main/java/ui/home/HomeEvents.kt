@@ -1,6 +1,6 @@
 package ui.home
 
-import domain.model.Travel
+import domain.model.travel.Travel
 import ui.base.BaseEvent
 
 sealed class HomeEvents : BaseEvent() {

@@ -1,4 +1,4 @@
-package domain.model
+package domain.model.travel
 
 data class Travel(
     val id:String,

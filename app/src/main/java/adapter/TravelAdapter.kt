@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.xodus.templatefive.R
 import com.xodus.templatefive.databinding.RowTravelBinding
-import domain.model.Travel
+import domain.model.travel.Travel
 import ui.base.BaseActivity
 
 class TravelAdapter(private val activity:BaseActivity):ListAdapter<Travel,TravelAdapter.TravelViewHolder>(DiffCallback()) {
@@ -17,7 +17,7 @@ class TravelAdapter(private val activity:BaseActivity):ListAdapter<Travel,Travel
 
     inner class TravelViewHolder(private val binding:RowTravelBinding):RecyclerView.ViewHolder(binding.root){
 
-        fun bind(travel:Travel){
+        fun bind(travel: Travel){
             binding.apply {
                 app = activity.app
                 data = travel

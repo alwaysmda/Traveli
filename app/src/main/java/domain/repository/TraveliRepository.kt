@@ -1,10 +1,11 @@
 package domain.repository
 
 import data.remote.DataState
-import domain.model.Travel
+import domain.model.travel.Travel
+import kotlinx.coroutines.flow.Flow
 
 interface TraveliRepository {
 
-    suspend fun getTravel(isTrending:Boolean,isNew:Boolean):DataState<List<Travel>>
+     fun getTravel(isTrending:Boolean,isNew:Boolean):Flow<DataState<List<Travel>>>
 
 }
