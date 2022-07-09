@@ -33,8 +33,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
     private fun observeToEvents() = viewLifecycleOwner.lifecycleScope.launchWhenStarted {
         viewModel.event.collectLatest {
             when (it) {
-                is HomeEvents.OnError                -> TODO()
-                HomeEvents.OnLoading                 -> TODO()
+                is HomeEvents.OnError                -> {}
+                HomeEvents.OnLoading                 -> {}
                 is HomeEvents.OnTrendingTravelUpdate -> trendingTravelAdapter.submitList(it.travels)
             }
         }

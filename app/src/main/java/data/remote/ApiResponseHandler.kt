@@ -46,6 +46,30 @@ ApiResponseHandler(
         }
     }
 
+    suspend fun <T> call(request: suspend () -> Response<T>): DataState<T> {
+        try {
+            val response = request()
+            if (response.isSuccessful) {
+                return DataState.Success(response.body()!!)
+            } else {
+                response.errorBody()?.let {
+                    return try {
+                        val error = Gson().fromJson(JsonParser().parse(it.string()), NetworkErrorDto::class.java)
+                        DataState.Failure(error.meta.code, error.meta.message, networkErrorMapper.toDomainModel(error))
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        DataState.Failure(response.code(), app.m.somethingWentWrong)
+                    }
+                } ?: kotlin.run {
+                    return DataState.Failure(response.code(), app.m.somethingWentWrong)
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return DataState.Failure(DataState.Failure.CODE_NO_INTERNET, app.m.checkConnectionAndTryAgain)
+        }
+    }
+
     @ExperimentalCoroutinesApi
     suspend fun call(path: String, name: String, response: Response<ResponseBody>, data: String?) = channelFlow {
         send(DownloadDataState.Loading)

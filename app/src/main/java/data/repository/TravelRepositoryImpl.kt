@@ -4,15 +4,12 @@ import data.remote.ApiResponseHandler
 import data.remote.DataState
 import data.remote.dto.NetworkErrorMapper
 import data.remote.dto.TraveliApi
+import domain.model.travel.Banner
 import domain.model.travel.Travel
 import domain.repository.TraveliRepository
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import main.ApplicationClass
 
-
-const val carabianSeeImage = "https://www.wildearth-travel.com/get-image-version/verybig/uploads/caribbean_sea_11_days_(fram)_picture.jpg"
-const val rioImage = "https://upload-gifs.s3-sa-east-1.amazonaws.com/ae79d48c-5994-449a-a10a-f02a0ea455b0_Cristo+Redentor+Riotur.jpg"
 
 class TravelRepositoryImpl(
     private val traveliApi: TraveliApi,
@@ -22,21 +19,26 @@ class TravelRepositoryImpl(
 ) : TraveliRepository, ApiResponseHandler(app, networkErrorMapper) {
 
 
-    override  fun getTravel(isTrending: Boolean, isNew: Boolean) = flow<DataState<List<Travel>>> {
-        when (val response = call(traveliApi.getTravel())) {
+    override fun getTravel(isTrending: Boolean, isNew: Boolean) = flow {
+
+        when (val response = call { traveliApi.getTravel() }) {
+            is DataState.Loading -> emit(response)
+            is DataState.Failure -> emit(response)
+            is DataState.Success -> {
+                emit(DataState.Success(Travel.getFake(10)))
+            }
+        }
+    }
+
+
+    override fun getBanner() = flow<DataState<Banner>> {
+        when (val response = call { traveliApi.getBanner() }) {
             is DataState.Failure -> emit(response)
             DataState.Loading    -> emit(DataState.Loading)
-            is DataState.Success -> {
-                val travels = mutableListOf<Travel>()
-                for (x in 0..10) {
-                    travels.add(Travel(x.toString(), "caribbean sea", carabianSeeImage))
-                }
-                emit(DataState.Success(travels))
-            }
-
+            is DataState.Success -> emit(DataState.Success(Banner.getFake()))
         }
 
-
     }
+
 
 }

@@ -8,12 +8,14 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.google.android.material.textfield.TextInputLayout
+import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 
 @BindingAdapter("imageUrl")
 fun imageUrl(imageView: ImageView, url: String?) {
     if (url.isNullOrEmpty().not()) {
         Picasso.get().load(url)
+
             //            .placeholder(R.color.md_grey_300).error(R.color.md_grey_500).fit().centerInside()
             .into(imageView)
     }
