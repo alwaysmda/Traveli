@@ -26,6 +26,7 @@
         app:cardBackgroundColor="?attr/colorBackground2"
         app:cardCornerRadius="@dimen/radiusMedium"
         android:layout_marginEnd="@dimen/paddingMedium"
+
         >
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="150dp"
@@ -42,6 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 imageUrl="@{data.image}"
+                android:scaleType="centerCrop"
                 />
 
 
@@ -56,6 +58,7 @@
                 android:layout_marginTop="@dimen/paddingMedium"
                 tools:text="ssdasd"
                 android:text="@{data.name}"
+                android:layout_marginBottom="@dimen/paddingMedium"
                 />
 
 

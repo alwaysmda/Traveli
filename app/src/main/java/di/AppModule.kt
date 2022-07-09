@@ -7,9 +7,12 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import domain.repository.PhotoRepository
+import domain.repository.TraveliRepository
 import domain.usecase.photo.*
 import domain.usecase.template.Template
 import domain.usecase.template.TemplateUseCases
+import domain.usecase.travel.GetTravel
+import domain.usecase.travel.TravelUseCases
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import lang.LanguageManager
 import main.ApplicationClass
@@ -31,12 +34,10 @@ object AppModule {
         PrefManager(app)
 
 
-
     @Singleton
     @Provides
     fun provideLanguageManager(app: ApplicationClass, prefManager: PrefManager): LanguageManager =
         LanguageManager(app, prefManager)
-
 
 
     @ExperimentalCoroutinesApi
@@ -58,6 +59,15 @@ object AppModule {
     fun provideTemplateUseCases(photoRepository: PhotoRepository): TemplateUseCases {
         return TemplateUseCases(
             Template(photoRepository),
+        )
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideTravelUseCase(traveliRepository: TraveliRepository): TravelUseCases {
+        return TravelUseCases(
+            GetTravel(traveliRepository)
         )
     }
 }

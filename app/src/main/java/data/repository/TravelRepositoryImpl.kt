@@ -18,10 +18,8 @@ class TravelRepositoryImpl(
 
     ) : TraveliRepository, ApiResponseHandler(app,networkErrorMapper) {
     override suspend fun getTravel(isTrending: Boolean, isNew: Boolean): DataState<List<Travel>> {
-        return when (val response = call(traveliApi.getTravel(isTrending,isNew))){
-            is DataState.Failure -> {
-                DataState.Failure(response.code,"")
-            }
+        return when (val response = call(traveliApi.getTravel())){
+            is DataState.Failure -> response
             DataState.Loading    -> DataState.Loading
             is DataState.Success -> {
                 val travels = mutableListOf<Travel>()

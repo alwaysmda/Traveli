@@ -80,7 +80,7 @@
                     app:cardCornerRadius="@dimen/radiusMedium"
                     />
 
-                <com.google.android.material.textview.MaterialTextView
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/tv_trending_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -93,6 +93,11 @@
                     android:textSize="@dimen/textLargeXX"
                     fonti="@{vm.app.m.fontBold}"
                     android:textColor="?attr/colorText0"
+                    style="@style/GeneralButton.TextButton"
+                    app:icon="@drawable/ic_arrow_right"
+                    app:iconSize="32dp"
+                    app:iconTint="?attr/colorText0"
+
                     />
 
 

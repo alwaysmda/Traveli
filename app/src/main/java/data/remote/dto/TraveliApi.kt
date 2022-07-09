@@ -9,7 +9,7 @@ interface TraveliApi {
 
 
     @GET(GOOGLE_URL)
-    suspend fun getTravel(isTrending:Boolean,isNew:Boolean):Response<Unit>
+    suspend fun getTravel():Response<Unit>
 
 
 }
