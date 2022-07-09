@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -19,7 +21,6 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:background="?attr/colorBackground0"
 
             >
@@ -28,9 +29,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="?attr/colorBackground0"
-                xmlns:tools="http://schemas.android.com/tools"
-                >
+                android:background="?attr/colorBackground0">
 
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -82,6 +81,7 @@
                     />
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_trending_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@+id/cv_third_travel"
@@ -96,21 +96,19 @@
                     />
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_trending_travel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/paddingMedium"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/paddingLarge"
+                    android:paddingEnd="4dp"
+                    android:clipToPadding="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_trending_title"
+                    tools:layout_editor_absoluteX="-38dp"
+                    tools:listitem="@layout/row_travel" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
