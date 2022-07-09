@@ -46,8 +46,8 @@ class BaseActivity : ThemeAwareActivity() {
     }
 
     fun setNavigationTabs() {
-        binding.baseNvNavigation.menu.getItem(0)?.title = app.m.appName
-        binding.baseNvNavigation.menu.getItem(1)?.title = app.m.appName
+        binding.baseNvNavigation.menu.getItem(0)?.title = ""
+        binding.baseNvNavigation.menu.getItem(1)?.title = ""
     }
 
     fun setLoading(visible: Boolean) {

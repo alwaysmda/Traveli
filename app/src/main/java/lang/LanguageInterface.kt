@@ -27,5 +27,9 @@ interface LanguageInterface {
     val search:String
     val trending:String
 
+
+    //navigation
+    val home:String
+
     fun paramString(param: String) = "$appName $param"
 }

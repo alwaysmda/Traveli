@@ -25,5 +25,7 @@ class LanguageEN(private val app: ApplicationClass) : LanguageInterface {
     override val download = "Download"
     override val search: String = "Search"
     override val trending: String = "Trending"
+    override val home: String = "Home"
+
 
 }

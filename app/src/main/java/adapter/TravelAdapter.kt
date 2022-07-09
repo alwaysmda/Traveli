@@ -21,6 +21,7 @@ class TravelAdapter(private val activity:BaseActivity):ListAdapter<Travel,Travel
             binding.apply {
                 app = activity.app
                 data = travel
+                ivTravel.clipToOutline = true
             }
 
 
