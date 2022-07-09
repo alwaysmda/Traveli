@@ -24,6 +24,6 @@ class LanguageEN(private val app: ApplicationClass) : LanguageInterface {
     override val loading = "Loading..."
     override val download = "Download"
     override val search: String = "Search"
-
+    override val trending: String = "Trending"
 
 }
