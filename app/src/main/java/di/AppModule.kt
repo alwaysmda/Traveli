@@ -11,6 +11,7 @@ import domain.repository.TraveliRepository
 import domain.usecase.photo.*
 import domain.usecase.template.Template
 import domain.usecase.template.TemplateUseCases
+import domain.usecase.travel.GetBanner
 import domain.usecase.travel.GetTravel
 import domain.usecase.travel.TravelUseCases
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -67,7 +68,8 @@ object AppModule {
     @Provides
     fun provideTravelUseCase(traveliRepository: TraveliRepository): TravelUseCases {
         return TravelUseCases(
-            GetTravel(traveliRepository)
+            GetTravel(traveliRepository),
+            GetBanner(traveliRepository)
         )
     }
 }

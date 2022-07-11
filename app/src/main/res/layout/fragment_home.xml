@@ -57,53 +57,63 @@
                     app:cardCornerRadius="@dimen/radiusMedium"
                     app:layout_constraintDimensionRatio="H,1:1"
                     >
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/gradiant"
-                        >
+                        android:orientation="vertical"
 
-                    </LinearLayout>
+                        >
+                        <ImageView
+                            android:id="@+id/iv_banner"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:elevation="0dp"
+                            />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_banner_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:gravity="center"
+                            android:padding="@dimen/paddingLarge"
+                            android:elevation="0dp"
+                            android:background="@drawable/gradiant"
+
+                            />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
 
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cv_second_travel"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_sub_banner"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@+id/cv_first_travel"
-                    android:layout_marginTop="@dimen/paddingLarge"
-                    android:layout_marginHorizontal="@dimen/paddingLarge"
-                    app:cardCornerRadius="@dimen/radiusMedium"
-                    app:cardBackgroundColor="?attr/colorBackground2"
-                    app:layout_constraintDimensionRatio="H,3:2"
+                    tools:listitem="@layout/row_sub_banner"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cv_third_travel"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:layout_constraintTop_toBottomOf="@+id/cv_second_travel"
-                    android:layout_marginTop="@dimen/paddingLarge"
-                    android:layout_marginHorizontal="@dimen/paddingLarge"
-                    app:cardBackgroundColor="?attr/colorBackground2"
-                    app:cardCornerRadius="@dimen/radiusMedium"
-                    app:layout_constraintDimensionRatio="H,3:2"
-                    />
+
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/tv_trending_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/cv_third_travel"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_sub_banner"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="@dimen/paddingLarge"
                     android:layout_marginStart="@dimen/paddingLarge"
                     tools:text="Trending"
+                    android:gravity="start|center_vertical"
                     android:text="@{vm.app.m.trending}"
                     android:textSize="@dimen/textLargeXX"
                     fonti="@{vm.app.m.fontBold}"
-                    android:textColor="?attr/colorText0"
                     style="@style/GeneralButton.TextButton"
                     app:icon="@drawable/ic_arrow_right"
                     app:iconSize="32dp"
@@ -123,7 +133,6 @@
                     android:clipToPadding="false"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@+id/tv_trending_title"
-                    tools:layout_editor_absoluteX="-38dp"
                     tools:listitem="@layout/row_travel" />
 
 

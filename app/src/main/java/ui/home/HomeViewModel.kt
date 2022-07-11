@@ -18,11 +18,10 @@ class HomeViewModel @Inject constructor(
 ) : BaseViewModel<HomeEvents, HomeAction>(app),HomeAction {
 
 
-    override fun onStart() {
-        if (isFirstStart){
-            getTrendingTravel()
-            isFirstStart = false
-        }
+     override fun onStart() {
+
+        getTrendingTravel()
+        getBanner()
     }
 
 
@@ -41,6 +40,21 @@ class HomeViewModel @Inject constructor(
 
         }.launchIn(viewModelScope)
     }
+
+    private fun getBanner(){
+        travelUseCases.getBanner().onEach {
+            when(it){
+                is DataState.Failure -> _event.emit(HomeEvents.OnError(it.message))
+                DataState.Loading    -> _event.emit(HomeEvents.OnLoading)
+                is DataState.Success -> _event.emit(HomeEvents.OnBannerUpdate(it.data))
+            }
+        }.launchIn(viewModelScope)
+    }
+
+
+
+
+
 
 
 }
