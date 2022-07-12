@@ -97,6 +97,8 @@
                     tools:listitem="@layout/row_sub_banner"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="2"
+
                     />
 
 
@@ -133,7 +135,44 @@
                     android:clipToPadding="false"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@+id/tv_trending_title"
-                    tools:listitem="@layout/row_travel" />
+
+                    />
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/tv_countries"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_trending_travel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="@dimen/paddingLarge"
+                    android:layout_marginStart="@dimen/paddingLarge"
+                    android:text="@{vm.app.m.countries}"
+                    android:textSize="@dimen/textLargeXX"
+                    style="@style/GeneralButton.TextButton"
+                    app:icon="@drawable/ic_arrow_right"
+                    app:iconTint="?attr/colorText0"
+                    app:iconGravity="textEnd"
+                    android:gravity="start|center_vertical"
+                    />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_countries"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_countries"
+                    android:layout_marginTop="@dimen/paddingMedium"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="4dp"
+                    android:clipToPadding="false"
+                    android:layout_marginBottom="@dimen/paddingLarge"
+                    />
+
+
+
+
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

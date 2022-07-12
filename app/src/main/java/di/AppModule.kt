@@ -8,6 +8,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import domain.repository.PhotoRepository
 import domain.repository.TraveliRepository
+import domain.usecase.country.CountryUseCases
+import domain.usecase.country.GetCountry
 import domain.usecase.photo.*
 import domain.usecase.template.Template
 import domain.usecase.template.TemplateUseCases
@@ -70,6 +72,14 @@ object AppModule {
         return TravelUseCases(
             GetTravel(traveliRepository),
             GetBanner(traveliRepository)
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun providesCountryUseCases(traveliRepository: TraveliRepository):CountryUseCases{
+        return CountryUseCases(
+            GetCountry(traveliRepository)
         )
     }
 }

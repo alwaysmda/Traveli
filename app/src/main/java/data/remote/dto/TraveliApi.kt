@@ -16,4 +16,8 @@ interface TraveliApi {
     suspend fun getBanner(): Response<Unit>
 
 
+    @GET(GOOGLE_URL)
+    suspend fun getCountries():Response<Unit>
+
+
 }

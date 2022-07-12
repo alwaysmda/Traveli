@@ -3,6 +3,7 @@ package ui.home
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import data.remote.DataState
+import domain.usecase.country.CountryUseCases
 import domain.usecase.travel.TravelUseCases
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -14,25 +15,22 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     app: ApplicationClass,
-    private val travelUseCases: TravelUseCases
-) : BaseViewModel<HomeEvents, HomeAction>(app),HomeAction {
+    private val travelUseCases: TravelUseCases,
+    private val countryUseCases: CountryUseCases
+) : BaseViewModel<HomeEvents, HomeAction>(app), HomeAction {
 
 
-     override fun onStart() {
+    override fun onStart() {
 
         getTrendingTravel()
         getBanner()
+        getCountries()
     }
 
 
-
-
-
-
-
-    private fun getTrendingTravel(){
+    private fun getTrendingTravel() {
         travelUseCases.getTravel(true).onEach {
-            when(it){
+            when (it) {
                 is DataState.Failure -> _event.emit(HomeEvents.OnError(it.message))
                 DataState.Loading    -> _event.emit(HomeEvents.OnLoading)
                 is DataState.Success -> _event.emit(HomeEvents.OnTrendingTravelUpdate(it.data))
@@ -41,9 +39,9 @@ class HomeViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    private fun getBanner(){
+    private fun getBanner() {
         travelUseCases.getBanner().onEach {
-            when(it){
+            when (it) {
                 is DataState.Failure -> _event.emit(HomeEvents.OnError(it.message))
                 DataState.Loading    -> _event.emit(HomeEvents.OnLoading)
                 is DataState.Success -> _event.emit(HomeEvents.OnBannerUpdate(it.data))
@@ -51,10 +49,15 @@ class HomeViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-
-
-
-
+    private fun getCountries() {
+        countryUseCases.getCountry().onEach {
+            when (it) {
+                is DataState.Failure -> _event.emit(HomeEvents.OnError(it.message))
+                DataState.Loading    -> _event.emit(HomeEvents.OnLoading)
+                is DataState.Success -> _event.emit(HomeEvents.OnCountriesUpdate(it.data))
+            }
+        }.launchIn(viewModelScope)
+    }
 
 
 }

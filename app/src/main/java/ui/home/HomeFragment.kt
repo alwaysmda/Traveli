@@ -1,5 +1,6 @@
 package ui.home
 
+import adapter.CountryAdapter
 import adapter.SubBannerAdapter
 import adapter.TravelAdapter
 import android.os.Bundle
@@ -20,6 +21,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
 
     private lateinit var trendingTravelAdapter: TravelAdapter
     private lateinit var subBannerAdapter: SubBannerAdapter
+    private lateinit var countryAdapter:CountryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +52,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
                         binding.tvBannerName.text = it.banner.banner.name
                         subBannerAdapter.submitList(it.banner.subBanner)
                     }
+                    is HomeEvents.OnCountriesUpdate      -> countryAdapter.submitList(it.countries)
                 }
             }
         }
@@ -60,7 +63,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
     private fun setUpRecyclerViews() {
         trendingTravelAdapter = TravelAdapter(baseActivity)
         subBannerAdapter = SubBannerAdapter(baseActivity)
-        binding.rvTrendingTravel.adapter = trendingTravelAdapter
-        binding.rvSubBanner.adapter = subBannerAdapter
-    }
+        countryAdapter = CountryAdapter(baseActivity)
+        binding.apply {
+            rvTrendingTravel.adapter = trendingTravelAdapter
+            rvSubBanner.adapter = subBannerAdapter
+            rvCountries.adapter = countryAdapter
+
+        }
+        }
+
 }

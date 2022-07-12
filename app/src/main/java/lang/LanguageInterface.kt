@@ -26,6 +26,7 @@ interface LanguageInterface {
 
     val search:String
     val trending:String
+    val countries:String
 
 
     //navigation

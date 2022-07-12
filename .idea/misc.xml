@@ -13,7 +13,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/dialog_custom.xml" value="0.2368659420289855" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.21200607902735563" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2633192794174013" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.125" />
         <entry key="app/src/main/res/layout/fragment_photo_detail.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/fragment_photo_list.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/fragment_template.xml" value="0.21073961499493415" />
@@ -21,6 +21,7 @@
         <entry key="app/src/main/res/layout/fragment_template_binfing.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/fragment_template_mvi.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/row_chat.xml" value="0.2717391304347826" />
+        <entry key="app/src/main/res/layout/row_country.xml" value="0.1" />
         <entry key="app/src/main/res/layout/row_message.xml" value="0.2859375" />
         <entry key="app/src/main/res/layout/row_photo.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/row_photo_state.xml" value="0.34371833839918947" />
