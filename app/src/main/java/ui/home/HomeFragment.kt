@@ -36,6 +36,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
         setUpRecyclerViews()
         observeToEvents()
         viewModel.action.onStart()
+        setUpActions()
 
     }
 
@@ -101,8 +102,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
                     }
                     is HomeEvents.TrendingTravelLoading -> {
                         binding.apply {
-                            trendingLoading.isVisible = true; trendingProgress.isVisible = true; tvTrendingError.isVisible = false
-                            btnTrendingRetry.isVisible = false; rvTrendingTravel.isVisible = false
+                            trendingLoading.isVisible = true
+                            trendingProgress.isVisible = true
+                            tvTrendingError.isVisible = false
+                            btnTrendingRetry.isVisible = false
+                            rvTrendingTravel.isVisible = false
                         }
 
                     }
@@ -152,6 +156,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
             }
         }
 
+    }
+
+    private fun setUpActions(){
+        binding.apply {
+            btnBannerRetry.setOnClickListener { viewModel.action.onGetBannerRetry() }
+            btnTrendingRetry.setOnClickListener { viewModel.action.onGetTrendingRetry() }
+            btnNewTravelRetry.setOnClickListener { viewModel.action.onGetNewRetry() }
+            btnCountriesRetry.setOnClickListener { viewModel.action.onGetCountriesRetry() }
+        }
     }
 
 

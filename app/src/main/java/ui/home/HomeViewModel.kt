@@ -25,6 +25,22 @@ class HomeViewModel @Inject constructor(
         getBanner()
         getCountries()
     }
+
+    override fun onGetBannerRetry() {
+        getBanner()
+    }
+
+    override fun onGetTrendingRetry() {
+        getTrendingTravel()
+    }
+
+    override fun onGetNewRetry() {
+        getNewTravel()
+    }
+
+    override fun onGetCountriesRetry() {
+        getCountries()
+    }
 /*
 API
 base/user/me
