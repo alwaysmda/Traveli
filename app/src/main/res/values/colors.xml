@@ -4,9 +4,9 @@
     <color name="darkBlueColorPrimary">#AD1457</color>
     <color name="darkBlueColorPrimaryDark">#880E4F</color>
     <color name="darkBlueColorAccent">#FFEB3B</color>
-    <color name="darkBlueBackground0">#000000</color>
-    <color name="darkBlueBackground1">#242424</color>
-    <color name="darkBlueBackground2">#484848</color>
+    <color name="darkBlueBackground0">#242424</color>
+    <color name="darkBlueBackground1">#484848</color>
+    <color name="darkBlueBackground2">#686868</color>
     <color name="darkBlueText0">#FFFFFF</color>
     <color name="darkBlueText1">#DBDBDB</color>
     <color name="darkBlueText2">#B7B7B7</color>

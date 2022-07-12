@@ -27,7 +27,7 @@
             android:orientation="vertical"
             android:background="?attr/colorBackground0"
             xmlns:tools="http://schemas.android.com/tools"
-            android:layout_marginEnd="@dimen/paddingMedium"
+            android:layout_marginHorizontal="@dimen/paddingMedium"
 
             >
 

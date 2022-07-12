@@ -8,8 +8,6 @@ import domain.model.Country
 import domain.model.travel.Banner
 import domain.model.travel.Travel
 import domain.repository.TraveliRepository
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import main.ApplicationClass
 
 
@@ -21,32 +19,39 @@ class TravelRepositoryImpl(
 ) : TraveliRepository, ApiResponseHandler(app, networkErrorMapper) {
 
 
-    override fun getTravel(isTrending: Boolean, isNew: Boolean) = flow {
-
-        when (val response = call { traveliApi.getTravel() }) {
-            is DataState.Loading -> emit(response)
-            is DataState.Failure -> emit(response)
+    override suspend fun getTrending():DataState<List<Travel>> {
+       return when (val response = call { traveliApi.getTrending() }) {
+            is DataState.Failure -> response
+            is DataState.Loading -> DataState.Loading
             is DataState.Success -> {
-                emit(DataState.Success(Travel.getFake(10)))
+                DataState.Success(Travel.getFake(10))
             }
         }
     }
 
+    override suspend fun getNewTravels(): DataState<List<Travel>> {
+        return when(val response = call { traveliApi.getNewTravel() }){
+            is DataState.Failure -> response
+            is DataState.Loading    -> response
+            is DataState.Success -> DataState.Success(Travel.getFake(10))
+        }
+    }
 
-    override fun getBanner() = flow {
-        when (val response = call { traveliApi.getBanner() }) {
-            is DataState.Failure -> emit(response)
-            DataState.Loading    -> emit(DataState.Loading)
-            is DataState.Success -> emit(DataState.Success(Banner.getFake()))
+
+    override suspend fun getBanner():DataState<Banner> {
+      return  when (val response = call { traveliApi.getBanner() }) {
+            is DataState.Failure -> response
+            DataState.Loading    -> DataState.Loading
+            is DataState.Success -> DataState.Success(Banner.getFake())
         }
 
     }
 
-    override fun getCountries() = flow<DataState<List<Country>>> {
-        when(val response = call { traveliApi.getCountries() }){
-            is DataState.Failure -> emit(response)
-            DataState.Loading    -> emit(DataState.Loading)
-            is DataState.Success -> emit(DataState.Success(Country.getFakes()))
+    override suspend fun getCountries() : DataState<List<Country>> {
+       return when(val response = call { traveliApi.getCountries() }){
+            is DataState.Failure -> response
+            DataState.Loading    -> DataState.Loading
+            is DataState.Success -> DataState.Success(Country.getFakes())
         }
     }
 

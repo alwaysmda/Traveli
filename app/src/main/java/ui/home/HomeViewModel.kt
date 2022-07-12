@@ -8,7 +8,6 @@ import domain.usecase.travel.TravelUseCases
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import main.ApplicationClass
-import ui.base.BaseEvent
 import ui.base.BaseViewModel
 import javax.inject.Inject
 
@@ -21,19 +20,48 @@ class HomeViewModel @Inject constructor(
 
 
     override fun onStart() {
-
         getTrendingTravel()
         getBanner()
         getCountries()
     }
+/*
+API
+base/user/me
+base/travels/banner
+base/travels/trending
+base/travels/new
+base/countries
 
+///
+font
+search button
+text padding
+title margin
+new list
+separate requests
+corner radius (sub banner)
+handle error / retry
+remove add tab
+update repo and usecases
+* */
 
     private fun getTrendingTravel() {
-        travelUseCases.getTravel(true).onEach {
+        travelUseCases.getTrending().onEach {
             when (it) {
                 is DataState.Failure -> _event.emit(HomeEvents.OnError(it.message))
-                DataState.Loading    -> _event.emit(HomeEvents.OnLoading)
-                is DataState.Success -> _event.emit(HomeEvents.OnTrendingTravelUpdate(it.data))
+                is DataState.Loading -> _event.emit(HomeEvents.Loading)
+                is DataState.Success -> _event.emit(HomeEvents.TrendingTravelUpdate(it.data))
+            }
+
+        }.launchIn(viewModelScope)
+    }
+
+    private fun getNewTravel(){
+        travelUseCases.getNewTravel().onEach {
+            when(it){
+                is DataState.Failure -> _event.emit(HomeEvents.NewTravelError(it.message))
+                is DataState.Loading    -> _event.emit(HomeEvents.NewTravelLoading)
+                is DataState.Success -> _event.emit(HomeEvents.NewTravelUpdate(it.data))
             }
 
         }.launchIn(viewModelScope)
@@ -43,8 +71,8 @@ class HomeViewModel @Inject constructor(
         travelUseCases.getBanner().onEach {
             when (it) {
                 is DataState.Failure -> _event.emit(HomeEvents.OnError(it.message))
-                DataState.Loading    -> _event.emit(HomeEvents.OnLoading)
-                is DataState.Success -> _event.emit(HomeEvents.OnBannerUpdate(it.data))
+                DataState.Loading    -> _event.emit(HomeEvents.Loading)
+                is DataState.Success -> _event.emit(HomeEvents.BannerUpdate(it.data))
             }
         }.launchIn(viewModelScope)
     }
@@ -53,8 +81,8 @@ class HomeViewModel @Inject constructor(
         countryUseCases.getCountry().onEach {
             when (it) {
                 is DataState.Failure -> _event.emit(HomeEvents.OnError(it.message))
-                DataState.Loading    -> _event.emit(HomeEvents.OnLoading)
-                is DataState.Success -> _event.emit(HomeEvents.OnCountriesUpdate(it.data))
+                is DataState.Loading    -> _event.emit(HomeEvents.Loading)
+                is DataState.Success -> _event.emit(HomeEvents.CountriesUpdate(it.data))
             }
         }.launchIn(viewModelScope)
     }

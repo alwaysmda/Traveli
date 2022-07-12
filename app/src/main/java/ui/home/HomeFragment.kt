@@ -13,7 +13,6 @@ import com.squareup.picasso.Picasso
 import com.xodus.templatefive.R
 import com.xodus.templatefive.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import ui.base.BaseFragment
 
 @AndroidEntryPoint
@@ -42,17 +41,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
         viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
             viewModel.event.collect {
                 when (it) {
-                    is HomeEvents.OnError                -> {}
-                    HomeEvents.OnLoading                 -> {}
-                    is HomeEvents.OnTrendingTravelUpdate ->{
+                    is HomeEvents.TrendingTravelUpdate ->{
                         trendingTravelAdapter.submitList(it.travels)
                     }
-                    is HomeEvents.OnBannerUpdate -> {
+                    is HomeEvents.BannerUpdate -> {
                         Picasso.get().load(it.banner.banner.image).into(binding.ivBanner)
                         binding.tvBannerName.text = it.banner.banner.name
                         subBannerAdapter.submitList(it.banner.subBanner)
                     }
-                    is HomeEvents.OnCountriesUpdate      -> countryAdapter.submitList(it.countries)
+                    is HomeEvents.CountriesUpdate      -> countryAdapter.submitList(it.countries)
+                    is HomeEvents.NewTravelUpdate      -> {}
+                    //loadings
+                    is HomeEvents.Loading                 -> {}
+                    is HomeEvents.NewTravelLoading -> {}
+                    is HomeEvents.BannerLoading    -> {}
+                    is HomeEvents.CountriesLoading -> {}
+                    is HomeEvents.TrendingTravelLoading   -> {}
+                    //errors
+                    is HomeEvents.OnError                -> {}
+                    is HomeEvents.TrendingTravelError  -> {}
+                    is HomeEvents.BannerError          -> {}
+                    is HomeEvents.CountriesError       -> {}
+                    is HomeEvents.NewTravelError       -> {}
+
+
                 }
             }
         }

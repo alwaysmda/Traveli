@@ -14,7 +14,8 @@ import domain.usecase.photo.*
 import domain.usecase.template.Template
 import domain.usecase.template.TemplateUseCases
 import domain.usecase.travel.GetBanner
-import domain.usecase.travel.GetTravel
+import domain.usecase.travel.GetNewTravel
+import domain.usecase.travel.GetTrending
 import domain.usecase.travel.TravelUseCases
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import lang.LanguageManager
@@ -70,8 +71,9 @@ object AppModule {
     @Provides
     fun provideTravelUseCase(traveliRepository: TraveliRepository): TravelUseCases {
         return TravelUseCases(
-            GetTravel(traveliRepository),
-            GetBanner(traveliRepository)
+            GetTrending(traveliRepository),
+            GetBanner(traveliRepository),
+            GetNewTravel(traveliRepository)
         )
     }
 

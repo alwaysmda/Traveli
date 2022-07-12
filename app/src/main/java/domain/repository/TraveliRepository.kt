@@ -8,11 +8,14 @@ import kotlinx.coroutines.flow.Flow
 
 interface TraveliRepository {
 
-     fun getTravel(isTrending:Boolean,isNew:Boolean):Flow<DataState<List<Travel>>>
+     suspend fun getTrending():DataState<List<Travel>>
 
-     fun getBanner():Flow<DataState<Banner>>
+     suspend fun getNewTravels():DataState<List<Travel>>
 
-     fun getCountries():Flow<DataState<List<Country>>>
+     suspend fun getBanner():DataState<Banner>
+
+   suspend  fun getCountries():DataState<List<Country>>
+
 
 
 

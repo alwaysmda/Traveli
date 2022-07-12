@@ -1,4 +1,4 @@
-package domain.usecase.country
+package domain.usecase.travel
 
 import data.remote.DataState
 import domain.repository.TraveliRepository
@@ -6,10 +6,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-class GetCountry(private val repo:TraveliRepository) {
-    operator fun invoke() = flow{
+class GetTrending(private val traveliRepo: TraveliRepository) {
+
+    operator fun invoke() = flow {
         emit(DataState.Loading)
-        val result = repo.getCountries()
-        emit(result)
+        emit(traveliRepo.getTrending())
     }.flowOn(Dispatchers.IO)
 }
