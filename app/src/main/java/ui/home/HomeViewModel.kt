@@ -49,8 +49,8 @@ update repo and usecases
     private fun getTrendingTravel() {
         travelUseCases.getTrending().onEach {
             when (it) {
-                is DataState.Failure -> _event.emit(HomeEvents.OnError(it.message))
-                is DataState.Loading -> _event.emit(HomeEvents.Loading)
+                is DataState.Failure -> _event.emit(HomeEvents.TrendingTravelError(it.message))
+                is DataState.Loading -> _event.emit(HomeEvents.TrendingTravelLoading)
                 is DataState.Success -> _event.emit(HomeEvents.TrendingTravelUpdate(it.data))
             }
 
@@ -62,7 +62,8 @@ update repo and usecases
             when(it){
                 is DataState.Failure -> _event.emit(HomeEvents.NewTravelError(it.message))
                 is DataState.Loading    -> _event.emit(HomeEvents.NewTravelLoading)
-                is DataState.Success -> _event.emit(HomeEvents.NewTravelUpdate(it.data))
+                is DataState.Success ->  _event.emit(HomeEvents.NewTravelUpdate(it.data))
+
             }
 
         }.launchIn(viewModelScope)
@@ -71,9 +72,11 @@ update repo and usecases
     private fun getBanner() {
         travelUseCases.getBanner().onEach {
             when (it) {
-                is DataState.Failure -> _event.emit(HomeEvents.OnError(it.message))
-                DataState.Loading    -> _event.emit(HomeEvents.Loading)
+                is DataState.Failure -> _event.emit(HomeEvents.BannerError(it.message))
+                DataState.Loading    -> _event.emit(HomeEvents.BannerLoading)
                 is DataState.Success -> _event.emit(HomeEvents.BannerUpdate(it.data))
+
+
             }
         }.launchIn(viewModelScope)
     }
@@ -81,7 +84,7 @@ update repo and usecases
     private fun getCountries() {
         countryUseCases.getCountry().onEach {
             when (it) {
-                is DataState.Failure -> _event.emit(HomeEvents.OnError(it.message))
+                is DataState.Failure -> _event.emit(HomeEvents.CountriesError(it.message))
                 is DataState.Loading    -> _event.emit(HomeEvents.Loading)
                 is DataState.Success -> _event.emit(HomeEvents.CountriesUpdate(it.data))
             }

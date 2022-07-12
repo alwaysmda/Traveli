@@ -20,8 +20,8 @@ sealed class HomeEvents : BaseEvent() {
     data class BannerError(val message: String) : HomeEvents()
 
     //loadings
-    object TrendingTravelLoading : HomeEvents()
-    object NewTravelLoading : HomeEvents()
+    object TrendingTravelLoading:HomeEvents()
+    object NewTravelLoading:HomeEvents()
     object CountriesLoading : HomeEvents()
     object BannerLoading : HomeEvents()
 }

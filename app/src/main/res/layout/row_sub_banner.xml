@@ -47,11 +47,12 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:gravity="center"
-                    android:padding="@dimen/paddingLarge"
+                    android:paddingBottom="@dimen/paddingSmall"
+                    android:paddingTop="@dimen/paddingLarge"
                     android:elevation="0dp"
                     android:background="@drawable/gradiant"
                     android:text="@{data.name}"
-                    fonti="@{app.m.fontMedium} "
+                    fonti="@{app.m.fontMedium}"
 
                     />
 
