@@ -21,6 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/paddingLarge"
             android:layout_marginHorizontal="@dimen/paddingLarge"
+            app:cardCornerRadius="@dimen/radiusMedium"
 
             >
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -50,6 +51,7 @@
                     android:elevation="0dp"
                     android:background="@drawable/gradiant"
                     android:text="@{data.name}"
+                    fonti="@{app.m.fontMedium} "
 
                     />
 

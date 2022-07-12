@@ -19,8 +19,10 @@ import ui.base.BaseFragment
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, HomeViewModel>(R.layout.fragment_home) {
 
     private lateinit var trendingTravelAdapter: TravelAdapter
+    private lateinit var newTravelAdapter:TravelAdapter
     private lateinit var subBannerAdapter: SubBannerAdapter
     private lateinit var countryAdapter:CountryAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +52,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
                         subBannerAdapter.submitList(it.banner.subBanner)
                     }
                     is HomeEvents.CountriesUpdate      -> countryAdapter.submitList(it.countries)
-                    is HomeEvents.NewTravelUpdate      -> {}
+                    is HomeEvents.NewTravelUpdate      -> newTravelAdapter.submitList(it.travels)
                     //loadings
                     is HomeEvents.Loading                 -> {}
                     is HomeEvents.NewTravelLoading -> {}
@@ -76,8 +78,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
         trendingTravelAdapter = TravelAdapter(baseActivity)
         subBannerAdapter = SubBannerAdapter(baseActivity)
         countryAdapter = CountryAdapter(baseActivity)
+        newTravelAdapter = TravelAdapter(baseActivity)
         binding.apply {
             rvTrendingTravel.adapter = trendingTravelAdapter
+            rvNewTravel.adapter = newTravelAdapter
             rvSubBanner.adapter = subBannerAdapter
             rvCountries.adapter = countryAdapter
 

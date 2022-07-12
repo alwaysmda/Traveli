@@ -21,6 +21,7 @@ class HomeViewModel @Inject constructor(
 
     override fun onStart() {
         getTrendingTravel()
+        getNewTravel()
         getBanner()
         getCountries()
     }
