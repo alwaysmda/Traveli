@@ -27,17 +27,23 @@
             android:background="?attr/colorBackground0">
 
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/edt_search"
-                fonti="@{vm.app.m.fontMedium}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/paddingLarge"
                 android:layout_marginTop="@dimen/paddingLarge"
-                android:hint="@{vm.app.m.search}"
-                android:textColor="?attr/colorText0"
-                android:textColorHint="?attr/colorText2"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:cardBackgroundColor="?attr/colorBackground2"
+                style="@style/GeneralButton"
+                android:text="@{vm.app.m.search}"
+                android:gravity="start|center_vertical"
+                app:cornerRadius="@dimen/radiusLargeX"
+                />
+
+
+
+
 
 
             <com.google.android.material.card.MaterialCardView
