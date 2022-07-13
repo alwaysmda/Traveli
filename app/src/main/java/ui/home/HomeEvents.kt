@@ -1,5 +1,7 @@
 package ui.home
 
+import androidx.navigation.NavDestination
+import androidx.navigation.NavDirections
 import domain.model.Country
 import domain.model.travel.Banner
 import domain.model.travel.Travel
@@ -11,6 +13,8 @@ sealed class HomeEvents : BaseEvent() {
     data class NewTravelUpdate(val travels: List<Travel>) : HomeEvents()
     data class CountriesUpdate(val countries: List<Country>) : HomeEvents()
     data class BannerUpdate(val banner: Banner) : HomeEvents()
+    data class NavToSearch(val direction:NavDirections):HomeEvents()
+
 
     //errors
     data class OnError(val message: String) : HomeEvents()
@@ -24,4 +28,5 @@ sealed class HomeEvents : BaseEvent() {
     object NewTravelLoading:HomeEvents()
     object CountriesLoading : HomeEvents()
     object BannerLoading : HomeEvents()
+
 }

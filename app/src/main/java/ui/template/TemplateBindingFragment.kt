@@ -12,7 +12,7 @@ import com.xodus.templatefive.databinding.FragmentTemplateBindingBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import ui.base.BaseFragment
-import ui.base.BaseState
+
 import util.extension.snack
 
 @AndroidEntryPoint

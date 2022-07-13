@@ -5,10 +5,13 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import data.remote.DataState
 import domain.usecase.country.CountryUseCases
 import domain.usecase.travel.TravelUseCases
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import main.ApplicationClass
 import ui.base.BaseViewModel
+import util.extension.log
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,10 +23,10 @@ class HomeViewModel @Inject constructor(
 
 
     override fun onStart() {
-        getTrendingTravel()
-        getNewTravel()
-        getBanner()
-        getCountries()
+            getTrendingTravel()
+            getNewTravel()
+            getBanner()
+            getCountries()
     }
 
     override fun onGetBannerRetry() {
@@ -40,6 +43,12 @@ class HomeViewModel @Inject constructor(
 
     override fun onGetCountriesRetry() {
         getCountries()
+    }
+
+    override fun onSearchClick() {
+        viewModelScope.launch {
+           _event.emit(HomeEvents.NavToSearch(HomeFragmentDirections.actionHomeFragmentToSearchFragment()))
+        }
     }
 /*
 API
@@ -78,7 +87,10 @@ update repo and usecases
             when(it){
                 is DataState.Failure -> _event.emit(HomeEvents.NewTravelError(it.message))
                 is DataState.Loading    -> _event.emit(HomeEvents.NewTravelLoading)
-                is DataState.Success ->  _event.emit(HomeEvents.NewTravelUpdate(it.data))
+                is DataState.Success -> {
+                    log("FLOW:travel")
+                    _event.emit(HomeEvents.NewTravelUpdate(it.data))
+                }
 
             }
 
@@ -90,7 +102,10 @@ update repo and usecases
             when (it) {
                 is DataState.Failure -> _event.emit(HomeEvents.BannerError(it.message))
                 DataState.Loading    -> _event.emit(HomeEvents.BannerLoading)
-                is DataState.Success -> _event.emit(HomeEvents.BannerUpdate(it.data))
+                is DataState.Success -> {
+                    log("FLOW:banner")
+                    _event.emit(HomeEvents.BannerUpdate(it.data))
+                }
 
 
             }

@@ -8,6 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 
 open class BaseFragment<VB : ViewDataBinding, E : BaseEvent, A : BaseAction, VM : BaseViewModel<E, A>>(private val layoutId: Int) : Fragment() {
     private var _binding: VB? = null

@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import main.ApplicationClass
-import ui.base.BaseState
 import ui.base.BaseViewModel
 import javax.inject.Inject
 

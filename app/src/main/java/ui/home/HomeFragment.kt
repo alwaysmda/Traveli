@@ -4,17 +4,21 @@ import adapter.CountryAdapter
 import adapter.SubBannerAdapter
 import adapter.TravelAdapter
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.squareup.picasso.Picasso
 import com.xodus.templatefive.R
 import com.xodus.templatefive.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import ui.base.BaseFragment
+import util.extension.log
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, HomeViewModel>(R.layout.fragment_home) {
@@ -32,18 +36,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        observeToEvents()
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerViews()
-        observeToEvents()
-        viewModel.action.onStart()
+        binding.root.post { viewModel.action.onStart() }
         setUpActions()
 
     }
 
 
     private fun observeToEvents() = viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+
             viewModel.event.collect {
+                log("FLOW:OBSERVE")
                 when (it) {
                     is HomeEvents.TrendingTravelUpdate  -> {
                         binding.apply {
@@ -150,11 +155,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
                         }
 
                     }
-
-
+                    is HomeEvents.NavToSearch           -> findNavController().navigate(it.direction)
                 }
             }
-        }
+
 
     }
 
@@ -164,6 +168,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
             btnTrendingRetry.setOnClickListener { viewModel.action.onGetTrendingRetry() }
             btnNewTravelRetry.setOnClickListener { viewModel.action.onGetNewRetry() }
             btnCountriesRetry.setOnClickListener { viewModel.action.onGetCountriesRetry() }
+            btnSearch.setOnClickListener { viewModel.action.onSearchClick() }
         }
     }
 

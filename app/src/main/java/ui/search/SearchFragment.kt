@@ -2,6 +2,8 @@ package ui.search
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.addTextChangedListener
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import com.xodus.templatefive.R
 import com.xodus.templatefive.databinding.FragmentSearchBinding
@@ -16,10 +18,20 @@ class SearchFragment:BaseFragment<FragmentSearchBinding,SearchEvents,SearchActio
         super.onCreate(savedInstanceState)
         val viewModel:SearchViewModel by viewModels()
         initialize(viewModel)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setUpAction()
+    }
+
+    private fun setUpAction(){
+        binding.apply {
+           edtSearch.addTextChangedListener { viewModel.action.onSearch(edtSearch.text.toString()) }
+
+        }
+
     }
 
 }
