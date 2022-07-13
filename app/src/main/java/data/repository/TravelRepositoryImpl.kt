@@ -5,6 +5,7 @@ import data.remote.DataState
 import data.remote.dto.NetworkErrorMapper
 import data.remote.dto.TraveliApi
 import domain.model.Country
+import domain.model.User
 import domain.model.travel.Banner
 import domain.model.travel.Travel
 import domain.repository.TraveliRepository
@@ -71,6 +72,15 @@ class TravelRepositoryImpl(
                 countries = Country.getFakes()
                 DataState.Success(Country.getFakes())
             }
+        }
+    }
+
+    override suspend fun getUsers(query:String): DataState<List<User>> {
+        return when(val response = call { traveliApi.getUsers() }){
+            is DataState.Failure -> response
+            is DataState.Loading    -> DataState.Loading
+            is DataState.Success -> DataState.Success(User.getFakes())
+
         }
     }
 

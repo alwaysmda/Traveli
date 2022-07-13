@@ -47,7 +47,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
 
     private fun observeToEvents() = viewLifecycleOwner.lifecycleScope.launchWhenStarted {
 
-            viewModel.event.collect {
+        viewModel.event.collect {
                 log("FLOW:OBSERVE")
                 when (it) {
                     is HomeEvents.TrendingTravelUpdate  -> {

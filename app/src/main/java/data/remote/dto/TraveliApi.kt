@@ -12,7 +12,7 @@ interface TraveliApi {
     suspend fun getTrending(): Response<Unit>
 
     @GET(GOOGLE_URL)
-    suspend fun getNewTravel():Response<Unit>
+    suspend fun getNewTravel(): Response<Unit>
 
 
     @GET(GOOGLE_URL)
@@ -20,7 +20,10 @@ interface TraveliApi {
 
 
     @GET(GOOGLE_URL)
-    suspend fun getCountries():Response<Unit>
+    suspend fun getCountries(): Response<Unit>
+
+    @GET(GOOGLE_URL)
+    suspend fun getUsers(): Response<Unit>
 
 
 }
