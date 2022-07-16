@@ -2,93 +2,55 @@ package adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.xodus.templatefive.R
-import com.xodus.templatefive.databinding.RowPhotoStateBinding
 import com.xodus.templatefive.databinding.RowUserBinding
+import domain.model.User
 import ui.base.BaseActivity
 
-class UserAdapter(
-    private val baseActivity: BaseActivity,
-    private val onItemClick: (Int, String) -> Unit = { _, _ -> },
-    private val onRetryClick: () -> Unit = {},
-) : ListAdapter<String, RecyclerView.ViewHolder>(DiffCallback()) {
-    private var loading = false
-    private var retry = false
+class UserAdapter(private val activity:BaseActivity): ListAdapter<User, UserAdapter.UserViewHolder>(DiffCallback()) {
 
-    fun setLoading(loading: Boolean) {
-        if (this.loading == loading) {
-            return
-        }
-        retry = false
-        this.loading = loading
-        if (loading) {
-            notifyItemInserted(currentList.size)
-        } else {
-            notifyItemRemoved(currentList.size)
-        }
-    }
+    inner class UserViewHolder(private val binding: RowUserBinding): RecyclerView.ViewHolder(binding.root){
 
-    fun setRetry() {
-        retry = true
-        notifyItemChanged(currentList.size)
-    }
+        fun bind(user: User){
+            binding.apply {
+                app = activity.app
+                data = user
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if (loading && viewType == currentList.size) {
-            LoadingHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.row_photo_state, parent, false))
-        } else {
-            UserHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.row_user, parent, false))
-        }
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        return position
-    }
-
-    override fun getItemCount(): Int {
-        return currentList.size + if (loading) 1 else 0
-    }
-
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
-            is LoadingHolder -> holder.bind()
-            is UserHolder    -> holder.bind(getItem(position))
-        }
-    }
-
-    inner class UserHolder(val binding: RowUserBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(username: String) {
-            with(binding) {
-                app = baseActivity.app
-                data = username
-                executePendingBindings()
-                rowChatCvContent.setOnClickListener { onItemClick(bindingAdapterPosition, username) }
             }
+
+
         }
+
     }
 
-    inner class LoadingHolder(val binding: RowPhotoStateBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind() {
-            with(binding) {
-                app = baseActivity.app
-                rowPhotoBtnRetry.isVisible = retry
-                rowPhotoPbLoading.isVisible = retry.not()
-                executePendingBindings()
-                rowPhotoBtnRetry.setOnClickListener { onRetryClick() }
-            }
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
+        return UserViewHolder(
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                R.layout.row_user,
+                parent,
+                false
+            )
+        )
     }
 
-    private class DiffCallback : DiffUtil.ItemCallback<String>() {
-        override fun areItemsTheSame(oldItem: String, newItem: String) =
-            oldItem == newItem
+    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
+        holder.bind(currentList[position])
+    }
 
-        override fun areContentsTheSame(oldItem: String, newItem: String) =
+
+    private class DiffCallback : DiffUtil.ItemCallback<User>() {
+        override fun areItemsTheSame(oldItem: User, newItem: User) =
+            oldItem.id == newItem.id
+
+        override fun areContentsTheSame(oldItem: User, newItem: User) =
             oldItem == newItem
     }
+
+
+
 }
