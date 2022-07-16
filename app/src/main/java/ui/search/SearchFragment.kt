@@ -45,6 +45,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
             edtSearch.addTextChangedListener { viewModel.action.onSearch(edtSearch.text.toString()) }
             searchTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
+                    binding.progressBar.isVisible = false
                     viewModel.action.onChangeTab(tab?.position ?: 0)
                 }
 
@@ -65,17 +66,27 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.event.collect {
                 when (it) {
-                    is SearchEvents.UpdateUsers        -> userAdapter.submitList(it.users)
-                    is SearchEvents.UpdateTravel       -> travelAdapter.submitList(it.travels)
+                    is SearchEvents.UpdateUsers        -> {
+                        userAdapter.submitList(it.users)
+                        binding.progressBar.isVisible = false
+                    }
+                    is SearchEvents.UpdateTravel       ->{
+                        travelAdapter.submitList(it.travels)
+                        binding.progressBar.isVisible = false
+                    }
                     is SearchEvents.UserError          -> {
+                        binding.progressBar.isVisible = false
                     }
                     is SearchEvents.UserLoading        -> {
+                        binding.progressBar.isVisible = true
                     }
                     is SearchEvents.RvTravelVisibility -> binding.rvTravel.isVisible = it.isVisible
                     is SearchEvents.RvUserVisibility   -> binding.rvUser.isVisible = it.isVisible
                     is SearchEvents.TravelError        -> {
+                        binding.progressBar.isVisible = false
                     }
-                    is SearchEvents.TravelLoading         -> {
+                    is SearchEvents.TravelLoading      -> {
+                        binding.progressBar.isVisible = true
                     }
                 }
             }
