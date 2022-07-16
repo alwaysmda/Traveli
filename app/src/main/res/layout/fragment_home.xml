@@ -100,7 +100,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@+id/cv_first_travel"
                 tools:itemCount="2"
-                tools:listitem="@layout/row_sub_banner"
+                tools:listitem="@layout/row_travel"
 
                 />
 
@@ -182,7 +182,7 @@
                 android:paddingHorizontal="4dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@+id/tv_trending_title"
-                tools:listitem="@layout/row_travel"
+                tools:listitem="@layout/row_square_travel"
 
                 />
 <!--           loading-->

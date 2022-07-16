@@ -3,6 +3,7 @@ package ui.search
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import data.remote.DataState
+import domain.usecase.travel.TravelUseCases
 import domain.usecase.user.UserUseCases
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -18,6 +19,7 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     app: ApplicationClass,
     private val userUseCases: UserUseCases,
+    private val travelUseCases: TravelUseCases
 ) : BaseViewModel<SearchEvents, SearchActions>(app), SearchActions {
 
     private var job: Job? = null
@@ -31,6 +33,14 @@ class SearchViewModel @Inject constructor(
                     is DataState.Failure -> _event.emit(SearchEvents.UserError(it.message))
                     is DataState.Loading -> _event.emit(SearchEvents.UserLoading)
                     is DataState.Success -> _event.emit(SearchEvents.UpdateUsers(it.data))
+                }
+            }.launchIn(viewModelScope)
+
+            travelUseCases.getTravel().onEach {
+                when (it) {
+                    is DataState.Failure -> _event.emit(SearchEvents.TravelError(it.message))
+                    DataState.Loading    -> _event.emit(SearchEvents.TravelLoading)
+                    is DataState.Success -> _event.emit(SearchEvents.UpdateTravel(it.data))
                 }
             }.launchIn(viewModelScope)
 

@@ -1,5 +1,7 @@
 package ui.search
 
+import adapter.TravelAdapter
+import adapter.UserAdapter
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
@@ -13,41 +15,58 @@ import ui.base.BaseFragment
 
 
 @AndroidEntryPoint
-class SearchFragment:BaseFragment<FragmentSearchBinding,SearchEvents,SearchActions,SearchViewModel>(R.layout.fragment_search) {
+class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchActions, SearchViewModel>(R.layout.fragment_search) {
 
+    private lateinit var userAdapter: UserAdapter
+    private lateinit var travelAdapter: TravelAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewModel:SearchViewModel by viewModels()
+        val viewModel: SearchViewModel by viewModels()
         initialize(viewModel)
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setUpRecyclerViews()
         observeToEvents()
         setUpAction()
 
     }
 
-    private fun setUpAction(){
+    private fun setUpAction() {
         binding.apply {
-           edtSearch.addTextChangedListener { viewModel.action.onSearch(edtSearch.text.toString()) }
+            edtSearch.addTextChangedListener { viewModel.action.onSearch(edtSearch.text.toString()) }
 
         }
 
     }
 
-    private fun observeToEvents(){
+    private fun observeToEvents() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.event.collect{
-                when(it){
-                    is SearchEvents.UpdateUsers -> TODO()
-                    is SearchEvents.UserError   -> TODO()
-                    is SearchEvents.UserLoading    -> TODO()
+            viewModel.event.collect {
+                when (it) {
+                    is SearchEvents.UpdateUsers -> userAdapter.submitList(it.users)
+                    is SearchEvents.UpdateTravel -> travelAdapter.submitList(it.travels)
+                    is SearchEvents.UserError   -> {
+                    }
+                    is SearchEvents.UserLoading -> {
+                    }
                 }
             }
+        }
+
+    }
+
+    private fun setUpRecyclerViews() {
+        userAdapter = UserAdapter(baseActivity)
+        travelAdapter = TravelAdapter(baseActivity)
+        binding.apply {
+            rvUser.adapter = userAdapter
+            rvTravel.adapter = travelAdapter
+
         }
 
     }

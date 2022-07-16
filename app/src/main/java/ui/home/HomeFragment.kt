@@ -1,17 +1,13 @@
 package ui.home
 
 import adapter.CountryAdapter
-import adapter.SubBannerAdapter
 import adapter.TravelAdapter
+import adapter.SquareTravelAdapter
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.squareup.picasso.Picasso
 import com.xodus.templatefive.R
@@ -23,9 +19,9 @@ import util.extension.log
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, HomeViewModel>(R.layout.fragment_home) {
 
-    private lateinit var trendingTravelAdapter: TravelAdapter
-    private lateinit var newTravelAdapter: TravelAdapter
-    private lateinit var subBannerAdapter: SubBannerAdapter
+    private lateinit var trendingTravelAdapter: SquareTravelAdapter
+    private lateinit var newTravelAdapter: SquareTravelAdapter
+    private lateinit var subBannerAdapter: TravelAdapter
     private lateinit var countryAdapter: CountryAdapter
 
 
@@ -174,10 +170,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
 
 
     private fun setUpRecyclerViews() {
-        trendingTravelAdapter = TravelAdapter(baseActivity)
-        subBannerAdapter = SubBannerAdapter(baseActivity)
+        trendingTravelAdapter = SquareTravelAdapter(baseActivity)
+        subBannerAdapter = TravelAdapter(baseActivity)
         countryAdapter = CountryAdapter(baseActivity)
-        newTravelAdapter = TravelAdapter(baseActivity)
+        newTravelAdapter = SquareTravelAdapter(baseActivity)
         binding.apply {
             rvTrendingTravel.adapter = trendingTravelAdapter
             rvNewTravel.adapter = newTravelAdapter

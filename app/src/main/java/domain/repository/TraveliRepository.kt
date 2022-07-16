@@ -13,11 +13,13 @@ interface TraveliRepository {
 
     suspend fun getNewTravels(): DataState<List<Travel>>
 
+    suspend fun getTravel(): DataState<List<Travel>>
+
     suspend fun getBanner(): DataState<Banner>
 
     suspend fun getCountries(): DataState<List<Country>>
 
-    suspend fun getUsers(query:String): DataState<List<User>>
+    suspend fun getUsers(query: String): DataState<List<User>>
 
 
 }

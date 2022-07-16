@@ -7,11 +7,14 @@ import ui.base.BaseEvent
 sealed class SearchEvents : BaseEvent() {
 
     data class UpdateUsers(val users: List<User>) : SearchEvents()
+    data class UpdateTravel(val travels:List<Travel>):SearchEvents()
 
     //loadings
     object UserLoading : SearchEvents()
+    object TravelLoading : SearchEvents()
 
     //errors
     data class UserError(val message: String) : SearchEvents()
+    data class TravelError(val message: String) : SearchEvents()
 
 }

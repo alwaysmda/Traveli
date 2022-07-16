@@ -28,6 +28,7 @@ interface LanguageInterface {
     val trending:String
     val countries:String
     val new:String
+    val travel:String
 
 
     //navigation

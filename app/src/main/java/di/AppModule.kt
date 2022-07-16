@@ -13,10 +13,7 @@ import domain.usecase.country.GetCountry
 import domain.usecase.photo.*
 import domain.usecase.template.Template
 import domain.usecase.template.TemplateUseCases
-import domain.usecase.travel.GetBanner
-import domain.usecase.travel.GetNewTravel
-import domain.usecase.travel.GetTrending
-import domain.usecase.travel.TravelUseCases
+import domain.usecase.travel.*
 import domain.usecase.user.GetUser
 import domain.usecase.user.UserUseCases
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -75,13 +72,14 @@ object AppModule {
         return TravelUseCases(
             GetTrending(traveliRepository),
             GetBanner(traveliRepository),
-            GetNewTravel(traveliRepository)
+            GetNewTravel(traveliRepository),
+            GetTravel(traveliRepository)
         )
     }
 
     @Singleton
     @Provides
-    fun providesCountryUseCases(traveliRepository: TraveliRepository):CountryUseCases{
+    fun providesCountryUseCases(traveliRepository: TraveliRepository): CountryUseCases {
         return CountryUseCases(
             GetCountry(traveliRepository)
         )
@@ -89,7 +87,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun providesUserUseCases(traveliRepository: TraveliRepository):UserUseCases{
+    fun providesUserUseCases(traveliRepository: TraveliRepository): UserUseCases {
         return UserUseCases(
             GetUser(traveliRepository)
         )

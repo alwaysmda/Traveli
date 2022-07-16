@@ -11,17 +11,15 @@ import com.xodus.templatefive.databinding.RowTravelBinding
 import domain.model.travel.Travel
 import ui.base.BaseActivity
 
-class TravelAdapter(private val activity:BaseActivity):ListAdapter<Travel,TravelAdapter.TravelViewHolder>(DiffCallback()) {
+class TravelAdapter(private val activity:BaseActivity):ListAdapter<Travel,TravelAdapter.SubBannerViewHolder>(DiffCallback()) {
 
-
-
-    inner class TravelViewHolder(private val binding:RowTravelBinding):RecyclerView.ViewHolder(binding.root){
+    inner class SubBannerViewHolder(private val binding: RowTravelBinding): RecyclerView.ViewHolder(binding.root){
 
         fun bind(travel: Travel){
             binding.apply {
                 app = activity.app
                 data = travel
-                ivTravel.clipToOutline = true
+
             }
 
 
@@ -29,8 +27,8 @@ class TravelAdapter(private val activity:BaseActivity):ListAdapter<Travel,Travel
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TravelViewHolder {
-       return TravelViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubBannerViewHolder {
+        return SubBannerViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
                 R.layout.row_travel,
@@ -40,7 +38,7 @@ class TravelAdapter(private val activity:BaseActivity):ListAdapter<Travel,Travel
         )
     }
 
-    override fun onBindViewHolder(holder: TravelViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SubBannerViewHolder, position: Int) {
         holder.bind(currentList[position])
     }
 
@@ -52,4 +50,5 @@ class TravelAdapter(private val activity:BaseActivity):ListAdapter<Travel,Travel
         override fun areContentsTheSame(oldItem: Travel, newItem: Travel) =
             oldItem == newItem
     }
+
 }

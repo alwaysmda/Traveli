@@ -2,68 +2,77 @@
 
 
 <layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
 
     <data>
         <variable
             name="app"
             type="main.ApplicationClass" />
-
         <variable
             name="data"
             type="domain.model.travel.Travel" />
 
-
-
-
     </data>
 
 
-
-        <LinearLayout
-            android:layout_width="130dp"
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="?attr/colorBackground0"
-            android:layout_marginHorizontal="@dimen/paddingMedium"
+            android:layout_marginTop="@dimen/paddingMedium"
+            android:layout_marginHorizontal="@dimen/paddingLarge"
+            app:cardCornerRadius="@dimen/radiusMedium"
 
             >
-
-
-            <ImageView
-                android:id="@+id/iv_travel"
-                imageUrl="@{data.image}"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:background="@drawable/rounded_back_ground"
-                android:scaleType="centerCrop"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+                <ImageView
+                    android:id="@+id/iv_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintDimensionRatio="2:1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:elevation="0dp"
+                    imageUrl="@{data.image}"
 
-                />
+                    />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_travel_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/textLarge"
-                android:textColor="?attr/colorText0"
-                fonti="@{app.m.fontMedium}"
-                android:layout_marginTop="@dimen/paddingMedium"
-                tools:text="ssdasd"
-                android:text="@{data.name}"
-                android:layout_marginBottom="@dimen/paddingMedium"
-                />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_banner_name"
+                    fonti="@{app.m.fontMedium}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/gradiant"
+                    android:elevation="0dp"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/paddingLarge"
+                    android:paddingBottom="@dimen/paddingSmall"
+                    android:text="@{data.name}"
+                    android:textColor="?attr/colorText0"
+                    android:textSize="@dimen/textLarge"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
 
 
 
 
 
 
-        </LinearLayout>
 
 
 
 
 </layout>
+
 

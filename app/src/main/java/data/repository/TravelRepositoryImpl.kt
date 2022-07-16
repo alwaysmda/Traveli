@@ -19,15 +19,15 @@ class TravelRepositoryImpl(
 
 ) : TraveliRepository, ApiResponseHandler(app, networkErrorMapper) {
 
-    private var trending:List<Travel>? = null
-    private var newTravel:List<Travel>? = null
-    private var banner:Banner? = null
-    private var countries:List<Country>? = null
+    private var trending: List<Travel>? = null
+    private var newTravel: List<Travel>? = null
+    private var banner: Banner? = null
+    private var countries: List<Country>? = null
 
 
-    override suspend fun getTrending():DataState<List<Travel>> {
+    override suspend fun getTrending(): DataState<List<Travel>> {
         trending?.let { return DataState.Success(it) }
-       return when (val response = call { traveliApi.getTrending() }) {
+        return when (val response = call { traveliApi.getTrending() }) {
             is DataState.Failure -> response
             is DataState.Loading -> DataState.Loading
             is DataState.Success -> {
@@ -38,10 +38,10 @@ class TravelRepositoryImpl(
     }
 
     override suspend fun getNewTravels(): DataState<List<Travel>> {
-        newTravel?.let { return DataState.Success(it)}
-        return when(val response = call { traveliApi.getNewTravel() }){
+        newTravel?.let { return DataState.Success(it) }
+        return when (val response = call { traveliApi.getNewTravel() }) {
             is DataState.Failure -> response
-            is DataState.Loading    -> response
+            is DataState.Loading -> response
             is DataState.Success -> {
                 newTravel = Travel.getFake(10)
                 DataState.Success(Travel.getFake(10))
@@ -49,13 +49,22 @@ class TravelRepositoryImpl(
         }
     }
 
+    override suspend fun getTravel(): DataState<List<Travel>> {
+        return when (val response = call { traveliApi.getTravel() }) {
+            is DataState.Failure -> response
+            is DataState.Loading -> response
+            is DataState.Success -> DataState.Success(Travel.getFake(5))
 
-    override suspend fun getBanner():DataState<Banner> {
+        }
+    }
+
+
+    override suspend fun getBanner(): DataState<Banner> {
         banner?.let { return DataState.Success(it) }
-      return  when (val response = call { traveliApi.getBanner() }) {
+        return when (val response = call { traveliApi.getBanner() }) {
             is DataState.Failure -> response
             DataState.Loading    -> DataState.Loading
-            is DataState.Success ->{
+            is DataState.Success -> {
                 banner = Banner.getFake()
                 DataState.Success(Banner.getFake())
             }
@@ -63,9 +72,9 @@ class TravelRepositoryImpl(
 
     }
 
-    override suspend fun getCountries() : DataState<List<Country>> {
-       countries?.let { return DataState.Success(it) }
-       return when(val response = call { traveliApi.getCountries() }){
+    override suspend fun getCountries(): DataState<List<Country>> {
+        countries?.let { return DataState.Success(it) }
+        return when (val response = call { traveliApi.getCountries() }) {
             is DataState.Failure -> response
             DataState.Loading    -> DataState.Loading
             is DataState.Success -> {
@@ -75,10 +84,10 @@ class TravelRepositoryImpl(
         }
     }
 
-    override suspend fun getUsers(query:String): DataState<List<User>> {
-        return when(val response = call { traveliApi.getUsers() }){
+    override suspend fun getUsers(query: String): DataState<List<User>> {
+        return when (val response = call { traveliApi.getUsers() }) {
             is DataState.Failure -> response
-            is DataState.Loading    -> DataState.Loading
+            is DataState.Loading -> DataState.Loading
             is DataState.Success -> DataState.Success(User.getFakes())
 
         }
