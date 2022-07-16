@@ -17,10 +17,11 @@
 
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="150dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/paddingMedium"
         app:cardBackgroundColor="?attr/colorBackground0"
+        android:layout_marginBottom="@dimen/paddingMedium"
         >
 
 
@@ -32,7 +33,7 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/iv_user"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="120dp"
                 app:shapeAppearance="@style/CircularImageView"
                 imageUrl="@{data.profileImage}"
                 android:scaleType="centerCrop"

@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../layout/compose-model-1644829256013.xml" value="0.8590785907859079" />
         <entry key="../../../../layout/compose-model-1644832616120.xml" value="0.625" />
+        <entry key="../../../../layout/custom_preview.xml" value="0.30052083333333335" />
         <entry key="app/src/main/res/drawable/gradiant.xml" value="0.1285" />
         <entry key="app/src/main/res/drawable/ic_compass.xml" value="0.141" />
         <entry key="app/src/main/res/drawable/rounded_back_ground.xml" value="0.1425" />
@@ -30,7 +31,7 @@
         <entry key="app/src/main/res/layout/row_sub_banner.xml" value="0.3578125" />
         <entry key="app/src/main/res/layout/row_template.xml" value="0.21073961499493415" />
         <entry key="app/src/main/res/layout/row_template_state.xml" value="0.2740036231884058" />
-        <entry key="app/src/main/res/layout/row_travel.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/row_travel.xml" value="0.4566929133858268" />
         <entry key="app/src/main/res/layout/row_user.xml" value="0.375" />
         <entry key="app/src/main/res/layout/toolbar_chat.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/toolbar_photo_detail.xml" value="0.34371833839918947" />

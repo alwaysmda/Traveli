@@ -13,6 +13,9 @@ object Constant {
     const val CON_AES_IV = "a3da2dab4e2b44d1"
     const val CON_TRANS_ID = "CON_TRANS_ID_"
     const val CON_TRANS_PHOTO = "CON_TRANS_PHOTO_"
+    const val USER_TAB = 0
+    const val TRAVEL_TAB = 1
+
 
     enum class Languages(val value: String) {
         FA("FA"),

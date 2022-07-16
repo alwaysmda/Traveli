@@ -47,7 +47,7 @@ class HomeViewModel @Inject constructor(
 
     override fun onSearchClick() {
         viewModelScope.launch {
-           _event.emit(HomeEvents.NavToSearch(HomeFragmentDirections.actionHomeFragmentToSearchFragment()))
+            _event.emit(HomeEvents.NavToSearch(HomeFragmentDirections.actionHomeFragmentToSearchFragment()))
         }
     }
 /*
