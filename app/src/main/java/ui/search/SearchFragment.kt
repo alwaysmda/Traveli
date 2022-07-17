@@ -45,8 +45,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
             edtSearch.addTextChangedListener { viewModel.action.onSearch(edtSearch.text.toString()) }
             searchTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
-                    binding.progressBar.isVisible = false
+                    binding.apply {
+                        progressBar.isVisible = false
+                        tvUserError.isVisible = false
+                        tvTravelError.isVisible = false
+                    }
+
                     viewModel.action.onChangeTab(tab?.position ?: 0)
+
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -70,23 +76,42 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
                         userAdapter.submitList(it.users)
                         binding.progressBar.isVisible = false
                     }
-                    is SearchEvents.UpdateTravel       ->{
+                    is SearchEvents.UpdateTravel       -> {
                         travelAdapter.submitList(it.travels)
                         binding.progressBar.isVisible = false
                     }
                     is SearchEvents.UserError          -> {
-                        binding.progressBar.isVisible = false
+                        binding.apply {
+                            progressBar.isVisible = false
+                            tvUserError.isVisible = true
+                            tvUserError.text = it.message
+                        }
+
                     }
                     is SearchEvents.UserLoading        -> {
-                        binding.progressBar.isVisible = true
+                        binding.apply {
+                            progressBar.isVisible = true
+                            tvUserError.isVisible = false
+                            tvTravelError.isVisible = false
+                        }
                     }
                     is SearchEvents.RvTravelVisibility -> binding.rvTravel.isVisible = it.isVisible
                     is SearchEvents.RvUserVisibility   -> binding.rvUser.isVisible = it.isVisible
                     is SearchEvents.TravelError        -> {
-                        binding.progressBar.isVisible = false
+                        binding.apply {
+                            progressBar.isVisible = false
+                            tvTravelError.isVisible = true
+                            tvTravelError.text = it.message
+                        }
+
+
                     }
                     is SearchEvents.TravelLoading      -> {
-                        binding.progressBar.isVisible = true
+                        binding.apply {
+                            progressBar.isVisible = true
+                            tvTravelError.isVisible = false
+                            tvUserError.isVisible = false
+                        }
                     }
                 }
             }
@@ -102,7 +127,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
             rvTravel.adapter = travelAdapter
 
         }
-
     }
 
     private fun setUpViews() {

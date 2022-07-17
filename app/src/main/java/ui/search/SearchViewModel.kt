@@ -39,9 +39,12 @@ class SearchViewModel @Inject constructor(
         job = viewModelScope.launch {
             delay(1000)
             when (tabIndex) {
-                0 -> userUseCases.getUser(text).onEach {
+                USER_TAB -> userUseCases.getUser(text).onEach {
                     when (it) {
-                        is DataState.Failure -> _event.emit(SearchEvents.UserError(it.message))
+                        is DataState.Failure -> {
+                            if (tabIndex == USER_TAB) _event.emit(SearchEvents.UserError(it.message))
+                            _event.emit(SearchEvents.UpdateUsers(listOf()))
+                        }
                         is DataState.Loading -> _event.emit(SearchEvents.UserLoading)
                         is DataState.Success -> {
                             _event.emit(SearchEvents.UpdateUsers(it.data))
@@ -53,7 +56,10 @@ class SearchViewModel @Inject constructor(
 
                 1 -> travelUseCases.getTravel().onEach {
                     when (it) {
-                        is DataState.Failure -> _event.emit(SearchEvents.TravelError(it.message))
+                        is DataState.Failure -> if (tabIndex == TRAVEL_TAB) {
+                            _event.emit(SearchEvents.TravelError(it.message))
+                            _event.emit(SearchEvents.UpdateTravel(listOf()))
+                        }
                         DataState.Loading    -> _event.emit(SearchEvents.TravelLoading)
                         is DataState.Success -> {
                             _event.emit(SearchEvents.UpdateTravel(it.data))
