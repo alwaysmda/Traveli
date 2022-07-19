@@ -47,7 +47,7 @@ class HomeViewModel @Inject constructor(
 
     override fun onSearchClick() {
         viewModelScope.launch {
-            _event.emit(HomeEvents.NavToSearch(HomeFragmentDirections.actionHomeFragmentToSearchFragment()))
+            _event.send(HomeEvents.NavToSearch(HomeFragmentDirections.actionHomeFragmentToSearchFragment()))
         }
     }
 /*
@@ -74,9 +74,9 @@ update repo and usecases
     private fun getTrendingTravel() {
         travelUseCases.getTrending().onEach {
             when (it) {
-                is DataState.Failure -> _event.emit(HomeEvents.TrendingTravelError(it.message))
-                is DataState.Loading -> _event.emit(HomeEvents.TrendingTravelLoading)
-                is DataState.Success -> _event.emit(HomeEvents.TrendingTravelUpdate(it.data))
+                is DataState.Failure -> _event.send(HomeEvents.TrendingTravelError(it.message))
+                is DataState.Loading -> _event.send(HomeEvents.TrendingTravelLoading)
+                is DataState.Success -> _event.send(HomeEvents.TrendingTravelUpdate(it.data))
             }
 
         }.launchIn(viewModelScope)
@@ -85,11 +85,11 @@ update repo and usecases
     private fun getNewTravel(){
         travelUseCases.getNewTravel().onEach {
             when(it){
-                is DataState.Failure -> _event.emit(HomeEvents.NewTravelError(it.message))
-                is DataState.Loading    -> _event.emit(HomeEvents.NewTravelLoading)
+                is DataState.Failure -> _event.send(HomeEvents.NewTravelError(it.message))
+                is DataState.Loading    -> _event.send(HomeEvents.NewTravelLoading)
                 is DataState.Success -> {
                     log("FLOW:travel")
-                    _event.emit(HomeEvents.NewTravelUpdate(it.data))
+                    _event.send(HomeEvents.NewTravelUpdate(it.data))
                 }
 
             }
@@ -100,11 +100,11 @@ update repo and usecases
     private fun getBanner() {
         travelUseCases.getBanner().onEach {
             when (it) {
-                is DataState.Failure -> _event.emit(HomeEvents.BannerError(it.message))
-                DataState.Loading    -> _event.emit(HomeEvents.BannerLoading)
+                is DataState.Failure -> _event.send(HomeEvents.BannerError(it.message))
+                DataState.Loading    -> _event.send(HomeEvents.BannerLoading)
                 is DataState.Success -> {
                     log("FLOW:banner")
-                    _event.emit(HomeEvents.BannerUpdate(it.data))
+                    _event.send(HomeEvents.BannerUpdate(it.data))
                 }
 
 
@@ -115,9 +115,9 @@ update repo and usecases
     private fun getCountries() {
         countryUseCases.getCountry().onEach {
             when (it) {
-                is DataState.Failure -> _event.emit(HomeEvents.CountriesError(it.message))
-                is DataState.Loading    -> _event.emit(HomeEvents.Loading)
-                is DataState.Success -> _event.emit(HomeEvents.CountriesUpdate(it.data))
+                is DataState.Failure -> _event.send(HomeEvents.CountriesError(it.message))
+                is DataState.Loading    -> _event.send(HomeEvents.Loading)
+                is DataState.Success -> _event.send(HomeEvents.CountriesUpdate(it.data))
             }
         }.launchIn(viewModelScope)
     }

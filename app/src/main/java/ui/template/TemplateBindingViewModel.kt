@@ -33,7 +33,7 @@ class TemplateBindingViewModel @Inject constructor(
 
     override fun onButtonClick() {
         viewModelScope.launch {
-            _event.emit(TemplateEvents.Snack(app.m.appName))
+            _event.send(TemplateEvents.Snack(app.m.appName))
         }
     }
 

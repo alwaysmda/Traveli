@@ -35,7 +35,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
         observeToEvents()
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerViews()
-        binding.root.post { viewModel.action.onStart() }
+         viewModel.action.onStart()
         setUpActions()
 
     }

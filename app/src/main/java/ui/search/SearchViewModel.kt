@@ -37,9 +37,9 @@ class SearchViewModel @Inject constructor(
 
     override fun onStart() {
         viewModelScope.launch {
-            delay(500)
-            _event.emit(SearchEvents.UpdateUsers(users))
-            _event.emit(SearchEvents.UpdateTravel(travels))
+
+            _event.send(SearchEvents.UpdateUsers(users))
+            _event.send(SearchEvents.UpdateTravel(travels))
         }
     }
 
@@ -58,15 +58,15 @@ class SearchViewModel @Inject constructor(
 
                         when (it) {
                             is DataState.Failure -> {
-                                if (tabIndex == USER_TAB) _event.emit(SearchEvents.UserError(it.message))
+                                if (tabIndex == USER_TAB) _event.send(SearchEvents.UserError(it.message))
                                 users = listOf()
-                                _event.emit(SearchEvents.UpdateUsers(users))
+                                _event.send(SearchEvents.UpdateUsers(users))
                             }
-                            is DataState.Loading -> _event.emit(SearchEvents.UserLoading)
+                            is DataState.Loading -> _event.send(SearchEvents.UserLoading)
                             is DataState.Success -> {
                                 lastUserQuery = text
                                 users = it.data
-                                _event.emit(SearchEvents.UpdateUsers(users))
+                                _event.send(SearchEvents.UpdateUsers(users))
                             }
 
                         }
@@ -80,13 +80,13 @@ class SearchViewModel @Inject constructor(
                         when (it) {
                             is DataState.Failure -> if (tabIndex == TRAVEL_TAB) {
                                 travels = listOf()
-                                _event.emit(SearchEvents.TravelError(it.message))
-                                _event.emit(SearchEvents.UpdateTravel(travels))
+                                _event.send(SearchEvents.TravelError(it.message))
+                                _event.send(SearchEvents.UpdateTravel(travels))
                             }
-                            DataState.Loading    -> _event.emit(SearchEvents.TravelLoading)
+                            DataState.Loading    -> _event.send(SearchEvents.TravelLoading)
                             is DataState.Success -> {
                                 lastTravelQuery = text
-                                _event.emit(SearchEvents.UpdateTravel(it.data))
+                                _event.send(SearchEvents.UpdateTravel(it.data))
                             }
 
 
@@ -106,15 +106,15 @@ class SearchViewModel @Inject constructor(
         viewModelScope.launch {
             when (tabIndex) {
                 USER_TAB   -> {
-                    _event.emit(SearchEvents.RvUserVisibility(true))
-                    _event.emit(SearchEvents.RvTravelVisibility(false))
+                    _event.send(SearchEvents.RvUserVisibility(true))
+                    _event.send(SearchEvents.RvTravelVisibility(false))
                     if (query.isNotEmpty() && query != lastUserQuery) search(query)
 
                 }
                 TRAVEL_TAB -> {
 
-                    _event.emit(SearchEvents.RvUserVisibility(false))
-                    _event.emit(SearchEvents.RvTravelVisibility(true))
+                    _event.send(SearchEvents.RvUserVisibility(false))
+                    _event.send(SearchEvents.RvTravelVisibility(true))
                     if (query.isNotEmpty() && query != lastTravelQuery) search(query)
 
                 }

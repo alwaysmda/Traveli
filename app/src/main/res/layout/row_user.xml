@@ -22,6 +22,7 @@
         android:layout_marginHorizontal="@dimen/paddingMedium"
         app:cardBackgroundColor="?attr/colorBackground0"
         android:layout_marginBottom="@dimen/paddingMedium"
+        app:cardElevation="0dp"
         >
 
 
