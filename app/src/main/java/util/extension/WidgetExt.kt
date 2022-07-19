@@ -195,7 +195,7 @@ fun ViewGroup.changeChildFont(typeface: Typeface) {
     for (i in 0 until childCount) {
         val view = getChildAt(i)
         if (view is TextView) {
-            view.typeface = ApplicationClass.getInstance().m.fontLight
+            view.typeface = typeface
         }
     }
 }

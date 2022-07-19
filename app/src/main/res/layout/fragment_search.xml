@@ -19,24 +19,48 @@
         android:layout_height="match_parent">
 
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/search_tab"
+        <LinearLayout
+            android:id="@+id/top_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="vertical"
+            >
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_search"
-            fonti="@{vm.app.m.fontMedium}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/paddingLarge"
-            android:layout_marginTop="@dimen/paddingLarge"
-            android:hint="@{vm.app.m.search}"
-            android:textColor="?attr/colorText0"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_tab" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_search"
+                fonti="@{vm.app.m.fontMedium}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/paddingLarge"
+                android:layout_marginTop="@dimen/paddingLarge"
+                android:hint="@{vm.app.m.search}"
+                android:textColor="?attr/colorText0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+
+                />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/search_tab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+
+                />
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_user"
@@ -49,9 +73,11 @@
             android:paddingBottom="@dimen/paddingLarge"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edt_search"
+            app:layout_constraintTop_toBottomOf="@+id/top_layout"
             app:spanCount="3"
             tools:listitem="@layout/row_user" />
+
+
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -64,7 +90,7 @@
             android:paddingBottom="@dimen/paddingLarge"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edt_search" />
+            app:layout_constraintTop_toBottomOf="@id/top_layout" />
 
         <ProgressBar
             android:id="@+id/progressBar"

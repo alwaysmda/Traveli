@@ -29,6 +29,19 @@ class SearchViewModel @Inject constructor(
     //local
     private var job: Job? = null
     private var tabIndex = USER_TAB
+    private var lastUserQuery = ""
+    private var lastTravelQuery = ""
+    private var users = listOf<User>()
+    private var travels = listOf<Travel>()
+
+
+    override fun onStart() {
+        viewModelScope.launch {
+            delay(500)
+            _event.emit(SearchEvents.UpdateUsers(users))
+            _event.emit(SearchEvents.UpdateTravel(travels))
+        }
+    }
 
     override fun onSearch(text: String) {
         search(text)
@@ -39,35 +52,47 @@ class SearchViewModel @Inject constructor(
         job = viewModelScope.launch {
             delay(1000)
             when (tabIndex) {
-                USER_TAB -> userUseCases.getUser(text).onEach {
-                    when (it) {
-                        is DataState.Failure -> {
-                            if (tabIndex == USER_TAB) _event.emit(SearchEvents.UserError(it.message))
-                            _event.emit(SearchEvents.UpdateUsers(listOf()))
+                USER_TAB   -> {
+                    if (text == lastUserQuery) return@launch
+                    userUseCases.getUser(text).onEach {
+
+                        when (it) {
+                            is DataState.Failure -> {
+                                if (tabIndex == USER_TAB) _event.emit(SearchEvents.UserError(it.message))
+                                users = listOf()
+                                _event.emit(SearchEvents.UpdateUsers(users))
+                            }
+                            is DataState.Loading -> _event.emit(SearchEvents.UserLoading)
+                            is DataState.Success -> {
+                                lastUserQuery = text
+                                users = it.data
+                                _event.emit(SearchEvents.UpdateUsers(users))
+                            }
+
                         }
-                        is DataState.Loading -> _event.emit(SearchEvents.UserLoading)
-                        is DataState.Success -> {
-                            _event.emit(SearchEvents.UpdateUsers(it.data))
+                    }.launchIn(viewModelScope)
+                }
+
+
+                TRAVEL_TAB -> {
+                    if (text == lastTravelQuery) return@launch
+                    travelUseCases.getTravel().onEach {
+                        when (it) {
+                            is DataState.Failure -> if (tabIndex == TRAVEL_TAB) {
+                                travels = listOf()
+                                _event.emit(SearchEvents.TravelError(it.message))
+                                _event.emit(SearchEvents.UpdateTravel(travels))
+                            }
+                            DataState.Loading    -> _event.emit(SearchEvents.TravelLoading)
+                            is DataState.Success -> {
+                                lastTravelQuery = text
+                                _event.emit(SearchEvents.UpdateTravel(it.data))
+                            }
+
+
                         }
-
-                    }
-                }.launchIn(viewModelScope)
-
-
-                1 -> travelUseCases.getTravel().onEach {
-                    when (it) {
-                        is DataState.Failure -> if (tabIndex == TRAVEL_TAB) {
-                            _event.emit(SearchEvents.TravelError(it.message))
-                            _event.emit(SearchEvents.UpdateTravel(listOf()))
-                        }
-                        DataState.Loading    -> _event.emit(SearchEvents.TravelLoading)
-                        is DataState.Success -> {
-                            _event.emit(SearchEvents.UpdateTravel(it.data))
-                        }
-
-
-                    }
-                }.launchIn(viewModelScope)
+                    }.launchIn(viewModelScope)
+                }
 
 
             }
@@ -76,22 +101,26 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    override fun onChangeTab(tabIndex: Int) {
+    override fun onChangeTab(tabIndex: Int, query: String) {
         this.tabIndex = tabIndex
         viewModelScope.launch {
             when (tabIndex) {
                 USER_TAB   -> {
                     _event.emit(SearchEvents.RvUserVisibility(true))
                     _event.emit(SearchEvents.RvTravelVisibility(false))
+                    if (query.isNotEmpty() && query != lastUserQuery) search(query)
 
                 }
                 TRAVEL_TAB -> {
 
                     _event.emit(SearchEvents.RvUserVisibility(false))
                     _event.emit(SearchEvents.RvTravelVisibility(true))
+                    if (query.isNotEmpty() && query != lastTravelQuery) search(query)
+
                 }
             }
         }
+
 
     }
 

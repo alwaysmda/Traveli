@@ -29,6 +29,8 @@ interface LanguageInterface {
     val countries:String
     val new:String
     val travel:String
+    val user:String
+
 
 
     //navigation

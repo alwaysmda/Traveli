@@ -29,6 +29,7 @@ class LanguageEN(private val app: ApplicationClass) : LanguageInterface {
     override val home: String = "Home"
     override val new: String = "New"
     override val travel: String = "Travel"
+    override val user: String = "User"
 
 
 }

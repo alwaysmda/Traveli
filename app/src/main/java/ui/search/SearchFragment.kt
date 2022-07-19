@@ -3,7 +3,11 @@ package ui.search
 import adapter.TravelAdapter
 import adapter.UserAdapter
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doOnTextChanged
@@ -14,6 +18,7 @@ import com.xodus.templatefive.R
 import com.xodus.templatefive.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 import ui.base.BaseFragment
+import util.extension.changeChildFont
 
 
 @AndroidEntryPoint
@@ -36,6 +41,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
         observeToEvents()
         setUpAction()
         setUpViews()
+        viewModel.action.onStart()
 
 
     }
@@ -51,7 +57,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
                         tvTravelError.isVisible = false
                     }
 
-                    viewModel.action.onChangeTab(tab?.position ?: 0)
+                    viewModel.action.onChangeTab(tab?.position ?: 0,edtSearch.text.toString())
 
                 }
 
@@ -131,9 +137,19 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
 
     private fun setUpViews() {
         binding.searchTab.apply {
-            addTab(newTab().setText("User"))
-            addTab(newTab().setText("Travel"))
+            addTab(newTab().setText(viewModel.app.m.user))
+            addTab(newTab().setText(viewModel.app.m.travel))
+            val vg = binding.searchTab.getChildAt(0) as ViewGroup
+            val vgTab1 = vg.getChildAt(0) as ViewGroup
+            val vgTab2 = vg.getChildAt(1) as ViewGroup
+            vgTab1.changeChildFont(viewModel.app.m.fontBold!!)
+            vgTab2.changeChildFont(viewModel.app.m.fontBold!!)
+
+
         }
+
+
+
     }
 
 }
