@@ -5,7 +5,10 @@ import kotlin.random.Random
 data class Travel(
     val id:String,
     val name:String,
-    val image:String
+    val image:String,
+
+
+
 ){
     companion object{
         const val carabianSeeImage = "https://www.wildearth-travel.com/get-image-version/verybig/uploads/caribbean_sea_11_days_(fram)_picture.jpg"
