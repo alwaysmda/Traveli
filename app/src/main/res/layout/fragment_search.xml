@@ -23,25 +23,45 @@
             android:id="@+id/top_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
             android:orientation="vertical"
-            >
+            app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_search"
-                fonti="@{vm.app.m.fontMedium}"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/paddingLarge"
-                android:layout_marginTop="@dimen/paddingLarge"
-                android:hint="@{vm.app.m.search}"
-                android:textColor="?attr/colorText0"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_back"
+                    style="@style/GeneralButton.TextButton"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/paddingLarge"
+                    app:cornerRadius="18dp"
+                    app:icon="@drawable/ic_arrow_left"
+                    app:iconSize="16dp"
+                    app:iconTint="?attr/colorText0"
+
+                    />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_search"
+                    fonti="@{vm.app.m.fontMedium}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/paddingLarge"
+                    android:layout_marginTop="@dimen/paddingLarge"
+                    android:hint="@{vm.app.m.search}"
+                    android:textColor="?attr/colorText0"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
 
 
-                />
+                    />
+
+            </LinearLayout>
+
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/search_tab"
@@ -54,12 +74,6 @@
 
 
         </LinearLayout>
-
-
-
-
-
-
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -76,8 +90,6 @@
             app:layout_constraintTop_toBottomOf="@+id/top_layout"
             app:spanCount="3"
             tools:listitem="@layout/row_user" />
-
-
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -106,28 +118,26 @@
             fonti="@{vm.app.m.fontMedium}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/paddingLarge"
             android:textColor="?attr/colorText0"
             android:textSize="@dimen/textLargeXX"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingHorizontal="@dimen/paddingLarge"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_travel_error"
             fonti="@{vm.app.m.fontMedium}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/paddingLarge"
             android:textColor="?attr/colorText0"
             android:textSize="@dimen/textLargeXX"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingHorizontal="@dimen/paddingLarge"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

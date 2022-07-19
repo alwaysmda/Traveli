@@ -124,4 +124,10 @@ class SearchViewModel @Inject constructor(
 
     }
 
+    override fun onBackPress() {
+        viewModelScope.launch {
+            _event.send(SearchEvents.NavBack)
+        }
+    }
+
 }

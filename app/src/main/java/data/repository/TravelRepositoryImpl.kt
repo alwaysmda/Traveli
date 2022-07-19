@@ -8,6 +8,7 @@ import domain.model.Country
 import domain.model.User
 import domain.model.travel.Banner
 import domain.model.travel.Travel
+import domain.model.travel.TravelDetail
 import domain.repository.TraveliRepository
 import main.ApplicationClass
 
@@ -55,6 +56,14 @@ class TravelRepositoryImpl(
             is DataState.Loading -> response
             is DataState.Success -> DataState.Success(Travel.getFake(5))
 
+        }
+    }
+
+    override suspend fun getTravelDetail(travelId: Int): DataState<TravelDetail> {
+        return when (val response = call { traveliApi.getTravelDetail(travelId) }) {
+            is DataState.Failure -> response
+            DataState.Loading    -> DataState.Loading
+            is DataState.Success -> DataState.Success(TravelDetail.getFake())
         }
     }
 

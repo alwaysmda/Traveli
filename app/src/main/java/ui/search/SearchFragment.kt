@@ -13,6 +13,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.xodus.templatefive.R
 import com.xodus.templatefive.databinding.FragmentSearchBinding
@@ -57,7 +58,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
                         tvTravelError.isVisible = false
                     }
 
-                    viewModel.action.onChangeTab(tab?.position ?: 0,edtSearch.text.toString())
+                    viewModel.action.onChangeTab(tab?.position ?: 0, edtSearch.text.toString())
 
                 }
 
@@ -70,6 +71,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
                 }
 
             })
+            btnBack.setOnClickListener { viewModel.action.onBackPress() }
         }
 
     }
@@ -119,6 +121,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
                             tvUserError.isVisible = false
                         }
                     }
+
+                    is SearchEvents.NavBack            -> findNavController().popBackStack()
+
                 }
             }
         }
@@ -147,7 +152,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
 
 
         }
-
 
 
     }

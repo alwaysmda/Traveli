@@ -21,4 +21,6 @@ sealed class SearchEvents : BaseEvent() {
     data class RvUserVisibility(val isVisible: Boolean) : SearchEvents()
     data class RvTravelVisibility(val isVisible: Boolean) : SearchEvents()
 
+    object NavBack : SearchEvents()
+
 }

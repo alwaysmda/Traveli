@@ -73,7 +73,8 @@ object AppModule {
             GetTrending(traveliRepository),
             GetBanner(traveliRepository),
             GetNewTravel(traveliRepository),
-            GetTravel(traveliRepository)
+            GetTravel(traveliRepository),
+            GetTravelDetail(traveliRepository)
         )
     }
 

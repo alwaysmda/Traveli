@@ -89,4 +89,9 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.0"
     implementation "androidx.navigation:navigation-ui-ktx:2.5.0"
     implementation "androidx.navigation:navigation-dynamic-features-fragment:2.5.0"
+
+    //player
+    implementation "androidx.media3:media3-exoplayer:1.0.0-beta01"
+    implementation "androidx.media3:media3-ui:1.0.0-beta01"
+    implementation "androidx.media3:media3-exoplayer-dash:1.0.0-beta01"
 }
