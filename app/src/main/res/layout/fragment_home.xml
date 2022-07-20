@@ -55,7 +55,7 @@
                 app:cardBackgroundColor="?attr/colorBackground2"
                 app:cardCornerRadius="@dimen/radiusMedium"
                 app:cardElevation="0dp"
-                app:layout_constraintDimensionRatio="H,1:1"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintTop_toBottomOf="@+id/btn_search">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
