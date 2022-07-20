@@ -16,9 +16,10 @@ import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_DESCRIPTION
 import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_IMAGE
 import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_LINK
 import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_VIDEO
+import ui.base.BaseActivity
 
 
-class TravelDetailDetailAdapter : ListAdapter<TravelDetail, RecyclerView.ViewHolder>(DiffCallback()) {
+class TravelDetailAdapter(private val activity: BaseActivity) : ListAdapter<TravelDetail, RecyclerView.ViewHolder>(DiffCallback()) {
 
 
     inner class CoverViewHolder(private val binding: RowTravelDetailCoverBinding) : RecyclerView.ViewHolder(binding.root) {

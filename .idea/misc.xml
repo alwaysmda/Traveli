@@ -35,6 +35,7 @@
         <entry key="app/src/main/res/layout/row_travel.xml" value="0.10344827586206896" />
         <entry key="app/src/main/res/layout/row_travel_cover.xml" value="0.3055555555555556" />
         <entry key="app/src/main/res/layout/row_travel_detail_bookmark.xml" value="0.3055555555555556" />
+        <entry key="app/src/main/res/layout/row_travel_detail_cover.xml" value="0.3055555555555556" />
         <entry key="app/src/main/res/layout/row_travel_detail_description.xml" value="0.3055555555555556" />
         <entry key="app/src/main/res/layout/row_travel_detail_image.xml" value="0.3055555555555556" />
         <entry key="app/src/main/res/layout/row_travel_detail_link.xml" value="0.3055555555555556" />

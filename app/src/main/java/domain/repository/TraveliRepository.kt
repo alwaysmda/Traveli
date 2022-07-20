@@ -6,7 +6,6 @@ import domain.model.User
 import domain.model.travel.Banner
 import domain.model.travel.Travel
 import domain.model.travel.TravelDetail
-import kotlinx.coroutines.flow.Flow
 
 interface TraveliRepository {
 
@@ -16,7 +15,7 @@ interface TraveliRepository {
 
     suspend fun getTravel(): DataState<List<Travel>>
 
-    suspend fun getTravelDetail(travelId:Int): DataState<TravelDetail>
+    suspend fun getTravelDetail(travelId: Int): DataState<List<TravelDetail>>
 
     suspend fun getBanner(): DataState<Banner>
 
