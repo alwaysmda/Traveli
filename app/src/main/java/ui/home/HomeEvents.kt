@@ -13,7 +13,10 @@ sealed class HomeEvents : BaseEvent() {
     data class NewTravelUpdate(val travels: List<Travel>) : HomeEvents()
     data class CountriesUpdate(val countries: List<Country>) : HomeEvents()
     data class BannerUpdate(val banner: Banner) : HomeEvents()
-    data class NavToSearch(val direction:NavDirections):HomeEvents()
+
+    //nav
+    data class NavToSearch(val direction: NavDirections) : HomeEvents()
+    object NavToTravelDetail : HomeEvents()
 
 
     //errors
@@ -24,8 +27,8 @@ sealed class HomeEvents : BaseEvent() {
     data class BannerError(val message: String) : HomeEvents()
 
     //loadings
-    object TrendingTravelLoading:HomeEvents()
-    object NewTravelLoading:HomeEvents()
+    object TrendingTravelLoading : HomeEvents()
+    object NewTravelLoading : HomeEvents()
     object CountriesLoading : HomeEvents()
     object BannerLoading : HomeEvents()
 

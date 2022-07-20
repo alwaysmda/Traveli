@@ -24,10 +24,10 @@ class HomeViewModel @Inject constructor(
 
 
     override fun onStart() {
-            getTrendingTravel()
-            getNewTravel()
-            getBanner()
-            getCountries()
+        getTrendingTravel()
+        getNewTravel()
+        getBanner()
+        getCountries()
     }
 
     override fun onGetBannerRetry() {
@@ -47,7 +47,9 @@ class HomeViewModel @Inject constructor(
     }
 
     override fun onTravelItemClick(travel: Travel, pos: Int) {
-
+        viewModelScope.launch {
+            _event.send(HomeEvents.NavToTravelDetail)
+        }
     }
 
     override fun onSearchClick() {
@@ -87,11 +89,11 @@ update repo and usecases
         }.launchIn(viewModelScope)
     }
 
-    private fun getNewTravel(){
+    private fun getNewTravel() {
         travelUseCases.getNewTravel().onEach {
-            when(it){
+            when (it) {
                 is DataState.Failure -> _event.send(HomeEvents.NewTravelError(it.message))
-                is DataState.Loading    -> _event.send(HomeEvents.NewTravelLoading)
+                is DataState.Loading -> _event.send(HomeEvents.NewTravelLoading)
                 is DataState.Success -> {
                     log("FLOW:travel")
                     _event.send(HomeEvents.NewTravelUpdate(it.data))
@@ -121,7 +123,7 @@ update repo and usecases
         countryUseCases.getCountry().onEach {
             when (it) {
                 is DataState.Failure -> _event.send(HomeEvents.CountriesError(it.message))
-                is DataState.Loading    -> _event.send(HomeEvents.Loading)
+                is DataState.Loading -> _event.send(HomeEvents.Loading)
                 is DataState.Success -> _event.send(HomeEvents.CountriesUpdate(it.data))
             }
         }.launchIn(viewModelScope)

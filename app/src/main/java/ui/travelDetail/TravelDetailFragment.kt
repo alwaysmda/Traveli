@@ -34,9 +34,6 @@ class TravelDetailFragment : BaseFragment<FragmentTravelDetailBinding, TravelDet
                     is TravelDetailEvents.TravelDetailLoading -> Unit
                     is TravelDetailEvents.UpdateTravelDetail  -> {
                         binding.apply {
-                            Picasso.get().load(it.travelDetail.image).into(ivTravel)
-                            val tvTitleText = "${viewModel.app.m.travelTo} ${it.travelDetail.countryName}"
-                            tvTitle.text = tvTitleText
 
 
 
