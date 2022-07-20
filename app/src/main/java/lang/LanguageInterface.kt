@@ -23,18 +23,17 @@ interface LanguageInterface {
     val download: String
 
 
-
-    val search:String
-    val trending:String
-    val countries:String
-    val new:String
-    val travel:String
-    val user:String
-
+    val search: String
+    val trending: String
+    val countries: String
+    val new: String
+    val travel: String
+    val user: String
+    val travelTo: String
 
 
     //navigation
-    val home:String
+    val home: String
 
     fun paramString(param: String) = "$appName $param"
 }

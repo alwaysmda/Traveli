@@ -3,57 +3,58 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
- <data>
+    <data>
 
-     <variable
-         name="app"
-         type="main.ApplicationClass" />
+        <variable
+            name="app"
+            type="main.ApplicationClass" />
 
-     <variable
-         name="data"
-         type="domain.model.User" />
+        <variable
+            name="data"
+            type="domain.model.User" />
 
- </data>
+    </data>
 
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="120dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/paddingMedium"
+        android:layout_margin="@dimen/paddingLarge"
         app:cardBackgroundColor="?attr/colorBackground0"
-        android:layout_marginBottom="@dimen/paddingMedium"
-        app:cardElevation="0dp"
-        >
+        app:cardElevation="0dp">
 
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/iv_user"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                app:shapeAppearance="@style/CircularImageView"
                 imageUrl="@{data.profileImage}"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:scaleType="centerCrop"
-                />
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/CircularImageView" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_user_name"
+                fonti="@{app.m.fontMedium}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/paddingMedium"
                 android:layout_gravity="center"
-                android:textSize="@dimen/textLarge"
-                android:textColor="?attr/colorText0"
-                fonti="@{app.m.fontMedium}"
+                android:layout_marginTop="@dimen/paddingMedium"
                 android:text="@{data.name}"
-                />
+                android:textColor="?attr/colorText0"
+                android:textSize="@dimen/textLarge"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_user" />
 
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.cardview.widget.CardView>

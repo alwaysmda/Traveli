@@ -101,6 +101,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/cv_first_travel"
                 tools:itemCount="2"
                 tools:listitem="@layout/row_travel"
+                android:paddingHorizontal="@dimen/paddingLarge"
 
                 />
 

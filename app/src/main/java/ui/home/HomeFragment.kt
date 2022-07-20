@@ -35,7 +35,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
         observeToEvents()
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerViews()
-         viewModel.action.onStart()
+        viewModel.action.onStart()
         setUpActions()
 
     }
@@ -44,121 +44,121 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
     private fun observeToEvents() = viewLifecycleOwner.lifecycleScope.launchWhenStarted {
 
         viewModel.event.collect {
-                log("FLOW:OBSERVE")
-                when (it) {
-                    is HomeEvents.TrendingTravelUpdate  -> {
-                        binding.apply {
-                            rvTrendingTravel.isVisible = true
-                            trendingLoading.isVisible = false
-                            trendingProgress.isVisible = false
-                            tvTrendingError.isVisible = false
-                            btnTrendingRetry.isVisible = false
-                        }
-                        trendingTravelAdapter.submitList(it.travels)
+            log("FLOW:OBSERVE")
+            when (it) {
+                is HomeEvents.TrendingTravelUpdate  -> {
+                    binding.apply {
+                        rvTrendingTravel.isVisible = true
+                        trendingLoading.isVisible = false
+                        trendingProgress.isVisible = false
+                        tvTrendingError.isVisible = false
+                        btnTrendingRetry.isVisible = false
                     }
-                    is HomeEvents.BannerUpdate          -> {
-                        binding.apply {
-                            binding.bannerLoading.isVisible = false
-                            Picasso.get().load(it.banner.banner.image).into(binding.ivBanner)
-                            tvBannerName.text = it.banner.banner.name
-                            subBannerAdapter.submitList(it.banner.subBanner)
-                        }
-
-                    }
-                    is HomeEvents.CountriesUpdate       -> {
-                        binding.countriesLoading.isVisible = false
-                        countryAdapter.submitList(it.countries)
-                    }
-                    is HomeEvents.NewTravelUpdate       -> {
-                        binding.newTravelLoading.isVisible = false
-                        binding.rvNewTravel.isVisible = true
-                        newTravelAdapter.submitList(it.travels)
-                    }
-                    //loadings
-                    is HomeEvents.Loading               -> {
-                    }
-                    is HomeEvents.NewTravelLoading      -> {
-                        binding.apply {
-                            newTravelLoading.isVisible = true
-                            newTravelProgress.isVisible = true
-                            tvNewTravelError.isVisible = false
-                            btnNewTravelRetry.isVisible = false
-                            rvNewTravel.isVisible = false
-                        }
-                    }
-                    is HomeEvents.BannerLoading         -> {
-                        binding.apply {
-                            bannerLoading.isVisible = true; bannerProgress.isVisible = true; tvBannerError.isVisible = false;
-                            btnBannerRetry.isVisible = false;
-
-                        }
-                    }
-                    is HomeEvents.CountriesLoading      -> {
-                        binding.apply {
-                            countriesLoading.isVisible = true
-                            countriesProgress.isVisible = true
-                            tvCountriesError.isVisible = false
-                            btnCountriesRetry.isVisible = false
-                        }
-                    }
-                    is HomeEvents.TrendingTravelLoading -> {
-                        binding.apply {
-                            trendingLoading.isVisible = true
-                            trendingProgress.isVisible = true
-                            tvTrendingError.isVisible = false
-                            btnTrendingRetry.isVisible = false
-                            rvTrendingTravel.isVisible = false
-                        }
-
-                    }
-                    //errors
-                    is HomeEvents.OnError               -> {
-                    }
-                    is HomeEvents.TrendingTravelError   -> {
-                        binding.apply {
-                            trendingLoading.isVisible = true
-                            trendingProgress.isVisible = false
-                            tvTrendingError.isVisible = true
-                            btnTrendingRetry.isVisible = true
-                            rvTrendingTravel.isVisible = false
-                            tvTrendingError.text = it.message
-                        }
-                    }
-                    is HomeEvents.BannerError           -> {
-                        binding.apply {
-                            bannerLoading.isVisible = true; bannerProgress.isVisible = false; tvBannerError.isVisible = true;
-                            btnBannerRetry.isVisible = true;tvBannerError.text = it.message
-
-                        }
-                    }
-                    is HomeEvents.CountriesError        -> {
-                        binding.apply {
-                            countriesLoading.isVisible = true
-                            countriesProgress.isVisible = false
-                            tvCountriesError.isVisible = true
-                            btnCountriesRetry.isVisible = true
-                            tvCountriesError.text = it.message
-                        }
-                    }
-                    is HomeEvents.NewTravelError        -> {
-                        binding.apply {
-                            newTravelLoading.isVisible = true
-                            newTravelProgress.isVisible = false
-                            tvNewTravelError.isVisible = true
-                            btnNewTravelRetry.isVisible = true
-                            tvNewTravelError.text = it.message
-                            rvNewTravel.isVisible = false
-                        }
-
-                    }
-                    is HomeEvents.NavToSearch           -> findNavController().navigate(it.direction)
+                    trendingTravelAdapter.submitList(it.travels)
                 }
+                is HomeEvents.BannerUpdate          -> {
+                    binding.apply {
+                        binding.bannerLoading.isVisible = false
+                        Picasso.get().load(it.banner.banner.image).into(binding.ivBanner)
+                        tvBannerName.text = it.banner.banner.name
+                        subBannerAdapter.submitList(it.banner.subBanner)
+                    }
+
+                }
+                is HomeEvents.CountriesUpdate       -> {
+                    binding.countriesLoading.isVisible = false
+                    countryAdapter.submitList(it.countries)
+                }
+                is HomeEvents.NewTravelUpdate       -> {
+                    binding.newTravelLoading.isVisible = false
+                    binding.rvNewTravel.isVisible = true
+                    newTravelAdapter.submitList(it.travels)
+                }
+                //loadings
+                is HomeEvents.Loading               -> {
+                }
+                is HomeEvents.NewTravelLoading      -> {
+                    binding.apply {
+                        newTravelLoading.isVisible = true
+                        newTravelProgress.isVisible = true
+                        tvNewTravelError.isVisible = false
+                        btnNewTravelRetry.isVisible = false
+                        rvNewTravel.isVisible = false
+                    }
+                }
+                is HomeEvents.BannerLoading         -> {
+                    binding.apply {
+                        bannerLoading.isVisible = true; bannerProgress.isVisible = true; tvBannerError.isVisible = false;
+                        btnBannerRetry.isVisible = false;
+
+                    }
+                }
+                is HomeEvents.CountriesLoading      -> {
+                    binding.apply {
+                        countriesLoading.isVisible = true
+                        countriesProgress.isVisible = true
+                        tvCountriesError.isVisible = false
+                        btnCountriesRetry.isVisible = false
+                    }
+                }
+                is HomeEvents.TrendingTravelLoading -> {
+                    binding.apply {
+                        trendingLoading.isVisible = true
+                        trendingProgress.isVisible = true
+                        tvTrendingError.isVisible = false
+                        btnTrendingRetry.isVisible = false
+                        rvTrendingTravel.isVisible = false
+                    }
+
+                }
+                //errors
+                is HomeEvents.OnError               -> {
+                }
+                is HomeEvents.TrendingTravelError   -> {
+                    binding.apply {
+                        trendingLoading.isVisible = true
+                        trendingProgress.isVisible = false
+                        tvTrendingError.isVisible = true
+                        btnTrendingRetry.isVisible = true
+                        rvTrendingTravel.isVisible = false
+                        tvTrendingError.text = it.message
+                    }
+                }
+                is HomeEvents.BannerError           -> {
+                    binding.apply {
+                        bannerLoading.isVisible = true; bannerProgress.isVisible = false; tvBannerError.isVisible = true;
+                        btnBannerRetry.isVisible = true;tvBannerError.text = it.message
+
+                    }
+                }
+                is HomeEvents.CountriesError        -> {
+                    binding.apply {
+                        countriesLoading.isVisible = true
+                        countriesProgress.isVisible = false
+                        tvCountriesError.isVisible = true
+                        btnCountriesRetry.isVisible = true
+                        tvCountriesError.text = it.message
+                    }
+                }
+                is HomeEvents.NewTravelError        -> {
+                    binding.apply {
+                        newTravelLoading.isVisible = true
+                        newTravelProgress.isVisible = false
+                        tvNewTravelError.isVisible = true
+                        btnNewTravelRetry.isVisible = true
+                        tvNewTravelError.text = it.message
+                        rvNewTravel.isVisible = false
+                    }
+
+                }
+                is HomeEvents.NavToSearch           -> findNavController().navigate(it.direction)
             }
+        }
 
 
     }
 
-    private fun setUpActions(){
+    private fun setUpActions() {
         binding.apply {
             btnBannerRetry.setOnClickListener { viewModel.action.onGetBannerRetry() }
             btnTrendingRetry.setOnClickListener { viewModel.action.onGetTrendingRetry() }
@@ -170,10 +170,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
 
 
     private fun setUpRecyclerViews() {
-        trendingTravelAdapter = SquareTravelAdapter(baseActivity)
+        trendingTravelAdapter = SquareTravelAdapter(baseActivity) { travel, pos ->
+            viewModel.action.onTravelItemClick(travel, pos)
+        }
         subBannerAdapter = TravelAdapter(baseActivity)
         countryAdapter = CountryAdapter(baseActivity)
-        newTravelAdapter = SquareTravelAdapter(baseActivity)
+        newTravelAdapter = SquareTravelAdapter(baseActivity) { travel, pos ->
+
+        }
         binding.apply {
             rvTrendingTravel.adapter = trendingTravelAdapter
             rvNewTravel.adapter = newTravelAdapter

@@ -3,6 +3,7 @@ package ui.home
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import data.remote.DataState
+import domain.model.travel.Travel
 import domain.usecase.country.CountryUseCases
 import domain.usecase.travel.TravelUseCases
 import kotlinx.coroutines.delay
@@ -43,6 +44,10 @@ class HomeViewModel @Inject constructor(
 
     override fun onGetCountriesRetry() {
         getCountries()
+    }
+
+    override fun onTravelItemClick(travel: Travel, pos: Int) {
+
     }
 
     override fun onSearchClick() {

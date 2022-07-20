@@ -11,17 +11,19 @@ import com.xodus.templatefive.databinding.RowSquareTravelBinding
 import domain.model.travel.Travel
 import ui.base.BaseActivity
 
-class SquareTravelAdapter(private val activity:BaseActivity):ListAdapter<Travel,SquareTravelAdapter.TravelViewHolder>(DiffCallback()) {
+class SquareTravelAdapter(private val activity: BaseActivity, private val onItemClick: (travel: Travel, pos: Int) -> Unit) : ListAdapter<Travel, SquareTravelAdapter.TravelViewHolder>(DiffCallback()) {
 
 
+    inner class TravelViewHolder(private val binding: RowSquareTravelBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    inner class TravelViewHolder(private val binding:RowSquareTravelBinding):RecyclerView.ViewHolder(binding.root){
-
-        fun bind(travel: Travel){
+        fun bind(travel: Travel) {
             binding.apply {
                 app = activity.app
                 data = travel
                 ivTravel.clipToOutline = true
+                root.setOnClickListener {
+                    onItemClick(travel, bindingAdapterPosition)
+                }
             }
 
 
@@ -30,7 +32,7 @@ class SquareTravelAdapter(private val activity:BaseActivity):ListAdapter<Travel,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TravelViewHolder {
-       return TravelViewHolder(
+        return TravelViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
                 R.layout.row_square_travel,
