@@ -4,6 +4,7 @@ package adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.media3.exoplayer.ExoPlayer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -19,35 +20,54 @@ import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_VIDEO
 import ui.base.BaseActivity
 
 
-class TravelDetailAdapter(private val activity: BaseActivity) : ListAdapter<TravelDetail, RecyclerView.ViewHolder>(DiffCallback()) {
+class TravelDetailAdapter(private val activity: BaseActivity, private val exoPlayer: ExoPlayer, private val onLinkClick: (link: String) -> Unit) : ListAdapter<TravelDetail, RecyclerView.ViewHolder>(DiffCallback()) {
 
 
     inner class CoverViewHolder(private val binding: RowTravelDetailCoverBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(travelDetail: TravelDetail) {
+            binding.apply {
+                app = activity.app
+                data = travelDetail
+            }
 
         }
     }
 
     inner class ImageViewHolder(private val binding: RowTravelDetailImageBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(travelDetail: TravelDetail) {
-
+            binding.apply {
+                data = travelDetail
+            }
         }
     }
 
     inner class DescriptionViewHolder(private val binding: RowTravelDetailDescriptionBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(travelDetail: TravelDetail) {
-
+            binding.apply {
+                app = activity.app
+                data = travelDetail
+            }
         }
     }
 
     inner class LinkViewHolder(private val binding: RowTravelDetailLinkBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(travelDetail: TravelDetail) {
-
+            binding.apply {
+                app = activity.app
+                data = travelDetail
+                root.setOnClickListener {
+                    onLinkClick(travelDetail.link)
+                }
+            }
         }
     }
 
     inner class VideoViewHolder(private val binding: RowTravelDetailVideoBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(travelDetail: TravelDetail) {
+            binding.apply {
+                playerView.player = exoPlayer
+            }
+
 
         }
     }

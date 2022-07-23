@@ -2,8 +2,11 @@ package ui.travelDetail
 
 
 import adapter.TravelDetailAdapter
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.xodus.templatefive.R
@@ -16,6 +19,7 @@ class TravelDetailFragment : BaseFragment<FragmentTravelDetailBinding, TravelDet
 
 
     private lateinit var travelDetailAdapter: TravelDetailAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,21 +38,28 @@ class TravelDetailFragment : BaseFragment<FragmentTravelDetailBinding, TravelDet
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.event.collect {
                 when (it) {
-                    is TravelDetailEvents.TravelDetailError   -> Unit
-                    is TravelDetailEvents.TravelDetailLoading -> Unit
+                    is TravelDetailEvents.TravelDetailError   -> binding.progress.isVisible = false
+                    is TravelDetailEvents.TravelDetailLoading -> {
+                        binding.progress.isVisible = true
+                    }
                     is TravelDetailEvents.UpdateTravelDetail  -> {
                         binding.apply {
+                            progress.isVisible = false
                             travelDetailAdapter.submitList(it.travelDetails)
-
                         }
                     }
+                    is TravelDetailEvents.OpenUrl             -> startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it.url)))
                 }
             }
         }
     }
 
+
     private fun setUpRecyclerView() {
-        travelDetailAdapter = TravelDetailAdapter(baseActivity)
+        travelDetailAdapter = TravelDetailAdapter(baseActivity, viewModel.exoPlayer, onLinkClick = {
+            viewModel.action.onLinkClick(it)
+        })
+        binding.rvTravelDetail.adapter = travelDetailAdapter
     }
 
 }

@@ -29,7 +29,7 @@ interface TraveliApi {
     suspend fun getUsers(): Response<Unit>
 
     @GET(GOOGLE_URL)
-    suspend fun getTravelDetail(travelId: Int): Response<Unit>
+    suspend fun getTravelDetail(): Response<Unit>
 
 
 }

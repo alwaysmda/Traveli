@@ -17,7 +17,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/paddingLarge"
+        android:layout_marginTop="@dimen/paddingLarge"
+
+        >
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_title"
@@ -25,26 +29,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/paddingLarge"
-            android:layout_marginTop="@dimen/paddingLarge"
-            android:text="@{app.m.travelTo + data.countryName}"
+            android:text="@{app.m.travelTo +  ` `+ data.countryName}"
             android:textColor="?attr/colorText0"
             android:textSize="@dimen/textLargeXX"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Travel to spain" />
 
-        <ImageView
-            android:id="@+id/iv_cover"
-            imageUrl="@{data.cover}"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/paddingLarge"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            app:layout_constraintDimensionRatio="2:1"
+            app:cardCornerRadius="@dimen/radiusMedium"
+            android:layout_marginTop="@dimen/paddingLarge">
+
+            <ImageView
+                android:id="@+id/iv_cover"
+                imageUrl="@{data.cover}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+        </com.google.android.material.card.MaterialCardView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

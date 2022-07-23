@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/paddingLarge"
+        android:layout_marginHorizontal="@dimen/paddingLarge"
         app:cardBackgroundColor="?attr/colorBackground0"
         app:cardCornerRadius="@dimen/radiusMedium">
 

@@ -1,6 +1,7 @@
 package di
 
 import android.content.Context
+import androidx.media3.exoplayer.ExoPlayer
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,6 +42,10 @@ object AppModule {
     @Provides
     fun provideLanguageManager(app: ApplicationClass, prefManager: PrefManager): LanguageManager =
         LanguageManager(app, prefManager)
+
+    @Singleton
+    @Provides
+    fun provideExoPlayer(@ApplicationContext context: Context) = ExoPlayer.Builder(context).build()
 
 
     @ExperimentalCoroutinesApi

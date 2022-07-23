@@ -1,8 +1,8 @@
 package ui.home
 
 import adapter.CountryAdapter
-import adapter.TravelAdapter
 import adapter.SquareTravelAdapter
+import adapter.TravelAdapter
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -140,7 +140,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
                         tvCountriesError.text = it.message
                     }
                 }
-                is HomeEvents.NewTravelError        -> {
+                is HomeEvents.NewTravelError -> {
                     binding.apply {
                         newTravelLoading.isVisible = true
                         newTravelProgress.isVisible = false
@@ -151,7 +151,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
                     }
 
                 }
-                is HomeEvents.NavToSearch           -> findNavController().navigate(it.direction)
+                is HomeEvents.NavToSearch    -> findNavController().navigate(it.direction)
+                HomeEvents.NavToTravelDetail -> findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToTravelDetailFragment())
             }
         }
 
