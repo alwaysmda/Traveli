@@ -68,5 +68,10 @@ class TravelDetailViewModel @Inject constructor(
         }
     }
 
+    override fun onCleared() {
+        super.onCleared()
+
+    }
+
 
 }

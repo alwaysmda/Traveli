@@ -20,7 +20,7 @@ import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_VIDEO
 import ui.base.BaseActivity
 
 
-class TravelDetailAdapter(private val activity: BaseActivity, private val exoPlayer: ExoPlayer, private val onLinkClick: (link: String) -> Unit) : ListAdapter<TravelDetail, RecyclerView.ViewHolder>(DiffCallback()) {
+class TravelDetailAdapter(private val activity: BaseActivity, private val exoPlayer: ExoPlayer, private val onLinkClick: (link: String) -> Unit, private val onVideoFullScreenClick: () -> Unit) : ListAdapter<TravelDetail, RecyclerView.ViewHolder>(DiffCallback()) {
 
 
     inner class CoverViewHolder(private val binding: RowTravelDetailCoverBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -65,7 +65,13 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
     inner class VideoViewHolder(private val binding: RowTravelDetailVideoBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(travelDetail: TravelDetail) {
             binding.apply {
+
                 playerView.player = exoPlayer
+                playerView.setFullscreenButtonClickListener {
+
+                }
+
+
             }
 
 

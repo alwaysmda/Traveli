@@ -58,6 +58,8 @@ class TravelDetailFragment : BaseFragment<FragmentTravelDetailBinding, TravelDet
     private fun setUpRecyclerView() {
         travelDetailAdapter = TravelDetailAdapter(baseActivity, viewModel.exoPlayer, onLinkClick = {
             viewModel.action.onLinkClick(it)
+        }, onVideoFullScreenClick = {
+
         })
         binding.rvTravelDetail.adapter = travelDetailAdapter
     }
