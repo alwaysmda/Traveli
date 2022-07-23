@@ -169,17 +169,23 @@
 
     <style name="CircularImageView">
         <item name="strokeWidth">1dp</item>
-        <item name="strokeColor">?attr/colorPrimary</item>
+        <item name="strokeColor">?attr/colorBackground0</item>
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="CoverImageView">
+        <item name="cornerSize">0dp</item>
+        <item name="cornerSizeBottomLeft">20dp</item>
+        <item name="cornerSizeBottomRight">20dp</item>
+        <item name="cornerFamily">rounded</item>
     </style>
 
     <style name="CircularImageView.Avatar">
         <item name="strokeWidth">1dp</item>
-        <item name="strokeColor">?attr/colorPrimary</item>
+        <item name="strokeColor">?attr/colorBackground0</item>
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
-
 
 </resources>

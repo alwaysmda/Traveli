@@ -4,11 +4,14 @@ import android.app.Application
 import com.squareup.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.HiltAndroidApp
+import domain.model.User
 import lang.LanguageInterface
 import lang.LanguageManager
 import okhttp3.ConnectionSpec
 import okhttp3.OkHttpClient
-import util.*
+import util.Constant
+import util.PrefManager
+import util.ThemeManager
 import util.extension.log
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -26,11 +29,9 @@ class ApplicationClass : Application() {
 
     @Inject
     lateinit var languageManager: LanguageManager
-
-
-
     val m: LanguageInterface
         get() = languageManager.main
+    val user: User? = null
 
     companion object {
         @Volatile

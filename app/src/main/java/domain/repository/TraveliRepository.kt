@@ -2,7 +2,6 @@ package domain.repository
 
 import data.remote.DataState
 import domain.model.Country
-import domain.model.User
 import domain.model.travel.Banner
 import domain.model.travel.Travel
 import domain.model.travel.TravelDetail
@@ -20,8 +19,5 @@ interface TraveliRepository {
     suspend fun getBanner(): DataState<Banner>
 
     suspend fun getCountries(): DataState<List<Country>>
-
-    suspend fun getUsers(query: String): DataState<List<User>>
-
 
 }

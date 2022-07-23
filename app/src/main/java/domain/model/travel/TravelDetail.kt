@@ -1,7 +1,7 @@
 package domain.model.travel
 
-import data.remote.dto.GOOGLE_URL
 import domain.model.City
+import util.Constant
 
 data class TravelDetail(
     val name: String = "",
@@ -19,6 +19,7 @@ data class TravelDetail(
         fun getFake(): TravelDetail {
             return TravelDetail(
                 "Amazing travel to barcelona", caribbean, "Spain", "I went to carabian sea alone.\n" +
+                        "there was shark there and that shark wanted to eat me but fortunately somehow I ran away", Constant.CON_BASE_TEMPLATE_URL, City.getFakes(), caribbean, " https ://persian5.cdn.asset.aparat.com/aparat-video/bdaea06a8c07f580a463d150bb9730af44790032-240p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImQxNWVmMmM1NDgxMGQzMDIzYTkzZDZlM2IwNzIyOGNlIiwiZXhwIjoxNjU4MjQ4NjEzLCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.Y121L3MRjZjjxywwgAulf1gaeaClRRB0fs4LPoh1NA0"
                         "there was shark there and that shark wanted to eat me but fortunately somehow I ran away", GOOGLE_URL, City.getFakes(), caribbean, "https://persian5.asset.aparat.com/aparat-video/bdaea06a8c07f580a463d150bb9730af44790032-360p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjY1NjdmMzU0NzQ0NjM3Mjk2NjUxMjAwZjBiOTIzNTYzIiwiZXhwIjoxNjU4NTY2OTk3LCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.YjP8cKAnu_mBXpEnAd3dUZvSDzEimHKEhn_cdcmUVbA"
             )
         }

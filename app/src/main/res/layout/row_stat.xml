@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="app"
+                type="main.ApplicationClass" />
+
+        <variable
+                name="data"
+                type="domain.model.Message" />
+    </data>
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/paddingLarge">
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/rowMessage_tvUsername"
+                style="@style/GeneralText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/paddingLargeXXX"
+                android:text="@{data.user}"
+                tools:text="Username" />
+
+        <com.google.android.material.card.MaterialCardView
+                android:id="@+id/rowMessage_cvMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/paddingLarge"
+                android:layout_marginTop="@dimen/paddingLargeXX"
+                android:layout_marginBottom="@dimen/paddingMedium"
+                app:cardBackgroundColor="@color/md_green_50"
+                app:cardCornerRadius="@dimen/radiusLargeXX"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rowMessage_tvUsername">
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/rowMessage_tvMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/font_en_medium"
+                    android:padding="@dimen/paddingMedium"
+                    android:text="@{data.message}"
+                    android:textColor="?attr/colorText0"
+                    android:textSize="@dimen/textLarge"
+                    app:fonti="@{app.m.fontLight}"
+                    tools:text="123asld la asd a asdjd k;dkaj k" />
+        </com.google.android.material.card.MaterialCardView>
+
+    </FrameLayout>
+</layout>

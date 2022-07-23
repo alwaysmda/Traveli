@@ -9,7 +9,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import data.remote.PhotoApi
 import data.remote.PhotoHeaderInterceptor
-import data.remote.dto.TraveliApi
+import data.remote.TraveliApi
+import data.remote.UserApi
 import lang.LanguageManager
 import main.ApplicationClass
 import okhttp3.OkHttpClient
@@ -62,17 +63,25 @@ object RetrofitModule {
             .build()
             .create(PhotoApi::class.java)
 
-
-
     @Provides
     @Singleton
-    fun providesTraveliApi(gson: Gson,client: OkHttpClient.Builder):TraveliApi =
+    fun providesTraveliApi(gson: Gson, client: OkHttpClient.Builder): TraveliApi =
         Retrofit
             .Builder()
             .client(client.build())
-            .baseUrl("https://www.google.com")
+            .baseUrl(Constant.CON_BASE_TEMPLATE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(TraveliApi::class.java)
 
+    @Provides
+    @Singleton
+    fun provideUserApi(gson: Gson, client: OkHttpClient.Builder): UserApi =
+        Retrofit
+            .Builder()
+            .client(client.build())
+            .baseUrl(Constant.CON_BASE_TEMPLATE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+            .create(UserApi::class.java)
 }
