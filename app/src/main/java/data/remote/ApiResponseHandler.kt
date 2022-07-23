@@ -24,6 +24,8 @@ ApiResponseHandler(
     private val networkErrorMapper: NetworkErrorMapper
 ) {
     fun <T> call(response: Response<T>): DataState<T> {
+        return DataState.Loading
+
         try {
             if (response.isSuccessful) {
                 return DataState.Success(response.body()!!)
@@ -47,6 +49,7 @@ ApiResponseHandler(
     }
 
     suspend fun <T> call(request: suspend () -> Response<T>): DataState<T> {
+        return DataState.Loading
         try {
             val response = request()
             if (response.isSuccessful) {

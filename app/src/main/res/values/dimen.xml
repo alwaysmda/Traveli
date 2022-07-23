@@ -11,6 +11,8 @@
     <item name="paddingSectionContentSides" type="dimen">12dp</item>
     <item name="paddingRow" type="dimen">6dp</item>
 
+    <item name="dimenButton" type="dimen">36dp</item>
+    <item name="dimenButtonRadius" type="dimen">18dp</item>
     <item name="dimenToolbar" type="dimen">48dp</item>
     <item name="dimenToolbar_X" type="dimen">96dp</item>
     <item name="dimenToolbarButton" type="dimen">38dp</item>

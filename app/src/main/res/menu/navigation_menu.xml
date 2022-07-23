@@ -3,7 +3,7 @@
     <item
             android:id="@+id/homeTabFragment"
             android:icon="@drawable/ic_compass"
-            android:title="One" />
+            android:title="" />
 
 
     <item
@@ -12,8 +12,8 @@
             android:title="" />
 
     <item
-        android:id="@+id/homeFragments"
-        android:icon="@drawable/ic_profile"
+            android:id="@+id/profileTabFragment"
+            android:icon="@drawable/ic_profile"
         android:title=""
         />
 </menu>

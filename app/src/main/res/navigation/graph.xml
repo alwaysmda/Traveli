@@ -2,32 +2,51 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/graph"
-    app:startDestination="@id/homeTabFragment">
+        app:startDestination="@id/homeTabFragment">
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="ui.home.HomeFragment"
-        android:label="HomeFragment" >
+            android:id="@+id/homeFragment"
+            android:name="ui.home.HomeFragment"
+            android:label="HomeFragment">
         <action
-            android:id="@+id/action_homeFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
+                android:id="@+id/action_homeFragment_to_searchFragment"
+                app:destination="@id/searchFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_travelDetailFragment"
-            app:destination="@id/travelDetailFragment" />
+                android:id="@+id/action_homeFragment_to_travelDetailFragment"
+                app:destination="@id/travelDetailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/homeTabFragment"
-        android:name="ui.home.HomeTabFragment"
-        android:label="HomeTabFragment" >
+            android:id="@+id/homeTabFragment"
+            android:name="ui.home.HomeTabFragment"
+            android:label="HomeTabFragment">
         <action
-            android:id="@+id/action_homeTabFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+                android:id="@+id/action_homeTabFragment_to_homeFragment"
+                app:destination="@id/homeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/searchFragment"
-        android:name="ui.search.SearchFragment"
-        android:label="SearchFragment" />
+            android:id="@+id/searchFragment"
+            android:name="ui.search.SearchFragment"
+            android:label="SearchFragment" />
     <fragment
-        android:id="@+id/travelDetailFragment"
-        android:name="ui.travelDetail.TravelDetailFragment"
-        android:label="TravelDetailFragment" />
+            android:id="@+id/travelDetailFragment"
+            android:name="ui.travelDetail.TravelDetailFragment"
+            android:label="TravelDetailFragment" />
+    <fragment
+            android:id="@+id/profileTabFragment"
+            android:name="ui.profile.ProfileTabFragment"
+            android:label="ProfileTabFragment"
+            tools:layout="@layout/fragment_tab">
+        <action
+                android:id="@+id/action_profileTabFragment_to_profileFragment"
+                app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/profileFragment"
+            android:name="ui.profile.ProfileFragment"
+            android:label="ProfileFragment"
+            tools:layout="@layout/fragment_profile">
+        <argument
+                android:name="userId"
+                android:defaultValue="0L"
+                app:argType="long" />
+    </fragment>
 </navigation>

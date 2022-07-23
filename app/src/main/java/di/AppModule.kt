@@ -8,6 +8,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import domain.repository.PhotoRepository
 import domain.repository.TraveliRepository
+import domain.repository.UserRepository
 import domain.usecase.country.CountryUseCases
 import domain.usecase.country.GetCountry
 import domain.usecase.photo.*
@@ -15,6 +16,7 @@ import domain.usecase.template.Template
 import domain.usecase.template.TemplateUseCases
 import domain.usecase.travel.*
 import domain.usecase.user.GetUser
+import domain.usecase.user.GetUserStat
 import domain.usecase.user.UserUseCases
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import lang.LanguageManager
@@ -88,9 +90,10 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun providesUserUseCases(traveliRepository: TraveliRepository): UserUseCases {
+    fun providesUserUseCases(userRepository: UserRepository): UserUseCases {
         return UserUseCases(
-            GetUser(traveliRepository)
+            GetUser(userRepository),
+            GetUserStat(userRepository),
         )
     }
 }

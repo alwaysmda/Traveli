@@ -1,35 +1,25 @@
-package data.remote.dto
+package data.remote
 
 import retrofit2.Response
 import retrofit2.http.GET
-
-const val GOOGLE_URL = "https://www.google.com"
+import util.Constant.CON_BASE_TEMPLATE_URL
 
 interface TraveliApi {
-
-
-    @GET(GOOGLE_URL)
+    @GET(CON_BASE_TEMPLATE_URL)
     suspend fun getTrending(): Response<Unit>
 
-    @GET(GOOGLE_URL)
+    @GET(CON_BASE_TEMPLATE_URL)
     suspend fun getNewTravel(): Response<Unit>
 
-    @GET(GOOGLE_URL)
+    @GET(CON_BASE_TEMPLATE_URL)
     suspend fun getTravel(): Response<Unit>
 
-
-    @GET(GOOGLE_URL)
+    @GET(CON_BASE_TEMPLATE_URL)
     suspend fun getBanner(): Response<Unit>
 
-
-    @GET(GOOGLE_URL)
+    @GET(CON_BASE_TEMPLATE_URL)
     suspend fun getCountries(): Response<Unit>
 
-    @GET(GOOGLE_URL)
-    suspend fun getUsers(): Response<Unit>
-
-    @GET(GOOGLE_URL)
+    @GET(CON_BASE_TEMPLATE_URL)
     suspend fun getTravelDetail(travelId: Int): Response<Unit>
-
-
 }

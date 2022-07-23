@@ -2,11 +2,9 @@ package domain.repository
 
 import data.remote.DataState
 import domain.model.Country
-import domain.model.User
 import domain.model.travel.Banner
 import domain.model.travel.Travel
 import domain.model.travel.TravelDetail
-import kotlinx.coroutines.flow.Flow
 
 interface TraveliRepository {
 
@@ -21,8 +19,5 @@ interface TraveliRepository {
     suspend fun getBanner(): DataState<Banner>
 
     suspend fun getCountries(): DataState<List<Country>>
-
-    suspend fun getUsers(query: String): DataState<List<User>>
-
 
 }
