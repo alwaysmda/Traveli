@@ -2,12 +2,31 @@
 
 <layout>
 
+    <data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <variable
+            name="app"
+            type="main.ApplicationClass" />
+
+        <variable
+            name="data"
+            type="domain.model.travel.TravelDetail.Description" />
+    </data>
+
+
+    <com.google.android.material.textview.MaterialTextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tv_description"
+        fonti="@{app.m.fontMedium}"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/paddingLarge"
+        android:layout_marginHorizontal="@dimen/paddingLarge"
+        android:text="@{data.description}"
+        android:textColor="?attr/colorText0"
+        android:textSize="@dimen/textLargeX"
+
+        />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 

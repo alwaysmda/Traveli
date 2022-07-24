@@ -1,12 +1,14 @@
 package di
 
 import android.content.Context
+import androidx.media3.exoplayer.ExoPlayer
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import domain.repository.PhotoRepository
+import domain.repository.Repository
 import domain.repository.TraveliRepository
 import domain.repository.UserRepository
 import domain.usecase.country.CountryUseCases
@@ -43,6 +45,10 @@ object AppModule {
     @Provides
     fun provideLanguageManager(app: ApplicationClass, prefManager: PrefManager): LanguageManager =
         LanguageManager(app, prefManager)
+
+    @Singleton
+    @Provides
+    fun provideExoPlayer(@ApplicationContext context: Context) = ExoPlayer.Builder(context).build()
 
 
     @ExperimentalCoroutinesApi
@@ -82,9 +88,9 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun providesCountryUseCases(traveliRepository: TraveliRepository): CountryUseCases {
+    fun providesCountryUseCases(repository: Repository): CountryUseCases {
         return CountryUseCases(
-            GetCountry(traveliRepository)
+            GetCountry(repository)
         )
     }
 

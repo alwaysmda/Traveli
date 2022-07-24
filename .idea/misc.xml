@@ -6,7 +6,18 @@
         <entry key="../../../../layout/compose-model-1644829256013.xml" value="0.8590785907859079" />
         <entry key="../../../../layout/compose-model-1644832616120.xml" value="0.625" />
         <entry key="../../../../layout/custom_preview.xml" value="0.30052083333333335" />
+        <entry key="../../.gradle/caches/transforms-3/309abdd41f6c0243f3a8d367b969d1c5/transformed/jetified-media3-ui-1.0.0-beta01/res/layout/exo_legacy_player_control_view.xml" value="0.165" />
+        <entry key="../../.gradle/caches/transforms-3/309abdd41f6c0243f3a8d367b969d1c5/transformed/jetified-media3-ui-1.0.0-beta01/res/layout/exo_list_divider.xml" value="0.32592592592592595" />
+        <entry key="../../.gradle/caches/transforms-3/309abdd41f6c0243f3a8d367b969d1c5/transformed/jetified-media3-ui-1.0.0-beta01/res/layout/exo_player_control_ffwd_button.xml" value="0.32592592592592595" />
+        <entry key="../../.gradle/caches/transforms-3/309abdd41f6c0243f3a8d367b969d1c5/transformed/jetified-media3-ui-1.0.0-beta01/res/layout/exo_player_control_rewind_button.xml" value="0.32592592592592595" />
+        <entry key="../../.gradle/caches/transforms-3/309abdd41f6c0243f3a8d367b969d1c5/transformed/jetified-media3-ui-1.0.0-beta01/res/layout/exo_player_control_view.xml" value="0.1" />
+        <entry key="../../.gradle/caches/transforms-3/309abdd41f6c0243f3a8d367b969d1c5/transformed/jetified-media3-ui-1.0.0-beta01/res/layout/exo_player_view.xml" value="0.1" />
+        <entry key="../../.gradle/caches/transforms-3/309abdd41f6c0243f3a8d367b969d1c5/transformed/jetified-media3-ui-1.0.0-beta01/res/layout/exo_styled_settings_list.xml" value="0.32592592592592595" />
+        <entry key="../../.gradle/caches/transforms-3/309abdd41f6c0243f3a8d367b969d1c5/transformed/jetified-media3-ui-1.0.0-beta01/res/layout/exo_styled_settings_list_item.xml" value="0.32592592592592595" />
+        <entry key="../../.gradle/caches/transforms-3/309abdd41f6c0243f3a8d367b969d1c5/transformed/jetified-media3-ui-1.0.0-beta01/res/layout/exo_styled_sub_settings_list_item.xml" value="0.32592592592592595" />
+        <entry key="../../.gradle/caches/transforms-3/309abdd41f6c0243f3a8d367b969d1c5/transformed/jetified-media3-ui-1.0.0-beta01/res/layout/exo_track_selection_dialog.xml" value="0.32592592592592595" />
         <entry key="app/src/main/res/drawable/gradiant.xml" value="0.1285" />
+        <entry key="app/src/main/res/drawable/ic_bookmark.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_compass.xml" value="0.141" />
         <entry key="app/src/main/res/drawable/ic_phone.xml" value="0.3405" />
         <entry key="app/src/main/res/drawable/ic_website.xml" value="0.3405" />
@@ -16,6 +27,7 @@
         <entry key="app/src/main/res/layout/activity_base.xml" value="0.21073961499493415" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/dialog_custom.xml" value="0.2368659420289855" />
+        <entry key="app/src/main/res/layout/exo_player_control_view.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.21200607902735563" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_photo_detail.xml" value="0.34371833839918947" />
@@ -40,10 +52,11 @@
         <entry key="app/src/main/res/layout/row_template_state.xml" value="0.2740036231884058" />
         <entry key="app/src/main/res/layout/row_travel.xml" value="0.375" />
         <entry key="app/src/main/res/layout/row_travel_cover.xml" value="0.3055555555555556" />
-        <entry key="app/src/main/res/layout/row_travel_detail_bookmark.xml" value="0.3055555555555556" />
+        <entry key="app/src/main/res/layout/row_travel_detail_bookmark.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/row_travel_detail_cover.xml" value="0.2878787878787879" />
         <entry key="app/src/main/res/layout/row_travel_detail_description.xml" value="0.3055555555555556" />
-        <entry key="app/src/main/res/layout/row_travel_detail_image.xml" value="0.3055555555555556" />
-        <entry key="app/src/main/res/layout/row_travel_detail_link.xml" value="0.3055555555555556" />
+        <entry key="app/src/main/res/layout/row_travel_detail_image.xml" value="0.2878787878787879" />
+        <entry key="app/src/main/res/layout/row_travel_detail_link.xml" value="0.296875" />
         <entry key="app/src/main/res/layout/row_travel_detail_video.xml" value="0.3055555555555556" />
         <entry key="app/src/main/res/layout/row_user.xml" value="0.375" />
         <entry key="app/src/main/res/layout/sheet_edit_contact.xml" value="0.34371833839918947" />
