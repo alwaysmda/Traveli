@@ -10,6 +10,7 @@ import data.remote.UserApi
 import data.remote.dto.NetworkErrorMapper
 import data.remote.dto.PhotoMapper
 import data.remote.dto.StatMapper
+import data.remote.dto.travelDetail.TravelDetailMapper
 import data.repository.PhotoRepositoryImpl
 import data.repository.TravelRepositoryImpl
 import data.repository.UserRepositoryImpl
@@ -39,6 +40,7 @@ object RepositoryModule {
         api,
         app,
         networkErrorMapper,
+        TravelDetailMapper()
     )
 
     @Provides

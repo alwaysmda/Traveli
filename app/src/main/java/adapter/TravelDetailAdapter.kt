@@ -24,7 +24,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
 
 
     inner class CoverViewHolder(private val binding: RowTravelDetailCoverBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(travelDetail: TravelDetail) {
+        fun bind(travelDetail: TravelDetail.Cover) {
             binding.apply {
                 app = activity.app
                 data = travelDetail
@@ -34,7 +34,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
     }
 
     inner class ImageViewHolder(private val binding: RowTravelDetailImageBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(travelDetail: TravelDetail) {
+        fun bind(travelDetail: TravelDetail.Image) {
             binding.apply {
                 data = travelDetail
             }
@@ -42,7 +42,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
     }
 
     inner class DescriptionViewHolder(private val binding: RowTravelDetailDescriptionBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(travelDetail: TravelDetail) {
+        fun bind(travelDetail: TravelDetail.Description) {
             binding.apply {
                 app = activity.app
                 data = travelDetail
@@ -51,25 +51,22 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
     }
 
     inner class LinkViewHolder(private val binding: RowTravelDetailLinkBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(travelDetail: TravelDetail) {
+        fun bind(travelDetail: TravelDetail.Link) {
             binding.apply {
                 app = activity.app
                 data = travelDetail
                 root.setOnClickListener {
-                    onLinkClick(travelDetail.link)
+                    onLinkClick(travelDetail.url)
                 }
             }
         }
     }
 
     inner class VideoViewHolder(private val binding: RowTravelDetailVideoBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(travelDetail: TravelDetail) {
+        fun bind(travelDetail: TravelDetail.Video) {
             binding.apply {
-
                 playerView.player = exoPlayer
-                playerView.setFullscreenButtonClickListener {
-
-                }
+                playerView.setFullscreenButtonClickListener {}
 
 
             }
@@ -79,7 +76,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
     }
 
     inner class BookMarkViewHolder(private val binding: RowTravelDetailBookmarkBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(travelDetail: TravelDetail) {
+        fun bind(travelDetail: TravelDetail.BookMark) {
 
         }
     }
@@ -168,19 +165,19 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is CoverViewHolder       -> holder.bind(currentList[position])
-            is ImageViewHolder       -> holder.bind(currentList[position])
-            is DescriptionViewHolder -> holder.bind(currentList[position])
-            is LinkViewHolder        -> holder.bind(currentList[position])
-            is VideoViewHolder       -> holder.bind(currentList[position])
-            is BookMarkViewHolder    -> holder.bind(currentList[position])
+            is CoverViewHolder       -> holder.bind(currentList[position] as TravelDetail.Cover)
+            is ImageViewHolder       -> holder.bind(currentList[position] as TravelDetail.Image)
+            is DescriptionViewHolder -> holder.bind(currentList[position] as TravelDetail.Description)
+            is LinkViewHolder        -> holder.bind(currentList[position] as TravelDetail.Link)
+            is VideoViewHolder       -> holder.bind(currentList[position] as TravelDetail.Video)
+            is BookMarkViewHolder    -> holder.bind(currentList[position] as TravelDetail.BookMark)
         }
     }
 
 
     private class DiffCallback : DiffUtil.ItemCallback<TravelDetail>() {
         override fun areItemsTheSame(oldItem: TravelDetail, newItem: TravelDetail) =
-            oldItem.name == newItem.name
+            oldItem == newItem
 
         override fun areContentsTheSame(oldItem: TravelDetail, newItem: TravelDetail) =
             oldItem == newItem

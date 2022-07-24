@@ -6,7 +6,7 @@
 
         <variable
             name="data"
-            type="domain.model.travel.TravelDetail" />
+            type="domain.model.travel.TravelDetail.Image" />
 
 
     </data>
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                imageUrl="@{data.image}"
+                imageUrl="@{data.imageUrl}"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"

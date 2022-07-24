@@ -60,7 +60,7 @@ class TravelDetailViewModel @Inject constructor(
                     is DataState.Success -> {
                         travelDetails = it.data
                         _event.send(TravelDetailEvents.UpdateTravelDetail(it.data))
-                        exoPlayer.setMediaItem(MediaItem.fromUri(travelDetails[4].video))
+                        exoPlayer.setMediaItem(MediaItem.fromUri((travelDetails[4] as TravelDetail.Video).video))
                     }
                 }
 
