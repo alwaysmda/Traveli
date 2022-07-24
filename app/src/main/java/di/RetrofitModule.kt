@@ -7,17 +7,14 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import data.remote.PhotoApi
-import data.remote.PhotoHeaderInterceptor
-import data.remote.TraveliApi
-import data.remote.UserApi
+import data.remote.*
 import lang.LanguageManager
 import main.ApplicationClass
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import util.Constant
+import util.Constant.CON_BASE_TEMPLATE_URL
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -58,21 +55,21 @@ object RetrofitModule {
         Retrofit
             .Builder()
             .client(templateClient.build())
-            .baseUrl(Constant.CON_BASE_TEMPLATE_URL)
+            .baseUrl(CON_BASE_TEMPLATE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(PhotoApi::class.java)
 
     @Provides
     @Singleton
-    fun providesTraveliApi(gson: Gson, client: OkHttpClient.Builder): TraveliApi =
+    fun providesTraveliApi(gson: Gson, client: OkHttpClient.Builder): TravelApi =
         Retrofit
             .Builder()
             .client(client.build())
-            .baseUrl(Constant.CON_BASE_TEMPLATE_URL)
+            .baseUrl(CON_BASE_TEMPLATE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
-            .create(TraveliApi::class.java)
+            .create(TravelApi::class.java)
 
     @Provides
     @Singleton
@@ -80,8 +77,19 @@ object RetrofitModule {
         Retrofit
             .Builder()
             .client(client.build())
-            .baseUrl(Constant.CON_BASE_TEMPLATE_URL)
+            .baseUrl(CON_BASE_TEMPLATE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(UserApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideApi(gson: Gson, client: OkHttpClient.Builder): Api =
+        Retrofit.Builder()
+            .client(client.build())
+            .baseUrl(CON_BASE_TEMPLATE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+            .create(Api::class.java)
+
 }

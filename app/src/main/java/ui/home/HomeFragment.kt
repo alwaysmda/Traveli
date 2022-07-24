@@ -38,6 +38,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
         viewModel.action.onStart()
         setUpActions()
 
+
     }
 
 

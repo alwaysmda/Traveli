@@ -4,17 +4,22 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import data.remote.Api
 import data.remote.PhotoApi
-import data.remote.TraveliApi
+import data.remote.TravelApi
 import data.remote.UserApi
 import data.remote.dto.NetworkErrorMapper
 import data.remote.dto.PhotoMapper
 import data.remote.dto.StatMapper
+import data.remote.dto.country.CountryMapper
+import data.remote.dto.travel.TravelMapper
 import data.remote.dto.travelDetail.TravelDetailMapper
 import data.repository.PhotoRepositoryImpl
+import data.repository.RepositoryImpl
 import data.repository.TravelRepositoryImpl
 import data.repository.UserRepositoryImpl
 import domain.repository.PhotoRepository
+import domain.repository.Repository
 import domain.repository.TraveliRepository
 import domain.repository.UserRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -34,13 +39,14 @@ object RepositoryModule {
     @Singleton
     fun providesTraveliRepository(
         app: ApplicationClass,
-        api: TraveliApi,
+        api: TravelApi,
         networkErrorMapper: NetworkErrorMapper,
     ): TraveliRepository = TravelRepositoryImpl(
         api,
         app,
         networkErrorMapper,
-        TravelDetailMapper()
+        TravelDetailMapper(),
+        TravelMapper()
     )
 
     @Provides
@@ -56,4 +62,13 @@ object RepositoryModule {
         networkErrorMapper,
         statMapper,
     )
+
+    @Provides
+    @Singleton
+    fun provideRepository(
+        app: ApplicationClass,
+        api: Api,
+        networkErrorMapper: NetworkErrorMapper,
+        countryMapper: CountryMapper
+    ): Repository = RepositoryImpl(api, app, networkErrorMapper, countryMapper)
 }
