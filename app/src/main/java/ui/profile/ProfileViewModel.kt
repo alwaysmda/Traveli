@@ -33,6 +33,36 @@ class ProfileViewModel @Inject constructor(
         getUserStat()
     }
 
+    override fun onSettingClick() {
+        viewModelScope.launch {
+            _event.send(ProfileEvents.EditContact("Edit Twitter Address", null))
+        }
+    }
+
+    override fun onBalanceClick() {
+    }
+
+    override fun onTravelClick() {
+    }
+
+    override fun onPhoneClick() {
+    }
+
+    override fun onEmailClick() {
+    }
+
+    override fun onTwitterClick() {
+    }
+
+    override fun onInstagramClick() {
+    }
+
+    override fun onWebsiteClick() {
+    }
+
+    override fun onConfirmEditContactClick(content: String?) {
+    }
+
     private fun getUserStat() {
         userUseCases.getUserStat(id).onEach {
             when (it) {

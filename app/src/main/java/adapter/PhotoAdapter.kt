@@ -13,7 +13,6 @@ import com.xodus.templatefive.databinding.RowPhotoBinding
 import com.xodus.templatefive.databinding.RowPhotoStateBinding
 import domain.model.Photo
 import main.ApplicationClass
-import util.extension.translate
 
 class PhotoAdapter(
     private val app: ApplicationClass,
@@ -73,7 +72,7 @@ class PhotoAdapter(
                 data = photo
                 executePendingBindings()
                 rowPhotoCvContent.setOnClickListener { onItemClick(bindingAdapterPosition, photo) }
-                rowPhotoTvText.text = translate("${this@PhotoAdapter.app.m.id} : ${photo.id}")
+//                rowPhotoTvText.text = translate("${this@PhotoAdapter.app.m.id} : ${photo.id}")
                 ViewCompat.setTransitionName(rowPhotoIvPhoto, "transPhoto$bindingAdapterPosition")
                 ViewCompat.setTransitionName(rowPhotoTvText, "transId$bindingAdapterPosition")
             }

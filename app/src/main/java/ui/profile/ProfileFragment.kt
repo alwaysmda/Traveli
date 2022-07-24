@@ -4,14 +4,16 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import com.xodus.templatefive.R
 import com.xodus.templatefive.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 import ui.base.BaseFragment
-import util.extension.log
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileEvents, ProfileAction, ProfileViewModel>(R.layout.fragment_profile) {
+    private var editContactBottomSheet: EditContactBottomSheet? = null
+    private val args by navArgs<ProfileFragmentArgs>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val vm: ProfileViewModel by viewModels()
@@ -22,17 +24,27 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileEvents, Prof
         observeToEvents()
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerViews()
-        arguments?.let {
-            viewModel.action.onStart(ProfileFragmentArgs.fromBundle(it).userId)
-        }
+        viewModel.action.onStart(args.userId)
     }
 
     private fun observeToEvents() = viewLifecycleOwner.lifecycleScope.launchWhenStarted {
         viewModel.event.collect {
-            log("FLOW:OBSERVE")
             when (it) {
-                is ProfileEvents.Loading -> {
+                is ProfileEvents.NavSetting          -> Unit
+                is ProfileEvents.NavTravel           -> Unit
+                is ProfileEvents.UpdateUser          -> Unit
+                is ProfileEvents.UpdateTravelList    -> Unit
+                is ProfileEvents.UpdateStatList      -> Unit
+                is ProfileEvents.LaunchIntent        -> Unit
+                is ProfileEvents.EditContact         -> {
+                    editContactBottomSheet = EditContactBottomSheet(viewModel, it.title, it.content) { content ->
+                        viewModel.action.onConfirmEditContactClick(content)
+                    }.also { sheet ->
+                        sheet.show(childFragmentManager, EditContactBottomSheet::class.simpleName)
+                    }
                 }
+                is ProfileEvents.EditContactError    -> editContactBottomSheet?.showError(it.error)
+                is ProfileEvents.EditContactComplete -> editContactBottomSheet?.dismiss()
             }
         }
     }

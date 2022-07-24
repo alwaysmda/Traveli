@@ -24,7 +24,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
-
     @Provides
     @Singleton
     fun provideGsonBuilder(): Gson =
@@ -34,7 +33,6 @@ object RetrofitModule {
     @Provides
     fun provideHeaderInterceptor(appClass: ApplicationClass, languageManager: LanguageManager): PhotoHeaderInterceptor =
         PhotoHeaderInterceptor(appClass, languageManager)
-
 
     @Provides
     @Singleton
@@ -50,7 +48,6 @@ object RetrofitModule {
         }
         return okHttpClient
     }
-
 
     @Provides
     @Singleton

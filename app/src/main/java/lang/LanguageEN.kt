@@ -26,11 +26,14 @@ class LanguageEN(private val app: ApplicationClass) : LanguageInterface {
     override val search: String = "Search"
     override val trending: String = "Trending"
     override val countries: String = "Countries"
+    override val cities: String = "Cities"
     override val home: String = "Home"
     override val new: String = "New"
     override val travel: String = "Travel"
     override val user: String = "User"
     override val travelTo: String = "Travel to"
 
-
+    //Profile
+    override val confirm: String = "Confirm"
+    override val cancel: String = "Cancel"
 }
