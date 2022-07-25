@@ -1,7 +1,6 @@
 package ui.travelDetail
 
 import androidx.lifecycle.viewModelScope
-import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import data.remote.DataState
@@ -46,7 +45,7 @@ class TravelDetailViewModel @Inject constructor(
     private fun getTravelDetail() {
 
         viewModelScope.launch {
-            travelUseCases.getTravelDetail(0).onEach {
+            travelUseCases.getTravelDetailUseCase(0).onEach {
                 when (it) {
                     is DataState.Failure -> {
                         log("TRAVELDETAILVM:${it.message}")
@@ -58,15 +57,17 @@ class TravelDetailViewModel @Inject constructor(
                         _event.send(TravelDetailEvents.TravelDetailLoading)
                     }
                     is DataState.Success -> {
-                        travelDetails = it.data.details
-                        _event.send(TravelDetailEvents.UpdateTravelDetail(it.data.details))
-                        exoPlayer.setMediaItem(MediaItem.fromUri((travelDetails[4] as TravelDetail.Video).video))
+                        travelDetails = it.data
+                        _event.send(TravelDetailEvents.UpdateTravelDetail(it.data))
+
+
                     }
                 }
 
             }.launchIn(viewModelScope)
         }
     }
+
 
     override fun onCleared() {
         super.onCleared()

@@ -5,5 +5,5 @@ data class TravelUseCases(
     val getBannerUseCase: GetBannerUseCase,
     val getNewTravelListUseCase: GetNewTravelListUseCase,
     val searchTravelsUseCase: SearchTravelsUseCase,
-    val getTravelDetail: GetTravelDetail
+    val getTravelDetailUseCase: GetTravelDetailUseCase
 )

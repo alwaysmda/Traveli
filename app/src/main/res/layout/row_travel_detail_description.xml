@@ -14,18 +14,40 @@
     </data>
 
 
-    <com.google.android.material.textview.MaterialTextView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/tv_description"
-        fonti="@{app.m.fontMedium}"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/paddingLarge"
         android:layout_marginTop="@dimen/paddingLarge"
-        android:text="@{data.description}"
-        android:textColor="?attr/colorText0"
-        android:textSize="@dimen/textLargeX"
+        android:orientation="vertical">
 
-        />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_title"
+            fonti="@{app.m.fontBold}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{data.title}"
+            android:textColor="?attr/colorText0"
+            android:textSize="@dimen/textLargeXX"
+
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_description"
+            fonti="@{app.m.fontMedium}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/paddingLarge"
+            android:layout_marginTop="@dimen/paddingLarge"
+            android:text="@{data.description}"
+            android:textColor="?attr/colorText0"
+            android:textSize="@dimen/textLargeX"
+
+
+            />
+
+
+    </LinearLayout>
 
 
 </layout>

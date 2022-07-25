@@ -8,7 +8,7 @@ class TravelMapper @Inject constructor(
     private val travelDetailMapper: TravelDetailMapper,
     private val cityMapper: CityMapper,
     private val countryMapper: CountryMapper,
-    private val userMapper: UserMapper,
+    private val userPreviewMapper: UserPreviewMapper,
 ) : EntityMapper<TravelDto, Travel> {
 
 
@@ -22,7 +22,7 @@ class TravelMapper @Inject constructor(
             dto.price,
             dto.details.map { travelDetailMapper.toDomainModel(it) }.toMutableList(),
             dto.cityList.map { cityMapper.toDomainModel(it) },
-            userMapper.toDomainModel(dto.user)
+            userPreviewMapper.toDomainModel(dto.user)
 
 
         )
@@ -38,7 +38,7 @@ class TravelMapper @Inject constructor(
             model.price,
             model.details.map { travelDetailMapper.toEntity(it) },
             model.cityList.map { cityMapper.toEntity(it) },
-            userMapper.toEntity(model.user)
+            userPreviewMapper.toEntity(model.user)
         )
     }
 

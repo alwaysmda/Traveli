@@ -7,9 +7,10 @@ sealed class TravelDetail(
     data class Cover(val title: String?, val cover: String) : TravelDetail(VIEW_TYPE_COVER)
     data class Description(val title: String?, val description: String) : TravelDetail(VIEW_TYPE_DESCRIPTION)
     data class Link(val title: String?, val url: String) : TravelDetail(VIEW_TYPE_LINK)
-    data class Image(val title: String?, val imageUrl: String) : TravelDetail(VIEW_TYPE_IMAGE)
-    data class Video(val title: String?, val video: String) : TravelDetail(VIEW_TYPE_VIDEO)
-    object BookMark : TravelDetail(VIEW_TYPE_BOOKMARK)
+    data class Image(val title: String?, val imageUrl: String, val description: String?) : TravelDetail(VIEW_TYPE_IMAGE)
+    data class Video(val title: String?, val video: String, val description: String?) : TravelDetail(VIEW_TYPE_VIDEO)
+    data class BookMark(var isBookMark: Boolean) : TravelDetail(VIEW_TYPE_BOOKMARK)
+    data class User(val user: UserPreview) : TravelDetail(VIEW_TYPE_USER)
 
     companion object {
         const val VIEW_TYPE_COVER = 0
@@ -18,7 +19,7 @@ sealed class TravelDetail(
         const val VIEW_TYPE_LINK = 3
         const val VIEW_TYPE_VIDEO = 4
         const val VIEW_TYPE_BOOKMARK = 5
-        const val VIEW_TYPE_USER = 5
+        const val VIEW_TYPE_USER = 6
     }
 }
 
