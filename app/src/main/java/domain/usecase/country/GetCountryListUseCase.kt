@@ -6,7 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-class GetCountry(private val repo: Repository) {
+class GetCountryListUseCase(private val repo: Repository) {
     operator fun invoke() = flow {
         emit(DataState.Loading)
         val result = repo.getCountries()

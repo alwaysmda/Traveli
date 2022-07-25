@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.flow
 
 class SearchTravelsUseCase(private val repo: TraveliRepository) {
 
-    operator fun invoke() = flow {
+    operator fun invoke(query: String) = flow {
         emit(DataState.Loading)
-        emit(repo.getTravel())
+        emit(repo.searchTravel(query))
     }
 }

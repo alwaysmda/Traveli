@@ -76,7 +76,7 @@ class SearchViewModel @Inject constructor(
 
                 TRAVEL_TAB -> {
                     if (text == lastTravelQuery) return@launch
-                    travelUseCases.searchTravelsUseCase().onEach { //TODO paginate and add query
+                    travelUseCases.searchTravelsUseCase(text).onEach { //TODO paginate and add query
                         when (it) {
                             is DataState.Failure -> if (tabIndex == TRAVEL_TAB) {
                                 travels = listOf()

@@ -19,7 +19,7 @@ class TravelRepositoryImpl(
     private val travelPreviewMapper: TravelPreviewMapper,
     private val travelMapper: TravelMapper
 
-    ) : TraveliRepository, ApiResponseHandler(app, networkErrorMapper) {
+) : TraveliRepository, ApiResponseHandler(app, networkErrorMapper) {
     private var trending: List<TravelPreview>? = null
     private var newTravelPreview: List<TravelPreview>? = null
     private var banner: Banner? = null
@@ -49,7 +49,7 @@ class TravelRepositoryImpl(
         }
     }
 
-    override suspend fun getTravel(): DataState<List<TravelPreview>> {
+    override suspend fun searchTravel(query: String): DataState<List<TravelPreview>> {
         return when (val response = call { travelApi.getTravel("") }) {
             is DataState.Failure -> response
             is DataState.Loading -> {
