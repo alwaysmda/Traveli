@@ -4,9 +4,10 @@ import data.remote.DataState
 import domain.repository.TraveliRepository
 import kotlinx.coroutines.flow.flow
 
-class GetBanner(private val traveliRepo: TraveliRepository) {
+class SearchTravelsUseCase(private val repo: TraveliRepository) {
+
     operator fun invoke() = flow {
         emit(DataState.Loading)
-        emit(traveliRepo.getBanner())
+        emit(repo.getTravel())
     }
 }

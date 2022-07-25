@@ -78,7 +78,7 @@ update repo and usecases
 * */
 
     private fun getTrendingTravel() {
-        travelUseCases.getTrending().onEach {
+        travelUseCases.getTrendingListUseCase().onEach {
             when (it) {
                 is DataState.Failure -> _event.send(HomeEvents.TrendingTravelError(it.message))
                 is DataState.Loading -> _event.send(HomeEvents.TrendingTravelLoading)
@@ -89,7 +89,7 @@ update repo and usecases
     }
 
     private fun getNewTravel() {
-        travelUseCases.getNewTravel().onEach {
+        travelUseCases.getNewTravelListUseCase().onEach {
             when (it) {
                 is DataState.Failure -> _event.send(HomeEvents.NewTravelError(it.message))
                 is DataState.Loading -> _event.send(HomeEvents.NewTravelLoading)
@@ -104,7 +104,7 @@ update repo and usecases
     }
 
     private fun getBanner() {
-        travelUseCases.getBanner().onEach {
+        travelUseCases.getBannerUseCase().onEach {
             when (it) {
                 is DataState.Failure -> _event.send(HomeEvents.BannerError(it.message))
                 DataState.Loading    -> _event.send(HomeEvents.BannerLoading)

@@ -1,5 +1,5 @@
 package domain.usecase.country
 
 data class CountryUseCases(
-     val getCountry: GetCountry
+    val getCountry: GetCountryListUseCase
 )

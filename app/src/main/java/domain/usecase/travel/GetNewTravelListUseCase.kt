@@ -6,7 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-class GetNewTravel(private val repo: TraveliRepository) {
+class GetNewTravelListUseCase(private val repo: TraveliRepository) {
     operator fun invoke() = flow {
         emit(DataState.Loading)
         emit(repo.getNewTravels())

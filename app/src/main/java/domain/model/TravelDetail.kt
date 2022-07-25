@@ -18,6 +18,7 @@ sealed class TravelDetail(
         const val VIEW_TYPE_LINK = 3
         const val VIEW_TYPE_VIDEO = 4
         const val VIEW_TYPE_BOOKMARK = 5
+        const val VIEW_TYPE_USER = 5
     }
 }
 
