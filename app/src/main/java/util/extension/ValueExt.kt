@@ -29,8 +29,8 @@ fun getRandomInt(length: Int): Int {
     return Integer.valueOf(sb.toString())
 }
 
-fun translate(_c: Any): String {
-    var c = _c.toString()
+fun Any?.translate(): String {
+    var c = this.toString()
     val enN = arrayOf("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
     val faN = arrayOf("۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹")
 
@@ -66,9 +66,13 @@ fun shortenNumber(number: Long, decimalCount: Int = 1): String {
     }
 }
 
-fun separateNumberBy3(number: Long): String {
-    val formatter = DecimalFormat("#,###,###")
-    return formatter.format(number)
+fun Long?.separateNumberBy3(): String {
+    return this?.let {
+        val formatter = DecimalFormat("#,###,###")
+        formatter.format(it)
+    } ?: kotlin.run {
+        "0"
+    }
 }
 
 fun convertBundleToString(bundle: Bundle?): String {

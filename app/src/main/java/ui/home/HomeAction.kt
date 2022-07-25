@@ -1,6 +1,6 @@
 package ui.home
 
-import domain.model.travel.TravelPreview
+import domain.model.TravelPreview
 import ui.base.BaseAction
 
 interface HomeAction : BaseAction {

@@ -20,7 +20,7 @@ class ProfileViewModel @Inject constructor(
     private var id = 0L
     override fun onStart(userId: Long) {
         id = if (userId == 0L) {
-            app.user?.id ?: 0L
+            app.userPreview?.id ?: 0L
         } else {
             userId
         }
@@ -31,6 +31,36 @@ class ProfileViewModel @Inject constructor(
             //Get Data
         }
         getUserStat()
+    }
+
+    override fun onSettingClick() {
+        viewModelScope.launch {
+            _event.send(ProfileEvents.EditContact("Edit Twitter Address", null))
+        }
+    }
+
+    override fun onBalanceClick() {
+    }
+
+    override fun onTravelClick() {
+    }
+
+    override fun onPhoneClick() {
+    }
+
+    override fun onEmailClick() {
+    }
+
+    override fun onTwitterClick() {
+    }
+
+    override fun onInstagramClick() {
+    }
+
+    override fun onWebsiteClick() {
+    }
+
+    override fun onConfirmEditContactClick(content: String?) {
     }
 
     private fun getUserStat() {

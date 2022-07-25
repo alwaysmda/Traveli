@@ -1,9 +1,9 @@
 package ui.home
 
 import androidx.navigation.NavDirections
+import domain.model.Banner
 import domain.model.Country
-import domain.model.travel.Banner
-import domain.model.travel.TravelPreview
+import domain.model.TravelPreview
 import ui.base.BaseEvent
 
 sealed class HomeEvents : BaseEvent() {

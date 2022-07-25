@@ -10,13 +10,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.xodus.templatefive.R
 import com.xodus.templatefive.databinding.*
-import domain.model.travel.TravelDetail
-import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_BOOKMARK
-import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_COVER
-import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_DESCRIPTION
-import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_IMAGE
-import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_LINK
-import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_VIDEO
+import domain.model.TravelDetail
+import domain.model.TravelDetail.Companion.VIEW_TYPE_BOOKMARK
+import domain.model.TravelDetail.Companion.VIEW_TYPE_COVER
+import domain.model.TravelDetail.Companion.VIEW_TYPE_DESCRIPTION
+import domain.model.TravelDetail.Companion.VIEW_TYPE_IMAGE
+import domain.model.TravelDetail.Companion.VIEW_TYPE_LINK
+import domain.model.TravelDetail.Companion.VIEW_TYPE_VIDEO
 import ui.base.BaseActivity
 
 

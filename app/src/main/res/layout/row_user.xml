@@ -11,7 +11,7 @@
 
         <variable
             name="data"
-            type="domain.model.User" />
+            type="domain.model.UserPreview" />
 
     </data>
 
@@ -31,7 +31,7 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/iv_user"
-                imageUrl="@{data.profileImage}"
+                imageUrl="@{data.avatar}"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"

@@ -8,21 +8,16 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.xodus.templatefive.R
 import com.xodus.templatefive.databinding.RowUserBinding
-import domain.model.User
+import domain.model.UserPreview
 import ui.base.BaseActivity
 
-class UserAdapter(private val activity:BaseActivity): ListAdapter<User, UserAdapter.UserViewHolder>(DiffCallback()) {
-
-    inner class UserViewHolder(private val binding: RowUserBinding): RecyclerView.ViewHolder(binding.root){
-
-        fun bind(user: User){
+class UserAdapter(private val activity: BaseActivity) : ListAdapter<UserPreview, UserAdapter.UserViewHolder>(DiffCallback()) {
+    inner class UserViewHolder(private val binding: RowUserBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(userPreview: UserPreview) {
             binding.apply {
                 app = activity.app
-                data = user
-
+                data = userPreview
             }
-
-
         }
 
     }
@@ -42,15 +37,11 @@ class UserAdapter(private val activity:BaseActivity): ListAdapter<User, UserAdap
         holder.bind(currentList[position])
     }
 
-
-    private class DiffCallback : DiffUtil.ItemCallback<User>() {
-        override fun areItemsTheSame(oldItem: User, newItem: User) =
+    private class DiffCallback : DiffUtil.ItemCallback<UserPreview>() {
+        override fun areItemsTheSame(oldItem: UserPreview, newItem: UserPreview) =
             oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: User, newItem: User) =
+        override fun areContentsTheSame(oldItem: UserPreview, newItem: UserPreview) =
             oldItem == newItem
     }
-
-
-
 }

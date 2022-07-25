@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.xodus.templatefive.R
 import com.xodus.templatefive.databinding.RowTravelBinding
-import domain.model.travel.TravelPreview
+import domain.model.TravelPreview
 import ui.base.BaseActivity
 
 class TravelAdapter(private val activity: BaseActivity) : ListAdapter<TravelPreview, TravelAdapter.SubBannerViewHolder>(DiffCallback()) {

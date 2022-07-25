@@ -5,8 +5,8 @@ import domain.repository.UserRepository
 import kotlinx.coroutines.flow.flow
 
 class GetUser(private val repo: UserRepository) {
-    operator fun invoke(query: String) = flow {
+    operator fun invoke(userId: Long) = flow {
         emit(DataState.Loading)
-        emit(repo.getUsers(query))
+        emit(repo.getUser(userId))
     }
 }

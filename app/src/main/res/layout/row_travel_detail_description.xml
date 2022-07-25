@@ -10,7 +10,7 @@
 
         <variable
             name="data"
-            type="domain.model.travel.TravelDetail.Description" />
+            type="domain.model.TravelDetail.Description" />
     </data>
 
 
@@ -19,8 +19,8 @@
         fonti="@{app.m.fontMedium}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/paddingLarge"
         android:layout_marginHorizontal="@dimen/paddingLarge"
+        android:layout_marginTop="@dimen/paddingLarge"
         android:text="@{data.description}"
         android:textColor="?attr/colorText0"
         android:textSize="@dimen/textLargeX"

@@ -77,11 +77,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
             viewModel.event.collect {
                 when (it) {
                     is SearchEvents.UpdateUsers        -> {
-                        userAdapter.submitList(it.users)
+                        userAdapter.submitList(it.userPreviews)
                         binding.progressBar.isVisible = false
                     }
                     is SearchEvents.UpdateTravel       -> {
-                        travelAdapter.submitList(it.travelPreviews)
+                        travelAdapter.submitList(it.travels)
                         binding.progressBar.isVisible = false
                     }
                     is SearchEvents.UserError          -> {

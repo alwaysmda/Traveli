@@ -2,14 +2,12 @@ package data.remote.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class ResponseTravelDto(
+data class ResponseGetUserDto(
     @SerializedName("status") val status: String,
     @SerializedName("meta") val meta: MetaDto,
-    @SerializedName("data") val travels: ArrayList<TravelDto>,
+    @SerializedName("data") val user: UserDto,
 ) {
-
     companion object {
-        fun getFake() = ResponseTravelDto("success", MetaDto.getFake(), TravelDto.getFake(10))
+        fun getFake() = ResponseGetUserDto("success", MetaDto.getFake(), UserDto.getFake())
     }
-
 }

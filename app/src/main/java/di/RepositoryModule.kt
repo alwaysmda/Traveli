@@ -36,13 +36,16 @@ object RepositoryModule {
         app: ApplicationClass,
         api: TravelApi,
         networkErrorMapper: NetworkErrorMapper,
+        travelMapper: TravelMapper,
+        travelPreviewMapper: TravelPreviewMapper
     ): TraveliRepository = TravelRepositoryImpl(
         api,
         app,
         networkErrorMapper,
-        TravelDetailMapper(),
-        TravelPreviewMapper()
+        travelPreviewMapper,
+        travelMapper
     )
+
 
     @Provides
     @Singleton
@@ -50,11 +53,15 @@ object RepositoryModule {
         app: ApplicationClass,
         api: UserApi,
         networkErrorMapper: NetworkErrorMapper,
+        userPreviewMapper: UserPreviewMapper,
+        userMapper: UserMapper,
         statMapper: StatMapper,
     ): UserRepository = UserRepositoryImpl(
         api,
         app,
         networkErrorMapper,
+        userPreviewMapper,
+        userMapper,
         statMapper,
     )
 

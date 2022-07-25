@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="ui.profile.ProfileViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/editContact_clParent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/md_transparent_1000">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:src="?attr/colorBackground1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/CircularImageView.BottomSheet" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/editContact_tvTitle"
+            style="@style/GeneralText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/paddingLarge"
+            android:gravity="center"
+            android:textSize="@dimen/textLarge"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Edit Twitter" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editContact_tlContent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/paddingLargeXXX"
+            android:layout_marginTop="@dimen/paddingMedium"
+            app:fonte="@{vm.app.m.fontMedium}"
+            app:layout_constraintTop_toBottomOf="@id/editContact_tvTitle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editContact_etContent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:lines="1"
+                app:fonte="@{vm.app.m.fontMedium}"
+                tools:hint="Twitter Address"
+                tools:text="Hello" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/editContact_tvError"
+            style="@style/GeneralText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/paddingMedium"
+            android:gravity="center"
+            android:textColor="@color/negative"
+            app:fonti="@{vm.app.m.fontMedium}"
+            app:layout_constraintTop_toBottomOf="@id/editContact_tlContent"
+            tools:text="This is an error!!" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/template_btnPositive"
+            style="@style/GeneralButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/paddingMedium"
+            android:layout_marginBottom="@dimen/paddingLarge"
+            android:text="@{vm.app.m.confirm}"
+            app:backgroundTint="@color/positive"
+            app:fonti="@{vm.app.m.fontMedium}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/template_btnNegative"
+            app:layout_constraintTop_toBottomOf="@id/editContact_tvError"
+            tools:text="Confirm" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/template_btnNegative"
+            style="@style/GeneralButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{vm.app.m.cancel}"
+            app:backgroundTint="@color/negative"
+            app:fonti="@{vm.app.m.fontMedium}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/template_btnPositive"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/template_btnPositive"
+            tools:text="Cancel" />
+
+        <FrameLayout
+            android:id="@+id/editContact_flLoading"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#22000000"
+            android:clickable="true"
+            android:elevation="10dp"
+            android:focusable="true"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

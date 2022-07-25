@@ -5,12 +5,12 @@ import com.google.gson.annotations.SerializedName
 data class ResponseTravelDetailDto(
     @SerializedName("status") val status: String,
     @SerializedName("meta") val meta: MetaDto,
-    @SerializedName("data") val travelDetailDto: List<TravelDetailDto>,
+    @SerializedName("data") val travel: TravelDto,
 ) {
 
 
     companion object {
-        fun getFake() = ResponseTravelDetailDto("success", MetaDto.getFake(), TravelDetailDto.getFakes())
+        fun getFake() = ResponseTravelDetailDto("success", MetaDto.getFake(), TravelDto.getFake())
     }
 
 

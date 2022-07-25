@@ -2,7 +2,6 @@ package domain.model
 
 import android.os.Parcelable
 import androidx.annotation.DrawableRes
-import com.xodus.templatefive.R
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -23,13 +22,5 @@ data class Stat(
     //        }
     companion object {
         fun List<Stat>.cloned() = ArrayList(map { it.copy() })
-        fun getFake(): Stat = Stat("cities", "10,000", R.drawable.ic_compass)
-        fun getFakeList(size: Int = 10): ArrayList<Stat> {
-            val list = arrayListOf<Stat>()
-            repeat(size) {
-                list.add(getFake())
-            }
-            return list
-        }
     }
 }

@@ -1,9 +1,9 @@
 package domain.repository
 
 import data.remote.DataState
-import domain.model.travel.Banner
-import domain.model.travel.TravelDetail
-import domain.model.travel.TravelPreview
+import domain.model.Banner
+import domain.model.Travel
+import domain.model.TravelPreview
 
 interface TraveliRepository {
 
@@ -13,7 +13,7 @@ interface TraveliRepository {
 
     suspend fun getTravel(): DataState<List<TravelPreview>>
 
-    suspend fun getTravelDetail(travelId: Int): DataState<List<TravelDetail>>
+    suspend fun getTravelDetail(travelId: Int): DataState<Travel>
 
     suspend fun getBanner(): DataState<Banner>
 

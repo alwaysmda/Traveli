@@ -5,10 +5,10 @@ import data.remote.ApiResponseHandler
 import data.remote.DataState
 import data.remote.TravelApi
 import data.remote.dto.*
+import domain.model.Banner
 import domain.model.Country
-import domain.model.travel.Banner
-import domain.model.travel.TravelDetail
-import domain.model.travel.TravelPreview
+import domain.model.Travel
+import domain.model.TravelPreview
 import domain.repository.TraveliRepository
 import main.ApplicationClass
 
@@ -16,8 +16,8 @@ class TravelRepositoryImpl(
     private val travelApi: TravelApi,
     private val app: ApplicationClass,
     private val networkErrorMapper: NetworkErrorMapper,
-    private val travelDetailMapper: TravelDetailMapper,
     private val travelPreviewMapper: TravelPreviewMapper,
+    private val travelMapper: TravelMapper
 
     ) : TraveliRepository, ApiResponseHandler(app, networkErrorMapper) {
     private var trending: List<TravelPreview>? = null
@@ -30,7 +30,7 @@ class TravelRepositoryImpl(
         return when (val response = call { travelApi.getTrending() }) {
             is DataState.Failure -> response
             is DataState.Loading -> {
-                trending = ResponseTravelDto.getFake().travels.map { travelPreviewMapper.toDomainModel(it) }
+                trending = ResponseTravelListDto.getFake().travels.map { travelPreviewMapper.toDomainModel(it) }
                 DataState.Success(trending!!)
             }
             is DataState.Success -> DataState.Loading
@@ -42,7 +42,7 @@ class TravelRepositoryImpl(
         return when (val response = call { travelApi.getNewTravel() }) {
             is DataState.Failure -> response
             is DataState.Loading -> {
-                newTravelPreview = ResponseTravelDto.getFake().travels.map { travelPreviewMapper.toDomainModel(it) }
+                newTravelPreview = ResponseTravelListDto.getFake().travels.map { travelPreviewMapper.toDomainModel(it) }
                 DataState.Success(newTravelPreview!!)
             }
             is DataState.Success -> DataState.Loading
@@ -53,16 +53,16 @@ class TravelRepositoryImpl(
         return when (val response = call { travelApi.getTravel("") }) {
             is DataState.Failure -> response
             is DataState.Loading -> {
-                DataState.Success(ResponseTravelDto.getFake().travels.map { travelPreviewMapper.toDomainModel(it) })
+                DataState.Success(ResponseTravelListDto.getFake().travels.map { travelPreviewMapper.toDomainModel(it) })
             }
             is DataState.Success -> DataState.Loading
         }
     }
 
-    override suspend fun getTravelDetail(travelId: Int): DataState<List<TravelDetail>> {
+    override suspend fun getTravelDetail(travelId: Int): DataState<Travel> {
         return when (val response = call { travelApi.getTravelDetail(travelId) }) {
             is DataState.Failure -> response
-            DataState.Loading    -> DataState.Success(ResponseTravelDetailDto.getFake().travelDetailDto.map { travelDetailMapper.toDomainModel(it) })
+            DataState.Loading    -> DataState.Success(travelMapper.toDomainModel(ResponseTravelDetailDto.getFake().travel))
             is DataState.Success -> DataState.Loading
         }
     }

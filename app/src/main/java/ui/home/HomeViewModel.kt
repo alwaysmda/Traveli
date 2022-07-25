@@ -3,7 +3,7 @@ package ui.home
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import data.remote.DataState
-import domain.model.travel.TravelPreview
+import domain.model.TravelPreview
 import domain.usecase.country.CountryUseCases
 import domain.usecase.travel.TravelUseCases
 import kotlinx.coroutines.flow.launchIn

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.xodus.templatefive.R
 import com.xodus.templatefive.databinding.RowSquareTravelBinding
-import domain.model.travel.TravelPreview
+import domain.model.TravelPreview
 import ui.base.BaseActivity
 
 class SquareTravelAdapter(private val activity: BaseActivity, private val onItemClick: (travelPreview: TravelPreview, pos: Int) -> Unit) : ListAdapter<TravelPreview, SquareTravelAdapter.TravelViewHolder>(DiffCallback()) {

@@ -10,7 +10,7 @@
 
         <variable
             name="data"
-            type="domain.model.travel.TravelDetail.Link" />
+            type="domain.model.TravelDetail.Link" />
 
     </data>
 

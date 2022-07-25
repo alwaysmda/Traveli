@@ -1,6 +1,6 @@
 package ui.travelDetail
 
-import domain.model.travel.TravelDetail
+import domain.model.TravelDetail
 import ui.base.BaseEvent
 
 sealed class TravelDetailEvents : BaseEvent() {

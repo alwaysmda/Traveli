@@ -1,4 +1,4 @@
-package domain.model.travel
+package domain.model
 
 import kotlin.random.Random
 

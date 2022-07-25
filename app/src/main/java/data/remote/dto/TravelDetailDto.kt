@@ -1,10 +1,10 @@
 package data.remote.dto
 
-import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_COVER
-import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_DESCRIPTION
-import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_IMAGE
-import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_LINK
-import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_VIDEO
+import domain.model.TravelDetail.Companion.VIEW_TYPE_COVER
+import domain.model.TravelDetail.Companion.VIEW_TYPE_DESCRIPTION
+import domain.model.TravelDetail.Companion.VIEW_TYPE_IMAGE
+import domain.model.TravelDetail.Companion.VIEW_TYPE_LINK
+import domain.model.TravelDetail.Companion.VIEW_TYPE_VIDEO
 
 data class TravelDetailDto(
     val type: Int,

@@ -5,7 +5,7 @@ import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import data.remote.DataState
-import domain.model.travel.TravelDetail
+import domain.model.TravelDetail
 import domain.usecase.travel.TravelUseCases
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -58,8 +58,8 @@ class TravelDetailViewModel @Inject constructor(
                         _event.send(TravelDetailEvents.TravelDetailLoading)
                     }
                     is DataState.Success -> {
-                        travelDetails = it.data
-                        _event.send(TravelDetailEvents.UpdateTravelDetail(it.data))
+                        travelDetails = it.data.details
+                        _event.send(TravelDetailEvents.UpdateTravelDetail(it.data.details))
                         exoPlayer.setMediaItem(MediaItem.fromUri((travelDetails[4] as TravelDetail.Video).video))
                     }
                 }

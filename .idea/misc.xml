@@ -29,7 +29,6 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_photo_detail.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/fragment_photo_list.xml" value="0.34371833839918947" />
-        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.17777777777777778" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.3578125" />
         <entry key="app/src/main/res/layout/fragment_tab.xml" value="0.2859375" />
@@ -53,7 +52,7 @@
         <entry key="app/src/main/res/layout/row_travel_detail_bookmark.xml" value="0.1" />
         <entry key="app/src/main/res/layout/row_travel_detail_cover.xml" value="0.2878787878787879" />
         <entry key="app/src/main/res/layout/row_travel_detail_description.xml" value="0.3055555555555556" />
-        <entry key="app/src/main/res/layout/row_travel_detail_image.xml" value="0.2878787878787879" />
+        <entry key="app/src/main/res/layout/row_travel_detail_image.xml" value="0.1" />
         <entry key="app/src/main/res/layout/row_travel_detail_link.xml" value="0.296875" />
         <entry key="app/src/main/res/layout/row_travel_detail_video.xml" value="0.3055555555555556" />
         <entry key="app/src/main/res/layout/row_user.xml" value="0.375" />
