@@ -8,6 +8,6 @@ data class ResponseGetUserDto(
     @SerializedName("data") val user: UserDto,
 ) {
     companion object {
-        fun getFake() = ResponseGetUserDto("success", MetaDto.getFake(), UserDto.getFake())
+        fun getFake(userId: Long? = null) = ResponseGetUserDto("success", MetaDto.getFake(), UserDto.getFake(userId))
     }
 }

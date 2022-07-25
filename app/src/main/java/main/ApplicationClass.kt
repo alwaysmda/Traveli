@@ -4,7 +4,7 @@ import android.app.Application
 import com.squareup.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.HiltAndroidApp
-import domain.model.UserPreview
+import domain.model.User
 import lang.LanguageInterface
 import lang.LanguageManager
 import okhttp3.ConnectionSpec
@@ -18,9 +18,6 @@ import javax.inject.Inject
 
 @HiltAndroidApp
 class ApplicationClass : Application() {
-
-
-
     @Inject
     lateinit var themeManager: ThemeManager
 
@@ -31,7 +28,7 @@ class ApplicationClass : Application() {
     lateinit var languageManager: LanguageManager
     val m: LanguageInterface
         get() = languageManager.main
-    val userPreview: UserPreview? = null
+    var user: User? = null
 
     companion object {
         @Volatile

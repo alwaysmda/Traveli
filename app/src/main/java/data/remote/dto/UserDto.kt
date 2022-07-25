@@ -15,9 +15,9 @@ data class UserDto(
     @SerializedName("contact") var contact: ContactDto,
 ) {
     companion object {
-        fun getFake(): UserDto {
+        fun getFake(userId: Long? = null): UserDto {
             return UserDto(
-                Random.nextLong(1, 10000),
+                userId ?: Random.nextLong(2, 10000),
                 "Denis Trico",
                 "https://upload.wikimedia.org/wikipedia/commons/2/23/Dennis_Ritchie_2011.jpg",
                 "It's me.",

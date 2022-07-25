@@ -48,45 +48,27 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideTemplateApi(gson: Gson, templateClient: OkHttpClient.Builder): PhotoApi =
+    fun provideRetrofit(gson: Gson, templateClient: OkHttpClient.Builder): Retrofit =
         Retrofit
             .Builder()
             .client(templateClient.build())
             .baseUrl(CON_BASE_TEMPLATE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
-            .create(PhotoApi::class.java)
 
     @Provides
     @Singleton
-    fun providesTraveliApi(gson: Gson, client: OkHttpClient.Builder): TravelApi =
-        Retrofit
-            .Builder()
-            .client(client.build())
-            .baseUrl(CON_BASE_TEMPLATE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
-            .create(TravelApi::class.java)
+    fun provideTemplateApi(retrofit: Retrofit): PhotoApi = retrofit.create(PhotoApi::class.java)
 
     @Provides
     @Singleton
-    fun provideUserApi(gson: Gson, client: OkHttpClient.Builder): UserApi =
-        Retrofit
-            .Builder()
-            .client(client.build())
-            .baseUrl(CON_BASE_TEMPLATE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
-            .create(UserApi::class.java)
+    fun providesTraveliApi(retrofit: Retrofit): TravelApi = retrofit.create(TravelApi::class.java)
 
     @Provides
     @Singleton
-    fun provideApi(gson: Gson, client: OkHttpClient.Builder): Api =
-        Retrofit.Builder()
-            .client(client.build())
-            .baseUrl(CON_BASE_TEMPLATE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
-            .create(Api::class.java)
+    fun provideUserApi(retrofit: Retrofit): UserApi = retrofit.create(UserApi::class.java)
 
+    @Provides
+    @Singleton
+    fun provideMiscApi(retrofit: Retrofit): MiscApi = retrofit.create(MiscApi::class.java)
 }

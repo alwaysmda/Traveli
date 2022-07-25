@@ -1,7 +1,12 @@
 package di
 
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.media3.exoplayer.ExoPlayer
+import com.xodus.templatefive.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,9 +22,7 @@ import domain.usecase.photo.*
 import domain.usecase.template.Template
 import domain.usecase.template.TemplateUseCases
 import domain.usecase.travel.*
-import domain.usecase.user.GetUserStat
-import domain.usecase.user.SearchUser
-import domain.usecase.user.UserUseCases
+import domain.usecase.user.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import lang.LanguageManager
 import main.ApplicationClass
@@ -29,7 +32,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
     @Singleton
     @Provides
     fun provideApplicationClass(@ApplicationContext app: Context): ApplicationClass =
@@ -40,6 +42,14 @@ object AppModule {
     fun providePrefManager(app: ApplicationClass): PrefManager =
         PrefManager(app)
 
+    @Provides
+    @Singleton
+    fun providePreferencesDataStore(@ApplicationContext app: Context): DataStore<Preferences> =
+        PreferenceDataStoreFactory.create(
+            produceFile = {
+                app.preferencesDataStoreFile(BuildConfig.APPLICATION_ID)
+            }
+        )
 
     @Singleton
     @Provides
@@ -100,6 +110,8 @@ object AppModule {
         return UserUseCases(
             SearchUser(userRepository),
             GetUserStat(userRepository),
+            GetMe(userRepository),
+            GetUser(userRepository),
         )
     }
 }
