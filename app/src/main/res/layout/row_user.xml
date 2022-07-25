@@ -10,8 +10,8 @@
             type="main.ApplicationClass" />
 
         <variable
-            name="data"
-            type="domain.model.User" />
+                name="data"
+                type="domain.model.UserPreview" />
 
     </data>
 
@@ -30,9 +30,9 @@
             android:orientation="vertical">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/iv_user"
-                imageUrl="@{data.profileImage}"
-                android:layout_width="match_parent"
+                    android:id="@+id/iv_user"
+                    imageUrl="@{data.avatar}"
+                    android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintDimensionRatio="1:1"

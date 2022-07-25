@@ -4,9 +4,9 @@ import data.remote.DataState
 import domain.repository.UserRepository
 import kotlinx.coroutines.flow.flow
 
-class GetUser(private val repo: UserRepository) {
-    operator fun invoke(userId: Long) = flow {
+class SearchUser(private val repo: UserRepository) {
+    operator fun invoke(query: String, page: Int) = flow {
         emit(DataState.Loading)
-        emit(repo.getUser(userId))
+        emit(repo.searchUser(query, page))
     }
 }

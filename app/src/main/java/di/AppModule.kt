@@ -17,8 +17,8 @@ import domain.usecase.photo.*
 import domain.usecase.template.Template
 import domain.usecase.template.TemplateUseCases
 import domain.usecase.travel.*
-import domain.usecase.user.GetUser
 import domain.usecase.user.GetUserStat
+import domain.usecase.user.SearchUser
 import domain.usecase.user.UserUseCases
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import lang.LanguageManager
@@ -98,7 +98,7 @@ object AppModule {
     @Provides
     fun providesUserUseCases(userRepository: UserRepository): UserUseCases {
         return UserUseCases(
-            GetUser(userRepository),
+            SearchUser(userRepository),
             GetUserStat(userRepository),
         )
     }

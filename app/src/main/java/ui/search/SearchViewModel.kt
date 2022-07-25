@@ -3,7 +3,7 @@ package ui.search
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import data.remote.DataState
-import domain.model.User
+import domain.model.UserPreview
 import domain.model.travel.Travel
 import domain.usecase.travel.TravelUseCases
 import domain.usecase.user.UserUseCases
@@ -31,14 +31,13 @@ class SearchViewModel @Inject constructor(
     private var tabIndex = USER_TAB
     private var lastUserQuery = ""
     private var lastTravelQuery = ""
-    private var users = listOf<User>()
+    private var userPreviews = listOf<UserPreview>()
     private var travels = listOf<Travel>()
 
 
     override fun onStart() {
         viewModelScope.launch {
-
-            _event.send(SearchEvents.UpdateUsers(users))
+            _event.send(SearchEvents.UpdateUsers(userPreviews))
             _event.send(SearchEvents.UpdateTravel(travels))
         }
     }
@@ -54,19 +53,18 @@ class SearchViewModel @Inject constructor(
             when (tabIndex) {
                 USER_TAB   -> {
                     if (text == lastUserQuery) return@launch
-                    userUseCases.getUser(text).onEach {
-
+                    userUseCases.searchUser(text, 1).onEach { //TODO paginate
                         when (it) {
                             is DataState.Failure -> {
                                 if (tabIndex == USER_TAB) _event.send(SearchEvents.UserError(it.message))
-                                users = listOf()
-                                _event.send(SearchEvents.UpdateUsers(users))
+                                userPreviews = listOf()
+                                _event.send(SearchEvents.UpdateUsers(userPreviews))
                             }
                             is DataState.Loading -> _event.send(SearchEvents.UserLoading)
                             is DataState.Success -> {
                                 lastUserQuery = text
-                                users = it.data
-                                _event.send(SearchEvents.UpdateUsers(users))
+                                userPreviews = it.data
+                                _event.send(SearchEvents.UpdateUsers(userPreviews))
                             }
 
                         }
@@ -76,7 +74,7 @@ class SearchViewModel @Inject constructor(
 
                 TRAVEL_TAB -> {
                     if (text == lastTravelQuery) return@launch
-                    travelUseCases.getTravel().onEach {
+                    travelUseCases.getTravel().onEach { //TODO paginate and add query
                         when (it) {
                             is DataState.Failure -> if (tabIndex == TRAVEL_TAB) {
                                 travels = listOf()
@@ -84,7 +82,7 @@ class SearchViewModel @Inject constructor(
                                 _event.send(SearchEvents.UpdateTravel(travels))
                             }
                             DataState.Loading    -> _event.send(SearchEvents.TravelLoading)
-                            is DataState.Success -> {
+                            is DataState.Success -> { //TODO update list
                                 lastTravelQuery = text
                                 _event.send(SearchEvents.UpdateTravel(it.data))
                             }

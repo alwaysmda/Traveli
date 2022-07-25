@@ -20,7 +20,7 @@ class ProfileViewModel @Inject constructor(
     private var id = 0L
     override fun onStart(userId: Long) {
         id = if (userId == 0L) {
-            app.user?.id ?: 0L
+            app.userPreview?.id ?: 0L
         } else {
             userId
         }

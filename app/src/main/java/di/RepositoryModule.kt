@@ -8,9 +8,7 @@ import data.remote.Api
 import data.remote.PhotoApi
 import data.remote.TravelApi
 import data.remote.UserApi
-import data.remote.dto.NetworkErrorMapper
-import data.remote.dto.PhotoMapper
-import data.remote.dto.StatMapper
+import data.remote.dto.*
 import data.remote.dto.country.CountryMapper
 import data.remote.dto.travel.TravelMapper
 import data.remote.dto.travelDetail.TravelDetailMapper
@@ -55,11 +53,15 @@ object RepositoryModule {
         app: ApplicationClass,
         api: UserApi,
         networkErrorMapper: NetworkErrorMapper,
+        userPreviewMapper: UserPreviewMapper,
+        userMapper: UserMapper,
         statMapper: StatMapper,
     ): UserRepository = UserRepositoryImpl(
         api,
         app,
         networkErrorMapper,
+        userPreviewMapper,
+        userMapper,
         statMapper,
     )
 
