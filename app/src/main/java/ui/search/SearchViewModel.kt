@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import data.remote.DataState
 import domain.model.User
-import domain.model.travel.Travel
+import domain.model.travel.TravelPreview
 import domain.usecase.travel.TravelUseCases
 import domain.usecase.user.UserUseCases
 import kotlinx.coroutines.Job
@@ -32,7 +32,7 @@ class SearchViewModel @Inject constructor(
     private var lastUserQuery = ""
     private var lastTravelQuery = ""
     private var users = listOf<User>()
-    private var travels = listOf<Travel>()
+    private var travels = listOf<TravelPreview>()
 
 
     override fun onStart() {

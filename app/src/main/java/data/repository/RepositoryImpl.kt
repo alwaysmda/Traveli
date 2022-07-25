@@ -3,9 +3,9 @@ package data.repository
 import data.remote.Api
 import data.remote.ApiResponseHandler
 import data.remote.DataState
+import data.remote.dto.CountryMapper
 import data.remote.dto.NetworkErrorMapper
-import data.remote.dto.country.CountryMapper
-import data.remote.dto.country.ResponseCountryDto
+import data.remote.dto.ResponseCountryDto
 import domain.model.Country
 import domain.repository.Repository
 import main.ApplicationClass

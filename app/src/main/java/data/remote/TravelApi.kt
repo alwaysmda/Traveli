@@ -1,7 +1,7 @@
 package data.remote
 
-import data.remote.dto.travel.ResponseTravelDto
-import data.remote.dto.travelDetail.ResponseTravelDetailDto
+import data.remote.dto.ResponseTravelDetailDto
+import data.remote.dto.ResponseTravelDto
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

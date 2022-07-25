@@ -1,6 +1,6 @@
 package ui.home
 
-import domain.model.travel.Travel
+import domain.model.travel.TravelPreview
 import ui.base.BaseAction
 
 interface HomeAction : BaseAction {
@@ -10,7 +10,7 @@ interface HomeAction : BaseAction {
     fun onGetTrendingRetry()
     fun onGetNewRetry()
     fun onGetCountriesRetry()
-    fun onTravelItemClick(travel: Travel, pos: Int)
+    fun onTravelItemClick(travelPreview: TravelPreview, pos: Int)
 
 
 }

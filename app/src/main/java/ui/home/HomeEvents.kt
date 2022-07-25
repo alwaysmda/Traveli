@@ -1,16 +1,15 @@
 package ui.home
 
-import androidx.navigation.NavDestination
 import androidx.navigation.NavDirections
 import domain.model.Country
 import domain.model.travel.Banner
-import domain.model.travel.Travel
+import domain.model.travel.TravelPreview
 import ui.base.BaseEvent
 
 sealed class HomeEvents : BaseEvent() {
     object Loading : HomeEvents()
-    data class TrendingTravelUpdate(val travels: List<Travel>) : HomeEvents()
-    data class NewTravelUpdate(val travels: List<Travel>) : HomeEvents()
+    data class TrendingTravelUpdate(val travelPreviews: List<TravelPreview>) : HomeEvents()
+    data class NewTravelUpdate(val travelPreviews: List<TravelPreview>) : HomeEvents()
     data class CountriesUpdate(val countries: List<Country>) : HomeEvents()
     data class BannerUpdate(val banner: Banner) : HomeEvents()
 

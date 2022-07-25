@@ -1,7 +1,6 @@
-package data.remote.dto.travel
+package data.remote.dto
 
 import com.google.gson.annotations.SerializedName
-import data.remote.dto.MetaDto
 
 data class ResponseTravelDto(
     @SerializedName("status") val status: String,

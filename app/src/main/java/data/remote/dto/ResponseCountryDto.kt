@@ -1,7 +1,6 @@
-package data.remote.dto.country
+package data.remote.dto
 
 import com.google.gson.annotations.SerializedName
-import data.remote.dto.MetaDto
 
 
 data class ResponseCountryDto(

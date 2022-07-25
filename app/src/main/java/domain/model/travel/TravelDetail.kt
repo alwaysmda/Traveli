@@ -4,11 +4,11 @@ sealed class TravelDetail(
     val viewType: Int
 ) {
 
-    data class Cover(val title: String, val cover: String) : TravelDetail(VIEW_TYPE_COVER)
-    data class Description(val description: String) : TravelDetail(VIEW_TYPE_DESCRIPTION)
-    data class Link(val url: String) : TravelDetail(VIEW_TYPE_LINK)
-    data class Image(val imageUrl: String) : TravelDetail(VIEW_TYPE_IMAGE)
-    data class Video(val video: String) : TravelDetail(VIEW_TYPE_VIDEO)
+    data class Cover(val title: String?, val cover: String) : TravelDetail(VIEW_TYPE_COVER)
+    data class Description(val title: String?, val description: String) : TravelDetail(VIEW_TYPE_DESCRIPTION)
+    data class Link(val title: String?, val url: String) : TravelDetail(VIEW_TYPE_LINK)
+    data class Image(val title: String?, val imageUrl: String) : TravelDetail(VIEW_TYPE_IMAGE)
+    data class Video(val title: String?, val video: String) : TravelDetail(VIEW_TYPE_VIDEO)
     object BookMark : TravelDetail(VIEW_TYPE_BOOKMARK)
 
     companion object {

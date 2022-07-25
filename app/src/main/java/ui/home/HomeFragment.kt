@@ -55,7 +55,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
                         tvTrendingError.isVisible = false
                         btnTrendingRetry.isVisible = false
                     }
-                    trendingTravelAdapter.submitList(it.travels)
+                    trendingTravelAdapter.submitList(it.travelPreviews)
                 }
                 is HomeEvents.BannerUpdate          -> {
                     binding.apply {
@@ -73,7 +73,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
                 is HomeEvents.NewTravelUpdate       -> {
                     binding.newTravelLoading.isVisible = false
                     binding.rvNewTravel.isVisible = true
-                    newTravelAdapter.submitList(it.travels)
+                    newTravelAdapter.submitList(it.travelPreviews)
                 }
                 //loadings
                 is HomeEvents.Loading               -> {
@@ -162,11 +162,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
 
     private fun setUpActions() {
         binding.apply {
-            btnBannerRetry.setOnClickListener { viewModel.action.onGetBannerRetry() }
+            // btnBannerRetry.setOnClickListener { viewModel.action.onGetBannerRetry() }
             btnTrendingRetry.setOnClickListener { viewModel.action.onGetTrendingRetry() }
             btnNewTravelRetry.setOnClickListener { viewModel.action.onGetNewRetry() }
             btnCountriesRetry.setOnClickListener { viewModel.action.onGetCountriesRetry() }
-            btnSearch.setOnClickListener { viewModel.action.onSearchClick() }
+            //   btnSearch.setOnClickListener { viewModel.action.onSearchClick() }
         }
     }
 

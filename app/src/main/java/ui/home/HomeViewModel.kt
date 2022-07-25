@@ -3,10 +3,9 @@ package ui.home
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import data.remote.DataState
-import domain.model.travel.Travel
+import domain.model.travel.TravelPreview
 import domain.usecase.country.CountryUseCases
 import domain.usecase.travel.TravelUseCases
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -46,7 +45,7 @@ class HomeViewModel @Inject constructor(
         getCountries()
     }
 
-    override fun onTravelItemClick(travel: Travel, pos: Int) {
+    override fun onTravelItemClick(travelPreview: TravelPreview, pos: Int) {
         viewModelScope.launch {
             _event.send(HomeEvents.NavToTravelDetail)
         }
