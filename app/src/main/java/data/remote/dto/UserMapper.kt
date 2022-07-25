@@ -1,6 +1,5 @@
 package data.remote.dto
 
-import data.remote.dto.country.CountryDto
 import domain.model.User
 import util.EntityMapper
 import javax.inject.Inject

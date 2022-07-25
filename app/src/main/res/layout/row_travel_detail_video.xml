@@ -1,16 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
 <layout>
 
+    <data>
 
-    <androidx.media3.ui.PlayerView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/playerView"
+        <variable
+            name="app"
+            type="main.ApplicationClass" />
+
+        <variable
+            name="data"
+            type="domain.model.TravelDetail.Video" />
+
+
+    </data>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginHorizontal="@dimen/paddingLarge"
-        android:layout_marginTop="@dimen/paddingLarge">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/paddingLarge"
+        android:orientation="vertical">
 
-    </androidx.media3.ui.PlayerView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_title"
+            fonti="@{app.m.fontMedium}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/paddingLarge"
+            android:text="@{data.title}"
+            android:textColor="?attr/colorText0"
+            android:textSize="@dimen/textLargeXX"
+
+            />
+
+        <androidx.media3.ui.PlayerView
+            android:id="@+id/playerView"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginHorizontal="@dimen/paddingLarge"
+            android:layout_marginTop="@dimen/paddingLarge"
+
+            />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_description"
+            fonti="@{app.m.fontMedium}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/paddingLarge"
+            android:layout_marginTop="@dimen/paddingLarge"
+            android:text="@{data.description}"
+            android:textColor="?attr/colorText0"
+            android:textSize="@dimen/textLarge" />
+
+
+    </LinearLayout>
+
 
 </layout>
 

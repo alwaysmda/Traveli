@@ -3,8 +3,8 @@ package ui.search
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import data.remote.DataState
+import domain.model.TravelPreview
 import domain.model.UserPreview
-import domain.model.travel.Travel
 import domain.usecase.travel.TravelUseCases
 import domain.usecase.user.UserUseCases
 import kotlinx.coroutines.Job
@@ -31,8 +31,10 @@ class SearchViewModel @Inject constructor(
     private var tabIndex = USER_TAB
     private var lastUserQuery = ""
     private var lastTravelQuery = ""
+
+
+    private var travels = listOf<TravelPreview>()
     private var userPreviews = listOf<UserPreview>()
-    private var travels = listOf<Travel>()
 
 
     override fun onStart() {
@@ -74,7 +76,7 @@ class SearchViewModel @Inject constructor(
 
                 TRAVEL_TAB -> {
                     if (text == lastTravelQuery) return@launch
-                    travelUseCases.getTravel().onEach { //TODO paginate and add query
+                    travelUseCases.searchTravelsUseCase(text).onEach { //TODO paginate and add query
                         when (it) {
                             is DataState.Failure -> if (tabIndex == TRAVEL_TAB) {
                                 travels = listOf()

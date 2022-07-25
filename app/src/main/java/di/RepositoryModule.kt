@@ -9,9 +9,6 @@ import data.remote.PhotoApi
 import data.remote.TravelApi
 import data.remote.UserApi
 import data.remote.dto.*
-import data.remote.dto.country.CountryMapper
-import data.remote.dto.travel.TravelMapper
-import data.remote.dto.travelDetail.TravelDetailMapper
 import data.repository.PhotoRepositoryImpl
 import data.repository.RepositoryImpl
 import data.repository.TravelRepositoryImpl
@@ -40,13 +37,16 @@ object RepositoryModule {
         app: ApplicationClass,
         api: TravelApi,
         networkErrorMapper: NetworkErrorMapper,
+        travelMapper: TravelMapper,
+        travelPreviewMapper: TravelPreviewMapper
     ): TraveliRepository = TravelRepositoryImpl(
         api,
         app,
         networkErrorMapper,
-        TravelDetailMapper(),
-        TravelMapper()
+        travelPreviewMapper,
+        travelMapper
     )
+
 
     @Provides
     @Singleton

@@ -17,7 +17,7 @@ import domain.repository.Repository
 import domain.repository.TraveliRepository
 import domain.repository.UserRepository
 import domain.usecase.country.CountryUseCases
-import domain.usecase.country.GetCountry
+import domain.usecase.country.GetCountryListUseCase
 import domain.usecase.photo.*
 import domain.usecase.template.Template
 import domain.usecase.template.TemplateUseCases
@@ -88,11 +88,11 @@ object AppModule {
     @Provides
     fun provideTravelUseCase(traveliRepository: TraveliRepository): TravelUseCases {
         return TravelUseCases(
-            GetTrending(traveliRepository),
-            GetBanner(traveliRepository),
-            GetNewTravel(traveliRepository),
-            GetTravel(traveliRepository),
-            GetTravelDetail(traveliRepository)
+            GetTrendingListUseCase(traveliRepository),
+            GetBannerUseCase(traveliRepository),
+            GetNewTravelListUseCase(traveliRepository),
+            SearchTravelsUseCase(traveliRepository),
+            GetTravelDetailUseCase(traveliRepository)
         )
     }
 
@@ -100,7 +100,7 @@ object AppModule {
     @Provides
     fun providesCountryUseCases(repository: Repository): CountryUseCases {
         return CountryUseCases(
-            GetCountry(repository)
+            GetCountryListUseCase(repository)
         )
     }
 

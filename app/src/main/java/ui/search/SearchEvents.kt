@@ -1,12 +1,15 @@
 package ui.search
 
+
+import domain.model.TravelPreview
 import domain.model.UserPreview
-import domain.model.travel.Travel
 import ui.base.BaseEvent
+
 
 sealed class SearchEvents : BaseEvent() {
     data class UpdateUsers(val userPreviews: List<UserPreview>) : SearchEvents()
-    data class UpdateTravel(val travels: List<Travel>) : SearchEvents()
+    data class UpdateTravel(val travels: List<TravelPreview>) : SearchEvents()
+
 
     //loadings
     object UserLoading : SearchEvents()

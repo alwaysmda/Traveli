@@ -60,3 +60,9 @@ class ApplicationClass : Application() {
         Picasso.setSingletonInstance(picasso)
     }
 }
+
+//type user
+/*
+add travel preview type
+add view types to travel detail
+* */

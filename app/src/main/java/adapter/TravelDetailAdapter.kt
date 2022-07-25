@@ -3,6 +3,7 @@ package adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.recyclerview.widget.DiffUtil
@@ -10,13 +11,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.xodus.templatefive.R
 import com.xodus.templatefive.databinding.*
-import domain.model.travel.TravelDetail
-import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_BOOKMARK
-import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_COVER
-import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_DESCRIPTION
-import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_IMAGE
-import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_LINK
-import domain.model.travel.TravelDetail.Companion.VIEW_TYPE_VIDEO
+import domain.model.TravelDetail
+import domain.model.TravelDetail.Companion.VIEW_TYPE_BOOKMARK
+import domain.model.TravelDetail.Companion.VIEW_TYPE_COVER
+import domain.model.TravelDetail.Companion.VIEW_TYPE_DESCRIPTION
+import domain.model.TravelDetail.Companion.VIEW_TYPE_IMAGE
+import domain.model.TravelDetail.Companion.VIEW_TYPE_LINK
+import domain.model.TravelDetail.Companion.VIEW_TYPE_USER
+import domain.model.TravelDetail.Companion.VIEW_TYPE_VIDEO
 import ui.base.BaseActivity
 
 
@@ -28,6 +30,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
             binding.apply {
                 app = activity.app
                 data = travelDetail
+                tvTitle.isVisible = travelDetail.title.isNullOrEmpty().not()
             }
 
         }
@@ -37,6 +40,8 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
         fun bind(travelDetail: TravelDetail.Image) {
             binding.apply {
                 data = travelDetail
+                tvTitle.isVisible = travelDetail.title.isNullOrEmpty().not()
+                tvDescription.isVisible = !travelDetail.description.isNullOrEmpty()
             }
         }
     }
@@ -46,6 +51,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
             binding.apply {
                 app = activity.app
                 data = travelDetail
+                tvTitle.isVisible = travelDetail.title.isNullOrEmpty().not()
             }
         }
     }
@@ -67,8 +73,8 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
             binding.apply {
                 playerView.player = exoPlayer
                 playerView.setFullscreenButtonClickListener {}
-
-
+                tvTitle.isVisible = travelDetail.title.isNullOrEmpty().not()
+                tvDescription.isVisible = travelDetail.description.isNullOrEmpty().not()
             }
 
 
@@ -81,10 +87,19 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
         }
     }
 
+    inner class UserViewHolder(private val binding: RowTravelDetailUserBindingImpl) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(travelDetail: TravelDetail.User) {
+            binding.apply {
+                app = activity.app
+                data = travelDetail.user
+            }
+        }
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            VIEW_TYPE_COVER       -> {
+            VIEW_TYPE_COVER    -> {
                 CoverViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -95,7 +110,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                 )
 
             }
-            VIEW_TYPE_IMAGE       -> {
+            VIEW_TYPE_IMAGE    -> {
                 ImageViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -126,7 +141,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                     )
                 )
             }
-            VIEW_TYPE_VIDEO       -> {
+            VIEW_TYPE_VIDEO    -> {
                 VideoViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -137,7 +152,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                 )
 
             }
-            VIEW_TYPE_BOOKMARK    -> {
+            VIEW_TYPE_BOOKMARK -> {
                 BookMarkViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -148,7 +163,19 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                 )
 
             }
-            else                  -> ImageViewHolder(
+
+            VIEW_TYPE_USER     -> {
+                UserViewHolder(
+                    DataBindingUtil.inflate(
+                        LayoutInflater.from(parent.context),
+                        R.layout.row_travel_detail_user,
+                        parent,
+                        false
+                    )
+                )
+            }
+
+            else               -> ImageViewHolder(
                 DataBindingUtil.inflate(
                     LayoutInflater.from(parent.context),
                     R.layout.row_travel_detail_image,
@@ -171,6 +198,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
             is LinkViewHolder        -> holder.bind(currentList[position] as TravelDetail.Link)
             is VideoViewHolder       -> holder.bind(currentList[position] as TravelDetail.Video)
             is BookMarkViewHolder    -> holder.bind(currentList[position] as TravelDetail.BookMark)
+            is UserViewHolder        -> holder.bind(currentList[position] as TravelDetail.User)
         }
     }
 

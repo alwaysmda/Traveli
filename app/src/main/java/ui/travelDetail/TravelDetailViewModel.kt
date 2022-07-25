@@ -1,11 +1,10 @@
 package ui.travelDetail
 
 import androidx.lifecycle.viewModelScope
-import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import data.remote.DataState
-import domain.model.travel.TravelDetail
+import domain.model.TravelDetail
 import domain.usecase.travel.TravelUseCases
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -46,7 +45,7 @@ class TravelDetailViewModel @Inject constructor(
     private fun getTravelDetail() {
 
         viewModelScope.launch {
-            travelUseCases.getTravelDetail(0).onEach {
+            travelUseCases.getTravelDetailUseCase(0).onEach {
                 when (it) {
                     is DataState.Failure -> {
                         log("TRAVELDETAILVM:${it.message}")
@@ -60,13 +59,15 @@ class TravelDetailViewModel @Inject constructor(
                     is DataState.Success -> {
                         travelDetails = it.data
                         _event.send(TravelDetailEvents.UpdateTravelDetail(it.data))
-                        exoPlayer.setMediaItem(MediaItem.fromUri((travelDetails[4] as TravelDetail.Video).video))
+
+
                     }
                 }
 
             }.launchIn(viewModelScope)
         }
     }
+
 
     override fun onCleared() {
         super.onCleared()

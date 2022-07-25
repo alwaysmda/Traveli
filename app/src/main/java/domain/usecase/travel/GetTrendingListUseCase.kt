@@ -6,7 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-class GetTrending(private val traveliRepo: TraveliRepository) {
+class GetTrendingListUseCase(private val traveliRepo: TraveliRepository) {
 
     operator fun invoke() = flow {
         emit(DataState.Loading)

@@ -1,4 +1,4 @@
-package data.remote.dto.country
+package data.remote.dto
 
 import domain.model.Country
 import util.EntityMapper

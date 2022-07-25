@@ -1,9 +1,9 @@
 package domain.usecase.travel
 
 data class TravelUseCases(
-    val getTrending: GetTrending,
-    val getBanner: GetBanner,
-    val getNewTravel: GetNewTravel,
-    val getTravel:GetTravel,
-    val getTravelDetail:GetTravelDetail
+    val getTrendingListUseCase: GetTrendingListUseCase,
+    val getBannerUseCase: GetBannerUseCase,
+    val getNewTravelListUseCase: GetNewTravelListUseCase,
+    val searchTravelsUseCase: SearchTravelsUseCase,
+    val getTravelDetailUseCase: GetTravelDetailUseCase
 )

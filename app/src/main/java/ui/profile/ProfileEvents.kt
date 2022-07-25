@@ -4,6 +4,9 @@ import android.content.Intent
 import domain.model.Stat
 import domain.model.User
 import domain.model.travel.Travel
+import domain.model.Travel
+import domain.model.UserPreview
+
 import ui.base.BaseEvent
 
 sealed class ProfileEvents : BaseEvent() {

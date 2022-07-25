@@ -8,17 +8,17 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.xodus.templatefive.R
 import com.xodus.templatefive.databinding.RowTravelBinding
-import domain.model.travel.Travel
+import domain.model.TravelPreview
 import ui.base.BaseActivity
 
-class TravelAdapter(private val activity:BaseActivity):ListAdapter<Travel,TravelAdapter.SubBannerViewHolder>(DiffCallback()) {
+class TravelAdapter(private val activity: BaseActivity) : ListAdapter<TravelPreview, TravelAdapter.SubBannerViewHolder>(DiffCallback()) {
 
-    inner class SubBannerViewHolder(private val binding: RowTravelBinding): RecyclerView.ViewHolder(binding.root){
+    inner class SubBannerViewHolder(private val binding: RowTravelBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(travel: Travel){
+        fun bind(travelPreview: TravelPreview) {
             binding.apply {
                 app = activity.app
-                data = travel
+                data = travelPreview
 
             }
 
@@ -43,11 +43,11 @@ class TravelAdapter(private val activity:BaseActivity):ListAdapter<Travel,Travel
     }
 
 
-    private class DiffCallback : DiffUtil.ItemCallback<Travel>() {
-        override fun areItemsTheSame(oldItem: Travel, newItem: Travel) =
+    private class DiffCallback : DiffUtil.ItemCallback<TravelPreview>() {
+        override fun areItemsTheSame(oldItem: TravelPreview, newItem: TravelPreview) =
             oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: Travel, newItem: Travel) =
+        override fun areContentsTheSame(oldItem: TravelPreview, newItem: TravelPreview) =
             oldItem == newItem
     }
 

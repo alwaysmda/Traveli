@@ -11,7 +11,7 @@
 
         <variable
             name="data"
-            type="domain.model.travel.TravelDetail.Cover" />
+            type="domain.model.TravelDetail.Cover" />
     </data>
 
 
@@ -37,6 +37,7 @@
             tools:text="Travel to spain" />
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_cover"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/paddingLarge"

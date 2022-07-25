@@ -10,7 +10,7 @@
 
         <variable
             name="data"
-            type="domain.model.travel.TravelDetail.Link" />
+            type="domain.model.TravelDetail.Link" />
 
     </data>
 
@@ -22,6 +22,7 @@
         android:text="@{data.url}"
         style="@style/GeneralButton.TextButton"
         android:textColor="@color/md_blue_200"
+        android:padding="0dp"
         android:textSize="@dimen/textLarge">
 
 

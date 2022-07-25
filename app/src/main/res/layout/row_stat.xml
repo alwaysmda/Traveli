@@ -6,56 +6,56 @@
     <data>
 
         <variable
-                name="app"
-                type="main.ApplicationClass" />
+            name="app"
+            type="main.ApplicationClass" />
 
         <variable
-                name="data"
-                type="domain.model.Stat" />
+            name="data"
+            type="domain.model.Stat" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_margin="@dimen/paddingMedium"
-                app:cardBackgroundColor="?attr/colorBackground1"
-                app:cardCornerRadius="@dimen/radiusLarge"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintTop_toTopOf="parent">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/paddingMedium"
+            app:cardBackgroundColor="?attr/colorBackground1"
+            app:cardCornerRadius="@dimen/radiusLarge"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:alpha="0.05"
-                    android:padding="@dimen/paddingMedium"
-                    android:src="@drawable/ic_compass"
-                    app:imageResource="@{data.icon}" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.05"
+                android:padding="@dimen/paddingMedium"
+                android:src="@drawable/ic_compass"
+                app:imageResource="@{data.icon}" />
 
             <com.google.android.material.textview.MaterialTextView
-                    style="@style/GeneralText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@{data.value}"
-                    android:textSize="@dimen/textLargeXX"
-                    tools:text="10,000" />
+                style="@style/GeneralText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@{data.value}"
+                android:textSize="@dimen/textLargeXX"
+                tools:text="10,000" />
 
             <com.google.android.material.textview.MaterialTextView
-                    style="@style/GeneralText"
-                    android:layout_width="match_parent"
-                    android:layout_gravity="bottom"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/paddingMedium"
-                    android:alpha="0.6"
-                    android:gravity="center"
-                    android:text="@{data.title}"
-                    android:textSize="@dimen/textLargeXX"
-                    tools:text="Cities" />
+                style="@style/GeneralText"
+                android:layout_width="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/paddingMedium"
+                android:alpha="0.6"
+                android:gravity="center"
+                android:text="@{data.title}"
+                android:textSize="@dimen/textLargeXX"
+                tools:text="Cities" />
 
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,7 @@
 package data.remote.dto
 
 import com.google.gson.annotations.SerializedName
-import data.remote.dto.country.CountryDto
+
 import kotlin.random.Random
 
 data class UserDto(

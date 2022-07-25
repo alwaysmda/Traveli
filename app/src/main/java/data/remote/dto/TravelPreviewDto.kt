@@ -1,22 +1,24 @@
-package domain.model.travel
+package data.remote.dto
 
 import kotlin.random.Random
 
-data class Travel(
+data class TravelPreviewDto(
     val id: Int,
     val name: String,
     val image: String,
 ) {
+
     companion object {
         const val carabianSeeImage = "https://www.wildearth-travel.com/get-image-version/verybig/uploads/caribbean_sea_11_days_(fram)_picture.jpg"
 
-        fun getFake() = Travel(Random.nextInt(1000), "Caribbean Sea", carabianSeeImage)
-        fun getFake(size: Int = 10): List<Travel> {
-            val list = arrayListOf<Travel>()
+        fun getFake() = TravelPreviewDto(Random.nextInt(1000), "Caribbean Sea", carabianSeeImage)
+        fun getFake(size: Int = 10): ArrayList<TravelPreviewDto> {
+            val list = arrayListOf<TravelPreviewDto>()
             repeat(size) {
                 list.add(getFake())
             }
             return list
         }
     }
+
 }

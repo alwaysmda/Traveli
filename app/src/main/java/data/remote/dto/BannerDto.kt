@@ -1,4 +1,4 @@
-package data.remote.dto.travel
+package data.remote.dto
 
 data class BannerDto(
     val banner: TravelDto,

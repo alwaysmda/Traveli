@@ -3,7 +3,7 @@ package ui.home
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import data.remote.DataState
-import domain.model.travel.Travel
+import domain.model.TravelPreview
 import domain.usecase.country.CountryUseCases
 import domain.usecase.travel.TravelUseCases
 import domain.usecase.user.UserUseCases
@@ -42,7 +42,7 @@ class HomeViewModel @Inject constructor(
         getCountries()
     }
 
-    override fun onTravelItemClick(travel: Travel, pos: Int) {
+    override fun onTravelItemClick(travelPreview: TravelPreview, pos: Int) {
         viewModelScope.launch {
             _event.send(HomeEvents.NavToTravelDetail) //TODO pass travel
         }
@@ -95,7 +95,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getTrendingTravel() {
-        travelUseCases.getTrending().onEach {
+        travelUseCases.getTrendingListUseCase().onEach {
             when (it) {
                 is DataState.Failure -> _event.send(HomeEvents.TrendingTravelError(it.message))
                 is DataState.Loading -> _event.send(HomeEvents.TrendingTravelLoading)
@@ -105,7 +105,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getNewTravel() {
-        travelUseCases.getNewTravel().onEach {
+        travelUseCases.getNewTravelListUseCase().onEach {
             when (it) {
                 is DataState.Failure -> _event.send(HomeEvents.NewTravelError(it.message))
                 is DataState.Loading -> _event.send(HomeEvents.NewTravelLoading)
@@ -118,7 +118,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getBanner() {
-        travelUseCases.getBanner().onEach {
+        travelUseCases.getBannerUseCase().onEach {
             when (it) {
                 is DataState.Failure -> _event.send(HomeEvents.BannerError(it.message))
                 DataState.Loading    -> _event.send(HomeEvents.BannerLoading)
