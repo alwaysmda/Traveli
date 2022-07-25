@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import data.remote.DataState
 import domain.model.Stat
-import domain.model.travel.Travel
+import domain.model.Travel
 import domain.usecase.user.UserUseCases
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
