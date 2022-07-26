@@ -13,6 +13,7 @@ import com.xodus.templatefive.R
 import com.xodus.templatefive.databinding.*
 import domain.model.TravelDetail
 import domain.model.TravelDetail.Companion.VIEW_TYPE_BOOKMARK
+import domain.model.TravelDetail.Companion.VIEW_TYPE_CITIES
 import domain.model.TravelDetail.Companion.VIEW_TYPE_COVER
 import domain.model.TravelDetail.Companion.VIEW_TYPE_DESCRIPTION
 import domain.model.TravelDetail.Companion.VIEW_TYPE_IMAGE
@@ -96,10 +97,21 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
         }
     }
 
+    inner class CityViewHolder(private val binding: RowTravelDetailCityBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(city: TravelDetail.City) {
+            val adapter = CityAdapter(activity).apply {
+                submitList(city.cityList)
+            }
+            binding.apply {
+                rvCity.adapter = adapter
+            }
+        }
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            VIEW_TYPE_COVER    -> {
+            VIEW_TYPE_COVER       -> {
                 CoverViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -110,7 +122,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                 )
 
             }
-            VIEW_TYPE_IMAGE    -> {
+            VIEW_TYPE_IMAGE       -> {
                 ImageViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -141,7 +153,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                     )
                 )
             }
-            VIEW_TYPE_VIDEO    -> {
+            VIEW_TYPE_VIDEO       -> {
                 VideoViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -152,7 +164,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                 )
 
             }
-            VIEW_TYPE_BOOKMARK -> {
+            VIEW_TYPE_BOOKMARK    -> {
                 BookMarkViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -164,7 +176,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
 
             }
 
-            VIEW_TYPE_USER     -> {
+            VIEW_TYPE_USER        -> {
                 UserViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -175,7 +187,18 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                 )
             }
 
-            else               -> ImageViewHolder(
+            VIEW_TYPE_CITIES      -> {
+                CityViewHolder(
+                    DataBindingUtil.inflate(
+                        LayoutInflater.from(parent.context),
+                        R.layout.row_travel_detail_city,
+                        parent,
+                        false
+                    )
+                )
+            }
+
+            else                  -> ImageViewHolder(
                 DataBindingUtil.inflate(
                     LayoutInflater.from(parent.context),
                     R.layout.row_travel_detail_image,
@@ -199,6 +222,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
             is VideoViewHolder       -> holder.bind(currentList[position] as TravelDetail.Video)
             is BookMarkViewHolder    -> holder.bind(currentList[position] as TravelDetail.BookMark)
             is UserViewHolder        -> holder.bind(currentList[position] as TravelDetail.User)
+            is CityViewHolder        -> holder.bind(currentList[position] as TravelDetail.City)
         }
     }
 

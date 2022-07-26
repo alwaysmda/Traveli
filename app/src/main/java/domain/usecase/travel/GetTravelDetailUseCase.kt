@@ -17,8 +17,9 @@ class GetTravelDetailUseCase(private val traveliRepo: TraveliRepository) {
             DataState.Loading    -> emit(DataState.Loading)
             is DataState.Success -> {
                 val details = result.data.details
-                details.add(TravelDetail.BookMark(result.data.isBookmarked))
                 details.add(2, TravelDetail.User(result.data.user))
+                details.add(TravelDetail.City(result.data.cityList))
+                details.add(TravelDetail.BookMark(result.data.isBookmarked))
                 emit(DataState.Success(details))
             }
         }

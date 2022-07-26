@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="app"
+            type="main.ApplicationClass" />
+
+        <variable
+            name="data"
+            type="domain.model.City" />
+
+
+    </data>
+
+
+    <LinearLayout android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="?attr/colorBackground0"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_marginHorizontal="@dimen/paddingMedium"
+
+        >
+
+
+        <ImageView
+            android:id="@+id/iv_city"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            imageUrl="@{data.image}"
+            android:scaleType="centerCrop"
+            android:background="@drawable/rounded_back_ground"
+
+            />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_city_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textLarge"
+            android:textColor="?attr/colorText0"
+            fonti="@{app.m.fontMedium}"
+            android:layout_marginTop="@dimen/paddingMedium"
+            tools:text="ssdasd"
+            android:text="@{data.name}"
+            android:layout_marginBottom="@dimen/paddingMedium" />
+
+
+    </LinearLayout>
+
+
+</layout>
