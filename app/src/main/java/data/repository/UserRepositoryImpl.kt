@@ -9,10 +9,13 @@ import domain.model.User
 import domain.model.UserPreview
 import domain.repository.UserRepository
 import main.ApplicationClass
+import util.Constant
+import util.PrefManager
 
 class UserRepositoryImpl(
     private val userApi: UserApi,
     private val app: ApplicationClass,
+    private val prefManager: PrefManager,
     private val networkErrorMapper: NetworkErrorMapper,
     private val userPreviewMapper: UserPreviewMapper,
     private val userMapper: UserMapper,
@@ -26,6 +29,21 @@ class UserRepositoryImpl(
                 val data = ResponseSearchUserDto.getFake()
                 DataState.Success(userPreviewMapper.fromEntityList(data.userPreviewList))
             }
+        }
+    }
+
+    override suspend fun getMe(): DataState<User> {
+        return prefManager.getStringPref(Constant.PREF_TOKEN)?.let {
+            when (val response = call { userApi.getMe() }) {
+                is DataState.Failure -> response
+                is DataState.Success -> DataState.Loading
+                is DataState.Loading -> {
+                    val data = ResponseGetUserDto.getFake(1)
+                    DataState.Success(userMapper.toDomainModel(data.user))
+                }
+            }
+        } ?: kotlin.run {
+            DataState.Failure(DataState.Failure.CODE_NOT_FOUND, "")
         }
     }
 

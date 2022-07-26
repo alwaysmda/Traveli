@@ -12,6 +12,9 @@ interface UserApi {
     @GET("users")
     suspend fun searchUser(@Query("query") query: String, @Query("page") page: Int): Response<ResponseSearchUserDto>
 
+    @GET("users/me")
+    suspend fun getMe(): Response<ResponseGetUserDto>
+
     @GET("users/{userId}")
     suspend fun getUser(@Path("userId") userId: Long): Response<ResponseGetUserDto>
 

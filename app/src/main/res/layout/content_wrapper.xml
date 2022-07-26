@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="app"
+                type="main.ApplicationClass" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cw_clParent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <ProgressBar
+                android:id="@+id/cw_pbContentLoading1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="@dimen/paddingLargeXXX"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+                android:id="@+id/cw_pbContentLoading2"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:scaleX="-1"
+                app:layout_constraintBottom_toBottomOf="@id/cw_pbContentLoading1"
+                app:layout_constraintLeft_toLeftOf="@id/cw_pbContentLoading1"
+                app:layout_constraintRight_toRightOf="@id/cw_pbContentLoading1"
+                app:layout_constraintTop_toTopOf="@id/cw_pbContentLoading1" />
+
+        <FrameLayout
+                android:id="@+id/cw_flRetry"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/cw_tvError"
+                    style="@style/GeneralText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:layout_marginBottom="@dimen/paddingLargeXXX"
+                    android:alpha="0.4"
+                    android:gravity="center"
+                    app:fonti="@{app.m.fontMedium}"
+                    tools:text="Something went wrong" />
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/cw_btnRefresh"
+                    style="@style/GeneralButton.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/paddingLargeXXX"
+                    app:icon="@drawable/ic_refresh"
+                    app:iconSize="30dp"
+                    app:iconTint="?attr/colorPrimary" />
+
+        </FrameLayout>
+
+        <FrameLayout
+                android:id="@+id/cw_flEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                    android:id="@+id/cw_ivEmpty"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/paddingLargeXXX"
+                    android:alpha="0.4"
+                    android:src="@drawable/ic_compass"
+                    app:tint="?attr/colorText0" />
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/cw_tvEmpty"
+                    style="@style/GeneralText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:layout_marginBottom="@dimen/paddingLargeXXX"
+                    android:alpha="0.4"
+                    android:gravity="center"
+                    android:textColor="?attr/colorText0"
+                    app:fonti="@{app.m.fontMedium}"
+                    tools:text="No Data Found" />
+
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

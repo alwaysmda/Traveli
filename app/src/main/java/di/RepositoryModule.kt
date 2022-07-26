@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import data.remote.Api
+import data.remote.MiscApi
 import data.remote.PhotoApi
 import data.remote.TravelApi
 import data.remote.UserApi
@@ -19,6 +19,7 @@ import domain.repository.TraveliRepository
 import domain.repository.UserRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import main.ApplicationClass
+import util.PrefManager
 import javax.inject.Singleton
 
 @ExperimentalCoroutinesApi
@@ -51,6 +52,7 @@ object RepositoryModule {
     @Singleton
     fun providesUserRepository(
         app: ApplicationClass,
+        prefManager: PrefManager,
         api: UserApi,
         networkErrorMapper: NetworkErrorMapper,
         userPreviewMapper: UserPreviewMapper,
@@ -59,6 +61,7 @@ object RepositoryModule {
     ): UserRepository = UserRepositoryImpl(
         api,
         app,
+        prefManager,
         networkErrorMapper,
         userPreviewMapper,
         userMapper,
@@ -69,8 +72,8 @@ object RepositoryModule {
     @Singleton
     fun provideRepository(
         app: ApplicationClass,
-        api: Api,
+        miscApi: MiscApi,
         networkErrorMapper: NetworkErrorMapper,
         countryMapper: CountryMapper
-    ): Repository = RepositoryImpl(api, app, networkErrorMapper, countryMapper)
+    ): Repository = RepositoryImpl(miscApi, app, networkErrorMapper, countryMapper)
 }

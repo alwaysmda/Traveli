@@ -8,7 +8,9 @@ import androidx.navigation.fragment.navArgs
 import com.xodus.templatefive.R
 import com.xodus.templatefive.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import ui.base.BaseFragment
+import ui.base.ContentWrapper
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileEvents, ProfileAction, ProfileViewModel>(R.layout.fragment_profile) {
@@ -23,25 +25,30 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileEvents, Prof
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         observeToEvents()
         super.onViewCreated(view, savedInstanceState)
-        setUpRecyclerViews()
+        //        setUpRecyclerViews()
         viewModel.action.onStart(args.userId)
     }
 
     private fun observeToEvents() = viewLifecycleOwner.lifecycleScope.launchWhenStarted {
         viewModel.event.collect {
             when (it) {
-                is ProfileEvents.NavSetting          -> Unit
-                is ProfileEvents.NavTravel           -> Unit
-                is ProfileEvents.UpdateUser          -> Unit
-                is ProfileEvents.UpdateTravelList    -> Unit
-                is ProfileEvents.UpdateStatList      -> Unit
-                is ProfileEvents.LaunchIntent        -> Unit
-                is ProfileEvents.EditContact         -> {
-                    editContactBottomSheet = EditContactBottomSheet(viewModel, it.title, it.content) { content ->
-                        viewModel.action.onConfirmEditContactClick(content)
-                    }.also { sheet ->
-                        sheet.show(childFragmentManager, EditContactBottomSheet::class.simpleName)
-                    }
+                is ProfileEvents.NavSetting       -> setUpRecyclerViews()
+                is ProfileEvents.NavTravel        -> Unit
+                is ProfileEvents.UpdateUser       -> Unit
+                is ProfileEvents.UpdateTravelList -> Unit
+                is ProfileEvents.UpdateStatList   -> Unit
+                is ProfileEvents.LaunchIntent     -> Unit
+                is ProfileEvents.EditContact      -> {
+                    //                    editContactBottomSheet = EditContactBottomSheet(viewModel, it.title, it.content) { content ->
+                    //                        viewModel.action.onConfirmEditContactClick(content)
+                    //                    }.also { sheet ->
+                    //                        sheet.show(childFragmentManager, EditContactBottomSheet::class.simpleName)
+                    //                    }
+                    binding.profileCwTest.setStatus(ContentWrapper.WrapperStatus.Loading)
+                    binding.profileTvTest.text = "Loading..."
+                    delay(3000)
+                    binding.profileCwTest.setStatus(ContentWrapper.WrapperStatus.Success)
+                    binding.profileTvTest.text = "Hello World!"
                 }
                 is ProfileEvents.EditContactError    -> editContactBottomSheet?.showError(it.error)
                 is ProfileEvents.EditContactComplete -> editContactBottomSheet?.dismiss()
@@ -61,5 +68,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileEvents, Prof
         //            rvCountries.adapter = countryAdapter
         //
         //        }
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            //            delay(3000)
+            //            binding.profileTvTest.text = "Before Loading"
+            binding.profileCwTest.setStatus(ContentWrapper.WrapperStatus.Loading)
+            binding.profileTvTest.text = "Loading..."
+            delay(3000)
+            binding.profileCwTest.setStatus(ContentWrapper.WrapperStatus.Failure("something is not right..."))
+            binding.profileTvTest.text = "Failed"
+        }
     }
 }

@@ -5,6 +5,7 @@ object Constant {
     const val PREF_LANGUAGE = "PREF_LANGUAGE"
     const val PREF_THEME = "PREF_THEME"
     const val PREF_LOG = "PREF_LOG"
+    const val PREF_TOKEN = "PREF_TOKEN"
 
     //========================== C O N S T A N T S ==========================//
     //    const val CON_BASE_TEMPLATE_URL = "https://jsonplaceholder.typicode.com/"
