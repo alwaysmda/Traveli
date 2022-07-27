@@ -6,4 +6,8 @@ data class TravelPreview(
     val image: String,
 ) {
 
+    companion object {
+        fun List<TravelPreview>.cloned() = ArrayList(this.map { it.copy() })
+    }
+
 }

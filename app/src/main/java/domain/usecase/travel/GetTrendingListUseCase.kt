@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.flowOn
 
 class GetTrendingListUseCase(private val traveliRepo: TraveliRepository) {
 
-    operator fun invoke() = flow {
+    operator fun invoke(page: Int = 1) = flow {
         emit(DataState.Loading)
-        emit(traveliRepo.getTrending())
+        emit(traveliRepo.getTrending(page))
     }.flowOn(Dispatchers.IO)
 }

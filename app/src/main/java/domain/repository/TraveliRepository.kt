@@ -7,11 +7,11 @@ import domain.model.TravelPreview
 
 interface TraveliRepository {
 
-    suspend fun getTrending(): DataState<List<TravelPreview>>
+    suspend fun getTrending(page: Int): DataState<List<TravelPreview>>
 
-    suspend fun getNewTravels(): DataState<List<TravelPreview>>
+    suspend fun getNewTravels(page: Int): DataState<List<TravelPreview>>
 
-    suspend fun searchTravel(query: String): DataState<List<TravelPreview>>
+    suspend fun searchTravel(query: String, page: Int): DataState<List<TravelPreview>>
 
     suspend fun getTravelDetail(travelId: Int): DataState<Travel>
 

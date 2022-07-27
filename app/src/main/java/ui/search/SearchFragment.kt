@@ -10,12 +10,14 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
 import com.xodus.templatefive.R
 import com.xodus.templatefive.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 import ui.base.BaseFragment
 import util.extension.changeChildFont
+import util.extension.log
 
 
 @AndroidEntryPoint
@@ -68,6 +70,41 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
 
             })
             btnBack.setOnClickListener { viewModel.action.onBackPress() }
+
+
+
+            rvTravel.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    if (recyclerView.computeVerticalScrollExtent() +
+                        recyclerView.computeVerticalScrollOffset() >
+                        recyclerView.computeVerticalScrollRange() - 100
+                    ) {
+                        viewModel.action.paginateTravelList()
+                    }
+                }
+            })
+            rvUser.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    log(
+                        "SF:extend+offset:${
+                            recyclerView.computeVerticalScrollExtent()
+                                    + recyclerView.computeVerticalScrollOffset()
+                        } range:${recyclerView.computeVerticalScrollRange() - 100}"
+                    )
+                    if (recyclerView.computeVerticalScrollExtent() +
+                        recyclerView.computeVerticalScrollOffset() >
+                        recyclerView.computeVerticalScrollRange() - 100
+                    ) {
+                        viewModel.action.paginateUserList()
+                    }
+
+
+                }
+
+            })
+
         }
 
     }
