@@ -20,9 +20,6 @@ interface TravelApi {
     @GET("travels/banner")
     suspend fun getBanner(): Response<Unit>
 
-    @GET("countries")
-    suspend fun getCountries(): Response<Unit>
-
     @GET("travels/{travelId}")
     suspend fun getTravelDetail(@Path("travelId") travelId: Int): Response<ResponseTravelDetailDto>
 }

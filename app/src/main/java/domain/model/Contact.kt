@@ -1,9 +1,9 @@
 package domain.model
 
 data class Contact(
-    val phone: String?,
-    val email: String?,
-    val twitter: String?,
-    val instagram: String?,
-    val website: String?,
+    val phone: ContactItem,
+    val email: ContactItem,
+    val twitter: ContactItem,
+    val instagram: ContactItem,
+    val website: ContactItem,
 )

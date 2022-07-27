@@ -18,16 +18,25 @@
                 android:id="@+id/profile_clParent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="?attr/colorBackground0">
+                android:background="?attr/colorBackground0"
+                android:descendantFocusability="blocksDescendants"
+                android:paddingBottom="@dimen/paddingLargeXXX">
 
             <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/profile_ivCover"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:scaleType="centerCrop"
                     android:src="@color/md_green_300"
                     app:layout_constraintDimensionRatio="2:1"
                     app:layout_constraintTop_toTopOf="parent"
                     app:shapeAppearance="@style/CircularImageView.Cover" />
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/shape_cover_overlay"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_ivCover" />
 
             <com.google.android.material.button.MaterialButton
                     android:id="@+id/profile_btnSetting"
@@ -42,6 +51,20 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+            <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/profile_ivAvatar"
+                    style="@style/CircularImageView.Avatar"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="@dimen/paddingLargeXXX"
+                    android:padding="1dp"
+                    android:scaleType="centerCrop"
+                    android:src="@color/md_green_500"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_ivCover"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/profile_ivCover"
+                    app:shapeAppearance="@style/CircularImageView.Avatar" />
+
             <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/profile_tvName"
                     style="@style/GeneralText"
@@ -49,6 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/paddingSmall"
+                    android:textColor="@color/md_white_1000"
                     android:textSize="@dimen/textLarge"
                     app:layout_constraintBottom_toBottomOf="@id/profile_ivCover"
                     app:layout_constraintStart_toEndOf="@id/profile_ivAvatar"
@@ -61,92 +85,92 @@
                     fonti="@{vm.app.m.fontMedium}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/paddingMedium"
-                    android:textSize="@dimen/textMedium"
-                    app:layout_constraintStart_toStartOf="@id/profile_ivAvatar"
-                    app:layout_constraintTop_toBottomOf="@id/profile_ivAvatar"
+                    android:layout_marginStart="@dimen/paddingSmall"
+                    android:textSize="@dimen/textSmall"
+                    app:layout_constraintTop_toBottomOf="@id/profile_ivCover"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_ivAvatar"
+                    app:layout_constraintStart_toEndOf="@id/profile_ivAvatar"
                     tools:text="Tehran, Iran" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/profile_ivAvatar"
-                    style="@style/CircularImageView.Avatar"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="@dimen/paddingLargeXXX"
-                    android:padding="2dp"
-                    android:src="@color/md_green_500"
-                    app:layout_constraintBottom_toBottomOf="@id/profile_ivCover"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/profile_ivCover"
-                    app:shapeAppearance="@style/CircularImageView.Avatar" />
-
-            <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/profile_cvBalance"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginHorizontal="@dimen/paddingLargeXXX"
-                    android:layout_marginTop="@dimen/paddingLargeXXX"
-                    android:onClick="@{() -> vm.action.onBalanceClick()}"
-                    app:cardBackgroundColor="?attr/colorBackground1"
-                    app:cardCornerRadius="@dimen/radiusLargeXX"
-                    app:cardElevation="10dp"
-                    app:layout_constraintTop_toBottomOf="@id/profile_tvHometown">
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="@dimen/paddingLargeXXX">
-
-                    <ImageView
-                            android:id="@+id/profile_ivBalance"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/ic_wallet"
-                            app:tint="?attr/colorText0" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/profile_tvBalance"
-                            style="@style/GeneralText"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/paddingLarge"
-                            android:layout_weight="1"
-                            android:textSize="@dimen/textLargeXX"
-                            tools:text="$12,000" />
-
-                    <ImageView
-                            android:id="@+id/profile_ivBalanceMore"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:alpha="0.5"
-                            android:src="@drawable/ic_arrow_right"
-                            app:tint="?attr/colorText0" />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
             <ui.base.ContentWrapper
-                    android:id="@+id/profile_cwTest"
+                    android:id="@+id/profile_cwBio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/paddingLargeXXX"
                     app:app="@{vm.app}"
-                    app:layout_constraintTop_toBottomOf="@id/profile_cvBalance"
-                    app:onRefreshClick="@{() -> vm.action.onSettingClick()}">
+                    app:emptyIcon="@drawable/ic_setting"
+                    app:emptyMessage="@{vm.app.m.somethingWentWrong}"
+                    app:layout_constraintTop_toBottomOf="@id/profile_ivAvatar"
+                    app:onRetryClick="@{() -> vm.action.onRetryBalanceClick()}">
 
                 <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/profile_tvTest"
+                        android:id="@+id/profile_tvBio"
                         style="@style/GeneralText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/paddingLargeXXX"
-                        android:gravity="center"
-                        android:padding="@dimen/paddingLargeXXX"
-                        android:text="Hello World!"
+                        android:layout_marginHorizontal="@dimen/paddingLargeXXX"
+                        app:fonti="@{vm.app.m.fontMedium}"
+                        tools:text="Some description about me." />
+            </ui.base.ContentWrapper>
+
+            <ui.base.ContentWrapper
+                    android:id="@+id/profile_cwBalance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:app="@{vm.app}"
+                    app:emptyIcon="@drawable/ic_setting"
+                    app:emptyMessage="@{vm.app.m.somethingWentWrong}"
+                    app:layout_constraintTop_toBottomOf="@id/profile_cwBio"
+                    app:onRetryClick="@{() -> vm.action.onRetryBalanceClick()}">
+
+                <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/profile_cvBalance"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginHorizontal="@dimen/paddingLargeXXX"
+                        android:layout_marginVertical="@dimen/paddingLargeXXX"
+                        android:onClick="@{() -> vm.action.onBalanceClick()}"
+                        app:cardBackgroundColor="?attr/colorBackground1"
+                        app:cardCornerRadius="@dimen/radiusLargeXX"
+                        app:cardElevation="10dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="@dimen/paddingLargeXXX">
+
+                        <ImageView
+                                android:id="@+id/profile_ivBalance"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/ic_wallet"
+                                app:tint="?attr/colorText0" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/profile_tvBalance"
+                                style="@style/GeneralText"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/paddingLarge"
+                                android:layout_weight="1"
+                                android:textSize="@dimen/textLargeXX"
+                                tools:text="$12,000" />
+
+                        <ImageView
+                                android:id="@+id/profile_ivBalanceMore"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:alpha="0.5"
+                                android:src="@drawable/ic_arrow_right"
+                                app:tint="?attr/colorText0" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
 
             </ui.base.ContentWrapper>
 
@@ -157,26 +181,39 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/paddingLarge"
-                    android:layout_marginTop="@dimen/paddingLargeXXX"
                     android:gravity="start|center_vertical"
+                    android:text="@{vm.app.m.travels}"
                     android:textSize="@dimen/textLargeXX"
                     app:icon="@drawable/ic_arrow_right"
                     app:iconGravity="textEnd"
                     app:iconTint="?attr/colorText0"
-                    app:layout_constraintTop_toBottomOf="@id/profile_cwTest"
+                    app:layout_constraintTop_toBottomOf="@id/profile_cwBalance"
                     tools:text="Travels" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/profile_rvTravel"
+            <ui.base.ContentWrapper
+                    android:id="@+id/profile_cwTravel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="@dimen/paddingMedium"
-                    android:paddingBottom="@dimen/paddingMedium"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:app="@{vm.app}"
+                    app:emptyIcon="@drawable/ic_compass"
+                    app:emptyMessage="@{vm.app.m.noTravels}"
                     app:layout_constraintTop_toBottomOf="@id/profile_btnTravelTitle"
-                    tools:itemCount="4"
-                    tools:listitem="@layout/row_travel" />
+                    app:onRetryClick="@{() -> vm.action.onRetryTravelListClick()}">
+
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/profile_rvTravel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:overScrollMode="never"
+                        android:paddingHorizontal="@dimen/paddingMedium"
+                        android:paddingBottom="@dimen/paddingMedium"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/row_travel" />
+
+            </ui.base.ContentWrapper>
 
             <com.google.android.material.button.MaterialButton
                     android:id="@+id/profile_btnStat"
@@ -186,25 +223,37 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/paddingLarge"
                     android:layout_marginTop="@dimen/paddingLargeXXX"
+                    android:clickable="false"
                     android:gravity="start|center_vertical"
+                    android:text="@{vm.app.m.stats}"
                     android:textSize="@dimen/textLargeXX"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/profile_rvTravel"
+                    app:layout_constraintTop_toBottomOf="@id/profile_cwTravel"
                     tools:text="Stats"
 
                     />
 
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/profile_rvStat"
+            <ui.base.ContentWrapper
+                    android:id="@+id/profile_cwStat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/paddingMedium"
-                    android:paddingBottom="@dimen/paddingMedium"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:app="@{vm.app}"
                     app:layout_constraintTop_toBottomOf="@id/profile_btnStat"
-                    app:spanCount="2"
-                    tools:itemCount="4"
-                    tools:listitem="@layout/row_stat" />
+                    app:onRetryClick="@{() -> vm.action.onRetryStatListClick()}">
+
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/profile_rvStat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:overScrollMode="never"
+                        android:paddingHorizontal="@dimen/paddingMedium"
+                        android:paddingBottom="@dimen/paddingMedium"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:spanCount="2"
+                        tools:itemCount="4"
+                        tools:listitem="@layout/row_stat" />
+
+            </ui.base.ContentWrapper>
 
             <com.google.android.material.button.MaterialButton
                     android:id="@+id/profile_btnContact"
@@ -214,10 +263,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/paddingLarge"
                     android:layout_marginTop="@dimen/paddingLargeXXX"
+                    android:clickable="false"
                     android:gravity="start|center_vertical"
+                    android:text="@{vm.app.m.contact}"
                     android:textSize="@dimen/textLargeXX"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/profile_rvStat"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_cwStat"
                     tools:text="Contact" />
 
             <LinearLayout
@@ -238,6 +289,7 @@
                         style="@style/GeneralButton.TextButton"
                         android:layout_width="@dimen/dimenButton"
                         android:layout_height="@dimen/dimenButton"
+                        android:onClick="@{() -> vm.action.onEmailClick()}"
                         app:backgroundTint="@color/md_orange_700"
                         app:cornerRadius="@dimen/dimenButtonRadius"
                         app:icon="@drawable/ic_email"
@@ -254,6 +306,7 @@
                         style="@style/GeneralButton.TextButton"
                         android:layout_width="@dimen/dimenButton"
                         android:layout_height="@dimen/dimenButton"
+                        android:onClick="@{() -> vm.action.onPhoneClick()}"
                         app:backgroundTint="@color/md_green_400"
                         app:cornerRadius="@dimen/dimenButtonRadius"
                         app:icon="@drawable/ic_phone"
@@ -269,11 +322,12 @@
                         style="@style/GeneralButton.TextButton"
                         android:layout_width="@dimen/dimenButton"
                         android:layout_height="@dimen/dimenButton"
-                        app:backgroundTint="@color/md_transparent_1000"
+                        android:onClick="@{() -> vm.action.onTwitterClick()}"
+                        app:backgroundTint="@color/md_light_blue_400"
                         app:cornerRadius="@dimen/dimenButtonRadius"
                         app:icon="@drawable/ic_twitter"
-                        app:iconSize="@dimen/dimenButton"
-                        app:iconTint="@null" />
+                        app:iconSize="20dp"
+                        app:iconTint="@color/md_white_1000" />
 
                 <Space
                         android:layout_width="0dp"
@@ -285,6 +339,7 @@
                         style="@style/GeneralButton.TextButton"
                         android:layout_width="@dimen/dimenButton"
                         android:layout_height="@dimen/dimenButton"
+                        android:onClick="@{() -> vm.action.onInstagramClick()}"
                         app:backgroundTint="@color/md_red_400"
                         app:cornerRadius="@dimen/dimenButtonRadius"
                         app:icon="@drawable/ic_instagram"
@@ -301,6 +356,7 @@
                         style="@style/GeneralButton.TextButton"
                         android:layout_width="@dimen/dimenButton"
                         android:layout_height="@dimen/dimenButton"
+                        android:onClick="@{() -> vm.action.onWebsiteClick()}"
                         app:backgroundTint="@color/md_brown_400"
                         app:cornerRadius="@dimen/dimenButtonRadius"
                         app:icon="@drawable/ic_website"

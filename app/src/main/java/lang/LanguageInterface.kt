@@ -38,6 +38,20 @@ interface LanguageInterface {
     //Profile
     val confirm: String
     val cancel: String
+    val noTravels: String
+    val fromTraveli: String
+    val travels: String
+    val stats: String
+    val contact: String
+    val add: String
+    val phoneNumber: String
+    val emailAddress: String
+    val twitterUsername: String
+    val instagramUsername: String
+    val websiteUrl: String
+    val crop: String
+    val pleaseLoginToDoThisAction: String
+    val fileIsInvalid: String
 
     fun paramString(param: String) = "$appName $param"
 }

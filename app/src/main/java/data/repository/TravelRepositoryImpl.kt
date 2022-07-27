@@ -6,7 +6,6 @@ import data.remote.DataState
 import data.remote.TravelApi
 import data.remote.dto.*
 import domain.model.Banner
-import domain.model.Country
 import domain.model.Travel
 import domain.model.TravelPreview
 import domain.repository.TraveliRepository
@@ -23,7 +22,6 @@ class TravelRepositoryImpl(
     private var trending: List<TravelPreview>? = null
     private var newTravelPreview: List<TravelPreview>? = null
     private var banner: Banner? = null
-    private var countries: List<Country>? = null
 
     override suspend fun getTrending(): DataState<List<TravelPreview>> {
         trending?.let { return DataState.Success(it) }
@@ -78,6 +76,4 @@ class TravelRepositoryImpl(
             is DataState.Success -> DataState.Loading
         }
     }
-
-
 }

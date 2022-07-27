@@ -4,19 +4,10 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import data.remote.MiscApi
-import data.remote.PhotoApi
-import data.remote.TravelApi
-import data.remote.UserApi
+import data.remote.*
 import data.remote.dto.*
-import data.repository.PhotoRepositoryImpl
-import data.repository.RepositoryImpl
-import data.repository.TravelRepositoryImpl
-import data.repository.UserRepositoryImpl
-import domain.repository.PhotoRepository
-import domain.repository.Repository
-import domain.repository.TraveliRepository
-import domain.repository.UserRepository
+import data.repository.*
+import domain.repository.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import main.ApplicationClass
 import util.PrefManager
@@ -47,7 +38,6 @@ object RepositoryModule {
         travelMapper
     )
 
-
     @Provides
     @Singleton
     fun providesUserRepository(
@@ -58,6 +48,7 @@ object RepositoryModule {
         userPreviewMapper: UserPreviewMapper,
         userMapper: UserMapper,
         statMapper: StatMapper,
+        travelPreviewMapper: TravelPreviewMapper,
     ): UserRepository = UserRepositoryImpl(
         api,
         app,
@@ -66,14 +57,29 @@ object RepositoryModule {
         userPreviewMapper,
         userMapper,
         statMapper,
+        travelPreviewMapper,
     )
 
     @Provides
     @Singleton
-    fun provideRepository(
+    fun providesTransactionRepository(
+        app: ApplicationClass,
+        networkErrorMapper: NetworkErrorMapper,
+        transactionApi: TransactionApi,
+        dataTransactionMapper: DataDataTransactionMapper,
+    ): TransactionRepository = TransactionRepositoryImpl(
+        app,
+        networkErrorMapper,
+        transactionApi,
+        dataTransactionMapper
+    )
+
+    @Provides
+    @Singleton
+    fun provideMiscRepository(
         app: ApplicationClass,
         miscApi: MiscApi,
         networkErrorMapper: NetworkErrorMapper,
         countryMapper: CountryMapper
-    ): Repository = RepositoryImpl(miscApi, app, networkErrorMapper, countryMapper)
+    ): MiscRepository = MiscRepositoryImpl(miscApi, app, networkErrorMapper, countryMapper)
 }

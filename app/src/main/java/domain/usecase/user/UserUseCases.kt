@@ -1,8 +1,13 @@
 package domain.usecase.user
 
 data class UserUseCases(
-    val searchUser: SearchUser,
-    val getUserStat: GetUserStat,
-    val getMe: GetMe,
-    val getUser: GetUser,
+    val searchUserUseCase: SearchUserUseCase,
+    val getUserStatUseCase: GetUserStatUseCase,
+    val getMeUseCase: GetMeUseCase,
+    val getUserUseCase: GetUserUseCase,
+    val getUserTravelListUseCase: GetUserTravelListUseCase,
+    val updateUserInfoUseCase: UpdateUserInfoUseCase,
+    val updateCoverUseCase: UpdateCoverUseCase,
+    val updateAvatarUseCase: UpdateAvatarUseCase,
+    val updateContactUseCase: UpdateContactUseCase,
 )

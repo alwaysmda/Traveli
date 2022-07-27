@@ -11,7 +11,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.xodus.templatefive"
+        applicationId "com.xodus.traveli"
         minSdk 21
         targetSdk 31
         versionCode 1
@@ -32,11 +32,11 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
     buildFeatures {
         dataBinding true
@@ -84,6 +84,7 @@ dependencies {
 
     //Picasso
     implementation "com.squareup.picasso:picasso:2.71828"
+    implementation "io.coil-kt:coil:2.1.0"
 
     //Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.0"
@@ -97,4 +98,7 @@ dependencies {
 
     //Data Store
     implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    //Crop Image
+    implementation "com.github.CanHub:Android-Image-Cropper:4.3.1"
 }

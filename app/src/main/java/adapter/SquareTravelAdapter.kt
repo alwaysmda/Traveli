@@ -6,8 +6,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.xodus.templatefive.R
-import com.xodus.templatefive.databinding.RowSquareTravelBinding
+import com.xodus.traveli.R
+import com.xodus.traveli.databinding.RowSquareTravelBinding
 import domain.model.TravelPreview
 import ui.base.BaseActivity
 

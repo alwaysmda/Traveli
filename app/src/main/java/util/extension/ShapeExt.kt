@@ -1,7 +1,7 @@
 package util.extension
 
 import android.graphics.drawable.GradientDrawable
-import com.xodus.templatefive.R
+import com.xodus.traveli.R
 
 fun getShape(
     orientation: GradientDrawable.Orientation,

@@ -6,21 +6,22 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.media3.exoplayer.ExoPlayer
-import com.xodus.templatefive.BuildConfig
+import com.xodus.traveli.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import domain.repository.PhotoRepository
-import domain.repository.Repository
-import domain.repository.TraveliRepository
-import domain.repository.UserRepository
+import domain.repository.*
 import domain.usecase.country.CountryUseCases
 import domain.usecase.country.GetCountryListUseCase
 import domain.usecase.photo.*
 import domain.usecase.template.Template
 import domain.usecase.template.TemplateUseCases
+import domain.usecase.transaction.ChargeUseCase
+import domain.usecase.transaction.CheckoutUseCase
+import domain.usecase.transaction.GetTransactionListUseCase
+import domain.usecase.transaction.TransactionUseCases
 import domain.usecase.travel.*
 import domain.usecase.user.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -98,20 +99,35 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun providesCountryUseCases(repository: Repository): CountryUseCases {
+    fun providesCountryUseCases(miscRepository: MiscRepository): CountryUseCases {
         return CountryUseCases(
-            GetCountryListUseCase(repository)
+            GetCountryListUseCase(miscRepository)
         )
     }
 
     @Singleton
     @Provides
-    fun providesUserUseCases(userRepository: UserRepository): UserUseCases {
+    fun provideUserUseCases(app: ApplicationClass, userRepository: UserRepository, prefManager: PrefManager): UserUseCases {
         return UserUseCases(
-            SearchUser(userRepository),
-            GetUserStat(userRepository),
-            GetMe(userRepository),
-            GetUser(userRepository),
+            SearchUserUseCase(userRepository),
+            GetUserStatUseCase(userRepository),
+            GetMeUseCase(app, userRepository, prefManager),
+            GetUserUseCase(userRepository),
+            GetUserTravelListUseCase(userRepository),
+            UpdateUserInfoUseCase(app, userRepository, prefManager),
+            UpdateCoverUseCase(app, userRepository, prefManager),
+            UpdateAvatarUseCase(app, userRepository, prefManager),
+            UpdateContactUseCase(app, userRepository, prefManager),
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideTransactionUseCases(app: ApplicationClass, transactionRepository: TransactionRepository, prefManager: PrefManager): TransactionUseCases {
+        return TransactionUseCases(
+            GetTransactionListUseCase(app, transactionRepository, prefManager),
+            ChargeUseCase(app, transactionRepository, prefManager),
+            CheckoutUseCase(app, transactionRepository, prefManager),
         )
     }
 }

@@ -75,7 +75,7 @@ class HomeViewModel @Inject constructor(
     update repo and usecases
     * */
     private fun getMe() {
-        userUseCases.getMe().onEach {
+        userUseCases.getMeUseCase().onEach {
             when (it) {
                 is DataState.Failure -> getData()
                 is DataState.Loading -> _event.send(HomeEvents.BannerLoading)

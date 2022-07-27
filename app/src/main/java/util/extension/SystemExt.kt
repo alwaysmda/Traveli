@@ -4,11 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ActivityManager
 import android.app.Application
-import android.content.ClipData
-import android.content.ClipDescription
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.res.Resources
@@ -30,8 +26,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.xodus.templatefive.BuildConfig
-import com.xodus.templatefive.R
+import com.xodus.traveli.BuildConfig
+import com.xodus.traveli.R
 import main.ApplicationClass
 import java.io.File
 import java.util.*

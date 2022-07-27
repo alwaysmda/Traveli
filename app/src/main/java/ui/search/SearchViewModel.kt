@@ -55,7 +55,7 @@ class SearchViewModel @Inject constructor(
             when (tabIndex) {
                 USER_TAB   -> {
                     if (text == lastUserQuery) return@launch
-                    userUseCases.searchUser(text, 1).onEach { //TODO paginate
+                    userUseCases.searchUserUseCase(text, 1).onEach { //TODO paginate
                         when (it) {
                             is DataState.Failure -> {
                                 if (tabIndex == USER_TAB) _event.send(SearchEvents.UserError(it.message))

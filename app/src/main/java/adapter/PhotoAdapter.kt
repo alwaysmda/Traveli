@@ -8,9 +8,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.xodus.templatefive.R
-import com.xodus.templatefive.databinding.RowPhotoBinding
-import com.xodus.templatefive.databinding.RowPhotoStateBinding
+import com.xodus.traveli.R
+import com.xodus.traveli.databinding.RowPhotoBinding
+import com.xodus.traveli.databinding.RowPhotoStateBinding
 import domain.model.Photo
 import main.ApplicationClass
 

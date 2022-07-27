@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.xodus.templatefive">
+        xmlns:tools="http://schemas.android.com/tools"
+        package="com.xodus.traveli">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="29"
-        tools:ignore="ScopedStorage" />
+            android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+            android:maxSdkVersion="29"
+            tools:ignore="ScopedStorage" />
 
     <queries>
         <package android:name="com.android.vending" />
@@ -33,15 +33,19 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
         <activity
-            android:name="ui.base.BaseActivity"
-            android:exported="true">
+                android:name="ui.base.BaseActivity"
+                android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+                android:name="com.canhub.cropper.CropImageActivity"
+                android:theme="@style/Base.Theme.AppCompat" />
     </application>
 
 </manifest>

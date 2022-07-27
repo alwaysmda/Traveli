@@ -4,9 +4,10 @@ import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import com.xodus.templatefive.R
-import com.xodus.templatefive.databinding.ActivityBaseBinding
+import com.xodus.traveli.R
+import com.xodus.traveli.databinding.ActivityBaseBinding
 import dagger.hilt.android.AndroidEntryPoint
+import util.extension.snack
 
 @AndroidEntryPoint
 class BaseActivity : ThemeAwareActivity() {
@@ -43,6 +44,12 @@ class BaseActivity : ThemeAwareActivity() {
         super.onDestroy()
         //FIXME: uncommenting this line causes crash after changing language (or maybe also rotate)
         //        _binding = null
+    }
+
+    fun snack(message: String?) {
+        message?.let {
+            snack(binding.root, it)
+        }
     }
 
     fun setNavigationTabs() {

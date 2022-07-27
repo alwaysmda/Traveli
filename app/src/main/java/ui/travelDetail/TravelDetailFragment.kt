@@ -9,8 +9,8 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.xodus.templatefive.R
-import com.xodus.templatefive.databinding.FragmentTravelDetailBinding
+import com.xodus.traveli.R
+import com.xodus.traveli.databinding.FragmentTravelDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 import ui.base.BaseFragment
 

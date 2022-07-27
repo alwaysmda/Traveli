@@ -4,9 +4,10 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
-import com.xodus.templatefive.BuildConfig
+import com.xodus.traveli.BuildConfig
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
 import main.ApplicationClass
@@ -18,29 +19,56 @@ class PrefManager(val app: ApplicationClass) {
         return runBlocking { app.dataStore.data.catch { emit(emptyPreferences()) }.map { it[stringPreferencesKey(key)] }.first() ?: default }
     }
 
+    fun getStringPrefFlow(key: String, default: String? = null) = flow {
+        app.dataStore.data.catch { emit(default) }.map { it[stringPreferencesKey(key)] }.first()
+    }
+
     fun getBooleanPref(key: String, default: Boolean = false): Boolean {
         return runBlocking { app.dataStore.data.catch { emit(emptyPreferences()) }.map { it[booleanPreferencesKey(key)] }.first() ?: default }
+    }
+
+    fun getBooleanPrefFlow(key: String, default: Boolean = false) = flow {
+        app.dataStore.data.catch { emit(default) }.map { it[booleanPreferencesKey(key)] }.first()
     }
 
     fun getIntPref(key: String, default: Int = 0): Int {
         return runBlocking { app.dataStore.data.catch { emit(emptyPreferences()) }.map { it[intPreferencesKey(key)] }.first() ?: default }
     }
 
+    fun getIntPrefFlow(key: String, default: Int = 0) = flow {
+        app.dataStore.data.catch { emit(default) }.map { it[intPreferencesKey(key)] }.first()
+    }
+
     fun getLongPref(key: String, default: Long = 0L): Long {
         return runBlocking { app.dataStore.data.catch { emit(emptyPreferences()) }.map { it[longPreferencesKey(key)] }.first() ?: default }
+    }
+
+    fun getLongPrefFlow(key: String, default: Long = 0L) = flow {
+        app.dataStore.data.catch { emit(default) }.map { it[longPreferencesKey(key)] }.first()
     }
 
     fun getFloatPref(key: String, default: Float = 0F): Float {
         return runBlocking { app.dataStore.data.catch { emit(emptyPreferences()) }.map { it[floatPreferencesKey(key)] }.first() ?: default }
     }
 
-    fun setPref(key: String, value: Any) {
+    fun getFloatPrefFlow(key: String, default: Float = 0F) = flow {
+        app.dataStore.data.catch { emit(default) }.map { it[floatPreferencesKey(key)] }.first()
+    }
+
+    fun setPref(key: String, value: Any?) {
         when (value) {
             is String  -> runBlocking { app.dataStore.edit { it[stringPreferencesKey(key)] = value } }
             is Boolean -> runBlocking { app.dataStore.edit { it[booleanPreferencesKey(key)] = value } }
             is Int     -> runBlocking { app.dataStore.edit { it[intPreferencesKey(key)] = value } }
             is Long    -> runBlocking { app.dataStore.edit { it[longPreferencesKey(key)] = value } }
             is Float   -> runBlocking { app.dataStore.edit { it[floatPreferencesKey(key)] = value } }
+            null       -> {
+                runBlocking { app.dataStore.edit { it.remove(stringPreferencesKey(key)) } }
+                runBlocking { app.dataStore.edit { it.remove(booleanPreferencesKey(key)) } }
+                runBlocking { app.dataStore.edit { it.remove(intPreferencesKey(key)) } }
+                runBlocking { app.dataStore.edit { it.remove(longPreferencesKey(key)) } }
+                runBlocking { app.dataStore.edit { it.remove(floatPreferencesKey(key)) } }
+            }
         }
     }
     //    private val pref: SharedPreferences = appClass.getSharedPreferences(CON_PREF_NAME, Context.MODE_PRIVATE)

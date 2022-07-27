@@ -6,6 +6,8 @@ data class User(
     val avatar: String,
     val bio: String,
     val cover: String,
+    val country: Country,
+    val city: String,
     val hometown: String,
     val contact: Contact,
 )

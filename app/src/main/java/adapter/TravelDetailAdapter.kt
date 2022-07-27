@@ -9,8 +9,8 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.xodus.templatefive.R
-import com.xodus.templatefive.databinding.*
+import com.xodus.traveli.R
+import com.xodus.traveli.databinding.*
 import domain.model.TravelDetail
 import domain.model.TravelDetail.Companion.VIEW_TYPE_BOOKMARK
 import domain.model.TravelDetail.Companion.VIEW_TYPE_COVER

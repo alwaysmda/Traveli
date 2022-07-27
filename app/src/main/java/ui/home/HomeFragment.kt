@@ -10,8 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.squareup.picasso.Picasso
-import com.xodus.templatefive.R
-import com.xodus.templatefive.databinding.FragmentHomeBinding
+import com.xodus.traveli.R
+import com.xodus.traveli.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import ui.base.BaseFragment
 import util.extension.log
@@ -175,10 +175,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
         trendingTravelAdapter = SquareTravelAdapter(baseActivity) { travel, pos ->
             viewModel.action.onTravelItemClick(travel, pos)
         }
-        subBannerAdapter = TravelAdapter(baseActivity)
+        subBannerAdapter = TravelAdapter(baseActivity) { position, item -> //TODO
+        }
         countryAdapter = CountryAdapter(baseActivity)
         newTravelAdapter = SquareTravelAdapter(baseActivity) { travel, pos ->
-
         }
         binding.apply {
             rvTrendingTravel.adapter = trendingTravelAdapter

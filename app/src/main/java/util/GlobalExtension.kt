@@ -43,8 +43,8 @@ package util
 //import androidx.core.content.ContextCompat
 //import androidx.lifecycle.MutableLiveData
 //import com.google.android.material.snackbar.Snackbar
-//import com.xodus.templatefive.BuildConfig
-//import com.xodus.templatefive.R
+//import com.xodus.traveli.BuildConfig
+//import com.xodus.traveli.R
 //import main.ApplicationClass
 //import org.json.JSONArray
 //import org.json.JSONException

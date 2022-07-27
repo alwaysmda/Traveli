@@ -5,6 +5,7 @@ import com.google.gson.JsonParser
 import data.remote.dto.NetworkErrorDto
 import data.remote.dto.NetworkErrorMapper
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
@@ -16,7 +17,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 import java.io.OutputStream
-
+import kotlin.random.Random
 
 abstract class
 ApiResponseHandler(
@@ -24,8 +25,6 @@ ApiResponseHandler(
     private val networkErrorMapper: NetworkErrorMapper
 ) {
     fun <T> call(response: Response<T>): DataState<T> {
-        return DataState.Loading
-
         try {
             if (response.isSuccessful) {
                 return DataState.Success(response.body()!!)
@@ -49,6 +48,7 @@ ApiResponseHandler(
     }
 
     suspend fun <T> call(request: suspend () -> Response<T>): DataState<T> {
+        delay(Random.nextLong(2, 7) * 500)
         return DataState.Loading
         try {
             val response = request()

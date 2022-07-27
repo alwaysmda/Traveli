@@ -7,12 +7,11 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.xodus.templatefive.R
-import com.xodus.templatefive.databinding.FragmentTemplateBindingBinding
+import com.xodus.traveli.R
+import com.xodus.traveli.databinding.FragmentTemplateBindingBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import ui.base.BaseFragment
-
 import util.extension.snack
 
 @AndroidEntryPoint

@@ -17,5 +17,4 @@ interface TraveliRepository {
 
     suspend fun getBanner(): DataState<Banner>
 
-
 }

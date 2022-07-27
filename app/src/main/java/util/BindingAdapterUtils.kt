@@ -7,26 +7,33 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
+import coil.load
+import coil.size.Scale
 import com.google.android.material.textfield.TextInputLayout
-import com.squareup.picasso.NetworkPolicy
-import com.squareup.picasso.Picasso
 
 @BindingAdapter("imageUrl")
 fun imageUrl(imageView: ImageView, url: String?) {
     if (url.isNullOrEmpty().not()) {
-        Picasso.get().load(url)
-
-            //            .placeholder(R.color.md_grey_300).error(R.color.md_grey_500).fit().centerInside()
-            .into(imageView)
+        imageView.load(url) {
+            crossfade(true)
+            scale(Scale.FILL)
+        }
+        //        Picasso.get().load(url)
+        //            //            .placeholder(R.color.md_grey_300).error(R.color.md_grey_500).fit().centerInside()
+        //            .into(imageView)
     }
 }
 
 @BindingAdapter("imageUrl")
 fun imageUrl(imageView: ImageView, drawable: Int?) {
     drawable?.let {
-        Picasso.get().load(it)
-            //            .placeholder(R.color.md_grey_300).error(R.color.md_grey_500).fit().centerInside()
-            .into(imageView)
+        imageView.load(it) {
+            crossfade(true)
+            scale(Scale.FILL)
+        }
+        //        Picasso.get().load(it)
+        //            //            .placeholder(R.color.md_grey_300).error(R.color.md_grey_500).fit().centerInside()
+        //            .into(imageView)
     }
 }
 

@@ -2,7 +2,7 @@ package lang
 
 import android.graphics.Typeface
 import androidx.core.content.res.ResourcesCompat
-import com.xodus.templatefive.R
+import com.xodus.traveli.R
 import main.ApplicationClass
 
 class LanguageEN(private val app: ApplicationClass) : LanguageInterface {
@@ -36,4 +36,18 @@ class LanguageEN(private val app: ApplicationClass) : LanguageInterface {
     //Profile
     override val confirm: String = "Confirm"
     override val cancel: String = "Cancel"
+    override val noTravels: String = "No Travels"
+    override val fromTraveli: String = "From Traveli"
+    override val travels: String = "Travels"
+    override val stats: String = "Stats"
+    override val contact: String = "Contact"
+    override val add: String = "Add"
+    override val phoneNumber: String = "Phone Number"
+    override val emailAddress: String = "Email Address"
+    override val twitterUsername: String = "Twitter Username"
+    override val instagramUsername: String = "Instagram Username"
+    override val websiteUrl: String = "Website Url"
+    override val crop: String = "Crop"
+    override val pleaseLoginToDoThisAction: String = "Please login to do this action."
+    override val fileIsInvalid: String = "File is invalid."
 }

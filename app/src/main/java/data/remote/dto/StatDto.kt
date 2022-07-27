@@ -11,7 +11,7 @@ data class StatDto(
             return StatDto("cities", 10000)
         }
 
-        fun getFakeList(size: Int = 10): ArrayList<StatDto> {
+        fun getFakeList(size: Int = 4): ArrayList<StatDto> {
             val list = arrayListOf<StatDto>()
             repeat(size) {
                 list.add(getFake())

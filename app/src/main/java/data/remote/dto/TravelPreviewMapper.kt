@@ -12,4 +12,7 @@ class TravelPreviewMapper @Inject constructor() : EntityMapper<TravelPreviewDto,
     override fun toEntity(model: TravelPreview): TravelPreviewDto {
         return TravelPreviewDto(model.id, model.name, model.image)
     }
+
+    fun fromEntityList(dtoList: List<TravelPreviewDto>): List<TravelPreview> =
+        dtoList.map { toDomainModel(it) }
 }

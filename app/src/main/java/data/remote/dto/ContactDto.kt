@@ -12,11 +12,11 @@ data class ContactDto(
     companion object {
         fun getFake(): ContactDto {
             return ContactDto(
-                "+989195030142",
-                "alwaysmda@gmail.com",
-                "google",
-                "google",
-                "gcoapps.com"
+                null,
+                null,
+                null,
+                null,
+                null,
             )
         }
 

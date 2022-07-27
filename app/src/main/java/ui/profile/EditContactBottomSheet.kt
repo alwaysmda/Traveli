@@ -1,17 +1,20 @@
 package ui.profile
 
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.library.baseAdapters.BR
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.xodus.templatefive.R
-import com.xodus.templatefive.databinding.SheetEditContactBinding
+import com.xodus.traveli.R
+import com.xodus.traveli.databinding.SheetEditContactBinding
+import domain.model.ContactItem
 
-class EditContactBottomSheet(private val viewModel: ProfileViewModel, private val title: String, private val content: String?, private val onPositive: (String?) -> Unit) : BottomSheetDialogFragment() {
+class EditContactBottomSheet(private val viewModel: ProfileViewModel, private val content: ContactItem, private val onPositive: (ContactItem) -> Unit) : BottomSheetDialogFragment() {
     private var _binding: SheetEditContactBinding? = null
     val binding: SheetEditContactBinding get() = _binding!!
 
@@ -26,12 +29,15 @@ class EditContactBottomSheet(private val viewModel: ProfileViewModel, private va
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            editContactTvTitle.text = title
-            editContactEtContent.setText(content)
+            editContactTvTitle.text = content.title
+            editContactEtContent.setText(content.value)
+            editContactIvIcon.setImageResource(content.icon)
+            editContactIvIcon.setColorFilter(ContextCompat.getColor(requireContext(), content.color), PorterDuff.Mode.SRC_IN)
             templateBtnPositive.setOnClickListener {
                 showError(null)
                 showLoading(true)
-                onPositive(editContactEtContent.text?.toString())
+                val value = editContactEtContent.text.toString()
+                onPositive(content.copy(value = value.ifBlank { null }))
             }
             templateBtnNegative.setOnClickListener {
                 dismiss()

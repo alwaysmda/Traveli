@@ -18,7 +18,6 @@ object Constant {
     const val USER_TAB = 0
     const val TRAVEL_TAB = 1
 
-
     enum class Languages(val value: String) {
         FA("FA"),
         EN("EN"),
@@ -28,6 +27,14 @@ object Constant {
     enum class Themes(val value: String) {
         DARK_BLUE("DARK_BLUE"),
         LIGHT_PINK("LIGHT_PINK"),
-        DEFAULT_THEME("DARK_BLUE"),
+        DEFAULT_THEME("LIGHT_PINK"),
+    }
+
+    enum class ContactType {
+        Phone,
+        Email,
+        Twitter,
+        Instagram,
+        Website,
     }
 }

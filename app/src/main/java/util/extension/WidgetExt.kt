@@ -1,11 +1,7 @@
 package util.extension
 
 import android.animation.ValueAnimator
-import android.graphics.Paint
-import android.graphics.PorterDuff
-import android.graphics.RadialGradient
-import android.graphics.Shader
-import android.graphics.Typeface
+import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Handler
@@ -21,7 +17,6 @@ import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
-import main.ApplicationClass
 
 fun getColor(view: ImageView, x: Int, y: Int): Int {
     return (view.drawable as BitmapDrawable).bitmap.getPixel(x, y)
@@ -231,4 +226,16 @@ fun TextView.bold() {
 
 fun TextView.boldRemove() {
     paintFlags = paintFlags and Paint.FAKE_BOLD_TEXT_FLAG.inv()
+}
+
+fun ImageView.grayscale() {
+    val matrix = ColorMatrix()
+    matrix.setSaturation(0f)
+    colorFilter = ColorMatrixColorFilter(matrix)
+}
+
+fun ImageView.saturation(saturation: Float) {
+    val matrix = ColorMatrix()
+    matrix.setSaturation(saturation)
+    colorFilter = ColorMatrixColorFilter(matrix)
 }

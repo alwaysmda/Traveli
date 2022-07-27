@@ -11,8 +11,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
-import com.xodus.templatefive.R
-import com.xodus.templatefive.databinding.ContentWrapperBinding
+import com.xodus.traveli.R
+import com.xodus.traveli.databinding.ContentWrapperBinding
 import main.ApplicationClass
 
 class ContentWrapper @JvmOverloads constructor(
@@ -23,8 +23,10 @@ class ContentWrapper @JvmOverloads constructor(
 
     //
     private lateinit var app: ApplicationClass
-    private var onRefreshClicked: () -> (Unit) = {}
-
+    private var emptyMessage: String = ""
+    private var emptyIcon: Int = R.drawable.ic_sad
+    private var onRetryClickListener: ContentWrapperInterface? = null
+    //    private var onRetryClicked: () -> (Unit) = {}
     //
     private var status: WrapperStatus = WrapperStatus.Loading
     private val contentList = arrayListOf<View?>()
@@ -33,34 +35,35 @@ class ContentWrapper @JvmOverloads constructor(
         val bundle = Bundle()
         when (status) {
             is WrapperStatus.Loading -> {
-                bundle.putInt("STATUS", 0)
-            }
-            is WrapperStatus.Failure -> {
-                bundle.putInt("STATUS", 1)
-                bundle.putString("MESSAGE", (status as WrapperStatus.Failure).message)
+                bundle.putInt(ARG_STATUS, 0)
             }
             is WrapperStatus.Success -> {
-                bundle.putInt("STATUS", 2)
+                bundle.putInt(ARG_STATUS, 1)
+            }
+            is WrapperStatus.Empty   -> {
+                bundle.putInt(ARG_STATUS, 2)
+            }
+            is WrapperStatus.Failure -> {
+                bundle.putInt(ARG_STATUS, 3)
+                bundle.putString(ARG_MESSAGE, (status as WrapperStatus.Failure).message)
             }
         }
         val superState = super.onSaveInstanceState()
-        bundle.putParcelable("SUPER", superState)
+        bundle.putParcelable(ARG_SUPER, superState)
         return bundle
     }
 
     override fun onRestoreInstanceState(state: Parcelable?) {
         if (state is Bundle) {
-            val statusInt = state.getInt("STATUS")
+            val statusInt = state.getInt(ARG_STATUS)
             status = when (statusInt) {
                 0    -> WrapperStatus.Loading
-                1    -> {
-                    val message = state.getString("MESSAGE") ?: ""
-                    WrapperStatus.Failure(message)
-                }
-                else -> WrapperStatus.Success
+                1    -> WrapperStatus.Success
+                2    -> WrapperStatus.Empty
+                else -> WrapperStatus.Failure(state.getString(ARG_MESSAGE) ?: "")
             }
             setStatus(status)
-            val superState = state.getParcelable<Parcelable>("SUPER")
+            val superState = state.getParcelable<Parcelable>(ARG_SUPER)
             super.onRestoreInstanceState(superState)
         } else {
             super.onRestoreInstanceState(state)
@@ -70,9 +73,14 @@ class ContentWrapper @JvmOverloads constructor(
     init {
         if (isInEditMode.not()) {
             _binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.content_wrapper, this, true)
-            binding.cwBtnRefresh.setOnClickListener {
-                onRefreshClicked()
+            binding.cwBtnRetry.setOnClickListener {
+                //                onRetryClicked()
+                onRetryClickListener?.onRetryClick()
             }
+            val a = context.obtainStyledAttributes(attrs, R.styleable.ContentWrapper, defStyleAttr, 0)
+            emptyIcon = a.getResourceId(R.styleable.ContentWrapper_emptyIcon, R.drawable.ic_sad)
+            a.recycle()
+            binding.cwIvEmpty.setImageResource(emptyIcon)
         }
     }
 
@@ -93,12 +101,6 @@ class ContentWrapper @JvmOverloads constructor(
         //        }
     }
 
-    sealed class WrapperStatus {
-        object Loading : WrapperStatus()
-        class Failure(val message: String) : WrapperStatus()
-        object Success : WrapperStatus()
-    }
-
     fun setStatus(wrapperStatus: WrapperStatus) {
         status = wrapperStatus
         if (isInEditMode) {
@@ -109,23 +111,50 @@ class ContentWrapper @JvmOverloads constructor(
             cwPbContentLoading2.isVisible = status is WrapperStatus.Loading
             cwFlRetry.isVisible = status is WrapperStatus.Failure
             cwTvError.text = (status as? WrapperStatus.Failure)?.message
+            cwFlEmpty.isVisible = status is WrapperStatus.Empty
         }
         contentList.forEach {
             it?.isVisible = status is WrapperStatus.Success
         }
     }
 
+    fun updateEmptyMessage(message: String) {
+        emptyMessage = message
+        binding.cwTvEmpty.text = emptyMessage
+    }
+
+    sealed class WrapperStatus {
+        object Loading : WrapperStatus()
+        object Success : WrapperStatus()
+        object Empty : WrapperStatus()
+        class Failure(val message: String) : WrapperStatus()
+    }
+
+    interface ContentWrapperInterface {
+        fun onRetryClick()
+    }
+
     companion object {
+        const val ARG_SUPER: String = "ARG_SUPER"
+        const val ARG_STATUS: String = "ARG_STATUS"
+        const val ARG_MESSAGE: String = "ARG_MESSAGE"
+
         @JvmStatic
-        @BindingAdapter("onRefreshClick")
-        fun ContentWrapper.setOnRefreshClick(onRefreshClickListener: () -> (Unit)) {
-            this.onRefreshClicked = onRefreshClickListener
+        @BindingAdapter("onRetryClick")
+        fun ContentWrapper.setOnRetryClick(onRetryClickListener: ContentWrapperInterface) {
+            this.onRetryClickListener = onRetryClickListener
         }
 
         @JvmStatic
         @BindingAdapter("app")
         fun ContentWrapper.setApp(app: ApplicationClass) {
             this.app = app
+        }
+
+        @JvmStatic
+        @BindingAdapter("emptyMessage")
+        fun ContentWrapper.setEmptyMessage(message: String) {
+            this.updateEmptyMessage(message)
         }
     }
 }
