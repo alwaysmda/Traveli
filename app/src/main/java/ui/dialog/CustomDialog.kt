@@ -15,8 +15,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
-import com.xodus.templatefive.R
-import com.xodus.templatefive.databinding.DialogCustomBinding
+import com.xodus.traveli.R
+import com.xodus.traveli.databinding.DialogCustomBinding
 import main.ApplicationClass
 import util.extension.getScreenWidth
 

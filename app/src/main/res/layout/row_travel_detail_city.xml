@@ -7,7 +7,6 @@
         android:id="@+id/rv_city"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/paddingLarge"
         android:layout_marginTop="@dimen/paddingLarge"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

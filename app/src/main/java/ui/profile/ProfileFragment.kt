@@ -5,8 +5,8 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.xodus.templatefive.R
-import com.xodus.templatefive.databinding.FragmentProfileBinding
+import com.xodus.traveli.R
+import com.xodus.traveli.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import ui.base.BaseFragment

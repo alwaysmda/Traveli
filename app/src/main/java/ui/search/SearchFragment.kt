@@ -12,8 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
-import com.xodus.templatefive.R
-import com.xodus.templatefive.databinding.FragmentSearchBinding
+import com.xodus.traveli.R
+import com.xodus.traveli.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 import ui.base.BaseFragment
 import util.extension.changeChildFont

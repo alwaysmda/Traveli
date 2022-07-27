@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import com.xodus.templatefive.R
-import com.xodus.templatefive.databinding.ActivityBaseBinding
+import com.xodus.traveli.R
+import com.xodus.traveli.databinding.ActivityBaseBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

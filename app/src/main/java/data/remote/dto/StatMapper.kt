@@ -1,6 +1,6 @@
 package data.remote.dto
 
-import com.xodus.templatefive.R
+import com.xodus.traveli.R
 import domain.model.Stat
 import main.ApplicationClass
 import okhttp3.internal.toLongOrDefault

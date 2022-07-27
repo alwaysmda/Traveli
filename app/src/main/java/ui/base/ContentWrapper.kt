@@ -11,8 +11,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
-import com.xodus.templatefive.R
-import com.xodus.templatefive.databinding.ContentWrapperBinding
+import com.xodus.traveli.R
+import com.xodus.traveli.databinding.ContentWrapperBinding
 import main.ApplicationClass
 
 class ContentWrapper @JvmOverloads constructor(

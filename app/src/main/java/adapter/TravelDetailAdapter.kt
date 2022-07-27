@@ -3,14 +3,17 @@ package adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import androidx.media3.common.C
+import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.xodus.templatefive.R
-import com.xodus.templatefive.databinding.*
+import com.xodus.traveli.R
+import com.xodus.traveli.databinding.*
 import domain.model.TravelDetail
 import domain.model.TravelDetail.Companion.VIEW_TYPE_BOOKMARK
 import domain.model.TravelDetail.Companion.VIEW_TYPE_CITIES
@@ -23,7 +26,9 @@ import domain.model.TravelDetail.Companion.VIEW_TYPE_VIDEO
 import ui.base.BaseActivity
 
 
-class TravelDetailAdapter(private val activity: BaseActivity, private val exoPlayer: ExoPlayer, private val onLinkClick: (link: String) -> Unit, private val onVideoFullScreenClick: () -> Unit) : ListAdapter<TravelDetail, RecyclerView.ViewHolder>(DiffCallback()) {
+class TravelDetailAdapter(private val activity: BaseActivity, private val exoPlayer: ExoPlayer, private val onLinkClick: (link: String) -> Unit, private val onPlayerViewClick: (lastPlayedVideoIndex: Int, position: Int) -> Unit) : ListAdapter<TravelDetail, RecyclerView.ViewHolder>(DiffCallback()) {
+
+    private var lastPlayedVideoIndex = -1
 
 
     inner class CoverViewHolder(private val binding: RowTravelDetailCoverBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -69,13 +74,27 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
         }
     }
 
-    inner class VideoViewHolder(private val binding: RowTravelDetailVideoBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class VideoViewHolder(val binding: RowTravelDetailVideoBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(travelDetail: TravelDetail.Video) {
             binding.apply {
-                playerView.player = exoPlayer
-                playerView.setFullscreenButtonClickListener {}
                 tvTitle.isVisible = travelDetail.title.isNullOrEmpty().not()
+                val playPauseBtn = playerView.findViewById<AppCompatImageButton>(androidx.media3.ui.R.id.exo_play_pause)
+                playerView.setOnClickListener {
+                    onPlayerViewClick(lastPlayedVideoIndex, bindingAdapterPosition)
+                    playerView.player = exoPlayer
+                    dispatchPlay(exoPlayer)
+
+                }
+                playPauseBtn.setOnClickListener {
+                    val state = exoPlayer.playbackState
+                    if (state == Player.STATE_IDLE || state == Player.STATE_ENDED || exoPlayer.playWhenReady.not()) {
+                        dispatchPlay(exoPlayer)
+                    } else {
+                        dispatchPause(exoPlayer)
+                    }
+                }
                 tvDescription.isVisible = travelDetail.description.isNullOrEmpty().not()
+
             }
 
 
@@ -235,4 +254,47 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
             oldItem == newItem
     }
 
+
+    private fun dispatchPlay(player: Player) {
+        val state = player.playbackState
+        if (state == Player.STATE_IDLE) {
+            player.prepare()
+        } else if (state == Player.STATE_ENDED) {
+            player.seekTo(player.currentMediaItemIndex, C.TIME_UNSET)
+        }
+        player.play()
+    }
+
+    private fun dispatchPause(player: Player) {
+        player.pause()
+    }
+
+
+    fun getLastPlayedVideoIndex() = lastPlayedVideoIndex
+
+    fun setLastPlayedVideoIndex(lastPlayedVideoIndex: Int) {
+        this.lastPlayedVideoIndex = lastPlayedVideoIndex
+    }
+
+
 }
+
+//
+//private void dispatchPlayPause(Player player) {
+//    @State int state = player.getPlaybackState();
+//    if (state == Player.STATE_IDLE || state == Player.STATE_ENDED || !player.getPlayWhenReady()) {
+//        dispatchPlay(player);
+//    } else {
+//        dispatchPause(player);
+//    }
+//}
+//
+//private void dispatchPlay(Player player) {
+//    @State int state = player.getPlaybackState();
+//    if (state == Player.STATE_IDLE) {
+//        player.prepare();
+//    } else if (state == Player.STATE_ENDED) {
+//        seekTo(player, player.getCurrentMediaItemIndex(), C.TIME_UNSET);
+//    }
+//    player.play();
+//}

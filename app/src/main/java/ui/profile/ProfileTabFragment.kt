@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.xodus.templatefive.R
+import com.xodus.traveli.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

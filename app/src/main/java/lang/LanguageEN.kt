@@ -2,7 +2,7 @@ package lang
 
 import android.graphics.Typeface
 import androidx.core.content.res.ResourcesCompat
-import com.xodus.templatefive.R
+import com.xodus.traveli.R
 import main.ApplicationClass
 
 class LanguageEN(private val app: ApplicationClass) : LanguageInterface {

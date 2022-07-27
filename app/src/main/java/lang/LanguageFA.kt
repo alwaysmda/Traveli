@@ -1,10 +1,5 @@
 package lang
 
-import android.graphics.Typeface
-import androidx.core.content.res.ResourcesCompat
-import com.xodus.templatefive.R
-import main.ApplicationClass
-
 //class LanguageFA(private val app: ApplicationClass) : LanguageInterface {
 //    override val fontLight: Typeface? get() = ResourcesCompat.getFont(app, R.font.font_fa_light)
 //    override val fontMedium: Typeface? get() = ResourcesCompat.getFont(app, R.font.font_fa_medium)

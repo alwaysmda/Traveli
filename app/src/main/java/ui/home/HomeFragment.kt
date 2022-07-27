@@ -10,8 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.squareup.picasso.Picasso
-import com.xodus.templatefive.R
-import com.xodus.templatefive.databinding.FragmentHomeBinding
+import com.xodus.traveli.R
+import com.xodus.traveli.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import ui.base.BaseFragment
 import util.extension.log

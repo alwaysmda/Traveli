@@ -8,8 +8,8 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.library.baseAdapters.BR
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.xodus.templatefive.R
-import com.xodus.templatefive.databinding.SheetEditContactBinding
+import com.xodus.traveli.R
+import com.xodus.traveli.databinding.SheetEditContactBinding
 
 class EditContactBottomSheet(private val viewModel: ProfileViewModel, private val title: String, private val content: String?, private val onPositive: (String?) -> Unit) : BottomSheetDialogFragment() {
     private var _binding: SheetEditContactBinding? = null
