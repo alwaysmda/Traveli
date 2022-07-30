@@ -1,4 +1,5 @@
 package lang
+
 //class LanguageFA(private val app: ApplicationClass) : LanguageInterface {
 //    override val fontLight: Typeface? get() = ResourcesCompat.getFont(app, R.font.font_fa_light)
 //    override val fontMedium: Typeface? get() = ResourcesCompat.getFont(app, R.font.font_fa_medium)

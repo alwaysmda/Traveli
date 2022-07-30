@@ -9,9 +9,11 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.media3.common.MediaItem
 import com.xodus.traveli.R
 import com.xodus.traveli.databinding.FragmentTravelDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
+import domain.model.TravelDetail
 import ui.base.BaseFragment
 
 @AndroidEntryPoint
@@ -58,10 +60,19 @@ class TravelDetailFragment : BaseFragment<FragmentTravelDetailBinding, TravelDet
     private fun setUpRecyclerView() {
         travelDetailAdapter = TravelDetailAdapter(baseActivity, viewModel.exoPlayer, onLinkClick = {
             viewModel.action.onLinkClick(it)
-        }, onVideoFullScreenClick = {
+        }, onPlayerViewClick = { lastPlayedVideoIndex, position ->
+            if (lastPlayedVideoIndex != -1 && lastPlayedVideoIndex != position) {
+                val videoViewHolder = binding.rvTravelDetail.findViewHolderForAdapterPosition(lastPlayedVideoIndex) as TravelDetailAdapter.VideoViewHolder
+                videoViewHolder.binding.apply {
+                    playerView.player = null
+                    viewModel.exoPlayer.setMediaItem(MediaItem.fromUri((travelDetailAdapter.currentList[position] as TravelDetail.Video).video))
+                }
+            }
+            travelDetailAdapter.setLastPlayedVideoIndex(position)
 
         })
         binding.rvTravelDetail.adapter = travelDetailAdapter
+
     }
 
 }

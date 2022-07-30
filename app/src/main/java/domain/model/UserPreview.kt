@@ -17,5 +17,7 @@ data class UserPreview(
             }
             return userPreviews
         }
+
+        fun List<UserPreview>.cloned() = ArrayList(this.map { it.copy() })
     }
 }

@@ -8,5 +8,8 @@ data class TravelPreview(
 companion object {
     const val ADD_ID = 0
     fun getAddItem() = TravelPreview(ADD_ID, "", "")
+    fun List<TravelPreview>.cloned() = ArrayList(this.map { it.copy() })
 }
+
+
 }

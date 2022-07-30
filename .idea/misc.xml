@@ -20,23 +20,17 @@
         <entry key="app/src/main/res/drawable/ic_bookmark.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_compass.xml" value="0.141" />
         <entry key="app/src/main/res/drawable/rounded_back_ground.xml" value="0.1425" />
-        <entry key="app/src/main/res/drawable/rounded_dialog.xml" value="0.3545" />
-        <entry key="app/src/main/res/drawable/shape_border_round.xml" value="0.3545" />
-        <entry key="app/src/main/res/drawable/shape_cover_overlay.xml" value="0.3545" />
         <entry key="app/src/main/res/drawable/shape_shadow.xml" value="0.44256410256410256" />
-        <entry key="app/src/main/res/drawable/splash.xml" value="0.3545" />
         <entry key="app/src/main/res/layout/activity_base.xml" value="0.21073961499493415" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.34371833839918947" />
-        <entry key="app/src/main/res/layout/content_wrapper.xml" value="0.30117753623188404" />
+        <entry key="app/src/main/res/layout/content_wrapper.xml" value="0.3578125" />
         <entry key="app/src/main/res/layout/dialog_custom.xml" value="0.2368659420289855" />
         <entry key="app/src/main/res/layout/exo_player_control_view.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.21200607902735563" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_photo_detail.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/fragment_photo_list.xml" value="0.34371833839918947" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.33039161610590184" />
-        <entry key="app/src/main/res/layout/fragment_profile_edit.xml" value="0.34371833839918947" />
-        <entry key="app/src/main/res/layout/fragment_profile_setting.xml" value="0.34371833839918947" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.3578125" />
         <entry key="app/src/main/res/layout/fragment_tab.xml" value="0.2859375" />
         <entry key="app/src/main/res/layout/fragment_template.xml" value="0.21073961499493415" />
@@ -45,6 +39,7 @@
         <entry key="app/src/main/res/layout/fragment_template_mvi.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/fragment_travel_detail.xml" value="0.1" />
         <entry key="app/src/main/res/layout/row_chat.xml" value="0.2717391304347826" />
+        <entry key="app/src/main/res/layout/row_city.xml" value="0.1" />
         <entry key="app/src/main/res/layout/row_country.xml" value="0.1" />
         <entry key="app/src/main/res/layout/row_message.xml" value="0.2859375" />
         <entry key="app/src/main/res/layout/row_photo.xml" value="0.34371833839918947" />
@@ -55,20 +50,16 @@
         <entry key="app/src/main/res/layout/row_template.xml" value="0.21073961499493415" />
         <entry key="app/src/main/res/layout/row_template_state.xml" value="0.2740036231884058" />
         <entry key="app/src/main/res/layout/row_travel.xml" value="0.10344827586206896" />
-        <entry key="app/src/main/res/layout/row_travel_add.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/row_travel_cover.xml" value="0.3055555555555556" />
         <entry key="app/src/main/res/layout/row_travel_detail_bookmark.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/row_travel_detail_city.xml" value="0.3578125" />
         <entry key="app/src/main/res/layout/row_travel_detail_cover.xml" value="0.2878787878787879" />
         <entry key="app/src/main/res/layout/row_travel_detail_description.xml" value="0.3055555555555556" />
         <entry key="app/src/main/res/layout/row_travel_detail_image.xml" value="0.25" />
         <entry key="app/src/main/res/layout/row_travel_detail_link.xml" value="0.296875" />
         <entry key="app/src/main/res/layout/row_travel_detail_user.xml" value="0.3578125" />
-        <entry key="app/src/main/res/layout/row_travel_detail_video.xml" value="0.3055555555555556" />
+        <entry key="app/src/main/res/layout/row_travel_detail_video.xml" value="0.1" />
         <entry key="app/src/main/res/layout/row_user.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/sample_view.xml" value="0.34371833839918947" />
-        <entry key="app/src/main/res/layout/sheet_confirm.xml" value="0.34371833839918947" />
-        <entry key="app/src/main/res/layout/sheet_edit.xml" value="0.34371833839918947" />
-        <entry key="app/src/main/res/layout/sheet_edit_contact.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/toolbar_chat.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/toolbar_photo_detail.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/toolbar_photo_list.xml" value="0.34371833839918947" />

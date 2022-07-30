@@ -3,8 +3,11 @@ package adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import androidx.media3.common.C
+import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -13,6 +16,7 @@ import com.xodus.traveli.R
 import com.xodus.traveli.databinding.*
 import domain.model.TravelDetail
 import domain.model.TravelDetail.Companion.VIEW_TYPE_BOOKMARK
+import domain.model.TravelDetail.Companion.VIEW_TYPE_CITIES
 import domain.model.TravelDetail.Companion.VIEW_TYPE_COVER
 import domain.model.TravelDetail.Companion.VIEW_TYPE_DESCRIPTION
 import domain.model.TravelDetail.Companion.VIEW_TYPE_IMAGE
@@ -22,7 +26,9 @@ import domain.model.TravelDetail.Companion.VIEW_TYPE_VIDEO
 import ui.base.BaseActivity
 
 
-class TravelDetailAdapter(private val activity: BaseActivity, private val exoPlayer: ExoPlayer, private val onLinkClick: (link: String) -> Unit, private val onVideoFullScreenClick: () -> Unit) : ListAdapter<TravelDetail, RecyclerView.ViewHolder>(DiffCallback()) {
+class TravelDetailAdapter(private val activity: BaseActivity, private val exoPlayer: ExoPlayer, private val onLinkClick: (link: String) -> Unit, private val onPlayerViewClick: (lastPlayedVideoIndex: Int, position: Int) -> Unit) : ListAdapter<TravelDetail, RecyclerView.ViewHolder>(DiffCallback()) {
+
+    private var lastPlayedVideoIndex = -1
 
 
     inner class CoverViewHolder(private val binding: RowTravelDetailCoverBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -68,13 +74,27 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
         }
     }
 
-    inner class VideoViewHolder(private val binding: RowTravelDetailVideoBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class VideoViewHolder(val binding: RowTravelDetailVideoBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(travelDetail: TravelDetail.Video) {
             binding.apply {
-                playerView.player = exoPlayer
-                playerView.setFullscreenButtonClickListener {}
                 tvTitle.isVisible = travelDetail.title.isNullOrEmpty().not()
+                val playPauseBtn = playerView.findViewById<AppCompatImageButton>(androidx.media3.ui.R.id.exo_play_pause)
+                playerView.setOnClickListener {
+                    onPlayerViewClick(lastPlayedVideoIndex, bindingAdapterPosition)
+                    playerView.player = exoPlayer
+                    dispatchPlay(exoPlayer)
+
+                }
+                playPauseBtn.setOnClickListener {
+                    val state = exoPlayer.playbackState
+                    if (state == Player.STATE_IDLE || state == Player.STATE_ENDED || exoPlayer.playWhenReady.not()) {
+                        dispatchPlay(exoPlayer)
+                    } else {
+                        dispatchPause(exoPlayer)
+                    }
+                }
                 tvDescription.isVisible = travelDetail.description.isNullOrEmpty().not()
+
             }
 
 
@@ -96,10 +116,21 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
         }
     }
 
+    inner class CityViewHolder(private val binding: RowTravelDetailCityBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(city: TravelDetail.City) {
+            val adapter = CityAdapter(activity).apply {
+                submitList(city.cityList)
+            }
+            binding.apply {
+                rvCity.adapter = adapter
+            }
+        }
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            VIEW_TYPE_COVER    -> {
+            VIEW_TYPE_COVER       -> {
                 CoverViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -110,7 +141,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                 )
 
             }
-            VIEW_TYPE_IMAGE    -> {
+            VIEW_TYPE_IMAGE       -> {
                 ImageViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -141,7 +172,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                     )
                 )
             }
-            VIEW_TYPE_VIDEO    -> {
+            VIEW_TYPE_VIDEO       -> {
                 VideoViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -152,7 +183,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                 )
 
             }
-            VIEW_TYPE_BOOKMARK -> {
+            VIEW_TYPE_BOOKMARK    -> {
                 BookMarkViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -164,7 +195,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
 
             }
 
-            VIEW_TYPE_USER     -> {
+            VIEW_TYPE_USER        -> {
                 UserViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -175,7 +206,18 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                 )
             }
 
-            else               -> ImageViewHolder(
+            VIEW_TYPE_CITIES      -> {
+                CityViewHolder(
+                    DataBindingUtil.inflate(
+                        LayoutInflater.from(parent.context),
+                        R.layout.row_travel_detail_city,
+                        parent,
+                        false
+                    )
+                )
+            }
+
+            else                  -> ImageViewHolder(
                 DataBindingUtil.inflate(
                     LayoutInflater.from(parent.context),
                     R.layout.row_travel_detail_image,
@@ -199,6 +241,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
             is VideoViewHolder       -> holder.bind(currentList[position] as TravelDetail.Video)
             is BookMarkViewHolder    -> holder.bind(currentList[position] as TravelDetail.BookMark)
             is UserViewHolder        -> holder.bind(currentList[position] as TravelDetail.User)
+            is CityViewHolder        -> holder.bind(currentList[position] as TravelDetail.City)
         }
     }
 
@@ -211,4 +254,47 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
             oldItem == newItem
     }
 
+
+    private fun dispatchPlay(player: Player) {
+        val state = player.playbackState
+        if (state == Player.STATE_IDLE) {
+            player.prepare()
+        } else if (state == Player.STATE_ENDED) {
+            player.seekTo(player.currentMediaItemIndex, C.TIME_UNSET)
+        }
+        player.play()
+    }
+
+    private fun dispatchPause(player: Player) {
+        player.pause()
+    }
+
+
+    fun getLastPlayedVideoIndex() = lastPlayedVideoIndex
+
+    fun setLastPlayedVideoIndex(lastPlayedVideoIndex: Int) {
+        this.lastPlayedVideoIndex = lastPlayedVideoIndex
+    }
+
+
 }
+
+//
+//private void dispatchPlayPause(Player player) {
+//    @State int state = player.getPlaybackState();
+//    if (state == Player.STATE_IDLE || state == Player.STATE_ENDED || !player.getPlayWhenReady()) {
+//        dispatchPlay(player);
+//    } else {
+//        dispatchPause(player);
+//    }
+//}
+//
+//private void dispatchPlay(Player player) {
+//    @State int state = player.getPlaybackState();
+//    if (state == Player.STATE_IDLE) {
+//        player.prepare();
+//    } else if (state == Player.STATE_ENDED) {
+//        seekTo(player, player.getCurrentMediaItemIndex(), C.TIME_UNSET);
+//    }
+//    player.play();
+//}

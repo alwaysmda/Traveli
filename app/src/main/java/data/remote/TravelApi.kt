@@ -11,11 +11,11 @@ interface TravelApi {
     @GET("travels/trending")
     suspend fun getTrending(): Response<ResponseTravelListDto>
 
-    @GET("travels/new")
-    suspend fun getNewTravel(): Response<ResponseTravelListDto>
+    @GET("travels/new/{page}")
+    suspend fun getNewTravels(@Path("page") page: Int): Response<ResponseTravelListDto>
 
     @GET("travels")
-    suspend fun getTravel(@Query("query") travel: String): Response<ResponseTravelListDto>
+    suspend fun getTravels(@Query("query") travel: String, @Query("page") page: Int): Response<ResponseTravelListDto>
 
     @GET("travels/banner")
     suspend fun getBanner(): Response<Unit>

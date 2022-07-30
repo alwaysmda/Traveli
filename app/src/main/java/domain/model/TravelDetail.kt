@@ -11,6 +11,7 @@ sealed class TravelDetail(
     data class Video(val title: String?, val video: String, val description: String?) : TravelDetail(VIEW_TYPE_VIDEO)
     data class BookMark(var isBookMark: Boolean) : TravelDetail(VIEW_TYPE_BOOKMARK)
     data class User(val user: UserPreview) : TravelDetail(VIEW_TYPE_USER)
+    data class City(val cityList: List<domain.model.City>) : TravelDetail(VIEW_TYPE_CITIES)
 
     companion object {
         const val VIEW_TYPE_COVER = 0
@@ -20,6 +21,7 @@ sealed class TravelDetail(
         const val VIEW_TYPE_VIDEO = 4
         const val VIEW_TYPE_BOOKMARK = 5
         const val VIEW_TYPE_USER = 6
+        const val VIEW_TYPE_CITIES = 7
     }
 }
 

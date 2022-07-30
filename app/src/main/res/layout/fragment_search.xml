@@ -85,6 +85,7 @@
             android:paddingBottom="@dimen/paddingLarge"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintTop_toBottomOf="@+id/top_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:spanCount="3"
             tools:listitem="@layout/row_user" />
 
