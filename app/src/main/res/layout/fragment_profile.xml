@@ -39,11 +39,30 @@
                     app:layout_constraintBottom_toBottomOf="@id/profile_ivCover" />
 
             <com.google.android.material.button.MaterialButton
+                    android:id="@+id/profile_btnBack"
+                    style="@style/GeneralButton.TextButton"
+                    android:layout_width="@dimen/dimenButton"
+                    android:layout_height="@dimen/dimenButton"
+                    android:layout_margin="@dimen/paddingMedium"
+                    android:onClick="@{() -> vm.action.onBackClick()}"
+                    android:visibility="gone"
+                    app:backgroundTint="#33000000"
+                    app:cornerRadius="@dimen/dimenButtonRadius"
+                    app:icon="@drawable/ic_arrow_left"
+                    app:iconPadding="8dp"
+                    app:iconSize="18dp"
+                    app:iconTint="@color/md_white_1000"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
                     android:id="@+id/profile_btnSetting"
                     style="@style/GeneralButton.TextButton"
                     android:layout_width="@dimen/dimenButton"
                     android:layout_height="@dimen/dimenButton"
                     android:layout_margin="@dimen/paddingMedium"
+                    android:visibility="gone"
+                    app:backgroundTint="#33000000"
                     android:onClick="@{() -> vm.action.onSettingClick()}"
                     app:cornerRadius="@dimen/dimenButtonRadius"
                     app:icon="@drawable/ic_setting"

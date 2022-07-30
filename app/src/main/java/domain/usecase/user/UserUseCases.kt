@@ -10,4 +10,6 @@ data class UserUseCases(
     val updateCoverUseCase: UpdateCoverUseCase,
     val updateAvatarUseCase: UpdateAvatarUseCase,
     val updateContactUseCase: UpdateContactUseCase,
+    val logoutUseCase: LogoutUseCase,
+    val deleteAccountUseCase: DeleteAccountUseCase,
 )

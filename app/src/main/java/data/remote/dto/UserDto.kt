@@ -6,9 +6,9 @@ import kotlin.random.Random
 
 data class UserDto(
     @SerializedName("id") var id: Long,
-    @SerializedName("name") var name: String,
+    @SerializedName("name") var name: String?,
     @SerializedName("avatar") var avatar: String,
-    @SerializedName("bio") var bio: String,
+    @SerializedName("bio") var bio: String?,
     @SerializedName("cover") var cover: String,
     @SerializedName("country") var country: CountryDto,
     @SerializedName("city") var city: String,

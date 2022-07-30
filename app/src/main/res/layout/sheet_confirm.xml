@@ -6,12 +6,12 @@
     <data>
 
         <variable
-                name="vm"
-                type="ui.profile.ProfileViewModel" />
+                name="app"
+                type="main.ApplicationClass" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/editContact_clParent"
+            android:id="@+id/sheetEdit_clParent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/md_transparent_1000">
@@ -25,7 +25,7 @@
                 app:shapeAppearance="@style/CircularImageView.BottomSheet" />
 
         <ImageView
-                android:id="@+id/editContact_ivIcon"
+                android:id="@+id/sheetEdit_ivIcon"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="@dimen/paddingLarge"
@@ -35,65 +35,56 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/editContact_tvTitle"
+                android:id="@+id/sheetEdit_tvTitle"
                 style="@style/GeneralText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/paddingLarge"
                 android:gravity="center"
                 android:textSize="@dimen/textLarge"
-                app:layout_constraintTop_toBottomOf="@id/editContact_ivIcon"
+                app:fonti="@{app.m.fontMedium}"
+                app:layout_constraintTop_toBottomOf="@id/sheetEdit_ivIcon"
                 tools:text="Edit Twitter" />
 
-        <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/editContact_tlContent"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/paddingLargeXXX"
-                android:layout_marginTop="@dimen/paddingMedium"
-                app:fonte="@{vm.app.m.fontMedium}"
-                app:layout_constraintTop_toBottomOf="@id/editContact_tvTitle">
-
-            <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editContact_etContent"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:imeOptions="actionDone"
-                    android:inputType="text"
-                    android:lines="1"
-                    app:fonte="@{vm.app.m.fontMedium}"
-                    tools:hint="Twitter Address"
-                    tools:text="Hello" />
-        </com.google.android.material.textfield.TextInputLayout>
-
         <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/editContact_tvError"
+                android:id="@+id/sheetEdit_tvContent"
                 style="@style/GeneralText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/paddingMedium"
+                android:layout_marginTop="@dimen/paddingLarge"
                 android:gravity="center"
-                android:textColor="@color/negative"
-                app:fonti="@{vm.app.m.fontMedium}"
-                app:layout_constraintTop_toBottomOf="@id/editContact_tlContent"
-                tools:text="This is an error!!" />
+                android:textSize="@dimen/textMedium"
+                app:fonti="@{app.m.fontMedium}"
+                app:layout_constraintTop_toBottomOf="@id/sheetEdit_tvTitle"
+                tools:text="Some content description about this sheet." />
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/sheetEdit_tvError"
+                style="@style/GeneralText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/paddingLarge"
+                android:gravity="center"
+                android:textColor="@color/md_red_700"
+                android:textSize="@dimen/textMedium"
+                android:visibility="gone"
+                app:fonti="@{app.m.fontMedium}"
+                app:layout_constraintTop_toBottomOf="@id/sheetEdit_tvContent"
+                tools:text="Some content description about this sheet." />
 
         <com.google.android.material.button.MaterialButton
                 android:id="@+id/template_btnPositive"
                 style="@style/GeneralButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/paddingMedium"
+                android:layout_marginTop="@dimen/paddingLarge"
                 android:layout_marginBottom="@dimen/paddingLarge"
-                android:text="@{vm.app.m.confirm}"
                 app:backgroundTint="@color/positive"
-                app:fonti="@{vm.app.m.fontMedium}"
+                app:fonti="@{app.m.fontMedium}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/template_btnNegative"
-                app:layout_constraintTop_toBottomOf="@id/editContact_tvError"
+                app:layout_constraintTop_toBottomOf="@id/sheetEdit_tvError"
                 tools:text="Confirm" />
 
         <com.google.android.material.button.MaterialButton
@@ -101,9 +92,8 @@
                 style="@style/GeneralButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{vm.app.m.cancel}"
                 app:backgroundTint="@color/negative"
-                app:fonti="@{vm.app.m.fontMedium}"
+                app:fonti="@{app.m.fontMedium}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/template_btnPositive"
                 app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +101,7 @@
                 tools:text="Cancel" />
 
         <FrameLayout
-                android:id="@+id/editContact_flLoading"
+                android:id="@+id/sheetEdit_flLoading"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:background="#22000000"

@@ -54,8 +54,8 @@
                     android:paddingTop="@dimen/paddingLarge"
                     android:paddingBottom="@dimen/paddingSmall"
                     android:text="@{data.name}"
-                    android:textColor="?attr/colorText0"
-                    android:textSize="@dimen/textLarge"
+                        android:textColor="@color/md_white_1000"
+                        android:textSize="@dimen/textLarge"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />

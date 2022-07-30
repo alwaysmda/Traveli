@@ -13,4 +13,5 @@ interface UserRepository {
     suspend fun updateAvatar(filePath: String): DataState<User>
     suspend fun updateUserInfo(user: User): DataState<User>
     suspend fun updateContact(contactItem: ContactItem): DataState<User>
+    suspend fun deleteAccount(): DataState<Unit>
 }

@@ -107,12 +107,12 @@ class UserRepositoryImpl(
     }
 
     override suspend fun updateUserInfo(user: User): DataState<User> {
-        return when (val response = call { userApi.updateUserInfo(user.name, user.bio, user.country.id, user.city) }) {
+        return when (val response = call { userApi.updateUserInfo(user.name ?: "", user.bio, user.country.id, user.city) }) {
             is DataState.Failure -> response
             is DataState.Success -> DataState.Loading
             is DataState.Loading -> {
                 val data = ResponseGetUserDto.getFake(1)
-                DataState.Success(userMapper.toDomainModel(data.user))
+                DataState.Success(user)
             }
         }
     }
@@ -124,6 +124,16 @@ class UserRepositoryImpl(
             is DataState.Loading -> {
                 val data = ResponseGetUserDto.getFake(1)
                 DataState.Success(userMapper.toDomainModel(data.user))
+            }
+        }
+    }
+
+    override suspend fun deleteAccount(): DataState<Unit> {
+        return when (val response = call { userApi.deleteAccount() }) {
+            is DataState.Failure -> response
+            is DataState.Success -> DataState.Loading
+            is DataState.Loading -> {
+                DataState.Success(Unit)
             }
         }
     }

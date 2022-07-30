@@ -35,7 +35,7 @@ interface UserApi {
     @POST("users/update/info")
     suspend fun updateUserInfo(
         @Field("name") name: String,
-        @Field("bio") bio: String,
+        @Field("bio") bio: String?,
         @Field("countryId") countryId: Long,
         @Field("city") city: String,
     ): Response<ResponseGetUserDto>
@@ -45,4 +45,8 @@ interface UserApi {
         @Field("title") title: String,
         @Field("value") value: String?,
     ): Response<ResponseGetUserDto>
+
+    @GET("users/delete")
+    suspend fun deleteAccount(
+    ): Response<Unit>
 }

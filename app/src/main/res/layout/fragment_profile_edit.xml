@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="vm"
+                type="ui.profile_edit.ProfileEditViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/colorBackground0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/profileEdit_clParent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/colorBackground0"
+                android:descendantFocusability="blocksDescendants"
+                android:paddingBottom="@dimen/paddingLargeXXX">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/profileEdit_ivCover"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:scaleType="centerCrop"
+                    android:src="@color/md_green_300"
+                    app:layout_constraintDimensionRatio="2:1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearance="@style/CircularImageView.Cover" />
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/shape_cover_overlay"
+                    app:layout_constraintBottom_toBottomOf="@id/profileEdit_ivCover" />
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/profileEdit_btnBack"
+                    style="@style/GeneralButton.TextButton"
+                    android:layout_width="@dimen/dimenButton"
+                    android:layout_height="@dimen/dimenButton"
+                    android:layout_margin="@dimen/paddingMedium"
+                    android:onClick="@{() -> vm.action.onBackClick()}"
+                    app:backgroundTint="#33000000"
+                    app:cornerRadius="@dimen/dimenButtonRadius"
+                    app:icon="@drawable/ic_arrow_left"
+                    app:iconPadding="8dp"
+                    app:iconSize="18dp"
+                    app:iconTint="@color/md_white_1000"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/profileEdit_btnEditCover"
+                    style="@style/GeneralButton.TextButton"
+                    android:layout_width="@dimen/dimenButton"
+                    android:layout_height="@dimen/dimenButton"
+                    android:onClick="@{() -> vm.action.onEditCoverClick()}"
+                    app:backgroundTint="#33000000"
+                    app:cornerRadius="@dimen/dimenButtonRadius"
+                    app:icon="@drawable/ic_camera"
+                    app:iconSize="20dp"
+                    app:iconTint="@color/md_white_1000"
+                    app:layout_constraintBottom_toBottomOf="@id/profileEdit_ivCover"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/profileEdit_ivCover"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/profileEdit_ivAvatar"
+                    style="@style/CircularImageView.Avatar"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="@dimen/paddingLargeXXX"
+                    android:padding="1dp"
+                    android:scaleType="centerCrop"
+                    android:src="@color/md_green_500"
+                    app:layout_constraintBottom_toBottomOf="@id/profileEdit_ivCover"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/profileEdit_ivCover"
+                    app:shapeAppearance="@style/CircularImageView.Avatar" />
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/profileEdit_btnEditAvatar"
+                    style="@style/GeneralButton.TextButton"
+                    android:layout_width="@dimen/dimenButton"
+                    android:layout_height="@dimen/dimenButton"
+                    android:onClick="@{() -> vm.action.onEditAvatarClick()}"
+                    app:backgroundTint="#33000000"
+                    app:cornerRadius="@dimen/dimenButtonRadius"
+                    app:icon="@drawable/ic_camera"
+                    app:iconSize="20dp"
+                    app:iconTint="@color/md_white_1000"
+                    app:layout_constraintBottom_toBottomOf="@id/profileEdit_ivAvatar"
+                    app:layout_constraintEnd_toEndOf="@id/profileEdit_ivAvatar"
+                    app:layout_constraintStart_toStartOf="@id/profileEdit_ivAvatar"
+                    app:layout_constraintTop_toTopOf="@id/profileEdit_ivAvatar" />
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/profileEdit_tvName"
+                    style="@style/GeneralText"
+                    fonti="@{vm.app.m.fontMedium}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/paddingLargeXXX"
+                    android:background="@drawable/shape_border_round"
+                    android:gravity="center_vertical"
+                    android:minHeight="60dp"
+                    android:paddingHorizontal="@dimen/paddingLarge"
+                    android:paddingVertical="@dimen/paddingLargeXX"
+                    android:textColor="?attr/colorText0"
+                    android:textSize="@dimen/textLarge"
+                    app:layout_constraintTop_toBottomOf="@id/profileEdit_ivAvatar"
+                    tools:text="Denis Trico" />
+
+            <com.google.android.material.textview.MaterialTextView
+                    style="@style/GeneralText"
+                    fonti="@{vm.app.m.fontMedium}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/paddingLargeXXX"
+                    android:background="?attr/colorBackground0"
+                    android:paddingHorizontal="@dimen/paddingMedium"
+                    android:text="@{vm.app.m.name}"
+                    android:textColor="?attr/colorText2"
+                    android:textSize="@dimen/textLarge"
+                    app:layout_constraintBottom_toTopOf="@id/profileEdit_tvName"
+                    app:layout_constraintStart_toStartOf="@id/profileEdit_tvName"
+                    app:layout_constraintTop_toTopOf="@id/profileEdit_tvName"
+                    tools:text="Name" />
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/profileEdit_btnEditName"
+                    style="@style/GeneralButton.TextButton"
+                    android:layout_width="@dimen/dimenButton"
+                    android:layout_height="@dimen/dimenButton"
+                    android:layout_marginStart="@dimen/paddingMedium"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="@dimen/paddingMedium"
+                    android:onClick="@{() -> vm.action.onEditNameClick()}"
+                    app:backgroundTint="#33000000"
+                    app:cornerRadius="@dimen/dimenButtonRadius"
+                    app:icon="@drawable/ic_edit"
+                    app:iconSize="20dp"
+                    app:iconTint="@color/md_white_1000"
+                    app:layout_constraintEnd_toEndOf="@id/profileEdit_tvName"
+                    app:layout_constraintTop_toTopOf="@id/profileEdit_tvName" />
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/profileEdit_tvHometown"
+                    style="@style/GeneralText"
+                    fonti="@{vm.app.m.fontMedium}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/paddingLargeXXX"
+                    android:background="@drawable/shape_border_round"
+                    android:gravity="center_vertical"
+                    android:minHeight="60dp"
+                    android:paddingHorizontal="@dimen/paddingLarge"
+                    android:paddingVertical="@dimen/paddingLargeXX"
+                    android:textColor="?attr/colorText0"
+                    android:textSize="@dimen/textLarge"
+                    app:layout_constraintTop_toBottomOf="@id/profileEdit_tvName"
+                    tools:text="Tehran, Iran" />
+
+            <com.google.android.material.textview.MaterialTextView
+                    style="@style/GeneralText"
+                    fonti="@{vm.app.m.fontMedium}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/paddingLargeXXX"
+                    android:background="?attr/colorBackground0"
+                    android:paddingHorizontal="@dimen/paddingMedium"
+                    android:text="@{vm.app.m.hometown}"
+                    android:textColor="?attr/colorText2"
+                    android:textSize="@dimen/textLarge"
+                    app:layout_constraintBottom_toTopOf="@id/profileEdit_tvHometown"
+                    app:layout_constraintStart_toStartOf="@id/profileEdit_tvHometown"
+                    app:layout_constraintTop_toTopOf="@id/profileEdit_tvHometown"
+                    tools:text="Hometown" />
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/profileEdit_btnEditHometown"
+                    style="@style/GeneralButton.TextButton"
+                    android:layout_width="@dimen/dimenButton"
+                    android:layout_height="@dimen/dimenButton"
+                    android:layout_marginStart="@dimen/paddingMedium"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="@dimen/paddingMedium"
+                    android:onClick="@{() -> vm.action.onEditHometownClick()}"
+                    app:backgroundTint="#33000000"
+                    app:cornerRadius="@dimen/dimenButtonRadius"
+                    app:icon="@drawable/ic_edit"
+                    app:iconSize="20dp"
+                    app:iconTint="@color/md_white_1000"
+                    app:layout_constraintEnd_toEndOf="@id/profileEdit_tvHometown"
+                    app:layout_constraintTop_toTopOf="@id/profileEdit_tvHometown" />
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/profileEdit_tvBio"
+                    style="@style/GeneralText"
+                    fonti="@{vm.app.m.fontMedium}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/paddingLargeXXX"
+                    android:background="@drawable/shape_border_round"
+                    android:gravity="center_vertical"
+                    android:minHeight="60dp"
+                    android:paddingHorizontal="@dimen/paddingLarge"
+                    android:paddingVertical="@dimen/paddingLargeXX"
+                    android:textColor="?attr/colorText0"
+                    android:textSize="@dimen/textLarge"
+                    app:layout_constraintTop_toBottomOf="@id/profileEdit_tvHometown"
+                    tools:text="This is me." />
+
+            <com.google.android.material.textview.MaterialTextView
+                    style="@style/GeneralText"
+                    fonti="@{vm.app.m.fontMedium}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/paddingLargeXXX"
+                    android:background="?attr/colorBackground0"
+                    android:paddingHorizontal="@dimen/paddingMedium"
+                    android:text="@{vm.app.m.bio}"
+                    android:textColor="?attr/colorText2"
+                    android:textSize="@dimen/textLarge"
+                    app:layout_constraintBottom_toTopOf="@id/profileEdit_tvBio"
+                    app:layout_constraintStart_toStartOf="@id/profileEdit_tvBio"
+                    app:layout_constraintTop_toTopOf="@id/profileEdit_tvBio"
+                    tools:text="Bio" />
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/profileEdit_btnEditBio"
+                    style="@style/GeneralButton.TextButton"
+                    android:layout_width="@dimen/dimenButton"
+                    android:layout_height="@dimen/dimenButton"
+                    android:layout_marginStart="@dimen/paddingMedium"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="@dimen/paddingMedium"
+                    android:onClick="@{() -> vm.action.onEditBioClick()}"
+                    app:backgroundTint="#33000000"
+                    app:cornerRadius="@dimen/dimenButtonRadius"
+                    app:icon="@drawable/ic_edit"
+                    app:iconSize="20dp"
+                    app:iconTint="@color/md_white_1000"
+                    app:layout_constraintEnd_toEndOf="@id/profileEdit_tvBio"
+                    app:layout_constraintTop_toTopOf="@id/profileEdit_tvBio" />
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/profileEdit_btnLogout"
+                    style="@style/GeneralButton"
+                    fonti="@{vm.app.m.fontMedium}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/paddingLargeXXX"
+                    android:onClick="@{() -> vm.action.onLogoutClick()}"
+                    android:text="@{vm.app.m.logout}"
+                    app:layout_constraintTop_toBottomOf="@id/profileEdit_tvBio"
+                    tools:text="Logout" />
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/profileEdit_btnDeleteAccount"
+                    style="@style/GeneralButton"
+                    fonti="@{vm.app.m.fontMedium}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/paddingLargeXXX"
+                    android:onClick="@{() -> vm.action.onDeleteAccountClick()}"
+                    android:text="@{vm.app.m.deleteAccount}"
+                    app:backgroundTint="@color/md_red_700"
+                    app:icon="@drawable/ic_delete"
+                    app:iconGravity="textStart"
+                    app:layout_constraintBottom_toBottomOf="parent "
+                    app:layout_constraintTop_toBottomOf="@id/profileEdit_btnLogout"
+                    tools:text="Delete Account" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

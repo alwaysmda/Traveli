@@ -50,4 +50,13 @@ class LanguageEN(private val app: ApplicationClass) : LanguageInterface {
     override val crop: String = "Crop"
     override val pleaseLoginToDoThisAction: String = "Please login to do this action."
     override val fileIsInvalid: String = "File is invalid."
+
+    //Profile Edit
+    override val name: String = "Name"
+    override val hometown: String = "Hometown"
+    override val bio: String = "Bio"
+    override val logout: String = "Logout"
+    override val deleteAccount: String = "Delete account"
+    override val logoutDesc: String = "Are you sure you want to logout?"
+    override val deleteAccountDesc: String = "Are you sure you want to delete your account permanently?\nAll your data will be lost.\nThis action cannot be undone."
 }

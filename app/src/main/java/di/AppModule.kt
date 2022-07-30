@@ -118,6 +118,8 @@ object AppModule {
             UpdateCoverUseCase(app, userRepository, prefManager),
             UpdateAvatarUseCase(app, userRepository, prefManager),
             UpdateContactUseCase(app, userRepository, prefManager),
+            LogoutUseCase(app, prefManager),
+            DeleteAccountUseCase(app, userRepository, prefManager),
         )
     }
 

@@ -32,27 +32,82 @@ class ProfileViewModel @Inject constructor(
 
     override fun onStart(userId: Long) {
         viewModelScope.launch {
-            if (userId == 0L) {
-                //Self
-                app.user?.let {
-                    id = it.id
-                    user = it
-                    _event.send(ProfileEvents.UpdateUser(it, true))
-                    getTransactionList()
+            if (isFirstStart) {
+                isFirstStart = false
+                if (userId == 0L) {
+                    //Self
+                    app.user?.let {
+                        id = it.id
+                        user = it
+                        _event.send(ProfileEvents.UpdateUser(it, true))
+                        getTransactionList()
+                        getUserTravelList()
+                        getUserStat()
+                    } ?: kotlin.run {
+                        //Register
+                        //todo remove
+                        app.prefManager.setPref(Constant.PREF_TOKEN, "Token")
+                    }
+                } else {
+                    //Others
+                    id = userId
+                    getUser()
                     getUserTravelList()
                     getUserStat()
-                } ?: kotlin.run {
-                    //Register
-                    //todo remove
-                    app.prefManager.setPref(Constant.PREF_TOKEN, "Token")
                 }
             } else {
-                //Others
-                id = userId
-                getUser()
-                getUserTravelList()
-                getUserStat()
+                if (userId == 0L) {
+                    //Self
+                    app.user?.let {
+                        id = it.id
+                        user = it
+                        _event.send(ProfileEvents.UpdateUser(it, true))
+                        transactionData?.balanceString?.let { value ->
+                            _event.send(ProfileEvents.UpdateBalance(value))
+                        } ?: kotlin.run {
+                            getTransactionList()
+                        }
+                        if (travelList.isEmpty()) {
+                            getUserTravelList()
+                        } else {
+                            _event.send(ProfileEvents.UpdateTravelList(travelList))
+                        }
+                        if (statList.isEmpty()) {
+                            getUserStat()
+                        } else {
+                            _event.send(ProfileEvents.UpdateStatList(statList))
+                        }
+                    } ?: kotlin.run {
+                        //Register
+                        //todo remove
+                        app.prefManager.setPref(Constant.PREF_TOKEN, "Token")
+                    }
+                } else {
+                    //Others
+                    id = userId
+                    user?.let {
+                        _event.send(ProfileEvents.UpdateUser(it, true))
+                    } ?: kotlin.run {
+                        getUser()
+                    }
+                    if (travelList.isEmpty()) {
+                        getUserTravelList()
+                    } else {
+                        _event.send(ProfileEvents.UpdateTravelList(travelList))
+                    }
+                    if (statList.isEmpty()) {
+                        getUserStat()
+                    } else {
+                        _event.send(ProfileEvents.UpdateStatList(statList))
+                    }
+                }
             }
+        }
+    }
+
+    override fun onBackClick() {
+        viewModelScope.launch {
+            _event.send(ProfileEvents.NavBack)
         }
     }
 

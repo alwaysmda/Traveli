@@ -8,36 +8,22 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
-import com.canhub.cropper.CropImageContract
-import com.canhub.cropper.CropImageView
-import com.canhub.cropper.options
 import com.xodus.traveli.R
 import com.xodus.traveli.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 import ui.base.BaseFragment
 import ui.base.ContentWrapper
-import util.extension.log
+import ui.dialog.EditBottomSheet
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileEvents, ProfileAction, ProfileViewModel>(R.layout.fragment_profile) {
-    private var editContactBottomSheet: EditContactBottomSheet? = null
+    private var editBottomSheet: EditBottomSheet? = null
     private val args by navArgs<ProfileFragmentArgs>()
     private var travelAdapter: TravelAdapter? = null
     private var statAdapter: StatAdapter? = null
-    private val cropImage = registerForActivityResult(CropImageContract()) { result ->
-        if (result.isSuccessful) {
-            // use the returned uri
-            val uriContent = result.uriContent
-            val uriFilePath = result.getUriFilePath(requireContext()) // optional usage
-            log("CROP:${uriContent}:${uriFilePath}")
-        } else {
-            // an error occurred
-            val exception = result.error
-            log("CROP:${exception}")
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,15 +41,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileEvents, Prof
         viewModel.event.collect {
             when (it) {
                 is ProfileEvents.Snack                -> snack(it.message)
-                is ProfileEvents.NavSetting           -> {
-                    cropImage.launch(
-                        options {
-                            setGuidelines(CropImageView.Guidelines.ON)
-                            setAspectRatio(2, 1)
-                            setCropMenuCropButtonTitle(viewModel.app.m.crop)
-                        }
-                    )
-                }
+                is ProfileEvents.NavBack              -> findNavController().popBackStack()
+                is ProfileEvents.NavSetting           -> findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToProfileEditFragment())
                 is ProfileEvents.NavTravel            -> Unit
                 is ProfileEvents.NavAddTravel         -> Unit
                 is ProfileEvents.NavTransactionList   -> Unit
@@ -72,6 +51,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileEvents, Prof
                 is ProfileEvents.UpdateUser           -> {
                     binding.apply {
                         profileCwBio.setStatus(ContentWrapper.WrapperStatus.Success)
+                        profileBtnBack.isVisible = it.isMe.not()
                         profileBtnSetting.isVisible = it.isMe
                         profileCwBalance.isVisible = it.isMe
                         profileIvCover.load(it.user.cover)
@@ -118,14 +98,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileEvents, Prof
                 }
                 is ProfileEvents.LaunchIntent         -> baseActivity.startActivity(it.intent)
                 is ProfileEvents.EditContact          -> {
-                    editContactBottomSheet = EditContactBottomSheet(viewModel, it.contentItem) { contactItem ->
-                        viewModel.action.onConfirmEditContactClick(contactItem)
+                    editBottomSheet = EditBottomSheet(baseActivity, it.contentItem.icon, it.contentItem.color, it.contentItem.title, it.contentItem.value) { value ->
+                        viewModel.action.onConfirmEditContactClick(it.contentItem.copy(value = value))
                     }.also { sheet ->
-                        sheet.show(childFragmentManager, EditContactBottomSheet::class.simpleName)
+                        sheet.show(childFragmentManager, EditBottomSheet::class.simpleName)
                     }
                 }
-                is ProfileEvents.EditContactError     -> editContactBottomSheet?.showError(it.error)
-                is ProfileEvents.EditContactComplete  -> editContactBottomSheet?.dismiss()
+                is ProfileEvents.EditContactError     -> editBottomSheet?.showError(it.error)
+                is ProfileEvents.EditContactComplete  -> editBottomSheet?.dismiss()
             }
         }
     }

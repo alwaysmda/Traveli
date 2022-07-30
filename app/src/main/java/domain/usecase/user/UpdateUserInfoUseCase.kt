@@ -12,7 +12,15 @@ class UpdateUserInfoUseCase(private val app: ApplicationClass, private val repo:
     operator fun invoke(user: User) = flow {
         emit(DataState.Loading)
         prefManager.authorize({
-            emit(repo.updateUserInfo(user))
+            //check for length and empty values
+            when (val response = repo.updateUserInfo(user)) {
+                is DataState.Loading -> emit(response)
+                is DataState.Failure -> emit(response)
+                is DataState.Success -> {
+                    app.user = response.data
+                    emit(response)
+                }
+            }
         }, {
             emit(DataState.Failure(DataState.Failure.CODE_NOT_FOUND, app.m.pleaseLoginToDoThisAction))
         })

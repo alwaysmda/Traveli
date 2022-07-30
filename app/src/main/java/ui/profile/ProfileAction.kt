@@ -6,6 +6,7 @@ import ui.base.BaseAction
 
 interface ProfileAction : BaseAction {
     fun onStart(userId: Long)
+    fun onBackClick()
     fun onSettingClick()
     fun onBalanceClick()
     fun onTravelClick(position: Int, item: TravelPreview)

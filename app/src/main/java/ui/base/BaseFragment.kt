@@ -36,6 +36,10 @@ open class BaseFragment<VB : ViewDataBinding, E : BaseEvent, A : BaseAction, VM 
         baseActivity.snack(message)
     }
 
+    fun showLoading(show: Boolean) {
+        baseActivity.setLoading(show)
+    }
+
     fun initialize(viewmodel: VM) {
         viewModel = viewmodel
     }

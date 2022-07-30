@@ -14,17 +14,17 @@ class UpdateContactUseCase(private val app: ApplicationClass, private val repo: 
         emit(DataState.Loading)
         prefManager.authorize({
             //TODO real
-            //emit(repo.updateContact(contactItem))
+            //emit(repo.updateContact(contactItem.copy(value = contactItem.value?.trim()?.replace("\n", "")?.replace("\r", ""))))
             //
             //TODO fake
             repo.updateContact(contactItem)
             app.user?.let {
                 app.user = when (contactItem.type) {
-                    Constant.ContactType.Phone     -> it.copy(contact = it.contact.copy(phone = contactItem))
-                    Constant.ContactType.Email     -> it.copy(contact = it.contact.copy(email = contactItem))
-                    Constant.ContactType.Twitter   -> it.copy(contact = it.contact.copy(twitter = contactItem))
-                    Constant.ContactType.Instagram -> it.copy(contact = it.contact.copy(instagram = contactItem))
-                    Constant.ContactType.Website   -> it.copy(contact = it.contact.copy(website = contactItem))
+                    Constant.ContactType.Phone     -> it.copy(contact = it.contact.copy(phone = contactItem.copy(value = contactItem.value?.trim()?.replace("\n", "")?.replace("\r", ""))))
+                    Constant.ContactType.Email     -> it.copy(contact = it.contact.copy(email = contactItem.copy(value = contactItem.value?.trim()?.replace("\n", "")?.replace("\r", ""))))
+                    Constant.ContactType.Twitter   -> it.copy(contact = it.contact.copy(twitter = contactItem.copy(value = contactItem.value?.trim()?.replace("\n", "")?.replace("\r", ""))))
+                    Constant.ContactType.Instagram -> it.copy(contact = it.contact.copy(instagram = contactItem.copy(value = contactItem.value?.trim()?.replace("\n", "")?.replace("\r", ""))))
+                    Constant.ContactType.Website   -> it.copy(contact = it.contact.copy(website = contactItem.copy(value = contactItem.value?.trim()?.replace("\n", "")?.replace("\r", ""))))
                 }
             }
             emit(DataState.Success(app.user!!))

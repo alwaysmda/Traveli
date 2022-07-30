@@ -53,5 +53,14 @@ interface LanguageInterface {
     val pleaseLoginToDoThisAction: String
     val fileIsInvalid: String
 
+    //Profile Edit
+    val name: String
+    val hometown: String
+    val bio: String
+    val logout: String
+    val deleteAccount: String
+    val logoutDesc: String
+    val deleteAccountDesc: String
+
     fun paramString(param: String) = "$appName $param"
 }

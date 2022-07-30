@@ -10,7 +10,7 @@ object Constant {
     //========================== C O N S T A N T S ==========================//
     //    const val CON_BASE_TEMPLATE_URL = "https://jsonplaceholder.typicode.com/"
     const val CON_BASE_TEMPLATE_URL = "https://www.google.com/"
-    const val CON_PREF_NAME = "com.xodus.templatefive"
+    const val CON_PREF_NAME = "com.xodus.traveli"
     const val CON_AES_KEY = "dde717bc4fd78bbbd98ccc7d8516ba79"
     const val CON_AES_IV = "a3da2dab4e2b44d1"
     const val CON_TRANS_ID = "CON_TRANS_ID_"

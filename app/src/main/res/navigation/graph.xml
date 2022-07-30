@@ -48,5 +48,13 @@
                 android:name="userId"
                 android:defaultValue="0L"
                 app:argType="long" />
+        <action
+                android:id="@+id/action_profileFragment_to_profileEditFragment"
+                app:destination="@id/profileEditFragment" />
     </fragment>
+    <fragment
+            android:id="@+id/profileEditFragment"
+            android:name="ui.profile_edit.ProfileEditFragment"
+            android:label="ProfileEditFragment"
+            tools:layout="@layout/fragment_profile_edit" />
 </navigation>

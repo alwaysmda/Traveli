@@ -26,8 +26,8 @@
         android:configChanges="orientation|screenSize|layoutDirection">
         <provider
             android:name="util.GenericFileProvider"
-            android:authorities="com.xodus.templatefive.provider"
-            android:exported="false"
+                android:authorities="com.xodus.traveli.provider"
+                android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"

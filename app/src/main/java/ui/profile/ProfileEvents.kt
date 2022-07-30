@@ -9,6 +9,7 @@ sealed class ProfileEvents : BaseEvent() {
     class Snack(val message: String) : ProfileEvents()
 
     //Nav
+    object NavBack : ProfileEvents()
     object NavSetting : ProfileEvents()
     class NavTransactionList(val dataTransaction: DataTransaction) : ProfileEvents()
     object NavAddTravel : ProfileEvents()
