@@ -2,6 +2,7 @@ package adapter
 
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.core.view.isVisible
@@ -12,6 +13,7 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.xodus.traveli.R
 import com.xodus.traveli.databinding.*
 import domain.model.TravelDetail
@@ -79,21 +81,30 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
             binding.apply {
                 tvTitle.isVisible = travelDetail.title.isNullOrEmpty().not()
                 val playPauseBtn = playerView.findViewById<AppCompatImageButton>(androidx.media3.ui.R.id.exo_play_pause)
-                playerView.setOnClickListener {
+                val previewsBtn = playerView.findViewById<AppCompatImageButton>(androidx.media3.ui.R.id.exo_prev)
+                val nextBtn = playerView.findViewById<AppCompatImageButton>(androidx.media3.ui.R.id.exo_next)
+                previewsBtn.visibility = View.GONE
+                nextBtn.visibility = View.GONE
+
+                ivVideoPreview.setOnClickListener {
+                    ivVideoPreview.visibility = View.GONE
+                    ivPlay.visibility = View.GONE
                     onPlayerViewClick(lastPlayedVideoIndex, bindingAdapterPosition)
                     playerView.player = exoPlayer
                     dispatchPlay(exoPlayer)
-
                 }
+
                 playPauseBtn.setOnClickListener {
                     val state = exoPlayer.playbackState
                     if (state == Player.STATE_IDLE || state == Player.STATE_ENDED || exoPlayer.playWhenReady.not()) {
+
                         dispatchPlay(exoPlayer)
                     } else {
                         dispatchPause(exoPlayer)
                     }
                 }
                 tvDescription.isVisible = travelDetail.description.isNullOrEmpty().not()
+                Picasso.get().load(travelDetail.image).into(binding.ivVideoPreview)
 
             }
 
@@ -122,6 +133,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                 submitList(city.cityList)
             }
             binding.apply {
+                app = activity.app
                 rvCity.adapter = adapter
             }
         }

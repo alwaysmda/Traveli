@@ -31,6 +31,7 @@ interface LanguageInterface {
     val travel: String
     val user: String
     val travelTo: String
+    val tags: String
 
     //navigation
     val home: String

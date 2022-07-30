@@ -65,9 +65,12 @@ class TravelDetailFragment : BaseFragment<FragmentTravelDetailBinding, TravelDet
                 val videoViewHolder = binding.rvTravelDetail.findViewHolderForAdapterPosition(lastPlayedVideoIndex) as TravelDetailAdapter.VideoViewHolder
                 videoViewHolder.binding.apply {
                     playerView.player = null
-                    viewModel.exoPlayer.setMediaItem(MediaItem.fromUri((travelDetailAdapter.currentList[position] as TravelDetail.Video).video))
+                    ivVideoPreview.visibility = View.VISIBLE
+                    ivPlay.visibility = View.VISIBLE
+
                 }
             }
+            viewModel.exoPlayer.setMediaItem(MediaItem.fromUri((travelDetailAdapter.currentList[position] as TravelDetail.Video).video))
             travelDetailAdapter.setLastPlayedVideoIndex(position)
 
         })

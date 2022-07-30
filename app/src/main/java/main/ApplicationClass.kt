@@ -30,6 +30,7 @@ class ApplicationClass : Application() {
         get() = languageManager.main
     var user: User? = null
 
+
     companion object {
         @Volatile
         private lateinit var instance: ApplicationClass
@@ -60,6 +61,7 @@ class ApplicationClass : Application() {
         Picasso.setSingletonInstance(picasso)
     }
 }
+
 
 //type user
 /*

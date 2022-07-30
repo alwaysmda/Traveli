@@ -18,6 +18,7 @@
         <entry key="../../.gradle/caches/transforms-3/309abdd41f6c0243f3a8d367b969d1c5/transformed/jetified-media3-ui-1.0.0-beta01/res/layout/exo_track_selection_dialog.xml" value="0.32592592592592595" />
         <entry key="app/src/main/res/drawable/gradiant.xml" value="0.1285" />
         <entry key="app/src/main/res/drawable/ic_bookmark.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_bookmark_selected.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_compass.xml" value="0.141" />
         <entry key="app/src/main/res/drawable/rounded_back_ground.xml" value="0.1425" />
         <entry key="app/src/main/res/drawable/shape_shadow.xml" value="0.44256410256410256" />
@@ -44,6 +45,7 @@
         <entry key="app/src/main/res/layout/row_message.xml" value="0.2859375" />
         <entry key="app/src/main/res/layout/row_photo.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/row_photo_state.xml" value="0.34371833839918947" />
+        <entry key="app/src/main/res/layout/row_simple_text.xml" value="0.3578125" />
         <entry key="app/src/main/res/layout/row_square_travel.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/row_stat.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/row_sub_banner.xml" value="0.3578125" />
@@ -57,8 +59,9 @@
         <entry key="app/src/main/res/layout/row_travel_detail_description.xml" value="0.3055555555555556" />
         <entry key="app/src/main/res/layout/row_travel_detail_image.xml" value="0.25" />
         <entry key="app/src/main/res/layout/row_travel_detail_link.xml" value="0.296875" />
+        <entry key="app/src/main/res/layout/row_travel_detail_tag.xml" value="0.3578125" />
         <entry key="app/src/main/res/layout/row_travel_detail_user.xml" value="0.3578125" />
-        <entry key="app/src/main/res/layout/row_travel_detail_video.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/row_travel_detail_video.xml" value="0.25" />
         <entry key="app/src/main/res/layout/row_user.xml" value="0.375" />
         <entry key="app/src/main/res/layout/toolbar_chat.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/toolbar_photo_detail.xml" value="0.34371833839918947" />

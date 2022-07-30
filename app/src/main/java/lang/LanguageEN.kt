@@ -32,6 +32,7 @@ class LanguageEN(private val app: ApplicationClass) : LanguageInterface {
     override val travel: String = "Travel"
     override val user: String = "User"
     override val travelTo: String = "Travel to"
+    override val tags: String = "Tags"
 
     //Profile
     override val confirm: String = "Confirm"

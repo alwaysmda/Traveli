@@ -22,7 +22,9 @@
             style="@style/GeneralButton.TextButton"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            app:icon="@drawable/ic_bookmark"
+            app:cornerRadius="18dp"
+            app:backgroundTint="?attr/colorBackground2"
+            app:icon="@drawable/ic_bookmark_unselected"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/btn_rate"
             app:layout_constraintTop_toTopOf="parent" />
