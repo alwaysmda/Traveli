@@ -39,6 +39,7 @@
                     android:layout_marginStart="@dimen/paddingLarge"
                     app:cornerRadius="18dp"
                     app:icon="@drawable/ic_arrow_left"
+                    app:iconPadding="5dp"
                     app:iconSize="16dp"
                     app:iconTint="?attr/colorText0"
 

@@ -17,8 +17,8 @@ data class TravelDetailDto(
             TravelDetailDto(VIEW_TYPE_IMAGE, "", "https://www.konnecthq.com/wp-content/uploads/2019/07/Caribbean-Sea-31-12-1.jpg", ""),
             TravelDetailDto(VIEW_TYPE_DESCRIPTION, "", "", "I went to carabian sea alone. there was shark there and that shark wanted to eat me but fortunately somehow I ran away"),
             TravelDetailDto(VIEW_TYPE_LINK, "", "https://www.google.com", ""),
-            TravelDetailDto(VIEW_TYPE_VIDEO, "", "https://caspian3.cdn.asset.aparat.com/aparat-video/bdaea06a8c07f580a463d150bb9730af44790032-360p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjFkMjU0MWI3NzI2ZDEzNzRmY2Q1ZDhjMWU0MjNhNWI2IiwiZXhwIjoxNjU4NjU2MzgyLCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.mm0aOtMk5uZFZTs-U2szif-kP3wLndv94vlONMhY5_s", ""),
-            TravelDetailDto(VIEW_TYPE_VIDEO, "", "https://caspian3.cdn.asset.aparat.com/aparat-video/bdaea06a8c07f580a463d150bb9730af44790032-360p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjFkMjU0MWI3NzI2ZDEzNzRmY2Q1ZDhjMWU0MjNhNWI2IiwiZXhwIjoxNjU4NjU2MzgyLCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.mm0aOtMk5uZFZTs-U2szif-kP3wLndv94vlONMhY5_s", "")
+            TravelDetailDto(VIEW_TYPE_VIDEO, "", "https://hajifirouz9.cdn.asset.aparat.com/aparat-video/18bed9b368a2983caf10ab51d106307940554504-240p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjFhYmFjMjA4NjNjYTBhZDE5NGRjZTJjN2IyYWZjMWFlIiwiZXhwIjoxNjU5MTgxNzk0LCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.aHw2f3bTcq0MF0dBzSuqIJ3BHFW1BlQ_jZ049ToeliE", ""),
+            TravelDetailDto(VIEW_TYPE_VIDEO, "", "https://hajifirouz9.cdn.asset.aparat.com/aparat-video/18bed9b368a2983caf10ab51d106307940554504-240p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjFhYmFjMjA4NjNjYTBhZDE5NGRjZTJjN2IyYWZjMWFlIiwiZXhwIjoxNjU5MTgxNzk0LCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.aHw2f3bTcq0MF0dBzSuqIJ3BHFW1BlQ_jZ049ToeliE", "")
 
         )
     }

@@ -37,8 +37,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
         setUpRecyclerViews()
         viewModel.action.onStart()
         setUpActions()
-
-
     }
 
 
