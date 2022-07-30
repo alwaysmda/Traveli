@@ -13,6 +13,7 @@ import androidx.media3.common.MediaItem
 import com.xodus.traveli.R
 import com.xodus.traveli.databinding.FragmentTravelDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
+import domain.model.TravelDetail
 import ui.base.BaseFragment
 
 @AndroidEntryPoint
@@ -64,7 +65,7 @@ class TravelDetailFragment : BaseFragment<FragmentTravelDetailBinding, TravelDet
                 val videoViewHolder = binding.rvTravelDetail.findViewHolderForAdapterPosition(lastPlayedVideoIndex) as TravelDetailAdapter.VideoViewHolder
                 videoViewHolder.binding.apply {
                     playerView.player = null
-                    viewModel.exoPlayer.setMediaItem(MediaItem.fromUri("https://persian5.cdn.asset.aparat.com/aparat-video/bdaea06a8c07f580a463d150bb9730af44790032-360p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImM1MDA0ZDM1ZDU4MGJjMzk5NDVmNjk2Y2IwMTQ5NmM2IiwiZXhwIjoxNjU4OTIwOTQ4LCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.kPJww86JRZqRSrjri07ip61IWYQwwZO217zJ-kfaXks"))
+                    viewModel.exoPlayer.setMediaItem(MediaItem.fromUri((travelDetailAdapter.currentList[position] as TravelDetail.Video).video))
                 }
             }
             travelDetailAdapter.setLastPlayedVideoIndex(position)
