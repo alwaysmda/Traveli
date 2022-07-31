@@ -8,14 +8,17 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.xodus.traveli.R
 import com.xodus.traveli.databinding.RowSimpleTextBinding
+import ui.base.BaseActivity
 
 
-class SimpleAdapter : ListAdapter<String, SimpleAdapter.SimpleViewHolder>(DiffCallback()) {
+class SimpleAdapter(private val activity: BaseActivity) : ListAdapter<String, SimpleAdapter.SimpleViewHolder>(DiffCallback()) {
 
 
     inner class SimpleViewHolder(private val binding: RowSimpleTextBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(name: String) {
             binding.apply {
+                app = activity.app
+                data = name
 
             }
         }

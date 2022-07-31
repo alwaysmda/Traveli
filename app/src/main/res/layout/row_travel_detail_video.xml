@@ -68,20 +68,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_description"
-            fonti="@{app.m.fontMedium}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/paddingLarge"
-            android:layout_marginTop="@dimen/paddingLarge"
-            android:text="@{data.description}"
-            android:textColor="?attr/colorText0"
-            android:textSize="@dimen/textLarge"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/playerView"
 
-            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

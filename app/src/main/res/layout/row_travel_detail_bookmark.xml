@@ -8,25 +8,15 @@
 
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_rate"
-            style="@style/GeneralButton.TextButton"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            app:icon="@drawable/ic_star"
-            app:layout_constraintEnd_toEndOf="@+id/btn_book_mark"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_book_mark"
             style="@style/GeneralButton.TextButton"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            app:cornerRadius="18dp"
             app:backgroundTint="?attr/colorBackground2"
+            app:cornerRadius="18dp"
             app:icon="@drawable/ic_bookmark_unselected"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/btn_rate"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
