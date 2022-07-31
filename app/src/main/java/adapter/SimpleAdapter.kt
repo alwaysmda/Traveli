@@ -1,16 +1,25 @@
 package adapter
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.xodus.traveli.R
 import com.xodus.traveli.databinding.RowSimpleTextBinding
 
 
 class SimpleAdapter : ListAdapter<String, SimpleAdapter.SimpleViewHolder>(DiffCallback()) {
 
 
-    inner class SimpleViewHolder(private val binding: RowSimpleTextBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class SimpleViewHolder(private val binding: RowSimpleTextBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(name: String) {
+            binding.apply {
+
+            }
+        }
+    }
 
 
     private class DiffCallback : DiffUtil.ItemCallback<String>() {
@@ -21,11 +30,18 @@ class SimpleAdapter : ListAdapter<String, SimpleAdapter.SimpleViewHolder>(DiffCa
             oldItem == newItem
     }
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): SimpleViewHolder {
-        TODO("Not yet implemented")
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimpleViewHolder {
+        return SimpleViewHolder(
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                R.layout.row_simple_text,
+                parent,
+                false
+            )
+        )
     }
 
-    override fun onBindViewHolder(p0: SimpleViewHolder, p1: Int) {
-        TODO("Not yet implemented")
+    override fun onBindViewHolder(holder: SimpleViewHolder, position: Int) {
+        holder.bind(currentList[position])
     }
 }

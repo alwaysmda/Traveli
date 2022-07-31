@@ -28,7 +28,7 @@
         <entry key="app/src/main/res/layout/dialog_custom.xml" value="0.2368659420289855" />
         <entry key="app/src/main/res/layout/exo_player_control_view.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.21200607902735563" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.375" />
         <entry key="app/src/main/res/layout/fragment_photo_detail.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/fragment_photo_list.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.34371833839918947" />

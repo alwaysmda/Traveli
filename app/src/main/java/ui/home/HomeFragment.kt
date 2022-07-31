@@ -5,7 +5,6 @@ import adapter.SquareTravelAdapter
 import adapter.TravelAdapter
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -14,6 +13,7 @@ import com.xodus.traveli.R
 import com.xodus.traveli.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import ui.base.BaseFragment
+import ui.base.ContentWrapper
 import util.extension.log
 
 @AndroidEntryPoint
@@ -47,66 +47,50 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
             when (it) {
                 is HomeEvents.TrendingTravelUpdate  -> {
                     binding.apply {
-                        rvTrendingTravel.isVisible = true
-                        trendingLoading.isVisible = false
-                        trendingProgress.isVisible = false
-                        tvTrendingError.isVisible = false
-                        btnTrendingRetry.isVisible = false
+                        cwTrending.setStatus(ContentWrapper.WrapperStatus.Success)
                     }
                     trendingTravelAdapter.submitList(it.travelPreviews)
                 }
                 is HomeEvents.BannerUpdate          -> {
                     binding.apply {
-                        binding.bannerLoading.isVisible = false
                         Picasso.get().load(it.banner.banner.image).into(binding.ivBanner)
                         tvBannerName.text = it.banner.banner.name
                         subBannerAdapter.submitList(it.banner.subBanner)
+                        cwBanner.setStatus(ContentWrapper.WrapperStatus.Success)
                     }
 
                 }
                 is HomeEvents.CountriesUpdate       -> {
-                    binding.countriesLoading.isVisible = false
+                    binding.cwCountry.setStatus(ContentWrapper.WrapperStatus.Success)
                     countryAdapter.submitList(it.countries)
                 }
                 is HomeEvents.NewTravelUpdate       -> {
-                    binding.newTravelLoading.isVisible = false
-                    binding.rvNewTravel.isVisible = true
+                    binding.cwNewTravel.setStatus(ContentWrapper.WrapperStatus.Success)
                     newTravelAdapter.submitList(it.travelPreviews)
+
                 }
                 //loadings
                 is HomeEvents.Loading               -> {
                 }
                 is HomeEvents.NewTravelLoading      -> {
                     binding.apply {
-                        newTravelLoading.isVisible = true
-                        newTravelProgress.isVisible = true
-                        tvNewTravelError.isVisible = false
-                        btnNewTravelRetry.isVisible = false
-                        rvNewTravel.isVisible = false
+                        binding.cwNewTravel.setStatus(ContentWrapper.WrapperStatus.Loading)
                     }
                 }
                 is HomeEvents.BannerLoading         -> {
                     binding.apply {
-                        bannerLoading.isVisible = true; bannerProgress.isVisible = true; tvBannerError.isVisible = false;
-                        btnBannerRetry.isVisible = false;
+                        cwBanner.setStatus(ContentWrapper.WrapperStatus.Loading)
 
                     }
                 }
                 is HomeEvents.CountriesLoading      -> {
                     binding.apply {
-                        countriesLoading.isVisible = true
-                        countriesProgress.isVisible = true
-                        tvCountriesError.isVisible = false
-                        btnCountriesRetry.isVisible = false
+                        cwCountry.setStatus(ContentWrapper.WrapperStatus.Loading)
                     }
                 }
                 is HomeEvents.TrendingTravelLoading -> {
                     binding.apply {
-                        trendingLoading.isVisible = true
-                        trendingProgress.isVisible = true
-                        tvTrendingError.isVisible = false
-                        btnTrendingRetry.isVisible = false
-                        rvTrendingTravel.isVisible = false
+                        cwTrending.setStatus(ContentWrapper.WrapperStatus.Loading)
                     }
 
                 }
@@ -115,43 +99,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
                 }
                 is HomeEvents.TrendingTravelError   -> {
                     binding.apply {
-                        trendingLoading.isVisible = true
-                        trendingProgress.isVisible = false
-                        tvTrendingError.isVisible = true
-                        btnTrendingRetry.isVisible = true
-                        rvTrendingTravel.isVisible = false
-                        tvTrendingError.text = it.message
+                        cwTrending.setStatus(ContentWrapper.WrapperStatus.Failure(it.message))
                     }
                 }
                 is HomeEvents.BannerError           -> {
                     binding.apply {
-                        bannerLoading.isVisible = true; bannerProgress.isVisible = false; tvBannerError.isVisible = true;
-                        btnBannerRetry.isVisible = true;tvBannerError.text = it.message
+                        cwBanner.setStatus(ContentWrapper.WrapperStatus.Failure(it.message))
 
                     }
                 }
                 is HomeEvents.CountriesError        -> {
                     binding.apply {
-                        countriesLoading.isVisible = true
-                        countriesProgress.isVisible = false
-                        tvCountriesError.isVisible = true
-                        btnCountriesRetry.isVisible = true
-                        tvCountriesError.text = it.message
+                        cwCountry.setStatus(ContentWrapper.WrapperStatus.Failure(it.message))
                     }
                 }
-                is HomeEvents.NewTravelError -> {
+                is HomeEvents.NewTravelError        -> {
                     binding.apply {
-                        newTravelLoading.isVisible = true
-                        newTravelProgress.isVisible = false
-                        tvNewTravelError.isVisible = true
-                        btnNewTravelRetry.isVisible = true
-                        tvNewTravelError.text = it.message
-                        rvNewTravel.isVisible = false
+                        cwNewTravel.setStatus(ContentWrapper.WrapperStatus.Failure(it.message))
                     }
 
                 }
-                is HomeEvents.NavToSearch    -> findNavController().navigate(it.direction)
-                HomeEvents.NavToTravelDetail -> findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToTravelDetailFragment())
+                is HomeEvents.NavToSearch           -> findNavController().navigate(it.direction)
+                HomeEvents.NavToTravelDetail        -> findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToTravelDetailFragment())
             }
         }
 
@@ -161,9 +130,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
     private fun setUpActions() {
         binding.apply {
             // btnBannerRetry.setOnClickListener { viewModel.action.onGetBannerRetry() }
-            btnTrendingRetry.setOnClickListener { viewModel.action.onGetTrendingRetry() }
-            btnNewTravelRetry.setOnClickListener { viewModel.action.onGetNewRetry() }
-            btnCountriesRetry.setOnClickListener { viewModel.action.onGetCountriesRetry() }
+//            btnTrendingRetry.setOnClickListener { viewModel.action.onGetTrendingRetry() }
+//            btnNewTravelRetry.setOnClickListener { viewModel.action.onGetNewRetry() }
+//            btnCountriesRetry.setOnClickListener { viewModel.action.onGetCountriesRetry() }
             //   btnSearch.setOnClickListener { viewModel.action.onSearchClick() }
         }
     }
