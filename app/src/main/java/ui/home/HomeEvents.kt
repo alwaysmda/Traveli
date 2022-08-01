@@ -15,7 +15,7 @@ sealed class HomeEvents : BaseEvent() {
 
     //nav
     data class NavToSearch(val direction: NavDirections) : HomeEvents()
-    object NavToTravelDetail : HomeEvents()
+    data class NavToTravelDetail(val travelPreview: TravelPreview) : HomeEvents()
 
 
     //errors

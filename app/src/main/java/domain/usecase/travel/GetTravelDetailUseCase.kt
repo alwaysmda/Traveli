@@ -20,7 +20,9 @@ class GetTravelDetailUseCase(private val traveliRepo: TraveliRepository) {
                 details.add(0, TravelDetail.User(result.data.user))
                 details.add(0, TravelDetail.Cover(result.data.name, result.data.image))
                 details.add(TravelDetail.City(result.data.cityList))
+                details.add(TravelDetail.Tag(result.data.tagList))
                 details.add(TravelDetail.BookMark(result.data.isBookmarked))
+
                 emit(DataState.Success(details))
             }
         }

@@ -118,6 +118,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
                         binding.progressBar.isVisible = false
                     }
                     is SearchEvents.UpdateTravel       -> {
+                        log("TRAVELLIST:FR${it.travels.hashCode()}")
                         travelAdapter.submitList(it.travels)
                         binding.progressBar.isVisible = false
                     }
@@ -144,8 +145,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
                             tvTravelError.isVisible = true
                             tvTravelError.text = it.message
                         }
-
-
                     }
                     is SearchEvents.TravelLoading      -> {
                         binding.apply {

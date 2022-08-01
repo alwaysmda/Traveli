@@ -27,9 +27,13 @@
             android:name="ui.search.SearchFragment"
             android:label="SearchFragment" />
     <fragment
-            android:id="@+id/travelDetailFragment"
-            android:name="ui.travelDetail.TravelDetailFragment"
-            android:label="TravelDetailFragment" />
+        android:id="@+id/travelDetailFragment"
+        android:name="ui.travelDetail.TravelDetailFragment"
+        android:label="TravelDetailFragment">
+        <argument
+            android:name="TravelPreview"
+            app:argType="domain.model.TravelPreview" />
+    </fragment>
     <fragment
             android:id="@+id/profileTabFragment"
             android:name="ui.profile.ProfileTabFragment"

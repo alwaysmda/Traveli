@@ -22,6 +22,7 @@ class TravelMapper @Inject constructor(
             dto.price,
             dto.details.map { travelDetailMapper.toDomainModel(it) }.toMutableList(),
             dto.cityList.map { cityMapper.toDomainModel(it) },
+            dto.tagList,
             userPreviewMapper.toDomainModel(dto.user)
 
 
@@ -38,6 +39,7 @@ class TravelMapper @Inject constructor(
             model.price,
             model.details.map { travelDetailMapper.toEntity(it) },
             model.cityList.map { cityMapper.toEntity(it) },
+            model.tagList,
             userPreviewMapper.toEntity(model.user)
         )
     }

@@ -75,7 +75,7 @@ class TravelAdapter(
 
     private class DiffCallback : DiffUtil.ItemCallback<TravelPreview>() {
         override fun areItemsTheSame(oldItem: TravelPreview, newItem: TravelPreview) =
-            oldItem.id == newItem.id
+            oldItem == newItem
 
         override fun areContentsTheSame(oldItem: TravelPreview, newItem: TravelPreview) =
             oldItem == newItem

@@ -18,6 +18,7 @@ import main.ApplicationClass
 import ui.base.BaseViewModel
 import util.Constant.TRAVEL_TAB
 import util.Constant.USER_TAB
+import util.extension.log
 import javax.inject.Inject
 
 
@@ -36,6 +37,9 @@ class SearchViewModel @Inject constructor(
     private var lastTravelQuery = ""
     private var travelPage = 1
     private var userPage = 1
+    private var isUserRequesting = false
+    private var isTravelRequesting = false
+    var paginateCount = 0
 
 
     private var travelList = mutableListOf<TravelPreview>()
@@ -45,7 +49,7 @@ class SearchViewModel @Inject constructor(
     override fun onStart() {
         viewModelScope.launch {
             _event.send(SearchEvents.UpdateUsers(userPreviewList))
-            _event.send(SearchEvents.UpdateTravel(travelList))
+            _event.send(SearchEvents.UpdateTravel(travelList.cloned()))
         }
     }
 
@@ -54,17 +58,26 @@ class SearchViewModel @Inject constructor(
 
     }
 
+
     override fun paginateTravelList() {
+        if (isTravelRequesting) return
+        paginateCount++
+        log("Paginate:$paginateCount")
+        isTravelRequesting = true
         viewModelScope.launch {
             travelUseCases.searchTravelsUseCase(lastTravelQuery, travelPage + 1).onEach { //TODO paginate and add query
                 when (it) {
                     is DataState.Failure -> if (tabIndex == TRAVEL_TAB) {
-                        travelList = mutableListOf()
+                        isTravelRequesting = false
+                        travelList.clear()
                         _event.send(SearchEvents.TravelError(it.message))
-                        _event.send(SearchEvents.UpdateTravel(travelList))
+                        _event.send(SearchEvents.UpdateTravel(travelList.cloned()))
                     }
-                    DataState.Loading    -> _event.send(SearchEvents.TravelLoading)
+                    DataState.Loading    -> {
+                        _event.send(SearchEvents.TravelLoading)
+                    }
                     is DataState.Success -> { //TODO update list
+                        isTravelRequesting = false
                         travelList.addAll(it.data)
                         travelPage++
                         _event.send(SearchEvents.UpdateTravel(travelList.cloned()))
@@ -77,16 +90,23 @@ class SearchViewModel @Inject constructor(
     }
 
     override fun paginateUserList() {
+        if (isUserRequesting) return
+        isUserRequesting = true
         viewModelScope.launch {
             userUseCases.searchUserUseCase(lastUserQuery, userPage + 1).onEach { //TODO paginate
                 when (it) {
                     is DataState.Failure -> {
+                        isUserRequesting = false
                         if (tabIndex == USER_TAB) _event.send(SearchEvents.UserError(it.message))
                         userPreviewList = mutableListOf()
                         _event.send(SearchEvents.UpdateUsers(userPreviewList))
                     }
-                    is DataState.Loading -> _event.send(SearchEvents.UserLoading)
+                    is DataState.Loading -> {
+                        isUserRequesting = false
+                        _event.send(SearchEvents.UserLoading)
+                    }
                     is DataState.Success -> {
+                        isUserRequesting = false
                         userPreviewList.addAll(it.data)
                         userPage++
                         _event.send(SearchEvents.UpdateUsers(userPreviewList.cloned()))
@@ -131,15 +151,17 @@ class SearchViewModel @Inject constructor(
                     travelUseCases.searchTravelsUseCase(text, 1).onEach { //TODO paginate and add query
                         when (it) {
                             is DataState.Failure -> if (tabIndex == TRAVEL_TAB) {
-                                travelList = mutableListOf()
+                                travelList.clear()
                                 _event.send(SearchEvents.TravelError(it.message))
-                                _event.send(SearchEvents.UpdateTravel(travelList))
+                                _event.send(SearchEvents.UpdateTravel(travelList.cloned()))
                             }
                             DataState.Loading    -> _event.send(SearchEvents.TravelLoading)
                             is DataState.Success -> { //TODO update list
-                                travelList = it.data.toMutableList()
+                                travelList.clear()
+                                travelList.addAll(it.data.toMutableList())
+                                log("TRAVELLIST:originalBefore:${travelList.hashCode()}")
                                 lastTravelQuery = text
-                                _event.send(SearchEvents.UpdateTravel(travelList))
+                                _event.send(SearchEvents.UpdateTravel(travelList.cloned()))
                             }
 
 
@@ -165,7 +187,6 @@ class SearchViewModel @Inject constructor(
 
                 }
                 TRAVEL_TAB -> {
-
                     _event.send(SearchEvents.RvUserVisibility(false))
                     _event.send(SearchEvents.RvTravelVisibility(true))
                     if (query.isNotEmpty() && query != lastTravelQuery) search(query)

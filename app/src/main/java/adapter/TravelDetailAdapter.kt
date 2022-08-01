@@ -23,6 +23,7 @@ import domain.model.TravelDetail.Companion.VIEW_TYPE_COVER
 import domain.model.TravelDetail.Companion.VIEW_TYPE_DESCRIPTION
 import domain.model.TravelDetail.Companion.VIEW_TYPE_IMAGE
 import domain.model.TravelDetail.Companion.VIEW_TYPE_LINK
+import domain.model.TravelDetail.Companion.VIEW_TYPE_TAG
 import domain.model.TravelDetail.Companion.VIEW_TYPE_USER
 import domain.model.TravelDetail.Companion.VIEW_TYPE_VIDEO
 import ui.base.BaseActivity
@@ -49,7 +50,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
             binding.apply {
                 data = travelDetail
                 tvTitle.isVisible = travelDetail.title.isNullOrEmpty().not()
-                tvDescription.isVisible = !travelDetail.description.isNullOrEmpty()
+
             }
         }
     }
@@ -103,7 +104,6 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                         dispatchPause(exoPlayer)
                     }
                 }
-                tvDescription.isVisible = travelDetail.description.isNullOrEmpty().not()
                 Picasso.get().load(travelDetail.image).into(binding.ivVideoPreview)
 
             }
@@ -139,10 +139,21 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
         }
     }
 
+    inner class TagViewHolder(private val binding: RowTravelDetailTagBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(tag: TravelDetail.Tag) {
+            binding.apply {
+                val tagAdapter = SimpleAdapter(activity)
+                tagAdapter.submitList(tag.tagList)
+                rvTags.adapter = tagAdapter
+                app = activity.app
+            }
+        }
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            VIEW_TYPE_COVER       -> {
+            VIEW_TYPE_COVER  -> {
                 CoverViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -153,7 +164,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                 )
 
             }
-            VIEW_TYPE_IMAGE       -> {
+            VIEW_TYPE_IMAGE  -> {
                 ImageViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -207,7 +218,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
 
             }
 
-            VIEW_TYPE_USER        -> {
+            VIEW_TYPE_USER   -> {
                 UserViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -218,7 +229,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                 )
             }
 
-            VIEW_TYPE_CITIES      -> {
+            VIEW_TYPE_CITIES -> {
                 CityViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -229,7 +240,18 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                 )
             }
 
-            else                  -> ImageViewHolder(
+            VIEW_TYPE_TAG    -> {
+                TagViewHolder(
+                    DataBindingUtil.inflate(
+                        LayoutInflater.from(parent.context),
+                        R.layout.row_travel_detail_tag,
+                        parent,
+                        false
+                    )
+                )
+            }
+
+            else             -> ImageViewHolder(
                 DataBindingUtil.inflate(
                     LayoutInflater.from(parent.context),
                     R.layout.row_travel_detail_image,
@@ -254,6 +276,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
             is BookMarkViewHolder    -> holder.bind(currentList[position] as TravelDetail.BookMark)
             is UserViewHolder        -> holder.bind(currentList[position] as TravelDetail.User)
             is CityViewHolder        -> holder.bind(currentList[position] as TravelDetail.City)
+            is TagViewHolder         -> holder.bind(currentList[position] as TravelDetail.Tag)
         }
     }
 

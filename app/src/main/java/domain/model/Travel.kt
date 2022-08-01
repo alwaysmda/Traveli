@@ -10,5 +10,6 @@ data class Travel(
     val price: Long,
     val details: MutableList<TravelDetail>,
     val cityList: List<City>,
+    val tagList: List<String>,
     val user: UserPreview
 )

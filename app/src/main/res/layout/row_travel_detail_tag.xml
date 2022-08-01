@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -12,22 +12,29 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/paddingLarge"
         android:orientation="vertical">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_tag_title"
+            fonti="@{app.m.fontBold}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/paddingLarge"
-            android:text="@{app.m.tags}" />
+            android:text="@{app.m.tags}"
+            android:textColor="?attr/colorText0"
+            android:textSize="@dimen/textLargeXX" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_tags"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/paddingMedium" />
+            android:layout_marginTop="@dimen/paddingMedium"
+            android:orientation="horizontal"
+            android:paddingHorizontal="4dp"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
     </LinearLayout>

@@ -9,7 +9,7 @@
             type="main.ApplicationClass" />
 
         <variable
-            name="tag"
+            name="data"
             type="String" />
 
 
@@ -20,8 +20,9 @@
             app:fonti="@{app.m.fontMedium}"
             android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@{tag}"
-        android:textColor="?attr/colorText0"
+        android:layout_marginHorizontal="@dimen/paddingMedium"
+        android:text="@{ `#` + data}"
+        android:textColor="@color/md_blue_500"
         android:textSize="@dimen/textLarge">
 
 

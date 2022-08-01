@@ -5,8 +5,6 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
-import androidx.media3.common.MediaItem
-import androidx.media3.exoplayer.ExoPlayer
 import com.xodus.traveli.BuildConfig
 import dagger.Module
 import dagger.Provides
@@ -55,11 +53,6 @@ object AppModule {
     fun provideLanguageManager(app: ApplicationClass, prefManager: PrefManager): LanguageManager =
         LanguageManager(app, prefManager)
 
-    @Singleton
-    @Provides
-    fun provideExoPlayer(@ApplicationContext context: Context) = ExoPlayer.Builder(context).build().apply {
-        setMediaItem(MediaItem.fromUri("https://persian5.cdn.asset.aparat.com/aparat-video/bdaea06a8c07f580a463d150bb9730af44790032-360p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImM1MDA0ZDM1ZDU4MGJjMzk5NDVmNjk2Y2IwMTQ5NmM2IiwiZXhwIjoxNjU4OTIwOTQ4LCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.kPJww86JRZqRSrjri07ip61IWYQwwZO217zJ-kfaXks"))
-    }
 
     @ExperimentalCoroutinesApi
     @Singleton
