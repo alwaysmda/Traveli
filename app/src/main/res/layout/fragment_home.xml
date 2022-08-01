@@ -70,8 +70,8 @@
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tv_banner_name"
-                        fonti="@{vm.app.m.fontMedium}"
-                        android:layout_width="match_parent"
+                            app:fonti="@{vm.app.m.fontMedium}"
+                            android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/gradiant"
                         android:gravity="center"
@@ -118,9 +118,9 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_banner_error"
-                    fonti="@{vm.app.m.fontMedium}"
-                    android:layout_width="wrap_content"
+                        android:id="@+id/tv_banner_error"
+                        app:fonti="@{vm.app.m.fontMedium}"
+                        android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="?attr/colorText0"
                     android:textSize="@dimen/textLargeX"
@@ -149,9 +149,9 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/tv_trending_title"
-                style="@style/GeneralButton.TextButton"
-                fonti="@{vm.app.m.fontBold}"
-                android:layout_width="match_parent"
+                    style="@style/GeneralButton.TextButton"
+                    app:fonti="@{vm.app.m.fontBold}"
+                    android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/paddingLarge"
                 android:layout_marginTop="@dimen/paddingLarge"
@@ -204,9 +204,9 @@
 
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_trending_error"
-                    fonti="@{vm.app.m.fontMedium}"
-                    android:layout_width="wrap_content"
+                        android:id="@+id/tv_trending_error"
+                        app:fonti="@{vm.app.m.fontMedium}"
+                        android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/paddingLargeXXX"
                     android:textColor="?attr/colorText0"
@@ -280,9 +280,9 @@
 
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_new_travel_error"
-                    fonti="@{vm.app.m.fontMedium}"
-                    android:layout_width="wrap_content"
+                        android:id="@+id/tv_new_travel_error"
+                        app:fonti="@{vm.app.m.fontMedium}"
+                        android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/paddingLargeXXX"
                     android:textColor="?attr/colorText0"
@@ -360,9 +360,9 @@
 
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_countries_error"
-                    fonti="@{vm.app.m.fontMedium}"
-                    android:layout_width="wrap_content"
+                        android:id="@+id/tv_countries_error"
+                        app:fonti="@{vm.app.m.fontMedium}"
+                        android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/paddingLargeXXX"
                     android:textColor="?attr/colorText0"

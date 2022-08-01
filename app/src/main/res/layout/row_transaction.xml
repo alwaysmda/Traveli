@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="app"
+                type="main.ApplicationClass" />
+
+        <variable
+                name="data"
+                type="domain.model.Transaction" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+            android:id="@+id/rowTravel_cvParent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/paddingMedium"
+            app:cardBackgroundColor="?attr/colorBackground1"
+            app:cardCornerRadius="@dimen/radiusMedium"
+
+            >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <View
+                    android:id="@+id/rowTransaction_vColor"
+                    android:layout_width="4dp"
+                    android:layout_height="0dp"
+                    android:background="@{data.color}"
+                    app:layout_constraintBottom_toBottomOf="@id/rowTransaction_tvDate"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/rowTransaction_tvAmount"
+                    style="@style/GeneralText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/paddingLarge"
+                    android:paddingHorizontal="@dimen/paddingLarge"
+                    android:text="@{data.amountString}"
+                    android:textColor="@{data.color}"
+                    android:textSize="@dimen/textLarge"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="$2,300" />
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/rowTransaction_tvTitle"
+                    style="@style/GeneralText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/paddingMedium"
+                    android:paddingHorizontal="@dimen/paddingLarge"
+                    android:text="@{data.title}"
+                    android:textSize="@dimen/textMedium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rowTransaction_tvAmount"
+                    tools:text="Purchase Top 10 London Tips Every Traveler Should Know" />
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/rowTransaction_tvDate"
+                    style="@style/GeneralText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/paddingMedium"
+                    android:alpha="0.7"
+                    android:paddingHorizontal="@dimen/paddingMedium"
+                    android:paddingBottom="@dimen/paddingMedium"
+                    android:text="@{data.dateString}"
+                    android:textSize="@dimen/textSmall"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rowTransaction_tvTitle"
+                    tools:text="2022 Jun 24 - 13:23" />
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/rowTransaction_tvCheckout"
+                    style="@style/GeneralText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_checkout"
+                    android:paddingVertical="@dimen/paddingSmall"
+                    android:paddingStart="28dp"
+                    android:paddingEnd="@dimen/paddingMedium"
+                    android:text="@{app.m.checkout}"
+                    android:textColor="@color/md_black_1000"
+                    android:textSize="@dimen/textMedium"
+                    app:isVisible="@{data.checkedOut}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Checkout" />
+
+            <ImageView
+                    android:id="@+id/rowTransaction_ivCheckout"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="@dimen/paddingMedium"
+                    android:src="@drawable/ic_check"
+                    app:isVisible="@{data.checkedOut}"
+                    app:layout_constraintBottom_toBottomOf="@id/rowTransaction_tvCheckout"
+                    app:layout_constraintStart_toStartOf="@id/rowTransaction_tvCheckout"
+                    app:layout_constraintTop_toTopOf="@id/rowTransaction_tvCheckout"
+                    app:tint="@color/md_black_1000" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>
+
+

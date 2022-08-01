@@ -19,10 +19,7 @@ import domain.usecase.country.GetCountryListUseCase
 import domain.usecase.photo.*
 import domain.usecase.template.Template
 import domain.usecase.template.TemplateUseCases
-import domain.usecase.transaction.ChargeUseCase
-import domain.usecase.transaction.CheckoutUseCase
-import domain.usecase.transaction.GetTransactionListUseCase
-import domain.usecase.transaction.TransactionUseCases
+import domain.usecase.transaction.*
 import domain.usecase.travel.*
 import domain.usecase.user.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -64,7 +61,6 @@ object AppModule {
         setMediaItem(MediaItem.fromUri("https://persian5.cdn.asset.aparat.com/aparat-video/bdaea06a8c07f580a463d150bb9730af44790032-360p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImM1MDA0ZDM1ZDU4MGJjMzk5NDVmNjk2Y2IwMTQ5NmM2IiwiZXhwIjoxNjU4OTIwOTQ4LCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.kPJww86JRZqRSrjri07ip61IWYQwwZO217zJ-kfaXks"))
     }
 
-
     @ExperimentalCoroutinesApi
     @Singleton
     @Provides
@@ -86,7 +82,6 @@ object AppModule {
             Template(photoRepository),
         )
     }
-
 
     @Singleton
     @Provides
@@ -133,6 +128,7 @@ object AppModule {
             GetTransactionListUseCase(app, transactionRepository, prefManager),
             ChargeUseCase(app, transactionRepository, prefManager),
             CheckoutUseCase(app, transactionRepository, prefManager),
+            GetBalanceUseCase(app, transactionRepository, prefManager),
         )
     }
 }

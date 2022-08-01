@@ -63,5 +63,15 @@ interface LanguageInterface {
     val logoutDesc: String
     val deleteAccountDesc: String
 
+    //Transaction
+    val balance: String
+    val checkout: String
+    val yourTransactionDetailWillBeHere: String
+    val confirmCheckout: String
+    val confirmCheckoutDesc1: String
+    val confirmCheckoutDesc2: String
+    val checkoutComplete: String
+
+    fun confirmCheckoutDesc(value: String) = "$confirmCheckoutDesc1 $value $confirmCheckoutDesc2"
     fun paramString(param: String) = "$appName $param"
 }

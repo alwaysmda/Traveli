@@ -1,6 +1,5 @@
 package ui.profile_edit
 
-import domain.model.User
 import ui.base.BaseEvent
 
 sealed class ProfileEditEvents : BaseEvent() {
@@ -13,9 +12,6 @@ sealed class ProfileEditEvents : BaseEvent() {
 
     //
     class PickImage(val aspectRatioX: Int, val aspectRatioY: Int) : ProfileEditEvents()
-    class UpdateCover(val coverUrl: String) : ProfileEditEvents()
-    class UpdateAvatar(val avatarUrl: String) : ProfileEditEvents()
-    class UpdateInfo(val user: User) : ProfileEditEvents()
     class EditContent(val title: String, val value: String?, val multiline: Boolean) : ProfileEditEvents()
     class EditContentError(val error: String) : ProfileEditEvents()
     object EditContentComplete : ProfileEditEvents()

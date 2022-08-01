@@ -3,18 +3,20 @@ package ui.profile
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewModelScope
+import com.xodus.traveli.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import data.remote.DataState
 import domain.model.*
 import domain.usecase.transaction.TransactionUseCases
 import domain.usecase.user.UserUseCases
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import main.ApplicationClass
 import ui.base.BaseViewModel
-import util.Constant
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,12 +25,25 @@ class ProfileViewModel @Inject constructor(
     private val userUseCases: UserUseCases,
     private val transactionUseCases: TransactionUseCases,
 ) : BaseViewModel<ProfileEvents, ProfileAction>(app), ProfileAction {
-    private var id: Long = 0L
+    //Bind
+    var coverUrl = MutableStateFlow("")
+    var backVisibility = MutableStateFlow(false)
+    var settingVisibility = MutableStateFlow(false)
+    var avatarUrl = MutableStateFlow("")
+    var nameText = MutableStateFlow("")
+    var hometownText = MutableStateFlow("")
+    var emailColor = MutableStateFlow(ContextCompat.getColor(app, R.color.md_grey_500))
+    var phoneColor = MutableStateFlow(ContextCompat.getColor(app, R.color.md_grey_500))
+    var twitterColor = MutableStateFlow(ContextCompat.getColor(app, R.color.md_grey_500))
+    var instagramColor = MutableStateFlow(ContextCompat.getColor(app, R.color.md_grey_500))
+    var websiteColor = MutableStateFlow(ContextCompat.getColor(app, R.color.md_grey_500))
+
+    //Local
     private var user: User? = null
-    private var transactionData: DataTransaction? = null
+    private var balance: Balance? = null
     private val travelList = arrayListOf<TravelPreview>()
     private val statList = arrayListOf<Stat>()
-    private val isMe get() = app.user?.id == id
+    private val isMe get() = (app.user != null) && (app.user?.id == user?.id)
 
     override fun onStart(userId: Long) {
         viewModelScope.launch {
@@ -37,66 +52,56 @@ class ProfileViewModel @Inject constructor(
                 if (userId == 0L) {
                     //Self
                     app.user?.let {
-                        id = it.id
-                        user = it
-                        _event.send(ProfileEvents.UpdateUser(it, true))
-                        getTransactionList()
-                        getUserTravelList()
-                        getUserStat()
+                        updateUser(it)
+                        getBalance()
+                        getUserTravelList(it.id)
+                        getUserStat(it.id)
                     } ?: kotlin.run {
                         //Register
-                        //todo remove
-                        app.prefManager.setPref(Constant.PREF_TOKEN, "Token")
                     }
                 } else {
                     //Others
-                    id = userId
-                    getUser()
-                    getUserTravelList()
-                    getUserStat()
+                    getUser(userId)
+                    getUserTravelList(userId)
+                    getUserStat(userId)
                 }
             } else {
                 if (userId == 0L) {
                     //Self
                     app.user?.let {
-                        id = it.id
-                        user = it
-                        _event.send(ProfileEvents.UpdateUser(it, true))
-                        transactionData?.balanceString?.let { value ->
+                        updateUser(it)
+                        balance?.balanceString?.let { value ->
                             _event.send(ProfileEvents.UpdateBalance(value))
                         } ?: kotlin.run {
-                            getTransactionList()
+                            getBalance()
                         }
                         if (travelList.isEmpty()) {
-                            getUserTravelList()
+                            getUserTravelList(it.id)
                         } else {
                             _event.send(ProfileEvents.UpdateTravelList(travelList))
                         }
                         if (statList.isEmpty()) {
-                            getUserStat()
+                            getUserStat(it.id)
                         } else {
                             _event.send(ProfileEvents.UpdateStatList(statList))
                         }
                     } ?: kotlin.run {
                         //Register
-                        //todo remove
-                        app.prefManager.setPref(Constant.PREF_TOKEN, "Token")
                     }
                 } else {
                     //Others
-                    id = userId
                     user?.let {
-                        _event.send(ProfileEvents.UpdateUser(it, true))
+                        updateUser(it)
                     } ?: kotlin.run {
-                        getUser()
+                        getUser(userId)
                     }
                     if (travelList.isEmpty()) {
-                        getUserTravelList()
+                        getUserTravelList(userId)
                     } else {
                         _event.send(ProfileEvents.UpdateTravelList(travelList))
                     }
                     if (statList.isEmpty()) {
-                        getUserStat()
+                        getUserStat(userId)
                     } else {
                         _event.send(ProfileEvents.UpdateStatList(statList))
                     }
@@ -119,7 +124,7 @@ class ProfileViewModel @Inject constructor(
 
     override fun onBalanceClick() {
         viewModelScope.launch {
-            transactionData?.let {
+            balance?.let {
                 _event.send(ProfileEvents.NavTransactionList(it))
             }
         }
@@ -189,6 +194,7 @@ class ProfileViewModel @Inject constructor(
                     } catch (e: Exception) {
                         Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/$it"))
                     }
+                    _event.send(ProfileEvents.LaunchIntent(intent))
                 }
             }
         }
@@ -234,8 +240,7 @@ class ProfileViewModel @Inject constructor(
                 is DataState.Loading -> Unit
                 is DataState.Failure -> _event.send(ProfileEvents.EditContactError(it.message))
                 is DataState.Success -> {
-                    user = it.data
-                    _event.send(ProfileEvents.UpdateUser(it.data, it.data.id == app.user?.id))
+                    updateUser(it.data)
                     _event.send(ProfileEvents.EditContactComplete)
                 }
             }
@@ -243,45 +248,48 @@ class ProfileViewModel @Inject constructor(
     }
 
     override fun onRetryBalanceClick() {
-        getTransactionList()
+        getBalance()
     }
 
     override fun onRetryTravelListClick() {
-        getUserTravelList()
+        user?.let {
+            getUserTravelList(it.id)
+        }
     }
 
     override fun onRetryStatListClick() {
-        getUserStat()
+        user?.let {
+            getUserStat(it.id)
+        }
     }
 
-    private fun getUser() {
-        userUseCases.getUserUseCase(id).onEach {
+    private fun getUser(userId: Long) {
+        userUseCases.getUserUseCase(userId).onEach {
             when (it) {
-                is DataState.Loading -> _event.send(ProfileEvents.SetUserLoading)
-                is DataState.Failure -> _event.send(ProfileEvents.SetUserFailure(it.message))
+                is DataState.Loading -> _event.send(ProfileEvents.SetBioLoading)
+                is DataState.Failure -> _event.send(ProfileEvents.SetBioFailure(it.message))
                 is DataState.Success -> {
-                    user = it.data
-                    _event.send(ProfileEvents.UpdateUser(it.data, it.data.id == app.user?.id))
+                    updateUser(it.data)
                 }
             }
         }.launchIn(viewModelScope)
     }
 
-    private fun getTransactionList() {
-        transactionUseCases.getTransactionListUseCase(1).onEach {
+    private fun getBalance() {
+        transactionUseCases.getBalanceUseCase().onEach {
             when (it) {
                 is DataState.Loading -> _event.send(ProfileEvents.SetBalanceLoading)
                 is DataState.Failure -> _event.send(ProfileEvents.SetBalanceFailure(it.message))
                 is DataState.Success -> {
-                    transactionData = it.data
+                    balance = it.data
                     _event.send(ProfileEvents.UpdateBalance(it.data.balanceString))
                 }
             }
         }.launchIn(viewModelScope)
     }
 
-    private fun getUserTravelList() {
-        userUseCases.getUserTravelListUseCase(id, 1).onEach {
+    private fun getUserTravelList(userId: Long) {
+        userUseCases.getUserTravelListUseCase(userId, 1).onEach {
             when (it) {
                 is DataState.Loading -> _event.send(ProfileEvents.SetTravelListLoading)
                 is DataState.Failure -> _event.send(ProfileEvents.SetTravelListFailure(it.message))
@@ -297,8 +305,8 @@ class ProfileViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    private fun getUserStat() {
-        userUseCases.getUserStatUseCase(id).onEach {
+    private fun getUserStat(userId: Long) {
+        userUseCases.getUserStatUseCase(userId).onEach {
             when (it) {
                 is DataState.Loading -> _event.send(ProfileEvents.SetStatLoading)
                 is DataState.Failure -> _event.send(ProfileEvents.SetStatFailure(it.message))
@@ -311,5 +319,25 @@ class ProfileViewModel @Inject constructor(
         }.launchIn(viewModelScope)
         viewModelScope.launch {
         }
+    }
+
+    private fun updateUser(u: User) {
+        user = u
+        val isMe = u.id == app.user?.id
+        coverUrl.value = u.cover
+        backVisibility.value = isMe.not()
+        settingVisibility.value = isMe
+        avatarUrl.value = u.avatar
+        nameText.value = u.name ?: ""
+        hometownText.value = u.hometown
+        viewModelScope.launch {
+            _event.send(ProfileEvents.UpdateBio(u.bio))
+        }
+        //Contact
+        emailColor.value = ContextCompat.getColor(app, if (u.contact.email.value == null) R.color.md_grey_500 else u.contact.email.color)
+        phoneColor.value = ContextCompat.getColor(app, if (u.contact.phone.value == null) R.color.md_grey_500 else u.contact.phone.color)
+        twitterColor.value = ContextCompat.getColor(app, if (u.contact.twitter.value == null) R.color.md_grey_500 else u.contact.twitter.color)
+        instagramColor.value = ContextCompat.getColor(app, if (u.contact.instagram.value == null) R.color.md_grey_500 else u.contact.instagram.color)
+        websiteColor.value = ContextCompat.getColor(app, if (u.contact.website.value == null) R.color.md_grey_500 else u.contact.website.color)
     }
 }

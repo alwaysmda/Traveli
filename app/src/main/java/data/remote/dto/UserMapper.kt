@@ -4,7 +4,11 @@ import domain.model.User
 import util.EntityMapper
 import javax.inject.Inject
 
-class UserMapper @Inject constructor(private val contactMapper: ContactMapper, private val countryMapper: CountryMapper) : EntityMapper<UserDto, User> {
+class UserMapper @Inject constructor(
+    private val contactMapper: ContactMapper,
+    private val countryMapper: CountryMapper,
+    private val cityMapper: CityMapper,
+) : EntityMapper<UserDto, User> {
     override fun toDomainModel(dto: UserDto): User {
         return User(
             dto.id,
@@ -13,8 +17,8 @@ class UserMapper @Inject constructor(private val contactMapper: ContactMapper, p
             dto.bio,
             dto.cover,
             countryMapper.toDomainModel(dto.country),
-            dto.city,
-            "${dto.city}, ${dto.country.name}",
+            cityMapper.toDomainModel(dto.city),
+            "${dto.city.name}, ${dto.country.name}",
             contactMapper.toDomainModel(dto.contact)
         )
     }
@@ -27,7 +31,7 @@ class UserMapper @Inject constructor(private val contactMapper: ContactMapper, p
             model.bio,
             model.cover,
             countryMapper.toEntity(model.country),
-            model.city,
+            cityMapper.toEntity(model.city),
             contactMapper.toEntity(model.contact)
         )
 

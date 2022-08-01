@@ -26,8 +26,8 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_title"
-            fonti="@{app.m.fontMedium}"
-            android:layout_width="wrap_content"
+                app:fonti="@{app.m.fontMedium}"
+                android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/paddingLarge"
             android:text="@{data.title}"
@@ -69,9 +69,9 @@
 
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_description"
-            fonti="@{app.m.fontMedium}"
-            android:layout_width="wrap_content"
+                android:id="@+id/tv_description"
+                app:fonti="@{app.m.fontMedium}"
+                android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/paddingLarge"
             android:layout_marginTop="@dimen/paddingLarge"

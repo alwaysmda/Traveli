@@ -23,8 +23,8 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_title"
-            fonti="@{app.m.fontBold}"
-            android:layout_width="wrap_content"
+                app:fonti="@{app.m.fontBold}"
+                android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{data.title}"
             android:textColor="?attr/colorText0"
@@ -33,9 +33,9 @@
             />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_description"
-            fonti="@{app.m.fontMedium}"
-            android:layout_width="match_parent"
+                android:id="@+id/tv_description"
+                app:fonti="@{app.m.fontMedium}"
+                android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/paddingLarge"
             android:layout_marginTop="@dimen/paddingLarge"

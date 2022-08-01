@@ -107,7 +107,7 @@ class UserRepositoryImpl(
     }
 
     override suspend fun updateUserInfo(user: User): DataState<User> {
-        return when (val response = call { userApi.updateUserInfo(user.name ?: "", user.bio, user.country.id, user.city) }) {
+        return when (val response = call { userApi.updateUserInfo(user.name ?: "", user.bio, user.country.id, user.city.id) }) {
             is DataState.Failure -> response
             is DataState.Success -> DataState.Loading
             is DataState.Loading -> {

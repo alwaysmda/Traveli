@@ -20,8 +20,8 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/row_city_title"
-            fonti="@{app.m.fontBold}"
-            android:layout_width="wrap_content"
+                app:fonti="@{app.m.fontBold}"
+                android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/paddingLarge"
             android:text="@{app.m.cities}"

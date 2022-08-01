@@ -11,7 +11,7 @@ data class User(
     val bio: String?,
     val cover: String,
     val country: Country,
-    val city: String,
+    val city: City,
     val hometown: String,
     val contact: Contact,
 ) : Parcelable

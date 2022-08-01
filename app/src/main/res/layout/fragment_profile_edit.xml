@@ -27,6 +27,7 @@
                     android:id="@+id/profileEdit_ivCover"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    app:imageUrl="@{vm.coverUrl}"
                     android:scaleType="centerCrop"
                     android:src="@color/md_green_300"
                     app:layout_constraintDimensionRatio="2:1"
@@ -77,6 +78,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginStart="@dimen/paddingLargeXXX"
+                    app:imageUrl="@{vm.avatarUrl}"
                     android:padding="1dp"
                     android:scaleType="centerCrop"
                     android:src="@color/md_green_500"
@@ -104,7 +106,7 @@
             <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/profileEdit_tvName"
                     style="@style/GeneralText"
-                    fonti="@{vm.app.m.fontMedium}"
+                    android:text="@{vm.nameText}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/paddingLargeXXX"
@@ -113,6 +115,7 @@
                     android:minHeight="60dp"
                     android:paddingHorizontal="@dimen/paddingLarge"
                     android:paddingVertical="@dimen/paddingLargeXX"
+                    app:fonti="@{vm.app.m.fontMedium}"
                     android:textColor="?attr/colorText0"
                     android:textSize="@dimen/textLarge"
                     app:layout_constraintTop_toBottomOf="@id/profileEdit_ivAvatar"
@@ -120,7 +123,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                     style="@style/GeneralText"
-                    fonti="@{vm.app.m.fontMedium}"
+                    app:fonti="@{vm.app.m.fontMedium}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/paddingLargeXXX"
@@ -154,12 +157,13 @@
             <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/profileEdit_tvHometown"
                     style="@style/GeneralText"
-                    fonti="@{vm.app.m.fontMedium}"
+                    android:text="@{vm.hometownText}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/paddingLargeXXX"
                     android:background="@drawable/shape_border_round"
                     android:gravity="center_vertical"
+                    app:fonti="@{vm.app.m.fontMedium}"
                     android:minHeight="60dp"
                     android:paddingHorizontal="@dimen/paddingLarge"
                     android:paddingVertical="@dimen/paddingLargeXX"
@@ -170,7 +174,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                     style="@style/GeneralText"
-                    fonti="@{vm.app.m.fontMedium}"
+                    app:fonti="@{vm.app.m.fontMedium}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/paddingLargeXXX"
@@ -204,12 +208,13 @@
             <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/profileEdit_tvBio"
                     style="@style/GeneralText"
-                    fonti="@{vm.app.m.fontMedium}"
+                    android:text="@{vm.bioText}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/paddingLargeXXX"
                     android:background="@drawable/shape_border_round"
                     android:gravity="center_vertical"
+                    app:fonti="@{vm.app.m.fontMedium}"
                     android:minHeight="60dp"
                     android:paddingHorizontal="@dimen/paddingLarge"
                     android:paddingVertical="@dimen/paddingLargeXX"
@@ -220,7 +225,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                     style="@style/GeneralText"
-                    fonti="@{vm.app.m.fontMedium}"
+                    app:fonti="@{vm.app.m.fontMedium}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/paddingLargeXXX"
@@ -254,7 +259,7 @@
             <com.google.android.material.button.MaterialButton
                     android:id="@+id/profileEdit_btnLogout"
                     style="@style/GeneralButton"
-                    fonti="@{vm.app.m.fontMedium}"
+                    app:fonti="@{vm.app.m.fontMedium}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/paddingLargeXXX"
@@ -266,7 +271,7 @@
             <com.google.android.material.button.MaterialButton
                     android:id="@+id/profileEdit_btnDeleteAccount"
                     style="@style/GeneralButton"
-                    fonti="@{vm.app.m.fontMedium}"
+                    app:fonti="@{vm.app.m.fontMedium}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/paddingLargeXXX"

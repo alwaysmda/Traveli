@@ -17,6 +17,11 @@ object Constant {
     const val CON_TRANS_PHOTO = "CON_TRANS_PHOTO_"
     const val USER_TAB = 0
     const val TRAVEL_TAB = 1
+    const val CON_PAGINATE_OFFSET = 100
+    const val CON_ADAPTER_NORMAL = 1
+    const val CON_ADAPTER_LOADING = 2
+    const val CON_ADAPTER_FAILURE = 3
+    const val CON_ADAPTER_ADD = 4
 
     enum class Languages(val value: String) {
         FA("FA"),
