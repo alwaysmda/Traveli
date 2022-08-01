@@ -79,4 +79,14 @@ class TravelRepositoryImpl(
             is DataState.Success -> DataState.Loading
         }
     }
+
+    override suspend fun bookMarkTravel(isBookMark: Boolean): DataState<Travel> {
+        return when (val response = call { travelApi.bookMarkTravel(isBookMark) }) {
+            is DataState.Failure -> response
+            DataState.Loading    -> {
+                DataState.Success(travelMapper.toDomainModel(ResponseBookmarkDto.getFake().travelDto))
+            }
+            is DataState.Success -> DataState.Loading
+        }
+    }
 }
