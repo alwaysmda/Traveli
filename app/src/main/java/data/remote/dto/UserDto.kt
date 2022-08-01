@@ -11,7 +11,7 @@ data class UserDto(
     @SerializedName("bio") var bio: String?,
     @SerializedName("cover") var cover: String,
     @SerializedName("country") var country: CountryDto,
-    @SerializedName("city") var city: String,
+    @SerializedName("city") var city: CityDto,
     @SerializedName("contact") var contact: ContactDto,
 ) {
     companion object {
@@ -20,10 +20,10 @@ data class UserDto(
                 userId ?: Random.nextLong(2, 10000),
                 "Denis Trico",
                 "https://upload.wikimedia.org/wikipedia/commons/2/23/Dennis_Ritchie_2011.jpg",
-                "It's me.",
+                "Travel opens you up to so many incredible experiences, and while there’s a whole lot more of the world I’d still like to see, and this is certainly not the definitive list of best travel experiences, I’d like to share with you some of my most amazing experiences and those I think deserve a spot on every traveler’s bucket list.",
                 "https://www.thewanderinglens.com/wp-content/uploads/2016/11/MARSEILLE01.jpg",
                 CountryDto.getFake(),
-                "Teyvat",
+                CityDto.getFake(),
                 ContactDto.getFake(),
             )
         }

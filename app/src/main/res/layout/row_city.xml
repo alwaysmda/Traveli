@@ -17,8 +17,8 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_city_name"
-        fonti="@{app.m.fontMedium}"
-        android:layout_width="wrap_content"
+            app:fonti="@{app.m.fontMedium}"
+            android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/paddingLarge"
         android:layout_marginBottom="@dimen/paddingMedium"

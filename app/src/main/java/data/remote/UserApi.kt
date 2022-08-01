@@ -37,7 +37,7 @@ interface UserApi {
         @Field("name") name: String,
         @Field("bio") bio: String?,
         @Field("countryId") countryId: Long,
-        @Field("city") city: String,
+        @Field("cityId") cityId: Long,
     ): Response<ResponseGetUserDto>
 
     @POST("users/update/contact")

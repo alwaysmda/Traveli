@@ -5,7 +5,6 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import coil.load
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageView
 import com.canhub.cropper.options
@@ -80,15 +79,6 @@ class ProfileEditFragment : BaseFragment<FragmentProfileEditBinding, ProfileEdit
                     sheet.show(childFragmentManager, EditBottomSheet::class.simpleName)
                 }
                 is ProfileEditEvents.ShowLoading         -> showLoading(it.show)
-                is ProfileEditEvents.UpdateCover         -> binding.profileEditIvCover.load(it.coverUrl)
-                is ProfileEditEvents.UpdateAvatar        -> binding.profileEditIvAvatar.load(it.avatarUrl)
-                is ProfileEditEvents.UpdateInfo          -> {
-                    binding.apply {
-                        profileEditTvName.text = it.user.name
-                        profileEditTvHometown.text = it.user.hometown
-                        profileEditTvBio.text = it.user.bio
-                    }
-                }
             }
         }
     }

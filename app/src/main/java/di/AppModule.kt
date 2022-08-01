@@ -17,10 +17,7 @@ import domain.usecase.country.GetCountryListUseCase
 import domain.usecase.photo.*
 import domain.usecase.template.Template
 import domain.usecase.template.TemplateUseCases
-import domain.usecase.transaction.ChargeUseCase
-import domain.usecase.transaction.CheckoutUseCase
-import domain.usecase.transaction.GetTransactionListUseCase
-import domain.usecase.transaction.TransactionUseCases
+import domain.usecase.transaction.*
 import domain.usecase.travel.*
 import domain.usecase.user.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -79,7 +76,6 @@ object AppModule {
         )
     }
 
-
     @Singleton
     @Provides
     fun provideTravelUseCase(traveliRepository: TraveliRepository): TravelUseCases {
@@ -125,6 +121,7 @@ object AppModule {
             GetTransactionListUseCase(app, transactionRepository, prefManager),
             ChargeUseCase(app, transactionRepository, prefManager),
             CheckoutUseCase(app, transactionRepository, prefManager),
+            GetBalanceUseCase(app, transactionRepository, prefManager),
         )
     }
 }

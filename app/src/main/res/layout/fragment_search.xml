@@ -47,8 +47,8 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_search"
-                    fonti="@{vm.app.m.fontMedium}"
-                    android:layout_width="match_parent"
+                        app:fonti="@{vm.app.m.fontMedium}"
+                        android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/paddingLarge"
                     android:layout_marginTop="@dimen/paddingLarge"
@@ -113,9 +113,9 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_user_error"
-            fonti="@{vm.app.m.fontMedium}"
-            android:layout_width="wrap_content"
+                android:id="@+id/tv_user_error"
+                app:fonti="@{vm.app.m.fontMedium}"
+                android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/paddingLarge"
             android:textColor="?attr/colorText0"
@@ -126,9 +126,9 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_travel_error"
-            fonti="@{vm.app.m.fontMedium}"
-            android:layout_width="wrap_content"
+                android:id="@+id/tv_travel_error"
+                app:fonti="@{vm.app.m.fontMedium}"
+                android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/paddingLarge"
             android:textColor="?attr/colorText0"

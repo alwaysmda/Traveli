@@ -4,13 +4,10 @@ import adapter.StatAdapter
 import adapter.TravelAdapter
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import coil.load
 import com.xodus.traveli.R
 import com.xodus.traveli.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,27 +42,28 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileEvents, Prof
                 is ProfileEvents.NavSetting           -> findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToProfileEditFragment())
                 is ProfileEvents.NavTravel            -> Unit
                 is ProfileEvents.NavAddTravel         -> Unit
-                is ProfileEvents.NavTransactionList   -> Unit
-                is ProfileEvents.SetUserLoading       -> binding.profileCwBio.setStatus(ContentWrapper.WrapperStatus.Loading)
-                is ProfileEvents.SetUserFailure       -> binding.profileCwBio.setStatus(ContentWrapper.WrapperStatus.Failure(it.message))
-                is ProfileEvents.UpdateUser           -> {
+                is ProfileEvents.NavTransactionList   -> findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToTransactionFragment(it.balance))
+                is ProfileEvents.SetBioLoading        -> binding.profileCwBio.setStatus(ContentWrapper.WrapperStatus.Loading)
+                is ProfileEvents.SetBioFailure        -> binding.profileCwBio.setStatus(ContentWrapper.WrapperStatus.Failure(it.message))
+                is ProfileEvents.UpdateBio            -> {
                     binding.apply {
                         profileCwBio.setStatus(ContentWrapper.WrapperStatus.Success)
-                        profileBtnBack.isVisible = it.isMe.not()
-                        profileBtnSetting.isVisible = it.isMe
-                        profileCwBalance.isVisible = it.isMe
-                        profileIvCover.load(it.user.cover)
-                        profileIvAvatar.load(it.user.avatar)
-                        profileTvName.text = it.user.name
-                        profileTvHometown.text = it.user.hometown
-                        profileTvBio.text = it.user.bio
-                        it.user.contact.apply {
-                            profileBtnEmail.backgroundTintList = ContextCompat.getColorStateList(requireContext(), if (email.value == null) R.color.md_grey_500 else email.color)
-                            profileBtnPhone.backgroundTintList = ContextCompat.getColorStateList(requireContext(), if (phone.value == null) R.color.md_grey_500 else phone.color)
-                            profileBtnTwitter.backgroundTintList = ContextCompat.getColorStateList(requireContext(), if (twitter.value == null) R.color.md_grey_500 else twitter.color)
-                            profileBtnInstagram.backgroundTintList = ContextCompat.getColorStateList(requireContext(), if (instagram.value == null) R.color.md_grey_500 else instagram.color)
-                            profileBtnWebsite.backgroundTintList = ContextCompat.getColorStateList(requireContext(), if (website.value == null) R.color.md_grey_500 else website.color)
-                        }
+                        profileTvBio.text = it.bio
+                        //                        profileBtnBack.isVisible = it.isMe.not()
+                        //                        profileBtnSetting.isVisible = it.isMe
+                        //                        profileCwBalance.isVisible = it.isMe
+                        //                        profileIvCover.load(it.user.cover)
+                        //                        profileIvAvatar.load(it.user.avatar)
+                        //                        profileTvName.text = it.user.name
+                        //                        profileTvHometown.text = it.user.hometown
+                        //                        profileTvBio.text = it.user.bio
+                        //                        it.contact.apply {
+                        //                            profileBtnEmail.backgroundTintList = ContextCompat.getColorStateList(requireContext(), if (email.value == null) R.color.md_grey_500 else email.color)
+                        //                            profileBtnPhone.backgroundTintList = ContextCompat.getColorStateList(requireContext(), if (phone.value == null) R.color.md_grey_500 else phone.color)
+                        //                            profileBtnTwitter.backgroundTintList = ContextCompat.getColorStateList(requireContext(), if (twitter.value == null) R.color.md_grey_500 else twitter.color)
+                        //                            profileBtnInstagram.backgroundTintList = ContextCompat.getColorStateList(requireContext(), if (instagram.value == null) R.color.md_grey_500 else instagram.color)
+                        //                            profileBtnWebsite.backgroundTintList = ContextCompat.getColorStateList(requireContext(), if (website.value == null) R.color.md_grey_500 else website.color)
+                        //                        }
                     }
                 }
                 is ProfileEvents.SetBalanceLoading    -> binding.profileCwBalance.setStatus(ContentWrapper.WrapperStatus.Loading)

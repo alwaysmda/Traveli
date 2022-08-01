@@ -1,8 +1,11 @@
 package data.remote.dto
 
+import androidx.core.content.ContextCompat
+import com.xodus.traveli.R
 import domain.model.Transaction
 import main.ApplicationClass
 import util.EntityMapper
+import util.extension.convertTimestampToDate
 import util.extension.separateNumberBy3
 import util.extension.translate
 import javax.inject.Inject
@@ -14,8 +17,11 @@ class TransactionMapper @Inject constructor(val applicationClass: ApplicationCla
             dto.title,
             dto.amount,
             dto.isPositive,
+            ContextCompat.getColor(applicationClass, if (dto.isPositive) R.color.md_green_700 else R.color.md_red_700),
             dto.isCheckedOut,
-            "$${dto.amount.separateNumberBy3().translate()}"
+            "${if (dto.isPositive) "+" else "-"}$${dto.amount.separateNumberBy3().translate()}",
+            dto.date,
+            convertTimestampToDate(dto.date, "yyyy MMM dd - HH:mm")
         )
     }
 
@@ -26,6 +32,7 @@ class TransactionMapper @Inject constructor(val applicationClass: ApplicationCla
             model.amount,
             model.isPositive,
             model.isCheckedOut,
+            model.date,
         )
 
     fun fromEntityList(dtoList: List<TransactionDto>): List<Transaction> =

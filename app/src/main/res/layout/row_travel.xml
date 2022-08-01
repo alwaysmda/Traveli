@@ -45,8 +45,8 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_banner_name"
-                    fonti="@{app.m.fontMedium}"
-                    android:layout_width="match_parent"
+                        app:fonti="@{app.m.fontMedium}"
+                        android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/gradiant"
                     android:elevation="0dp"

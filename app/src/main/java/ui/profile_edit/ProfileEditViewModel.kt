@@ -3,7 +3,9 @@ package ui.profile_edit
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import data.remote.DataState
+import domain.model.User
 import domain.usecase.user.UserUseCases
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -16,6 +18,14 @@ class ProfileEditViewModel @Inject constructor(
     app: ApplicationClass,
     private val userUseCases: UserUseCases,
 ) : BaseViewModel<ProfileEditEvents, ProfileEditAction>(app), ProfileEditAction {
+    //Bind
+    val coverUrl = MutableStateFlow("")
+    val avatarUrl = MutableStateFlow("")
+    val nameText = MutableStateFlow("")
+    val hometownText = MutableStateFlow("")
+    val bioText = MutableStateFlow("")
+
+    //Local
     private var editType = ProfileEditType.Cover
 
     private enum class ProfileEditType {
@@ -29,9 +39,9 @@ class ProfileEditViewModel @Inject constructor(
     override fun onStart() {
         viewModelScope.launch {
             app.user?.let {
-                _event.send(ProfileEditEvents.UpdateCover(it.cover))
-                _event.send(ProfileEditEvents.UpdateAvatar(it.avatar))
-                _event.send(ProfileEditEvents.UpdateInfo(it))
+                coverUrl.value = it.cover
+                avatarUrl.value = it.avatar
+                updateUserInfo(it)
             } ?: kotlin.run {
                 _event.send(ProfileEditEvents.Snack(app.m.pleaseLoginToDoThisAction))
                 _event.send(ProfileEditEvents.NavBack)
@@ -71,7 +81,7 @@ class ProfileEditViewModel @Inject constructor(
                         }
                         is DataState.Success -> {
                             _event.send(ProfileEditEvents.ShowLoading(false))
-                            _event.send(ProfileEditEvents.UpdateCover(it.data.cover))
+                            coverUrl.value = it.data.cover
                             app.user = it.data
                         }
                     }
@@ -87,7 +97,7 @@ class ProfileEditViewModel @Inject constructor(
                         }
                         is DataState.Success -> {
                             _event.send(ProfileEditEvents.ShowLoading(false))
-                            _event.send(ProfileEditEvents.UpdateAvatar(it.data.avatar))
+                            avatarUrl.value = it.data.avatar
                             app.user = it.data
                         }
                     }
@@ -136,7 +146,7 @@ class ProfileEditViewModel @Inject constructor(
                     is DataState.Success -> {
                         _event.send(ProfileEditEvents.EditContentComplete)
                         _event.send(ProfileEditEvents.ShowLoading(false))
-                        _event.send(ProfileEditEvents.UpdateInfo(it.data))
+                        updateUserInfo(it.data)
                         app.user = it.data
                     }
                 }
@@ -173,5 +183,11 @@ class ProfileEditViewModel @Inject constructor(
                 }.launchIn(viewModelScope)
             }))
         }
+    }
+
+    private fun updateUserInfo(u: User) {
+        nameText.value = u.name ?: ""
+        hometownText.value = u.hometown
+        bioText.value = u.bio ?: ""
     }
 }

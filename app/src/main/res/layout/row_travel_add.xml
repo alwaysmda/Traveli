@@ -11,16 +11,15 @@
                 type="main.ApplicationClass" />
 
     </data>
-
     <com.google.android.material.button.MaterialButton
             android:id="@+id/rowTravelAdd_btnAdd"
             style="@style/GeneralButton.IconButton"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/paddingMedium"
             android:text="@{app.m.add}"
             android:textAllCaps="false"
-            app:cornerRadius="25dp"
+            app:cornerRadius="@dimen/radiusMedium"
             app:icon="@drawable/ic_plus"
             app:iconGravity="textStart"
             tools:text="Add" />

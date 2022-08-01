@@ -7,7 +7,7 @@ import main.ApplicationClass
 
 class LanguageEN(private val app: ApplicationClass) : LanguageInterface {
     override val fontLight: Typeface? get() = ResourcesCompat.getFont(app, R.font.font_en_light)
-    override val fontMedium: Typeface? get() = ResourcesCompat.getFont(app, R.font.font_en_light)
+    override val fontMedium: Typeface? get() = ResourcesCompat.getFont(app, R.font.font_en_medium)
     override val fontBold: Typeface? get() = ResourcesCompat.getFont(app, R.font.font_en_medium)
     override val locale = "EN"
     override val appName = "Template Five"
@@ -60,4 +60,13 @@ class LanguageEN(private val app: ApplicationClass) : LanguageInterface {
     override val deleteAccount: String = "Delete account"
     override val logoutDesc: String = "Are you sure you want to logout?"
     override val deleteAccountDesc: String = "Are you sure you want to delete your account permanently?\nAll your data will be lost.\nThis action cannot be undone."
+
+    //Transaction
+    override val balance: String = "Balance"
+    override val checkout: String = "Checkout"
+    override val yourTransactionDetailWillBeHere: String = "Your transactions' details will be here"
+    override val confirmCheckout: String = "Confirm checkout"
+    override val confirmCheckoutDesc1: String = "Are you sure you want to checkout"
+    override val confirmCheckoutDesc2: String = "to your account?"
+    override val checkoutComplete: String = "Checkout complete!"
 }

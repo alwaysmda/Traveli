@@ -1,7 +1,10 @@
 package ui.profile
 
 import android.content.Intent
-import domain.model.*
+import domain.model.Balance
+import domain.model.ContactItem
+import domain.model.Stat
+import domain.model.TravelPreview
 import ui.base.BaseEvent
 
 sealed class ProfileEvents : BaseEvent() {
@@ -11,14 +14,14 @@ sealed class ProfileEvents : BaseEvent() {
     //Nav
     object NavBack : ProfileEvents()
     object NavSetting : ProfileEvents()
-    class NavTransactionList(val dataTransaction: DataTransaction) : ProfileEvents()
+    class NavTransactionList(val balance: Balance) : ProfileEvents()
     object NavAddTravel : ProfileEvents()
     class NavTravel(val travel: TravelPreview) : ProfileEvents()
 
-    //User
-    object SetUserLoading : ProfileEvents()
-    class SetUserFailure(val message: String) : ProfileEvents()
-    class UpdateUser(val user: User, val isMe: Boolean) : ProfileEvents()
+    //Bio
+    object SetBioLoading : ProfileEvents()
+    class SetBioFailure(val message: String) : ProfileEvents()
+    class UpdateBio(val bio: String?) : ProfileEvents()
 
     //Balance
     object SetBalanceLoading : ProfileEvents()
