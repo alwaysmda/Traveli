@@ -28,7 +28,6 @@
             fonti="@{app.m.fontBold}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/paddingLarge"
             android:text="@{data.title}"
             android:textColor="?attr/colorText0"
             android:textSize="@dimen/textLargeXX"

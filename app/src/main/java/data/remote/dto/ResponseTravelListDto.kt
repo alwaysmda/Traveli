@@ -9,7 +9,7 @@ data class ResponseTravelListDto(
 ) {
 
     companion object {
-        fun getFake() = ResponseTravelListDto("success", MetaDto.getFake(), TravelPreviewDto.getFake(20))
+        fun getFake() = ResponseTravelListDto("success", MetaDto.getFake(), TravelPreviewDto.getFake(10))
     }
 
 }

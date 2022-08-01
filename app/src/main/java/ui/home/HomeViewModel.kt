@@ -23,7 +23,8 @@ class HomeViewModel @Inject constructor(
     private val countryUseCases: CountryUseCases
 ) : BaseViewModel<HomeEvents, HomeAction>(app), HomeAction {
     override fun onStart() {
-        getMe()
+        if (app.user == null) getMe() else getData()
+
     }
 
     override fun onGetBannerRetry() { // onGetCountriesRetryClick
@@ -44,7 +45,7 @@ class HomeViewModel @Inject constructor(
 
     override fun onTravelItemClick(travelPreview: TravelPreview, pos: Int) {
         viewModelScope.launch {
-            _event.send(HomeEvents.NavToTravelDetail) //TODO pass travel
+            _event.send(HomeEvents.NavToTravelDetail(travelPreview)) //TODO pass travel
         }
     }
 

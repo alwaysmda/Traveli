@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaItem
+import androidx.navigation.fragment.navArgs
 import com.xodus.traveli.R
 import com.xodus.traveli.databinding.FragmentTravelDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,6 +23,8 @@ class TravelDetailFragment : BaseFragment<FragmentTravelDetailBinding, TravelDet
 
     private lateinit var travelDetailAdapter: TravelDetailAdapter
 
+    private val args: TravelDetailFragmentArgs by navArgs()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +36,9 @@ class TravelDetailFragment : BaseFragment<FragmentTravelDetailBinding, TravelDet
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerView()
         observeToEvents()
-        viewModel.action.onStart()
+        viewModel.action.onStart(args.travelPreview)
+
+
     }
 
     private fun observeToEvents() {
@@ -61,18 +66,20 @@ class TravelDetailFragment : BaseFragment<FragmentTravelDetailBinding, TravelDet
         travelDetailAdapter = TravelDetailAdapter(baseActivity, viewModel.exoPlayer, onLinkClick = {
             viewModel.action.onLinkClick(it)
         }, onPlayerViewClick = { lastPlayedVideoIndex, position ->
-            if (lastPlayedVideoIndex != -1 && lastPlayedVideoIndex != position) {
-                val videoViewHolder = binding.rvTravelDetail.findViewHolderForAdapterPosition(lastPlayedVideoIndex) as TravelDetailAdapter.VideoViewHolder
-                videoViewHolder.binding.apply {
-                    playerView.player = null
-                    ivVideoPreview.visibility = View.VISIBLE
-                    ivPlay.visibility = View.VISIBLE
 
+
+            binding.rvTravelDetail.findViewHolderForAdapterPosition(lastPlayedVideoIndex)?.let {
+                if (lastPlayedVideoIndex != -1 && lastPlayedVideoIndex != position) {
+                    val videoViewHolder = it as TravelDetailAdapter.VideoViewHolder
+                    videoViewHolder.binding.apply {
+                        playerView.player = null
+                        ivVideoPreview.visibility = View.VISIBLE
+                        ivPlay.visibility = View.VISIBLE
+                    }
                 }
             }
             viewModel.exoPlayer.setMediaItem(MediaItem.fromUri((travelDetailAdapter.currentList[position] as TravelDetail.Video).video))
             travelDetailAdapter.setLastPlayedVideoIndex(position)
-
         })
         binding.rvTravelDetail.adapter = travelDetailAdapter
 

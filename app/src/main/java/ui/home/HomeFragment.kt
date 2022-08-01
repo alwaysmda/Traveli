@@ -120,7 +120,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
 
                 }
                 is HomeEvents.NavToSearch           -> findNavController().navigate(it.direction)
-                HomeEvents.NavToTravelDetail        -> findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToTravelDetailFragment())
+                is HomeEvents.NavToTravelDetail     -> findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToTravelDetailFragment(it.travelPreview))
             }
         }
 
