@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.flowOn
 class GetTravelDetailUseCase(private val traveliRepo: TraveliRepository) {
 
 
-    operator fun invoke(travelId: Int) = flow<DataState<List<TravelDetail>>> {
+    operator fun invoke(travelId: Long) = flow<DataState<List<TravelDetail>>> {
         emit(DataState.Loading)
         when (val result = traveliRepo.getTravelDetail(travelId)) {
             is DataState.Failure -> emit(DataState.Failure(result.code, result.message))
