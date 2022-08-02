@@ -16,11 +16,15 @@ class MiscRepositoryImpl(
     private val networkErrorMapper: NetworkErrorMapper,
     private val countryMapper: CountryMapper
 ) : MiscRepository, ApiResponseHandler(app, networkErrorMapper) {
+    private val countryList = arrayListOf<Country>()
     override suspend fun getCountries(): DataState<ArrayList<Country>> {
+        if (countryList.isNotEmpty()) return DataState.Success(countryList)
         return when (val response = call { miscApi.getCountries() }) {
             is DataState.Failure -> response
             DataState.Loading    -> {
-                DataState.Success(countryMapper.fromEntityList(ResponseCountryDto.getFake().countries))
+                countryList.addAll(countryMapper.fromEntityList(ResponseCountryDto.getFake().countries))
+                DataState.Success(countryList)
+
             }
             is DataState.Success -> DataState.Loading
         }

@@ -47,6 +47,12 @@ class TravelDetailViewModel @Inject constructor(
         }
     }
 
+    override fun onBackPress() {
+        viewModelScope.launch {
+            _event.send(TravelDetailEvents.NavBack)
+        }
+    }
+
 
     private fun getTravelDetail(travelPreview: TravelPreview) {
 

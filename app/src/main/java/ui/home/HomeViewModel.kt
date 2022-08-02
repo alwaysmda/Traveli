@@ -89,10 +89,10 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getData() {
-        getTrendingTravel()
+        getCountries()
         getNewTravel()
         getBanner()
-        getCountries()
+        getTrendingTravel()
     }
 
     private fun getTrendingTravel() {

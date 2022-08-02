@@ -60,7 +60,7 @@ class TravelRepositoryImpl(
         }
     }
 
-    override suspend fun getTravelDetail(travelId: Int): DataState<Travel> {
+    override suspend fun getTravelDetail(travelId: Long): DataState<Travel> {
         return when (val response = call { travelApi.getTravelDetail(travelId) }) {
             is DataState.Failure -> response
             DataState.Loading    -> DataState.Success(travelMapper.toDomainModel(ResponseTravelDetailDto.getFake().travel))

@@ -18,6 +18,7 @@ import main.ApplicationClass
 import ui.base.BaseViewModel
 import util.Constant.TRAVEL_TAB
 import util.Constant.USER_TAB
+import util.extension.log
 import javax.inject.Inject
 
 
@@ -40,14 +41,13 @@ class SearchViewModel @Inject constructor(
     private var isTravelRequesting = false
 
 
-
     private var travelList = mutableListOf<TravelPreview>()
     private var userPreviewList = mutableListOf<UserPreview>()
 
 
     override fun onStart() {
         viewModelScope.launch {
-            _event.send(SearchEvents.UpdateUsers(userPreviewList))
+            _event.send(SearchEvents.UpdateUsers(userPreviewList.cloned()))
             _event.send(SearchEvents.UpdateTravel(travelList.cloned()))
         }
     }
@@ -67,6 +67,9 @@ class SearchViewModel @Inject constructor(
                     is DataState.Failure -> if (tabIndex == TRAVEL_TAB) {
                         isTravelRequesting = false
                         travelList.clear()
+                        val clonedList = userPreviewList.cloned()
+                        log("orig${userPreviewList.hashCode()}")
+                        log("clone:${clonedList.hashCode()}")
                         _event.send(SearchEvents.TravelError(it.message))
                         _event.send(SearchEvents.UpdateTravel(travelList.cloned()))
                     }
@@ -96,7 +99,7 @@ class SearchViewModel @Inject constructor(
                         isUserRequesting = false
                         if (tabIndex == USER_TAB) _event.send(SearchEvents.UserError(it.message))
                         userPreviewList.clear()
-                        _event.send(SearchEvents.UpdateUsers(userPreviewList))
+                        _event.send(SearchEvents.UpdateUsers(userPreviewList.cloned()))
                     }
                     is DataState.Loading -> {
                         _event.send(SearchEvents.UserLoading)
@@ -121,17 +124,20 @@ class SearchViewModel @Inject constructor(
             when (tabIndex) {
                 USER_TAB   -> {
                     if (text == lastUserQuery) return@launch
-
+//                    userUseCases.searchUserUseCase(text, 1).collectLatest {
+//
+//                    }
                     userUseCases.searchUserUseCase(text, 1).onEach { //TODO paginate
                         when (it) {
                             is DataState.Failure -> {
                                 if (tabIndex == USER_TAB) _event.send(SearchEvents.UserError(it.message))
                                 userPreviewList.clear()
-                                _event.send(SearchEvents.UpdateUsers(userPreviewList))
+                                _event.send(SearchEvents.UpdateUsers(userPreviewList.cloned()))
                             }
                             is DataState.Loading -> _event.send(SearchEvents.UserLoading)
                             is DataState.Success -> {
                                 lastUserQuery = text
+                                userPreviewList.clear()
                                 userPreviewList.addAll(it.data)
                                 _event.send(SearchEvents.UpdateUsers(userPreviewList.cloned()))
                             }

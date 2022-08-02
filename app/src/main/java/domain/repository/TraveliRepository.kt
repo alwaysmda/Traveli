@@ -13,7 +13,7 @@ interface TraveliRepository {
 
     suspend fun searchTravel(query: String, page: Int): DataState<List<TravelPreview>>
 
-    suspend fun getTravelDetail(travelId: Int): DataState<Travel>
+    suspend fun getTravelDetail(travelId: Long): DataState<Travel>
 
     suspend fun getBanner(): DataState<Banner>
 

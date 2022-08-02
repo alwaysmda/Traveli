@@ -20,7 +20,7 @@ interface TravelApi {
     suspend fun getBanner(): Response<Unit>
 
     @GET("travels/{travelId}")
-    suspend fun getTravelDetail(@Path("travelId") travelId: Int): Response<ResponseTravelDetailDto>
+    suspend fun getTravelDetail(@Path("travelId") travelId: Long): Response<ResponseTravelDetailDto>
 
     @FormUrlEncoded
     @POST("travels/{travelId}/bookMark")

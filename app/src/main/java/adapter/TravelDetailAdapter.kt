@@ -30,7 +30,7 @@ import domain.model.TravelDetail.Companion.VIEW_TYPE_VIDEO
 import ui.base.BaseActivity
 
 
-class TravelDetailAdapter(private val activity: BaseActivity, private val exoPlayer: ExoPlayer, private val onLinkClick: (link: String) -> Unit, private val onPlayerViewClick: (lastPlayedVideoIndex: Int, position: Int) -> Unit) : ListAdapter<TravelDetail, RecyclerView.ViewHolder>(DiffCallback()) {
+class TravelDetailAdapter(private val activity: BaseActivity, private val exoPlayer: ExoPlayer, private val onLinkClick: (link: String) -> Unit, private val onPlayerViewClick: (lastPlayedVideoIndex: Int, position: Int) -> Unit, private val onBackPress: () -> Unit, private val onBookMarkClick: () -> Unit) : ListAdapter<TravelDetail, RecyclerView.ViewHolder>(DiffCallback()) {
 
     private var lastPlayedVideoIndex = -1
     private var lastPlayedVideoView: PlayerView? = null
@@ -42,6 +42,9 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                 app = activity.app
                 data = travelDetail
                 tvTitle.isVisible = travelDetail.title.isNullOrEmpty().not()
+                btnBack.setOnClickListener {
+                    onBackPress()
+                }
             }
 
         }
