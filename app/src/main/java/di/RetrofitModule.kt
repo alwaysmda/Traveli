@@ -14,7 +14,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import util.Constant.CON_BASE_TEMPLATE_URL
 import util.PrefManager
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -54,11 +53,11 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(gson: Gson, templateClient: OkHttpClient.Builder): Retrofit =
+    fun provideRetrofit(app: ApplicationClass, gson: Gson, templateClient: OkHttpClient.Builder): Retrofit =
         Retrofit
             .Builder()
             .client(templateClient.build())
-            .baseUrl(CON_BASE_TEMPLATE_URL)
+            .baseUrl(app.getBaseApi())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 

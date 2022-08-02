@@ -13,7 +13,7 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
+import coil.load
 import com.xodus.traveli.R
 import com.xodus.traveli.databinding.*
 import domain.model.TravelDetail
@@ -98,13 +98,12 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                 playPauseBtn.setOnClickListener {
                     val state = exoPlayer.playbackState
                     if (state == Player.STATE_IDLE || state == Player.STATE_ENDED || exoPlayer.playWhenReady.not()) {
-
                         dispatchPlay(exoPlayer)
                     } else {
                         dispatchPause(exoPlayer)
                     }
                 }
-                Picasso.get().load(travelDetail.image).into(binding.ivVideoPreview)
+                binding.ivVideoPreview.load(travelDetail.image)
 
             }
 

@@ -8,7 +8,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.squareup.picasso.Picasso
+import coil.load
 import com.xodus.traveli.R
 import com.xodus.traveli.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,7 +53,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
                 }
                 is HomeEvents.BannerUpdate          -> {
                     binding.apply {
-                        Picasso.get().load(it.banner.banner.image).into(binding.ivBanner)
+                        binding.ivBanner.load(it.banner.banner.image)
                         tvBannerName.text = it.banner.banner.name
                         subBannerAdapter.submitList(it.banner.subBanner)
                         cwBanner.setStatus(ContentWrapper.WrapperStatus.Success)
