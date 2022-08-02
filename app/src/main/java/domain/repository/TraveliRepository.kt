@@ -17,4 +17,6 @@ interface TraveliRepository {
 
     suspend fun getBanner(): DataState<Banner>
 
+    suspend fun bookMarkTravel(isBookMark: Boolean): DataState<Travel>
+
 }

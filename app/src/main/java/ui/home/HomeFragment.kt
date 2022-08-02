@@ -142,16 +142,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
         trendingTravelAdapter = SquareTravelAdapter(baseActivity) { travel, pos ->
             viewModel.action.onTravelItemClick(travel, pos)
         }
-        subBannerAdapter = TravelAdapter(baseActivity) { position, item -> //TODO
+        subBannerAdapter = TravelAdapter(baseActivity) { position, travel -> //TODO
+            viewModel.action.onTravelItemClick(travel, position)
         }
         countryAdapter = CountryAdapter(baseActivity)
         newTravelAdapter = SquareTravelAdapter(baseActivity) { travel, pos ->
+            viewModel.action.onTravelItemClick(travel, pos)
         }
         binding.apply {
+            rvCountries.adapter = countryAdapter
             rvTrendingTravel.adapter = trendingTravelAdapter
             rvNewTravel.adapter = newTravelAdapter
             rvSubBanner.adapter = subBannerAdapter
-            rvCountries.adapter = countryAdapter
+
 
         }
     }

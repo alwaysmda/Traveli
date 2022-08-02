@@ -23,15 +23,31 @@
 
         >
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_back"
+            style="@style/GeneralButton.TextButton"
+            android:layout_width="@dimen/dimenButton"
+            android:layout_height="@dimen/dimenButton"
+            app:backgroundTint="#33000000"
+            app:cornerRadius="@dimen/dimenButtonRadius"
+            app:icon="@drawable/ic_arrow_left"
+            app:iconPadding="8dp"
+            app:iconSize="18dp"
+            app:iconTint="@color/md_white_1000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_title"
-                app:fonti="@{app.m.fontBold}"
-                android:layout_width="wrap_content"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{data.title}"
             android:textColor="?attr/colorText0"
             android:textSize="@dimen/textLargeXX"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/paddingMedium"
+            app:fonti="@{app.m.fontBold}"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_back"
+            app:layout_constraintStart_toEndOf="@+id/btn_back"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Travel to spain" />
 
@@ -40,8 +56,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/paddingLarge"
-            app:cardCornerRadius="@dimen/radiusMedium"
             app:cardBackgroundColor="?attr/colorBackground2"
+            app:cardCornerRadius="@dimen/radiusMedium"
             app:layout_constraintDimensionRatio="2:1"
             app:layout_constraintTop_toBottomOf="@+id/tv_title">
 

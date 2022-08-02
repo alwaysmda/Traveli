@@ -27,7 +27,7 @@ class CountryAdapter(private val activity: BaseActivity) : ListAdapter<Country,C
 
     private class DiffCallback : DiffUtil.ItemCallback<Country>() {
         override fun areItemsTheSame(oldItem: Country, newItem: Country) =
-            oldItem.id == newItem.id
+            oldItem == newItem
 
         override fun areContentsTheSame(oldItem: Country, newItem: Country) =
             oldItem == newItem

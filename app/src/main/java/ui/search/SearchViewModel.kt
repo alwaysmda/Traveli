@@ -39,7 +39,6 @@ class SearchViewModel @Inject constructor(
     private var userPage = 1
     private var isUserRequesting = false
     private var isTravelRequesting = false
-    var paginateCount = 0
 
 
     private var travelList = mutableListOf<TravelPreview>()
@@ -48,7 +47,7 @@ class SearchViewModel @Inject constructor(
 
     override fun onStart() {
         viewModelScope.launch {
-            _event.send(SearchEvents.UpdateUsers(userPreviewList))
+            _event.send(SearchEvents.UpdateUsers(userPreviewList.cloned()))
             _event.send(SearchEvents.UpdateTravel(travelList.cloned()))
         }
     }
@@ -61,8 +60,6 @@ class SearchViewModel @Inject constructor(
 
     override fun paginateTravelList() {
         if (isTravelRequesting) return
-        paginateCount++
-        log("Paginate:$paginateCount")
         isTravelRequesting = true
         viewModelScope.launch {
             travelUseCases.searchTravelsUseCase(lastTravelQuery, travelPage + 1).onEach { //TODO paginate and add query
@@ -70,6 +67,9 @@ class SearchViewModel @Inject constructor(
                     is DataState.Failure -> if (tabIndex == TRAVEL_TAB) {
                         isTravelRequesting = false
                         travelList.clear()
+                        val clonedList = userPreviewList.cloned()
+                        log("orig${userPreviewList.hashCode()}")
+                        log("clone:${clonedList.hashCode()}")
                         _event.send(SearchEvents.TravelError(it.message))
                         _event.send(SearchEvents.UpdateTravel(travelList.cloned()))
                     }
@@ -98,11 +98,10 @@ class SearchViewModel @Inject constructor(
                     is DataState.Failure -> {
                         isUserRequesting = false
                         if (tabIndex == USER_TAB) _event.send(SearchEvents.UserError(it.message))
-                        userPreviewList = mutableListOf()
-                        _event.send(SearchEvents.UpdateUsers(userPreviewList))
+                        userPreviewList.clear()
+                        _event.send(SearchEvents.UpdateUsers(userPreviewList.cloned()))
                     }
                     is DataState.Loading -> {
-                        isUserRequesting = false
                         _event.send(SearchEvents.UserLoading)
                     }
                     is DataState.Success -> {
@@ -125,19 +124,22 @@ class SearchViewModel @Inject constructor(
             when (tabIndex) {
                 USER_TAB   -> {
                     if (text == lastUserQuery) return@launch
-
+//                    userUseCases.searchUserUseCase(text, 1).collectLatest {
+//
+//                    }
                     userUseCases.searchUserUseCase(text, 1).onEach { //TODO paginate
                         when (it) {
                             is DataState.Failure -> {
                                 if (tabIndex == USER_TAB) _event.send(SearchEvents.UserError(it.message))
-                                userPreviewList = mutableListOf()
-                                _event.send(SearchEvents.UpdateUsers(userPreviewList))
+                                userPreviewList.clear()
+                                _event.send(SearchEvents.UpdateUsers(userPreviewList.cloned()))
                             }
                             is DataState.Loading -> _event.send(SearchEvents.UserLoading)
                             is DataState.Success -> {
                                 lastUserQuery = text
-                                userPreviewList = it.data.toMutableList()
-                                _event.send(SearchEvents.UpdateUsers(userPreviewList))
+                                userPreviewList.clear()
+                                userPreviewList.addAll(it.data)
+                                _event.send(SearchEvents.UpdateUsers(userPreviewList.cloned()))
                             }
 
                         }
@@ -159,7 +161,6 @@ class SearchViewModel @Inject constructor(
                             is DataState.Success -> { //TODO update list
                                 travelList.clear()
                                 travelList.addAll(it.data.toMutableList())
-                                log("TRAVELLIST:originalBefore:${travelList.hashCode()}")
                                 lastTravelQuery = text
                                 _event.send(SearchEvents.UpdateTravel(travelList.cloned()))
                             }

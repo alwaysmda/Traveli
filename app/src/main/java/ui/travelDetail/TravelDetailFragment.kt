@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaItem
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.xodus.traveli.R
 import com.xodus.traveli.databinding.FragmentTravelDetailBinding
@@ -45,17 +46,18 @@ class TravelDetailFragment : BaseFragment<FragmentTravelDetailBinding, TravelDet
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.event.collect {
                 when (it) {
-                    is TravelDetailEvents.TravelDetailError   -> binding.progress.isVisible = false
+                    is TravelDetailEvents.TravelDetailError -> binding.progress.isVisible = false
                     is TravelDetailEvents.TravelDetailLoading -> {
                         binding.progress.isVisible = true
                     }
-                    is TravelDetailEvents.UpdateTravelDetail  -> {
+                    is TravelDetailEvents.UpdateTravelDetail -> {
                         binding.apply {
                             progress.isVisible = false
                             travelDetailAdapter.submitList(it.travelDetails)
                         }
                     }
-                    is TravelDetailEvents.OpenUrl             -> startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it.url)))
+                    is TravelDetailEvents.OpenUrl -> startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it.url)))
+                    TravelDetailEvents.NavBack -> findNavController().popBackStack()
                 }
             }
         }
@@ -80,7 +82,10 @@ class TravelDetailFragment : BaseFragment<FragmentTravelDetailBinding, TravelDet
             }
             viewModel.exoPlayer.setMediaItem(MediaItem.fromUri((travelDetailAdapter.currentList[position] as TravelDetail.Video).video))
             travelDetailAdapter.setLastPlayedVideoIndex(position)
-        })
+        },
+            onBackPress = { viewModel.action.onBackPress() },
+            onBookMarkClick = {}
+        )
         binding.rvTravelDetail.adapter = travelDetailAdapter
 
     }

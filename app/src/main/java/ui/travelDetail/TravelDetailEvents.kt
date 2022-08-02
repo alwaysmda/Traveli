@@ -13,6 +13,7 @@ sealed class TravelDetailEvents : BaseEvent() {
     object TravelDetailLoading : TravelDetailEvents()
 
     data class OpenUrl(val url: String) : TravelDetailEvents()
+    object NavBack : TravelDetailEvents()
 
 
 }

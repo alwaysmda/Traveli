@@ -24,7 +24,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/colorBackground0">
+            android:background="?attr/colorBackground0"
+            android:descendantFocusability="blocksDescendants">
 
 
             <com.google.android.material.button.MaterialButton
@@ -82,7 +83,7 @@
                             android:gravity="center"
                             android:paddingTop="@dimen/paddingLarge"
                             android:paddingBottom="@dimen/paddingSmall"
-                            android:textColor="?attr/colorText0"
+                            android:textColor="@color/md_white_1000"
                             android:textSize="@dimen/textLarge"
                             app:layout_constraintBottom_toBottomOf="parent"
 
@@ -133,8 +134,8 @@
                 android:id="@+id/cw_trending"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/tv_trending_title"
-                android:layout_marginTop="@dimen/paddingMedium">
+                android:layout_marginTop="@dimen/paddingMedium"
+                app:layout_constraintTop_toBottomOf="@+id/tv_trending_title">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_trending_travel"

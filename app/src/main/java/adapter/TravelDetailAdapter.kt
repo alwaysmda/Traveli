@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.media3.common.C
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.ui.PlayerView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -29,9 +30,10 @@ import domain.model.TravelDetail.Companion.VIEW_TYPE_VIDEO
 import ui.base.BaseActivity
 
 
-class TravelDetailAdapter(private val activity: BaseActivity, private val exoPlayer: ExoPlayer, private val onLinkClick: (link: String) -> Unit, private val onPlayerViewClick: (lastPlayedVideoIndex: Int, position: Int) -> Unit) : ListAdapter<TravelDetail, RecyclerView.ViewHolder>(DiffCallback()) {
+class TravelDetailAdapter(private val activity: BaseActivity, private val exoPlayer: ExoPlayer, private val onLinkClick: (link: String) -> Unit, private val onPlayerViewClick: (lastPlayedVideoIndex: Int, position: Int) -> Unit, private val onBackPress: () -> Unit, private val onBookMarkClick: () -> Unit) : ListAdapter<TravelDetail, RecyclerView.ViewHolder>(DiffCallback()) {
 
     private var lastPlayedVideoIndex = -1
+    private var lastPlayedVideoView: PlayerView? = null
 
 
     inner class CoverViewHolder(private val binding: RowTravelDetailCoverBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -40,6 +42,9 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                 app = activity.app
                 data = travelDetail
                 tvTitle.isVisible = travelDetail.title.isNullOrEmpty().not()
+                btnBack.setOnClickListener {
+                    onBackPress()
+                }
             }
 
         }
@@ -88,6 +93,10 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                 nextBtn.visibility = View.GONE
 
                 ivVideoPreview.setOnClickListener {
+                    if (lastPlayedVideoView != null && lastPlayedVideoView != playerView) {
+                        lastPlayedVideoView?.player = null
+                    }
+                    lastPlayedVideoView = playerView
                     ivVideoPreview.visibility = View.GONE
                     ivPlay.visibility = View.GONE
                     onPlayerViewClick(lastPlayedVideoIndex, bindingAdapterPosition)
@@ -152,7 +161,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            VIEW_TYPE_COVER  -> {
+            VIEW_TYPE_COVER       -> {
                 CoverViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -163,7 +172,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                 )
 
             }
-            VIEW_TYPE_IMAGE  -> {
+            VIEW_TYPE_IMAGE       -> {
                 ImageViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -217,7 +226,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
 
             }
 
-            VIEW_TYPE_USER   -> {
+            VIEW_TYPE_USER        -> {
                 UserViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -228,7 +237,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                 )
             }
 
-            VIEW_TYPE_CITIES -> {
+            VIEW_TYPE_CITIES      -> {
                 CityViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -239,7 +248,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                 )
             }
 
-            VIEW_TYPE_TAG    -> {
+            VIEW_TYPE_TAG         -> {
                 TagViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
@@ -250,7 +259,7 @@ class TravelDetailAdapter(private val activity: BaseActivity, private val exoPla
                 )
             }
 
-            else             -> ImageViewHolder(
+            else                  -> ImageViewHolder(
                 DataBindingUtil.inflate(
                     LayoutInflater.from(parent.context),
                     R.layout.row_travel_detail_image,

@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import main.ApplicationClass
 import ui.base.BaseViewModel
+import util.Constant
 import util.extension.log
 import javax.inject.Inject
 
@@ -23,6 +24,7 @@ class HomeViewModel @Inject constructor(
     private val countryUseCases: CountryUseCases
 ) : BaseViewModel<HomeEvents, HomeAction>(app), HomeAction {
     override fun onStart() {
+        app.prefManager.setPref(Constant.PREF_TOKEN, "Token")
         if (app.user == null) getMe() else getData()
 
     }
@@ -89,10 +91,10 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getData() {
-        getTrendingTravel()
+        getCountries()
         getNewTravel()
         getBanner()
-        getCountries()
+        getTrendingTravel()
     }
 
     private fun getTrendingTravel() {

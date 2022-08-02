@@ -1,11 +1,10 @@
 package data.remote
 
+import data.remote.dto.ResponseBookmarkDto
 import data.remote.dto.ResponseTravelDetailDto
 import data.remote.dto.ResponseTravelListDto
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface TravelApi {
     @GET("travels/trending")
@@ -22,4 +21,11 @@ interface TravelApi {
 
     @GET("travels/{travelId}")
     suspend fun getTravelDetail(@Path("travelId") travelId: Long): Response<ResponseTravelDetailDto>
+
+
+    @FormUrlEncoded
+    @POST("travels/{travelId}/bookMark")
+    suspend fun bookMarkTravel(
+        @Field("isBookMark") isBookMark: Boolean
+    ): Response<ResponseBookmarkDto>
 }
