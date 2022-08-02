@@ -22,6 +22,7 @@ interface TravelApi {
     @GET("travels/{travelId}")
     suspend fun getTravelDetail(@Path("travelId") travelId: Long): Response<ResponseTravelDetailDto>
 
+
     @FormUrlEncoded
     @POST("travels/{travelId}/bookMark")
     suspend fun bookMarkTravel(

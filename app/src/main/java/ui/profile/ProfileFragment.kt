@@ -37,36 +37,21 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileEvents, Prof
     private fun observeToEvents() = viewLifecycleOwner.lifecycleScope.launchWhenStarted {
         viewModel.event.collect {
             when (it) {
-                is ProfileEvents.Snack                -> snack(it.message)
-                is ProfileEvents.NavBack              -> findNavController().popBackStack()
-                is ProfileEvents.NavSetting           -> findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToProfileEditFragment())
-                is ProfileEvents.NavTravel            -> Unit
-                is ProfileEvents.NavAddTravel         -> Unit
-                is ProfileEvents.NavTransactionList   -> findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToTransactionFragment(it.balance))
-                is ProfileEvents.SetBioLoading        -> binding.profileCwBio.setStatus(ContentWrapper.WrapperStatus.Loading)
-                is ProfileEvents.SetBioFailure        -> binding.profileCwBio.setStatus(ContentWrapper.WrapperStatus.Failure(it.message))
-                is ProfileEvents.UpdateBio            -> {
+                is ProfileEvents.Snack              -> snack(it.message)
+                is ProfileEvents.NavBack            -> findNavController().popBackStack()
+                is ProfileEvents.NavSetting         -> findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToProfileEditFragment())
+                is ProfileEvents.NavTravel          -> findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToTravelDetailFragment(it.travel))
+                is ProfileEvents.NavAddTravel       -> Unit
+                is ProfileEvents.NavTransactionList -> findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToTransactionFragment(it.balance))
+                is ProfileEvents.SetBioLoading      -> binding.profileCwBio.setStatus(ContentWrapper.WrapperStatus.Loading)
+                is ProfileEvents.SetBioFailure      -> binding.profileCwBio.setStatus(ContentWrapper.WrapperStatus.Failure(it.message))
+                is ProfileEvents.UpdateBio          -> {
                     binding.apply {
                         profileCwBio.setStatus(ContentWrapper.WrapperStatus.Success)
                         profileTvBio.text = it.bio
-                        //                        profileBtnBack.isVisible = it.isMe.not()
-                        //                        profileBtnSetting.isVisible = it.isMe
-                        //                        profileCwBalance.isVisible = it.isMe
-                        //                        profileIvCover.load(it.user.cover)
-                        //                        profileIvAvatar.load(it.user.avatar)
-                        //                        profileTvName.text = it.user.name
-                        //                        profileTvHometown.text = it.user.hometown
-                        //                        profileTvBio.text = it.user.bio
-                        //                        it.contact.apply {
-                        //                            profileBtnEmail.backgroundTintList = ContextCompat.getColorStateList(requireContext(), if (email.value == null) R.color.md_grey_500 else email.color)
-                        //                            profileBtnPhone.backgroundTintList = ContextCompat.getColorStateList(requireContext(), if (phone.value == null) R.color.md_grey_500 else phone.color)
-                        //                            profileBtnTwitter.backgroundTintList = ContextCompat.getColorStateList(requireContext(), if (twitter.value == null) R.color.md_grey_500 else twitter.color)
-                        //                            profileBtnInstagram.backgroundTintList = ContextCompat.getColorStateList(requireContext(), if (instagram.value == null) R.color.md_grey_500 else instagram.color)
-                        //                            profileBtnWebsite.backgroundTintList = ContextCompat.getColorStateList(requireContext(), if (website.value == null) R.color.md_grey_500 else website.color)
-                        //                        }
                     }
                 }
-                is ProfileEvents.SetBalanceLoading    -> binding.profileCwBalance.setStatus(ContentWrapper.WrapperStatus.Loading)
+                is ProfileEvents.SetBalanceLoading  -> binding.profileCwBalance.setStatus(ContentWrapper.WrapperStatus.Loading)
                 is ProfileEvents.SetBalanceFailure    -> binding.profileCwBalance.setStatus(ContentWrapper.WrapperStatus.Failure(it.message))
                 is ProfileEvents.UpdateBalance        -> {
                     binding.profileCwBalance.setStatus(ContentWrapper.WrapperStatus.Success)
