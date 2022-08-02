@@ -1,6 +1,5 @@
 package ui.travelDetail
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.media3.exoplayer.ExoPlayer
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +21,6 @@ class TravelDetailViewModel @Inject constructor(
     app: ApplicationClass,
     private val travelUseCases: TravelUseCases,
     val exoPlayer: ExoPlayer,
-    val handle: SavedStateHandle
 ) : BaseViewModel<TravelDetailEvents, TravelDetailAction>(app), TravelDetailAction {
 
 
