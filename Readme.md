@@ -1,99 +1,99 @@
-
-=============================================================================================
-========================================= S T O R Y =========================================
-=============================================================================================
-Traveli
-Share and earn with your travel experience.
-Travelers and also natives can share their experiences about a country.
-Users can create free or purchasable packages and each package is assigned to a single country.
-In each package they can add ultimate videos, images, external links and texts in any order.
-Each package also has a title, cover, cities and tags.
-If user is going to sell the package, they should add an overview for their package.
-The overviews' structure is similar to the package itself.
-
-
-
-MVP version:
-•Homepage:
--Search
-Navigates to search screen.
-
--Banners
-Top packages, chosen by app admins
-
--Trending
-Sublist of top packages.
-
--New
-Sublist of recently published packages.
-
-Tapping on each one of them navigates to travel content.
-It depends if the travel if free or not.
-If it's free, then user can view package content, if not, user can view the package overview and price.
-
--Countries
-Tapping on each item navigates to search screen and searches the selected country.
-
-••Lists:
--Contains two lists.
-Bookmarked packages and owned packages.
-
-•••Profile:
--User information
-Cover, avatar, name, hometown and bio.
-
--Balance
-It is only visible to current user.
-Tapping on it navigates to transaction list screen.
-User can charge or checkout in transaction screen.
-
--Travels
-A sublist of user's travels.
-An add button and draft travels is only visible to current user.
-
--Stats
-A few items that summarises some stats about user.
-It can contain number of countries and cities visited.
-
--Contact
-Phone, Email, Twitter, Instagram, Website.
-
-
-=============================================================================================
-===================================== S T R U C T U R E =====================================
-=============================================================================================
-MVVM Clean architecture with Actions and Events
-
--Actions
-An interface that listens on the users input and delivers it to view models
-
--Events
-An interface that orders the view to do something
-
-Using:
--Retrofit2
-Different apis and repositories are separated
-
--Coil
-There is binding extensions in BindingAdapterUtils
-
--XML
-
--Hilt
-
--DataStore
-PrefManager is responsible to save and load data using DataStore
-
--Flow
-Used for connection between UseCases and ViewModels and XMLs
-
--CPP
-Used to hide sensitive strings like base API and tokens
-
--LanguageManager
-Custom classes that handle the language and font changing function.
-All strings should be referenced from LanguageManager's interface.
-LanguageManager's interface, m, is only available in ApplicationClass, so ApplicationClass should be injected into every class and XML that uses strings.
+  
+=============================================================================================  
+========================================= S T O R Y =========================================  
+=============================================================================================  
+Traveli  
+Share and earn with your travel experience.  
+Travelers and also natives can share their experiences about a country.  
+Users can create free or purchasable packages and each package is assigned to a single country.  
+In each package they can add ultimate videos, images, external links and texts in any order.  
+Each package also has a title, cover, cities and tags.  
+If user is going to sell the package, they should add an overview for their package.  
+The overviews' structure is similar to the package itself.  
+  
+  
+  
+MVP version:  
+•Homepage:  
+-Search  
+Navigates to search screen.  
+  
+-Banners  
+Top packages, chosen by app admins  
+  
+-Trending  
+Sublist of top packages.  
+  
+-New  
+Sublist of recently published packages.  
+  
+Tapping on each one of them navigates to travel content.  
+It depends if the travel if free or not.  
+If it's free, then user can view package content, if not, user can view the package overview and price.  
+  
+-Countries  
+Tapping on each item navigates to search screen and searches the selected country.  
+  
+••Lists:  
+-Contains two lists.  
+Bookmarked packages and owned packages.  
+  
+•••Profile:  
+-User information  
+Cover, avatar, name, hometown and bio.  
+  
+-Balance  
+It is only visible to current user.  
+Tapping on it navigates to transaction list screen.  
+User can charge or checkout in transaction screen.  
+  
+-Travels  
+A sublist of user's travels.  
+An add button and draft travels is only visible to current user.  
+  
+-Stats  
+A few items that summarises some stats about user.  
+It can contain number of countries and cities visited.  
+  
+-Contact  
+Phone, Email, Twitter, Instagram, Website.  
+  
+  
+=============================================================================================  
+===================================== S T R U C T U R E =====================================  
+=============================================================================================  
+MVVM Clean architecture with Actions and Events  
+  
+-Actions  
+An interface that listens on the users input and delivers it to view models  
+  
+-Events  
+An interface that orders the view to do something  
+  
+Using:  
+-Retrofit2  
+Different apis and repositories are separated  
+  
+-Coil  
+There is binding extensions in BindingAdapterUtils  
+  
+-XML  
+  
+-Hilt  
+  
+-DataStore  
+PrefManager is responsible to save and load data using DataStore  
+  
+-Flow  
+Used for connection between UseCases and ViewModels and XMLs  
+  
+-CPP  
+Used to hide sensitive strings like base API and tokens  
+  
+-LanguageManager  
+Custom classes that handle the language and font changing function.  
+All strings should be referenced from LanguageManager's interface.  
+LanguageManager's interface, m, is only available in ApplicationClass, so ApplicationClass should be injected into every class and XML that uses strings.  
 
 -ContentWrapper
 A custom view wrapper to handle different view states.
@@ -168,10 +168,14 @@ ic_user, bg_user, shape_user, fragment_user, activity_user, row_user, sheet_user
 -Bonus
 My own Android Studio settings are exported to project as android_studio_settings.zip.
 Code style and shortcuts are configured.
+Share the same setting in team and make sure to check Reformat Code, Rearrange Code and Optimize Import before commit.
+
 Some useful shortcuts are:
 Command+O -> Close other tabs
 Option+A -> Clone caret above 
 Option+Z -> Clone caret below
+Double Option+(hold or tap)Up -> Clone caret above
+Double Option+(hold or tap)Down -> Clone caret below
 Control+C -> Stop application
 Control+X -> Clean
 Control+Z -> Run
@@ -187,6 +191,8 @@ Shift+Enter -> Goto next line
 Command+D -> Duplicate line/selected
 Control+Tab -> Change tab
 Command+Q -> Magic!
+
+
 
 Happy Coding!
 
