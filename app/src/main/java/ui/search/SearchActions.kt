@@ -1,5 +1,6 @@
 package ui.search
 
+import domain.model.UserPreview
 import ui.base.BaseAction
 
 interface SearchActions : BaseAction {
@@ -9,5 +10,6 @@ interface SearchActions : BaseAction {
     fun paginateUserList()
     fun onChangeTab(tab: Int, query: String)
     fun onBackPress()
+    fun onUserItemClick(user: UserPreview, pos: Int)
 
 }

@@ -205,4 +205,10 @@ class SearchViewModel @Inject constructor(
         }
     }
 
+    override fun onUserItemClick(user: UserPreview, pos: Int) {
+        viewModelScope.launch {
+            _event.send(SearchEvents.NavUser(user))
+        }
+    }
+
 }

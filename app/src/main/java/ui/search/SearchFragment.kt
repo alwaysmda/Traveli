@@ -139,14 +139,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
                     }
                     is SearchEvents.RvTravelVisibility -> binding.rvTravel.isVisible = it.isVisible
                     is SearchEvents.RvUserVisibility   -> binding.rvUser.isVisible = it.isVisible
-                    is SearchEvents.TravelError        -> {
+                    is SearchEvents.TravelError   -> {
                         binding.apply {
                             progressBar.isVisible = false
                             tvTravelError.isVisible = true
                             tvTravelError.text = it.message
                         }
                     }
-                    is SearchEvents.TravelLoading      -> {
+                    is SearchEvents.TravelLoading -> {
                         binding.apply {
                             progressBar.isVisible = true
                             tvTravelError.isVisible = false
@@ -154,8 +154,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
                         }
                     }
 
-                    is SearchEvents.NavBack            -> findNavController().popBackStack()
-
+                    is SearchEvents.NavBack       -> findNavController().popBackStack()
+                    is SearchEvents.NavUser       -> findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToProfileFragment())
                 }
             }
         }
@@ -163,7 +163,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
     }
 
     private fun setUpRecyclerViews() {
-        userAdapter = UserAdapter(baseActivity)
+        userAdapter = UserAdapter(baseActivity) { user, pos ->
+            viewModel.action.onUserItemClick(user, pos)
+
+        }
         travelAdapter = TravelAdapter(baseActivity) { position, item -> //TODO
         }
         binding.apply {

@@ -11,12 +11,17 @@ import com.xodus.traveli.databinding.RowUserBinding
 import domain.model.UserPreview
 import ui.base.BaseActivity
 
-class UserAdapter(private val activity: BaseActivity) : ListAdapter<UserPreview, UserAdapter.UserViewHolder>(DiffCallback()) {
+class UserAdapter(private val activity: BaseActivity, private val onItemClick: (user: UserPreview, pos: Int) -> Unit) : ListAdapter<UserPreview, UserAdapter.UserViewHolder>(DiffCallback()) {
     inner class UserViewHolder(private val binding: RowUserBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(userPreview: UserPreview) {
             binding.apply {
                 app = activity.app
                 data = userPreview
+                cvParent.setOnClickListener {
+                    onItemClick(userPreview, bindingAdapterPosition)
+                }
+
+
             }
         }
 

@@ -47,13 +47,15 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_search"
-                        app:fonti="@{vm.app.m.fontMedium}"
-                        android:layout_width="match_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/paddingLarge"
                     android:layout_marginTop="@dimen/paddingLarge"
                     android:hint="@{vm.app.m.search}"
+                    android:imeOptions="actionSearch"
+                    android:inputType="textFilter"
                     android:textColor="?attr/colorText0"
+                    app:fonti="@{vm.app.m.fontMedium}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -85,8 +87,8 @@
             android:orientation="vertical"
             android:paddingBottom="@dimen/paddingLarge"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintTop_toBottomOf="@+id/top_layout"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_layout"
             app:spanCount="3"
             tools:listitem="@layout/row_user" />
 
@@ -113,26 +115,26 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_user_error"
-                app:fonti="@{vm.app.m.fontMedium}"
-                android:layout_width="wrap_content"
+            android:id="@+id/tv_user_error"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/paddingLarge"
             android:textColor="?attr/colorText0"
             android:textSize="@dimen/textLargeXX"
+            app:fonti="@{vm.app.m.fontMedium}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_travel_error"
-                app:fonti="@{vm.app.m.fontMedium}"
-                android:layout_width="wrap_content"
+            android:id="@+id/tv_travel_error"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/paddingLarge"
             android:textColor="?attr/colorText0"
             android:textSize="@dimen/textLargeXX"
+            app:fonti="@{vm.app.m.fontMedium}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
