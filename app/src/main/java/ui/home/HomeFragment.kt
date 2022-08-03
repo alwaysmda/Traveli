@@ -5,6 +5,7 @@ import adapter.SquareTravelAdapter
 import adapter.TravelAdapter
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -15,6 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import ui.base.BaseFragment
 import ui.base.ContentWrapper
 import util.extension.log
+import java.util.*
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, HomeViewModel>(R.layout.fragment_home) {
@@ -32,11 +34,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        var exit = false
+        baseActivity.onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (exit) {
+                    baseActivity.finishAffinity()
+                } else {
+                    exit = true
+                    snack(viewModel.app.m.pressBackAgainToExit)
+                }
+
+                Timer().schedule(object : TimerTask() {
+                    override fun run() {
+                        exit = false
+                    }
+                }, 2500)
+            }
+        })
         observeToEvents()
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerViews()
         viewModel.action.onStart()
         setUpActions()
+
+
     }
 
 
@@ -135,6 +156,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
 //            btnCountriesRetry.setOnClickListener { viewModel.action.onGetCountriesRetry() }
             //   btnSearch.setOnClickListener { viewModel.action.onSearchClick() }
         }
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
     }
 
 
