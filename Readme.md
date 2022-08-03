@@ -193,6 +193,7 @@ Option+Down -> Select less
 Shift+Enter -> Goto next line  
 Command+D -> Duplicate line/selected  
 Control+Tab -> Change tab  
+Control+Command+G -> Find all occurrences in page  
 Command+Q -> Magic!  
   
   
