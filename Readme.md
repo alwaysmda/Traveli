@@ -62,13 +62,26 @@ Phone, Email, Twitter, Instagram, Website.
 =============================================================================================  
 ===================================== S T R U C T U R E =====================================  
 =============================================================================================  
-MVVM Clean architecture with Actions and Events  
+MVVM Clean architecture with Actions, Events, Domain layer and UseCases  
   
 -Actions  
 An interface that listens on the users input and delivers it to view models  
   
 -Events  
 An interface that orders the view to do something  
+  
+-Domain layer  
+DTOs (Data Transfer Object) are used to retrieve and convert API's response to objects.  
+Mappers are used to convert the DTOs to Domain models in repository.  
+Domain models are being used through the app.  
+Domain models are meant to be in the most efficient state to be used in views.  
+  
+-UseCases  
+Each flow of actions or data is a use case.  
+It prevents duplicate code and makes ViewModels simpler.  
+Each UseCase has one and only one public method and can have none, one or multiple private methods.   
+Sorting, filtering, fetching and validating data is done in use cases.  
+UseCases are categorized by usage.  
   
 Using:  
 -Retrofit2  
@@ -93,7 +106,7 @@ Used to hide sensitive strings like base API and tokens
 -LanguageManager  
 Custom classes that handle the language and font changing function.  
 All strings should be referenced from LanguageManager's interface.  
-LanguageManager's interface, m, is only available in ApplicationClass, so ApplicationClass should be injected into every class and XML that uses strings.    
+LanguageManager's interface, m, is only available in ApplicationClass, so ApplicationClass should be injected into every class and XML that uses strings.  
   
 -ContentWrapper  
 A custom view wrapper to handle different view states.  
@@ -117,6 +130,16 @@ It is being used instead of dialogs.
 There is currently two general types.  
 Confirm and Edit sheet.  
   
+-Navigation component  
+BottomNavigationView with navigation component is used to manage screens.  
+For each tab on bottom navigation there is an empty fragment that navigates to the main fragment.  
+These tabs are used to provide us the re-usability of the fragments that are being used in tabs.  
+For example we can navigate to the settings fragment in home fragment without changing the tab.  
+  
+-Extensions  
+There are multiple useful extension files available.  
+AppExtensions is the app specific extensions but the other ones can be used in any project.  
+Search before adding a snippet.  
   
 App creation flow:  
 -Idea  
@@ -148,10 +171,10 @@ Checkout profile implementation for more info.
 -Themes  
 All changing colors should be referenced with ?attr/someColor.  
 Different styles is defined using colors.xml, styles.xml and attrs.xml.  
-Changing theme can be done using ThemeManager.
-
--Styles
-Use the Button, TextView and ImageView styles defined in styles.xml.
+Changing theme can be done using ThemeManager.  
+  
+-Styles  
+Use the Button, TextView and ImageView styles defined in styles.xml.  
   
 -Logging  
 Only use the log extension function available in  LogExt.kt file.  
@@ -199,9 +222,4 @@ Command+Q -> Magic!
   
   
 Happy Coding!  
-  
-  
-  
-  
-  
   
