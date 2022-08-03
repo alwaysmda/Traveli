@@ -148,7 +148,10 @@ Checkout profile implementation for more info.
 -Themes  
 All changing colors should be referenced with ?attr/someColor.  
 Different styles is defined using colors.xml, styles.xml and attrs.xml.  
-Changing theme can be done using ThemeManager.  
+Changing theme can be done using ThemeManager.
+
+-Styles
+Use the Button, TextView and ImageView styles defined in styles.xml.
   
 -Logging  
 Only use the log extension function available in  LogExt.kt file.  
