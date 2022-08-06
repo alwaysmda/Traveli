@@ -78,67 +78,47 @@
 
         </LinearLayout>
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_user"
+        <ui.base.ContentWrapper
+            android:id="@+id/cw_rv_user"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/paddingLarge"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:background="?attr/colorBackground0"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/top_layout"
-            app:spanCount="3"
-            tools:listitem="@layout/row_user" />
+            app:layout_constraintTop_toBottomOf="@+id/top_layout">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/paddingLarge"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+
+                app:spanCount="3"
+                tools:listitem="@layout/row_user" />
+
+        </ui.base.ContentWrapper>
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_travel"
+        <ui.base.ContentWrapper
+            android:id="@+id/cw_rv_travel"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:orientation="vertical"
-            android:paddingHorizontal="@dimen/paddingLarge"
-            android:paddingBottom="@dimen/paddingLarge"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/top_layout" />
+            app:layout_constraintTop_toBottomOf="@id/top_layout">
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_travel"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/paddingLarge"
+                android:paddingBottom="@dimen/paddingLarge"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_user_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/paddingLarge"
-            android:textColor="?attr/colorText0"
-            android:textSize="@dimen/textLargeXX"
-            app:fonti="@{vm.app.m.fontMedium}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_travel_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/paddingLarge"
-            android:textColor="?attr/colorText0"
-            android:textSize="@dimen/textLargeXX"
-            app:fonti="@{vm.app.m.fontMedium}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        </ui.base.ContentWrapper>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

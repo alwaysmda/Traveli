@@ -182,14 +182,12 @@ class SearchViewModel @Inject constructor(
         viewModelScope.launch {
             when (tabIndex) {
                 USER_TAB   -> {
-                    _event.send(SearchEvents.RvUserVisibility(true))
-                    _event.send(SearchEvents.RvTravelVisibility(false))
+                    _event.send(SearchEvents.TabUser)
                     if (query.isNotEmpty() && query != lastUserQuery) search(query)
 
                 }
                 TRAVEL_TAB -> {
-                    _event.send(SearchEvents.RvUserVisibility(false))
-                    _event.send(SearchEvents.RvTravelVisibility(true))
+                    _event.send(SearchEvents.TabTravel)
                     if (query.isNotEmpty() && query != lastTravelQuery) search(query)
 
                 }

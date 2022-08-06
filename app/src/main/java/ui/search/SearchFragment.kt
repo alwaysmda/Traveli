@@ -5,7 +5,6 @@ import adapter.UserAdapter
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +15,7 @@ import com.xodus.traveli.R
 import com.xodus.traveli.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 import ui.base.BaseFragment
+import ui.base.ContentWrapper
 import util.extension.changeChildFont
 import util.extension.log
 
@@ -51,9 +51,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
             searchTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     binding.apply {
-                        progressBar.isVisible = false
-                        tvUserError.isVisible = false
-                        tvTravelError.isVisible = false
+
+//                        progressBar.isVisible = false
+//                        tvUserError.isVisible = false
+//                        tvTravelError.isVisible = false
+
                     }
 
                     viewModel.action.onChangeTab(tab?.position ?: 0, edtSearch.text.toString())
@@ -113,49 +115,58 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.event.collect {
                 when (it) {
-                    is SearchEvents.UpdateUsers        -> {
+                    is SearchEvents.UpdateUsers   -> {
                         userAdapter.submitList(it.userPreviews)
-                        binding.progressBar.isVisible = false
+                        binding.cwRvUser.setStatus(ContentWrapper.WrapperStatus.Success)
                     }
-                    is SearchEvents.UpdateTravel       -> {
-                        log("TRAVELLIST:FR${it.travels.hashCode()}")
+                    is SearchEvents.UpdateTravel  -> {
                         travelAdapter.submitList(it.travels)
-                        binding.progressBar.isVisible = false
+                        binding.cwRvTravel.setStatus(ContentWrapper.WrapperStatus.Success)
                     }
-                    is SearchEvents.UserError          -> {
+                    is SearchEvents.UserError     -> {
                         binding.apply {
-                            progressBar.isVisible = false
-                            tvUserError.isVisible = true
-                            tvUserError.text = it.message
+                            binding.cwRvUser.setStatus(ContentWrapper.WrapperStatus.Failure(it.message))
                         }
 
                     }
-                    is SearchEvents.UserLoading        -> {
+                    is SearchEvents.UserLoading   -> {
                         binding.apply {
-                            progressBar.isVisible = true
-                            tvUserError.isVisible = false
-                            tvTravelError.isVisible = false
+                            cwRvUser.setStatus(ContentWrapper.WrapperStatus.Loading)
                         }
                     }
-                    is SearchEvents.RvTravelVisibility -> binding.rvTravel.isVisible = it.isVisible
-                    is SearchEvents.RvUserVisibility   -> binding.rvUser.isVisible = it.isVisible
+//                    is SearchEvents.RvTravelVisibility -> {
+//                        binding.rvTravel.isVisible = it.isVisible
+//                    }
+//                    is SearchEvents.RvUserVisibility   -> {
+//                        binding.rvUser.isVisible = it.isVisible
+//                    }
                     is SearchEvents.TravelError   -> {
                         binding.apply {
-                            progressBar.isVisible = false
-                            tvTravelError.isVisible = true
-                            tvTravelError.text = it.message
+                            cwRvTravel.setStatus(ContentWrapper.WrapperStatus.Failure(it.message))
                         }
                     }
                     is SearchEvents.TravelLoading -> {
                         binding.apply {
-                            progressBar.isVisible = true
-                            tvTravelError.isVisible = false
-                            tvUserError.isVisible = false
+                            cwRvTravel.setStatus(ContentWrapper.WrapperStatus.Loading)
+                        }
+                    }
+
+                    SearchEvents.TabTravel        -> {
+                        binding.apply {
+                            cwRvTravel.visibility = View.VISIBLE
+                            cwRvUser.visibility = View.GONE
+                        }
+                    }
+                    SearchEvents.TabUser          -> {
+                        binding.apply {
+                            cwRvUser.visibility = View.VISIBLE
+                            cwRvTravel.visibility = View.GONE
                         }
                     }
 
                     is SearchEvents.NavBack       -> findNavController().popBackStack()
                     is SearchEvents.NavUser       -> findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToProfileFragment())
+
                 }
             }
         }
@@ -176,16 +187,18 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
     }
 
     private fun setUpViews() {
-        binding.searchTab.apply {
-            addTab(newTab().setText(viewModel.app.m.user))
-            addTab(newTab().setText(viewModel.app.m.travel))
-            val vg = binding.searchTab.getChildAt(0) as ViewGroup
-            val vgTab1 = vg.getChildAt(0) as ViewGroup
-            val vgTab2 = vg.getChildAt(1) as ViewGroup
-            vgTab1.changeChildFont(viewModel.app.m.fontBold!!)
-            vgTab2.changeChildFont(viewModel.app.m.fontBold!!)
-
-
+        binding.apply {
+            searchTab.apply {
+                addTab(newTab().setText(viewModel.app.m.user))
+                addTab(newTab().setText(viewModel.app.m.travel))
+                val vg = binding.searchTab.getChildAt(0) as ViewGroup
+                val vgTab1 = vg.getChildAt(0) as ViewGroup
+                val vgTab2 = vg.getChildAt(1) as ViewGroup
+                vgTab1.changeChildFont(viewModel.app.m.fontBold!!)
+                vgTab2.changeChildFont(viewModel.app.m.fontBold!!)
+            }
+            cwRvTravel.setStatus(ContentWrapper.WrapperStatus.Success)
+            cwRvUser.setStatus(ContentWrapper.WrapperStatus.Success)
         }
 
 
