@@ -166,7 +166,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
 
                     is SearchEvents.NavBack       -> findNavController().popBackStack()
                     is SearchEvents.NavUser       -> findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToProfileFragment())
-
+                    is SearchEvents.NavTravel     -> findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToTravelDetailFragment(it.travel))
+                    is SearchEvents.TravelNotFound -> binding.cwRvTravel.setStatus(ContentWrapper.WrapperStatus.Empty)
+                    is SearchEvents.UserNotFound -> binding.cwRvUser.setStatus(ContentWrapper.WrapperStatus.Empty)
                 }
             }
         }
@@ -178,7 +180,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
             viewModel.action.onUserItemClick(user, pos)
 
         }
-        travelAdapter = TravelAdapter(baseActivity) { position, item -> //TODO
+        travelAdapter = TravelAdapter(baseActivity) { position, item ->
+            viewModel.action.onTravelItemClick(item, position)
         }
         binding.apply {
             rvUser.adapter = userAdapter

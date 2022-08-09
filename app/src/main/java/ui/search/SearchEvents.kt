@@ -19,14 +19,15 @@ sealed class SearchEvents : BaseEvent() {
     data class UserError(val message: String) : SearchEvents()
     data class TravelError(val message: String) : SearchEvents()
 
-    //visibility
-    data class RvUserVisibility(val isVisible: Boolean) : SearchEvents()
-    data class RvTravelVisibility(val isVisible: Boolean) : SearchEvents()
+
+    data class UserNotFound(val message: String) : SearchEvents()
+    data class TravelNotFound(val message: String) : SearchEvents()
 
     object TabUser : SearchEvents()
     object TabTravel : SearchEvents()
 
     object NavBack : SearchEvents()
     data class NavUser(val user: UserPreview) : SearchEvents()
+    data class NavTravel(val travel: TravelPreview) : SearchEvents()
 
 }

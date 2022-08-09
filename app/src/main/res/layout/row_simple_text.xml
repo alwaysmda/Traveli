@@ -16,17 +16,18 @@
     </data>
 
 
-    <com.google.android.material.textview.MaterialTextView xmlns:android="http://schemas.android.com/apk/res/android"
-            app:fonti="@{app.m.fontMedium}"
-            android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.google.android.material.button.MaterialButton xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/GeneralButton.TextButton"
+        app:fonti="@{app.m.fontMedium}"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
         android:layout_marginHorizontal="@dimen/paddingMedium"
         android:text="@{ `#` + data}"
         android:textColor="@color/md_blue_500"
         android:textSize="@dimen/textLarge">
 
 
-    </com.google.android.material.textview.MaterialTextView>
+    </com.google.android.material.button.MaterialButton>
 
 </layout>
 

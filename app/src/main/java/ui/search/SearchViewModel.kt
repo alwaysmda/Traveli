@@ -56,7 +56,8 @@ class SearchViewModel @Inject constructor(
     }
 
     override fun onSearch(text: String) {
-        search(text)
+        if (text.isNotEmpty()) search(text)
+
 
     }
 
@@ -127,6 +128,7 @@ class SearchViewModel @Inject constructor(
     }
 
     fun search(text: String) {
+
         job?.cancel()
         job = viewModelScope.launch {
             delay(1000)
@@ -144,12 +146,17 @@ class SearchViewModel @Inject constructor(
                             is DataState.Success -> {
                                 lastUserQuery = text
                                 userPreviewList.clear()
-                                userPreviewList.addAll(it.data)
-                                val list = userPreviewList.cloned()
-                                if (userHasMore) {
-                                    list.add(UserPreview(LOADING_ID, "", ""))
+                                if (it.data.isEmpty()) {
+                                    _event.send(SearchEvents.UserNotFound(""))
+                                } else {
+                                    userPreviewList.addAll(it.data)
+                                    val list = userPreviewList.cloned()
+                                    if (userHasMore) {
+                                        list.add(UserPreview(LOADING_ID, "", ""))
+                                    }
+                                    _event.send(SearchEvents.UpdateUsers(list))
                                 }
-                                _event.send(SearchEvents.UpdateUsers(list))
+
                             }
 
                         }
@@ -170,13 +177,18 @@ class SearchViewModel @Inject constructor(
                             DataState.Loading    -> _event.send(SearchEvents.TravelLoading)
                             is DataState.Success -> {
                                 travelList.clear()
-                                travelList.addAll(it.data.toMutableList())
-                                lastTravelQuery = text
-                                val list = travelList.cloned()
-                                if (travelHasMore) {
-                                    list.add(getLoadingItem())
+                                if (it.data.isEmpty()) {
+                                    _event.send(SearchEvents.TravelNotFound(""))
+                                } else {
+                                    travelList.addAll(it.data)
+                                    lastTravelQuery = text
+                                    val list = travelList.cloned()
+                                    if (travelHasMore) {
+                                        list.add(getLoadingItem())
+                                    }
+                                    _event.send(SearchEvents.UpdateTravel(list))
                                 }
-                                _event.send(SearchEvents.UpdateTravel(list))
+
                             }
 
 
@@ -220,6 +232,12 @@ class SearchViewModel @Inject constructor(
     override fun onUserItemClick(user: UserPreview, pos: Int) {
         viewModelScope.launch {
             _event.send(SearchEvents.NavUser(user))
+        }
+    }
+
+    override fun onTravelItemClick(travel: TravelPreview, pos: Int) {
+        viewModelScope.launch {
+            _event.send(SearchEvents.NavTravel(travel))
         }
     }
 

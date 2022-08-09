@@ -24,6 +24,8 @@ sealed class TravelDetail(
         const val VIEW_TYPE_USER = 6
         const val VIEW_TYPE_CITIES = 7
         const val VIEW_TYPE_TAG = 8
+
+
     }
 }
 

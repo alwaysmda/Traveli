@@ -32,6 +32,11 @@ class TravelDetailViewModel @Inject constructor(
     override fun onStart(travelPreview: TravelPreview) {
         this.travelPreview = travelPreview
         if (travelDetails.isEmpty()) {
+            viewModelScope.launch {
+                val list = travelDetails.toMutableList()
+                list.add(TravelDetail.Cover(travelPreview.name, travelPreview.image))
+                _event.send(TravelDetailEvents.UpdateTravelDetail(list))
+            }
             getTravelDetail(travelPreview)
         } else {
             viewModelScope.launch { _event.send(TravelDetailEvents.UpdateTravelDetail(travelDetails)) }
