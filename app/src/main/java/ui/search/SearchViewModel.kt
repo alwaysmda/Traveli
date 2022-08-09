@@ -5,10 +5,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import data.remote.DataState
 import domain.model.TravelPreview
 import domain.model.TravelPreview.Companion.cloned
+import domain.model.TravelPreview.Companion.getLoadingItem
 import domain.model.UserPreview
 import domain.model.UserPreview.Companion.LOADING_ID
 import domain.model.UserPreview.Companion.cloned
-import domain.model.UserPreview.Companion.getFailureItem
 import domain.usecase.travel.TravelUseCases
 import domain.usecase.user.UserUseCases
 import kotlinx.coroutines.Job
@@ -20,7 +20,6 @@ import main.ApplicationClass
 import ui.base.BaseViewModel
 import util.Constant.TRAVEL_TAB
 import util.Constant.USER_TAB
-import util.extension.log
 import javax.inject.Inject
 
 
@@ -30,7 +29,7 @@ class SearchViewModel @Inject constructor(
     private val userUseCases: UserUseCases,
     private val travelUseCases: TravelUseCases
 ) : BaseViewModel<SearchEvents, SearchActions>(app), SearchActions {
-    var get = 0
+
 
     //local
     private var job: Job? = null
@@ -70,21 +69,22 @@ class SearchViewModel @Inject constructor(
                 when (it) {
                     is DataState.Failure -> if (tabIndex == TRAVEL_TAB) {
                         isTravelRequesting = false
-                        travelList.clear()
-                        val clonedList = userPreviewList.cloned()
-                        log("orig${userPreviewList.hashCode()}")
-                        log("clone:${clonedList.hashCode()}")
-                        _event.send(SearchEvents.TravelError(it.message))
-                        _event.send(SearchEvents.UpdateTravel(travelList.cloned()))
+                        val list = travelList.cloned()
+                        list.add(TravelPreview.getFailureItem())
+                        _event.send(SearchEvents.UpdateTravel(list))
                     }
                     DataState.Loading    -> {
-                        _event.send(SearchEvents.TravelLoading)
+                        //  _event.send(SearchEvents.TravelLoading)
                     }
                     is DataState.Success -> { //TODO update list
                         isTravelRequesting = false
                         travelList.addAll(it.data)
                         travelPage++
-                        _event.send(SearchEvents.UpdateTravel(travelList.cloned()))
+                        val list = travelList.cloned()
+                        if (travelHasMore) {
+                            list.add(getLoadingItem())
+                        }
+                        _event.send(SearchEvents.UpdateTravel(list))
                     }
 
 
@@ -103,7 +103,7 @@ class SearchViewModel @Inject constructor(
                         isUserRequesting = false
                         if (tabIndex == USER_TAB) _event.send(SearchEvents.UserError(it.message))
                         val list = userPreviewList.cloned()
-                        list.add(getFailureItem())
+                        list.add(UserPreview.getFailureItem())
                         _event.send(SearchEvents.UpdateUsers(list))
                     }
                     is DataState.Loading -> {
@@ -168,11 +168,15 @@ class SearchViewModel @Inject constructor(
                                 _event.send(SearchEvents.UpdateTravel(travelList.cloned()))
                             }
                             DataState.Loading    -> _event.send(SearchEvents.TravelLoading)
-                            is DataState.Success -> { //TODO update list
+                            is DataState.Success -> {
                                 travelList.clear()
                                 travelList.addAll(it.data.toMutableList())
                                 lastTravelQuery = text
-                                _event.send(SearchEvents.UpdateTravel(travelList.cloned()))
+                                val list = travelList.cloned()
+                                if (travelHasMore) {
+                                    list.add(getLoadingItem())
+                                }
+                                _event.send(SearchEvents.UpdateTravel(list))
                             }
 
 
