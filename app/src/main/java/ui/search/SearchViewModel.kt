@@ -6,7 +6,9 @@ import data.remote.DataState
 import domain.model.TravelPreview
 import domain.model.TravelPreview.Companion.cloned
 import domain.model.UserPreview
+import domain.model.UserPreview.Companion.LOADING_ID
 import domain.model.UserPreview.Companion.cloned
+import domain.model.UserPreview.Companion.getFailureItem
 import domain.usecase.travel.TravelUseCases
 import domain.usecase.user.UserUseCases
 import kotlinx.coroutines.Job
@@ -43,6 +45,8 @@ class SearchViewModel @Inject constructor(
 
     private var travelList = mutableListOf<TravelPreview>()
     private var userPreviewList = mutableListOf<UserPreview>()
+    private var userHasMore = true
+    private var travelHasMore = true
 
 
     override fun onStart() {
@@ -98,17 +102,22 @@ class SearchViewModel @Inject constructor(
                     is DataState.Failure -> {
                         isUserRequesting = false
                         if (tabIndex == USER_TAB) _event.send(SearchEvents.UserError(it.message))
-                        userPreviewList.clear()
-                        _event.send(SearchEvents.UpdateUsers(userPreviewList.cloned()))
+                        val list = userPreviewList.cloned()
+                        list.add(getFailureItem())
+                        _event.send(SearchEvents.UpdateUsers(list))
                     }
                     is DataState.Loading -> {
-                        _event.send(SearchEvents.UserLoading)
+                        //  _event.send(SearchEvents.UserLoading)
                     }
                     is DataState.Success -> {
                         isUserRequesting = false
                         userPreviewList.addAll(it.data)
+                        val list = userPreviewList.cloned()
+                        if (userHasMore) {
+                            list.add(UserPreview(LOADING_ID, "", ""))
+                        }
                         userPage++
-                        _event.send(SearchEvents.UpdateUsers(userPreviewList.cloned()))
+                        _event.send(SearchEvents.UpdateUsers(list))
                     }
 
                 }
@@ -124,9 +133,6 @@ class SearchViewModel @Inject constructor(
             when (tabIndex) {
                 USER_TAB   -> {
                     if (text == lastUserQuery) return@launch
-//                    userUseCases.searchUserUseCase(text, 1).collectLatest {
-//
-//                    }
                     userUseCases.searchUserUseCase(text, 1).onEach { //TODO paginate
                         when (it) {
                             is DataState.Failure -> {
@@ -139,7 +145,11 @@ class SearchViewModel @Inject constructor(
                                 lastUserQuery = text
                                 userPreviewList.clear()
                                 userPreviewList.addAll(it.data)
-                                _event.send(SearchEvents.UpdateUsers(userPreviewList.cloned()))
+                                val list = userPreviewList.cloned()
+                                if (userHasMore) {
+                                    list.add(UserPreview(LOADING_ID, "", ""))
+                                }
+                                _event.send(SearchEvents.UpdateUsers(list))
                             }
 
                         }
