@@ -73,6 +73,7 @@
         <entry key="app/src/main/res/layout/row_travel_detail_tag.xml" value="0.30117753623188404" />
         <entry key="app/src/main/res/layout/row_travel_detail_user.xml" value="0.3578125" />
         <entry key="app/src/main/res/layout/row_travel_detail_video.xml" value="0.3055555555555556" />
+        <entry key="app/src/main/res/layout/row_travel_vertical.xml" value="0.3578125" />
         <entry key="app/src/main/res/layout/row_user.xml" value="0.375" />
         <entry key="app/src/main/res/layout/sample_view.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/sheet_charge.xml" value="0.34371833839918947" />

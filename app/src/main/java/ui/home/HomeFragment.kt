@@ -1,7 +1,7 @@
 package ui.home
 
 import adapter.CountryAdapter
-import adapter.SquareTravelAdapter
+import adapter.HorizontalSquareTravelAdapter
 import adapter.TravelAdapter
 import android.os.Bundle
 import android.view.View
@@ -21,8 +21,8 @@ import java.util.*
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, HomeViewModel>(R.layout.fragment_home) {
 
-    private lateinit var trendingTravelAdapter: SquareTravelAdapter
-    private lateinit var newTravelAdapter: SquareTravelAdapter
+    private lateinit var trendingTravelAdapter: HorizontalSquareTravelAdapter
+    private lateinit var newTravelAdapter: HorizontalSquareTravelAdapter
     private lateinit var subBannerAdapter: TravelAdapter
     private lateinit var countryAdapter: CountryAdapter
 
@@ -167,14 +167,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
 
 
     private fun setUpRecyclerViews() {
-        trendingTravelAdapter = SquareTravelAdapter(baseActivity) { travel, pos ->
+        trendingTravelAdapter = HorizontalSquareTravelAdapter(baseActivity) { travel, pos ->
             viewModel.action.onTravelItemClick(travel, pos)
         }
         subBannerAdapter = TravelAdapter(baseActivity) { position, travel -> //TODO
             viewModel.action.onTravelItemClick(travel, position)
         }
         countryAdapter = CountryAdapter(baseActivity)
-        newTravelAdapter = SquareTravelAdapter(baseActivity) { travel, pos ->
+        newTravelAdapter = HorizontalSquareTravelAdapter(baseActivity) { travel, pos ->
             viewModel.action.onTravelItemClick(travel, pos)
         }
         binding.apply {
