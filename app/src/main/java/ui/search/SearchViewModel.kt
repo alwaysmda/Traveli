@@ -56,7 +56,7 @@ class SearchViewModel @Inject constructor(
     }
 
     override fun onSearch(text: String) {
-        if (text.isNotEmpty()) search(text)
+        if (text.isNotEmpty()) search(text) else job?.cancel()
 
 
     }

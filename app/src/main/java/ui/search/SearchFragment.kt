@@ -16,6 +16,7 @@ import com.xodus.traveli.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 import ui.base.BaseFragment
 import ui.base.ContentWrapper
+import ui.base.ContentWrapper.Companion.setOnRetryClick
 import util.extension.changeChildFont
 import util.extension.log
 
@@ -107,6 +108,19 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
 
             })
 
+            cwRvTravel.setOnRetryClick(object : ContentWrapper.ContentWrapperInterface {
+                override fun onRetryClick() {
+                    viewModel.action.onSearch(edtSearch.text.toString())
+                }
+
+            })
+            cwRvUser.setOnRetryClick(object : ContentWrapper.ContentWrapperInterface {
+                override fun onRetryClick() {
+                    viewModel.action.onSearch(edtSearch.text.toString())
+                }
+
+            })
+
         }
 
     }
@@ -115,21 +129,21 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.event.collect {
                 when (it) {
-                    is SearchEvents.UpdateUsers   -> {
+                    is SearchEvents.UpdateUsers    -> {
                         userAdapter.submitList(it.userPreviews)
                         binding.cwRvUser.setStatus(ContentWrapper.WrapperStatus.Success)
                     }
-                    is SearchEvents.UpdateTravel  -> {
+                    is SearchEvents.UpdateTravel   -> {
                         travelAdapter.submitList(it.travels)
                         binding.cwRvTravel.setStatus(ContentWrapper.WrapperStatus.Success)
                     }
-                    is SearchEvents.UserError     -> {
+                    is SearchEvents.UserError      -> {
                         binding.apply {
                             binding.cwRvUser.setStatus(ContentWrapper.WrapperStatus.Failure(it.message))
                         }
 
                     }
-                    is SearchEvents.UserLoading   -> {
+                    is SearchEvents.UserLoading    -> {
                         binding.apply {
                             cwRvUser.setStatus(ContentWrapper.WrapperStatus.Loading)
                         }
@@ -140,35 +154,35 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchEvents, SearchA
 //                    is SearchEvents.RvUserVisibility   -> {
 //                        binding.rvUser.isVisible = it.isVisible
 //                    }
-                    is SearchEvents.TravelError   -> {
+                    is SearchEvents.TravelError    -> {
                         binding.apply {
                             cwRvTravel.setStatus(ContentWrapper.WrapperStatus.Failure(it.message))
                         }
                     }
-                    is SearchEvents.TravelLoading -> {
+                    is SearchEvents.TravelLoading  -> {
                         binding.apply {
                             cwRvTravel.setStatus(ContentWrapper.WrapperStatus.Loading)
                         }
                     }
 
-                    SearchEvents.TabTravel        -> {
+                    SearchEvents.TabTravel         -> {
                         binding.apply {
                             cwRvTravel.visibility = View.VISIBLE
                             cwRvUser.visibility = View.GONE
                         }
                     }
-                    SearchEvents.TabUser          -> {
+                    SearchEvents.TabUser           -> {
                         binding.apply {
                             cwRvUser.visibility = View.VISIBLE
                             cwRvTravel.visibility = View.GONE
                         }
                     }
 
-                    is SearchEvents.NavBack       -> findNavController().popBackStack()
-                    is SearchEvents.NavUser       -> findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToProfileFragment())
-                    is SearchEvents.NavTravel     -> findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToTravelDetailFragment(it.travel))
+                    is SearchEvents.NavBack        -> findNavController().popBackStack()
+                    is SearchEvents.NavUser        -> findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToProfileFragment())
+                    is SearchEvents.NavTravel      -> findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToTravelDetailFragment(it.travel))
                     is SearchEvents.TravelNotFound -> binding.cwRvTravel.setStatus(ContentWrapper.WrapperStatus.Empty)
-                    is SearchEvents.UserNotFound -> binding.cwRvUser.setStatus(ContentWrapper.WrapperStatus.Empty)
+                    is SearchEvents.UserNotFound   -> binding.cwRvUser.setStatus(ContentWrapper.WrapperStatus.Empty)
                 }
             }
         }

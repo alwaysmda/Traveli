@@ -44,6 +44,8 @@
 
             <ui.base.ContentWrapper
                 android:id="@+id/cw_banner"
+                app="@{vm.app}"
+                onRetryClick="@{()->vm.onGetBannerRetry()}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/paddingLarge"
@@ -58,7 +60,10 @@
                     app:cardCornerRadius="@dimen/radiusMedium"
                     app:cardElevation="0dp"
                     app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_search">
+                    app:layout_constraintTop_toBottomOf="@+id/btn_search"
+                    android:onClick="@{()->vm.onBannerClick()}"
+
+                    >
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -72,6 +77,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <com.google.android.material.textview.MaterialTextView
@@ -103,7 +110,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cv_first_travel"
-
                     tools:itemCount="2"
                     tools:listitem="@layout/row_travel" />
 
@@ -132,6 +138,8 @@
 
             <ui.base.ContentWrapper
                 android:id="@+id/cw_trending"
+                app="@{vm.app}"
+                onRetryClick="@{()->vm.onGetTrendingRetry()}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/paddingMedium"
@@ -175,6 +183,8 @@
 
             <ui.base.ContentWrapper
                 android:id="@+id/cw_new_travel"
+                app="@{vm.app}"
+                onRetryClick="@{()->vm.onGetNewRetry()}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/paddingMedium"
@@ -212,6 +222,8 @@
 
             <ui.base.ContentWrapper
                 android:id="@+id/cw_country"
+                app="@{vm.app}"
+                onRetryClick="@{()->vm.onGetCountriesRetry()}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/paddingMedium"

@@ -23,6 +23,11 @@ class HomeViewModel @Inject constructor(
     private val travelUseCases: TravelUseCases,
     private val countryUseCases: CountryUseCases
 ) : BaseViewModel<HomeEvents, HomeAction>(app), HomeAction {
+
+    //local
+    private lateinit var bannerTravel: TravelPreview
+
+
     override fun onStart() {
         app.prefManager.setPref(Constant.PREF_TOKEN, "Token")
         if (app.user == null) getMe() else getData()
@@ -47,7 +52,13 @@ class HomeViewModel @Inject constructor(
 
     override fun onTravelItemClick(travelPreview: TravelPreview, pos: Int) {
         viewModelScope.launch {
-            _event.send(HomeEvents.NavToTravelDetail(travelPreview)) //TODO pass travel
+            _event.send(HomeEvents.NavToTravelDetail(travelPreview))
+        }
+    }
+
+    override fun onBannerClick() {
+        viewModelScope.launch {
+            _event.send(HomeEvents.NavToTravelDetail(bannerTravel))
         }
     }
 
@@ -127,6 +138,7 @@ class HomeViewModel @Inject constructor(
                 DataState.Loading    -> _event.send(HomeEvents.BannerLoading)
                 is DataState.Success -> {
                     log("FLOW:banner")
+                    bannerTravel = it.data.banner
                     _event.send(HomeEvents.BannerUpdate(it.data))
                 }
             }

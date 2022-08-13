@@ -155,6 +155,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
 //            btnNewTravelRetry.setOnClickListener { viewModel.action.onGetNewRetry() }
 //            btnCountriesRetry.setOnClickListener { viewModel.action.onGetCountriesRetry() }
             //   btnSearch.setOnClickListener { viewModel.action.onSearchClick() }
+
         }
     }
 
