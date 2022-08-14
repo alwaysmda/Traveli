@@ -74,8 +74,6 @@ class TravelDetailViewModel @Inject constructor(
                     is DataState.Success -> {
                         travelDetails = it.data
                         _event.send(TravelDetailEvents.UpdateTravelDetail(it.data))
-
-
                     }
                 }
 

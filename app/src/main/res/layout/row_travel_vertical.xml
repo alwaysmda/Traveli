@@ -8,6 +8,10 @@
             name="app"
             type="main.ApplicationClass" />
 
+        <variable
+            name="data"
+            type="domain.model.TravelPreview" />
+
 
     </data>
 
@@ -25,7 +29,8 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                imageUrl="@{data.image}" />
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.textview.MaterialTextView
@@ -36,7 +41,8 @@
             android:textSize="@dimen/textLarge"
             app:layout_constraintStart_toEndOf="@+id/cv_travel"
             app:layout_constraintTop_toTopOf="@+id/cv_travel"
-            android:layout_marginTop="@dimen/paddingLarge" />
+            android:layout_marginTop="@dimen/paddingLarge"
+            android:text="@{data.name}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

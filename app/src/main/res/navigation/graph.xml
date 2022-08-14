@@ -4,15 +4,18 @@
         android:id="@+id/graph"
         app:startDestination="@id/homeTabFragment">
     <fragment
-            android:id="@+id/homeFragment"
-            android:name="ui.home.HomeFragment"
-            android:label="HomeFragment">
+        android:id="@+id/homeFragment"
+        android:name="ui.home.HomeFragment"
+        android:label="HomeFragment">
         <action
-                android:id="@+id/action_homeFragment_to_searchFragment"
-                app:destination="@id/searchFragment" />
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
         <action
-                android:id="@+id/action_homeFragment_to_travelDetailFragment"
-                app:destination="@id/travelDetailFragment" />
+            android:id="@+id/action_homeFragment_to_travelDetailFragment"
+            app:destination="@id/travelDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_travelListFragment"
+            app:destination="@id/travelListFragment" />
     </fragment>
     <fragment
             android:id="@+id/homeTabFragment"
@@ -79,12 +82,20 @@
             tools:layout="@layout/fragment_profile_edit" />
 
     <fragment
-            android:id="@+id/transactionFragment"
-            android:name="ui.transaction.TransactionFragment"
-            android:label="TransactionFragment"
-            tools:layout="@layout/fragment_transaction">
+        android:id="@+id/transactionFragment"
+        android:name="ui.transaction.TransactionFragment"
+        android:label="TransactionFragment"
+        tools:layout="@layout/fragment_transaction">
         <argument
-                android:name="balance"
-                app:argType="domain.model.Balance" />
+            android:name="balance"
+            app:argType="domain.model.Balance" />
+    </fragment>
+    <fragment
+        android:id="@+id/travelListFragment"
+        android:name="ui.travels.TravelListFragment"
+        android:label="TravelListFragment">
+        <argument
+            android:name="TravelType"
+            app:argType="string" />
     </fragment>
 </navigation>

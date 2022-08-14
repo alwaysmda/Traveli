@@ -84,7 +84,8 @@ object AppModule {
             GetBannerUseCase(traveliRepository),
             GetNewTravelListUseCase(traveliRepository),
             SearchTravelsUseCase(traveliRepository),
-            GetTravelDetailUseCase(traveliRepository)
+            GetTravelDetailUseCase(traveliRepository),
+            GetTravelByTypeUseCase(traveliRepository)
         )
     }
 

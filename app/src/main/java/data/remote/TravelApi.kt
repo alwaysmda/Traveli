@@ -13,6 +13,9 @@ interface TravelApi {
     @GET("travels/new/{page}")
     suspend fun getNewTravels(@Path("page") page: Int): Response<ResponseTravelListDto>
 
+    @GET("travels/{travelType}/{page}")
+    suspend fun getTravelByType(@Path("travelType") travelType: String, page: Int): Response<ResponseTravelListDto>
+
     @GET("travels")
     suspend fun getTravels(@Query("query") travel: String, @Query("page") page: Int): Response<ResponseTravelListDto>
 
