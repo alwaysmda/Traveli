@@ -13,6 +13,8 @@ import kotlinx.coroutines.launch
 import main.ApplicationClass
 import ui.base.BaseViewModel
 import util.Constant
+import util.Constant.CON_TRAVEL_TYPE_NEW
+import util.Constant.CON_TRAVEL_TYPE_TRENDING
 import util.extension.log
 import javax.inject.Inject
 
@@ -64,7 +66,13 @@ class HomeViewModel @Inject constructor(
 
     override fun onTrendingMoreClick() {
         viewModelScope.launch {
-            _event.send(HomeEvents.NavToTravelListFragment("trending"))
+            _event.send(HomeEvents.NavToTravelListFragment(CON_TRAVEL_TYPE_TRENDING))
+        }
+    }
+
+    override fun onNewClick() {
+        viewModelScope.launch {
+            _event.send(HomeEvents.NavToTravelListFragment(CON_TRAVEL_TYPE_NEW))
         }
     }
 

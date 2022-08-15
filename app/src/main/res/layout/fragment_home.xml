@@ -173,6 +173,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/paddingLarge"
                 android:gravity="start|center_vertical"
+                android:onClick="@{()->vm.onNewClick()}"
                 android:paddingHorizontal="@dimen/paddingLarge"
                 android:text="@{vm.app.m.new}"
                 android:textSize="@dimen/textLargeXX"

@@ -13,6 +13,7 @@ interface HomeAction : BaseAction {
     fun onTravelItemClick(travelPreview: TravelPreview, pos: Int)
     fun onBannerClick()
     fun onTrendingMoreClick()
+    fun onNewClick()
 
 
 }
