@@ -62,6 +62,12 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    override fun onTrendingMoreClick() {
+        viewModelScope.launch {
+            _event.send(HomeEvents.NavToTravelListFragment("trending"))
+        }
+    }
+
     override fun onSearchClick() {
         viewModelScope.launch {
             _event.send(HomeEvents.NavToSearch(HomeFragmentDirections.actionHomeFragmentToSearchFragment()))

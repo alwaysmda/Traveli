@@ -12,6 +12,7 @@ interface HomeAction : BaseAction {
     fun onGetCountriesRetry()
     fun onTravelItemClick(travelPreview: TravelPreview, pos: Int)
     fun onBannerClick()
+    fun onTrendingMoreClick()
 
 
 }

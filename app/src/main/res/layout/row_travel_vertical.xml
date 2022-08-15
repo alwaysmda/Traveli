@@ -15,37 +15,50 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="?attr/colorBackground2"
+        app:cardCornerRadius="@dimen/radiusLarge"
+        android:layout_marginTop="@dimen/paddingLarge">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_travel"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                imageUrl="@{data.image}" />
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_travel"
-            fonti="@{app.m.fontMedium}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/textLarge"
-            app:layout_constraintStart_toEndOf="@+id/cv_travel"
-            app:layout_constraintTop_toTopOf="@+id/cv_travel"
-            android:layout_marginTop="@dimen/paddingLarge"
-            android:text="@{data.name}" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_travel"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    imageUrl="@{data.image}"
+                    android:scaleType="centerCrop" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_travel"
+                fonti="@{app.m.fontBold}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textLargeXX"
+                app:layout_constraintStart_toEndOf="@+id/cv_travel"
+                app:layout_constraintTop_toTopOf="@+id/cv_travel"
+                android:layout_marginTop="@dimen/paddingLarge"
+                android:layout_marginStart="@dimen/paddingMedium"
+                android:textColor="?attr/colorText0"
+                android:text="@{data.name}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
 
 
 </layout>
