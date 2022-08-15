@@ -56,12 +56,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginHorizontal="@dimen/paddingLarge"
+                    android:onClick="@{()->vm.onBannerClick()}"
                     app:cardBackgroundColor="?attr/colorBackground2"
                     app:cardCornerRadius="@dimen/radiusMedium"
                     app:cardElevation="0dp"
                     app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintTop_toBottomOf="@+id/btn_search"
-                    android:onClick="@{()->vm.onBannerClick()}"
 
                     >
 
@@ -125,6 +125,7 @@
                 android:layout_marginHorizontal="@dimen/paddingLarge"
                 android:layout_marginTop="@dimen/paddingLarge"
                 android:gravity="start|center_vertical"
+                android:onClick="@{()-> vm.onTrendingMoreClick()}"
                 android:text="@{vm.app.m.trending}"
                 android:textSize="@dimen/textLargeXX"
                 app:icon="@drawable/ic_arrow_right"
@@ -172,6 +173,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/paddingLarge"
                 android:gravity="start|center_vertical"
+                android:onClick="@{()->vm.onNewClick()}"
                 android:paddingHorizontal="@dimen/paddingLarge"
                 android:text="@{vm.app.m.new}"
                 android:textSize="@dimen/textLargeXX"

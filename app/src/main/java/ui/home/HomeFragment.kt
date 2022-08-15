@@ -1,7 +1,7 @@
 package ui.home
 
 import adapter.CountryAdapter
-import adapter.SquareTravelAdapter
+import adapter.HorizontalSquareTravelAdapter
 import adapter.TravelAdapter
 import android.os.Bundle
 import android.view.View
@@ -21,8 +21,8 @@ import java.util.*
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, HomeViewModel>(R.layout.fragment_home) {
 
-    private lateinit var trendingTravelAdapter: SquareTravelAdapter
-    private lateinit var newTravelAdapter: SquareTravelAdapter
+    private lateinit var trendingTravelAdapter: HorizontalSquareTravelAdapter
+    private lateinit var newTravelAdapter: HorizontalSquareTravelAdapter
     private lateinit var subBannerAdapter: TravelAdapter
     private lateinit var countryAdapter: CountryAdapter
 
@@ -66,13 +66,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
         viewModel.event.collect {
             log("FLOW:OBSERVE")
             when (it) {
-                is HomeEvents.TrendingTravelUpdate  -> {
+                is HomeEvents.TrendingTravelUpdate    -> {
                     binding.apply {
                         cwTrending.setStatus(ContentWrapper.WrapperStatus.Success)
                     }
                     trendingTravelAdapter.submitList(it.travelPreviews)
                 }
-                is HomeEvents.BannerUpdate          -> {
+                is HomeEvents.BannerUpdate            -> {
                     binding.apply {
                         binding.ivBanner.load(it.banner.banner.image)
                         tvBannerName.text = it.banner.banner.name
@@ -81,67 +81,68 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
                     }
 
                 }
-                is HomeEvents.CountriesUpdate       -> {
+                is HomeEvents.CountriesUpdate         -> {
                     binding.cwCountry.setStatus(ContentWrapper.WrapperStatus.Success)
                     countryAdapter.submitList(it.countries)
                 }
-                is HomeEvents.NewTravelUpdate       -> {
+                is HomeEvents.NewTravelUpdate         -> {
                     binding.cwNewTravel.setStatus(ContentWrapper.WrapperStatus.Success)
                     newTravelAdapter.submitList(it.travelPreviews)
 
                 }
                 //loadings
-                is HomeEvents.Loading               -> {
+                is HomeEvents.Loading                 -> {
                 }
-                is HomeEvents.NewTravelLoading      -> {
+                is HomeEvents.NewTravelLoading        -> {
                     binding.apply {
                         binding.cwNewTravel.setStatus(ContentWrapper.WrapperStatus.Loading)
                     }
                 }
-                is HomeEvents.BannerLoading         -> {
+                is HomeEvents.BannerLoading           -> {
                     binding.apply {
                         cwBanner.setStatus(ContentWrapper.WrapperStatus.Loading)
 
                     }
                 }
-                is HomeEvents.CountriesLoading      -> {
+                is HomeEvents.CountriesLoading        -> {
                     binding.apply {
                         cwCountry.setStatus(ContentWrapper.WrapperStatus.Loading)
                     }
                 }
-                is HomeEvents.TrendingTravelLoading -> {
+                is HomeEvents.TrendingTravelLoading   -> {
                     binding.apply {
                         cwTrending.setStatus(ContentWrapper.WrapperStatus.Loading)
                     }
 
                 }
                 //errors
-                is HomeEvents.OnError               -> {
+                is HomeEvents.OnError                 -> {
                 }
-                is HomeEvents.TrendingTravelError   -> {
+                is HomeEvents.TrendingTravelError     -> {
                     binding.apply {
                         cwTrending.setStatus(ContentWrapper.WrapperStatus.Failure(it.message))
                     }
                 }
-                is HomeEvents.BannerError           -> {
+                is HomeEvents.BannerError             -> {
                     binding.apply {
                         cwBanner.setStatus(ContentWrapper.WrapperStatus.Failure(it.message))
 
                     }
                 }
-                is HomeEvents.CountriesError        -> {
+                is HomeEvents.CountriesError          -> {
                     binding.apply {
                         cwCountry.setStatus(ContentWrapper.WrapperStatus.Failure(it.message))
                     }
                 }
-                is HomeEvents.NewTravelError        -> {
+                is HomeEvents.NewTravelError          -> {
                     binding.apply {
                         cwNewTravel.setStatus(ContentWrapper.WrapperStatus.Failure(it.message))
                     }
 
                 }
-                is HomeEvents.NavToSearch           -> findNavController().navigate(it.direction)
-                is HomeEvents.NavToTravelDetail     -> findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToTravelDetailFragment(it.travelPreview))
+                is HomeEvents.NavToSearch             -> findNavController().navigate(it.direction)
+                is HomeEvents.NavToTravelDetail       -> findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToTravelDetailFragment(it.travelPreview))
+                is HomeEvents.NavToTravelListFragment -> findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToTravelListFragment(it.type))
             }
         }
 
@@ -167,14 +168,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeEvents, HomeAction, H
 
 
     private fun setUpRecyclerViews() {
-        trendingTravelAdapter = SquareTravelAdapter(baseActivity) { travel, pos ->
+        trendingTravelAdapter = HorizontalSquareTravelAdapter(baseActivity) { travel, pos ->
             viewModel.action.onTravelItemClick(travel, pos)
         }
         subBannerAdapter = TravelAdapter(baseActivity) { position, travel -> //TODO
             viewModel.action.onTravelItemClick(travel, position)
         }
         countryAdapter = CountryAdapter(baseActivity)
-        newTravelAdapter = SquareTravelAdapter(baseActivity) { travel, pos ->
+        newTravelAdapter = HorizontalSquareTravelAdapter(baseActivity) { travel, pos ->
             viewModel.action.onTravelItemClick(travel, pos)
         }
         binding.apply {

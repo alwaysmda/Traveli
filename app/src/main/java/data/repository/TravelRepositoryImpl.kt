@@ -50,6 +50,15 @@ class TravelRepositoryImpl(
         }
     }
 
+    override suspend fun getTravelByType(type: String, page: Int): DataState<List<TravelPreview>> {
+        return when (val response = call { travelApi.getTravelByType(type, page) }) {
+            is DataState.Failure -> response
+            is DataState.Loading -> DataState.Success(ResponseTravelListDto.getFake().travels.map { travelPreviewMapper.toDomainModel(it) })
+            is DataState.Success -> DataState.Loading
+
+        }
+    }
+
     override suspend fun searchTravel(query: String, page: Int): DataState<List<TravelPreview>> {
         return when (val response = call { travelApi.getTravels("", page) }) {
             is DataState.Failure -> response

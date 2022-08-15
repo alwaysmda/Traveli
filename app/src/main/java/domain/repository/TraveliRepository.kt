@@ -11,6 +11,8 @@ interface TraveliRepository {
 
     suspend fun getNewTravels(page: Int): DataState<List<TravelPreview>>
 
+    suspend fun getTravelByType(type: String, page: Int): DataState<List<TravelPreview>>
+
     suspend fun searchTravel(query: String, page: Int): DataState<List<TravelPreview>>
 
     suspend fun getTravelDetail(travelId: Long): DataState<Travel>

@@ -22,6 +22,8 @@ object Constant {
     const val CON_ADAPTER_LOADING = 2
     const val CON_ADAPTER_FAILURE = 3
     const val CON_ADAPTER_ADD = 4
+    const val CON_TRAVEL_TYPE_TRENDING = "trending"
+    const val CON_TRAVEL_TYPE_NEW = "new"
 
     enum class Languages(val value: String) {
         FA("FA"),
