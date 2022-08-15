@@ -50,6 +50,24 @@ class TransactionViewModel @Inject constructor(
 
     override fun onChargeClick() {
         viewModelScope.launch {
+            transactionUseCases.getChargePriceListUseCase().onEach {
+                when (it) {
+                    is DataState.Loading -> _event.send(TransactionEvents.ShowLoading(true))
+                    is DataState.Failure -> {
+                        _event.send(TransactionEvents.ShowLoading(false))
+                        _event.send(TransactionEvents.Snack(it.message))
+                    }
+                    is DataState.Success -> {
+                        _event.send(TransactionEvents.ShowLoading(false))
+                        _event.send(TransactionEvents.ShowChargeSheet(it.data))
+                    }
+                }
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    override fun onChargeConfirmClick(value: Long) {
+        viewModelScope.launch {
             _event.send(TransactionEvents.Snack(app.m.add))
         }
     }

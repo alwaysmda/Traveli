@@ -69,4 +69,10 @@ class LanguageEN(private val app: ApplicationClass) : LanguageInterface {
     override val confirmCheckoutDesc1: String = "Are you sure you want to checkout"
     override val confirmCheckoutDesc2: String = "to your account?"
     override val checkoutComplete: String = "Checkout complete!"
+    override val chargeAccount: String = "Charge Account"
+    override val customAmount: String = "Custom amount"
+    override val priceCannotBeLowerThanX1: String = "Price cannot be lower than"
+    override val priceCannotBeLowerThanX2: String = ""
+    override val priceCannotBeHigherThanX1: String = "Price cannot be higher than"
+    override val priceCannotBeHigherThanX2: String = ""
 }

@@ -14,14 +14,14 @@ import com.xodus.traveli.databinding.FragmentTransactionBinding
 import dagger.hilt.android.AndroidEntryPoint
 import ui.base.BaseFragment
 import ui.base.ContentWrapper
+import ui.dialog.ChargeBottomSheet
 import ui.dialog.ConfirmBottomSheet
-import ui.dialog.EditBottomSheet
 import util.Constant
 
 @AndroidEntryPoint
 class TransactionFragment : BaseFragment<FragmentTransactionBinding, TransactionEvents, TransactionAction, TransactionViewModel>(R.layout.fragment_transaction) {
     private val args: TransactionFragmentArgs by navArgs()
-    private var editBottomSheet: EditBottomSheet? = null
+    private var chargeBottomSheet: ChargeBottomSheet? = null
     private var confirmBottomSheet: ConfirmBottomSheet? = null
     private var transactionAdapter: TransactionAdapter? = null
 
@@ -97,7 +97,14 @@ class TransactionFragment : BaseFragment<FragmentTransactionBinding, Transaction
                     it.onPositive,
                     it.negative,
                     it.onNegative
-                ).also { d -> d.show(childFragmentManager, "") }
+                ).also { d -> d.show(childFragmentManager, ConfirmBottomSheet::class.java.simpleName) }
+                is TransactionEvents.ShowChargeSheet           -> {
+                    chargeBottomSheet = ChargeBottomSheet(baseActivity, it.chargePrice) { value ->
+                        viewModel.action.onChargeConfirmClick(value)
+                    }.also { d ->
+                        d.show(childFragmentManager, ChargeBottomSheet::class.java.simpleName)
+                    }
+                }
             }
         }
     }

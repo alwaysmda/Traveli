@@ -68,12 +68,14 @@ object RepositoryModule {
         transactionApi: TransactionApi,
         balanceMapper: BalanceMapper,
         transactionDataMapper: TransactionDataMapper,
+        chargePriceMapper: ChargePriceMapper,
     ): TransactionRepository = TransactionRepositoryImpl(
         app,
         networkErrorMapper,
         transactionApi,
         balanceMapper,
         transactionDataMapper,
+        chargePriceMapper,
     )
 
     @Provides

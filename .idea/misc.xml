@@ -46,6 +46,7 @@
         <entry key="app/src/main/res/layout/fragment_template_mvi.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/fragment_transaction.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_travel_detail.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/row_charge_price.xml" value="0.625" />
         <entry key="app/src/main/res/layout/row_chat.xml" value="0.2717391304347826" />
         <entry key="app/src/main/res/layout/row_city.xml" value="0.3578125" />
         <entry key="app/src/main/res/layout/row_country.xml" value="0.1" />
@@ -76,6 +77,7 @@
         <entry key="app/src/main/res/layout/row_user.xml" value="0.375" />
         <entry key="app/src/main/res/layout/sample_view.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/sheet_charge.xml" value="0.34371833839918947" />
+        <entry key="app/src/main/res/layout/sheet_charge_price.xml" value="0.9236111111111112" />
         <entry key="app/src/main/res/layout/sheet_confirm.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/sheet_edit.xml" value="0.34371833839918947" />
         <entry key="app/src/main/res/layout/sheet_edit_contact.xml" value="0.34371833839918947" />

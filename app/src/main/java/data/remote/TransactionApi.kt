@@ -1,6 +1,7 @@
 package data.remote
 
 import data.remote.dto.ResponseBalanceDto
+import data.remote.dto.ResponseChargePricesDto
 import data.remote.dto.ResponseTransactionDto
 import retrofit2.Response
 import retrofit2.http.Field
@@ -19,4 +20,7 @@ interface TransactionApi {
 
     @GET("transactions/checkout")
     suspend fun checkout(): Response<ResponseTransactionDto>
+
+    @GET("transactions/charge/prices")
+    suspend fun getChargePrices(): Response<ResponseChargePricesDto>
 }

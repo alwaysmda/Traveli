@@ -35,7 +35,7 @@ If it's free, then user can view package content, if not, user can view the pack
 Tapping on each item navigates to search screen and searches the selected country.  
   
 ••Lists:  
--Contains two lists.  
+-Contains two lists  
 Bookmarked packages and owned packages.  
   
 •••Profile:  
@@ -62,13 +62,13 @@ Phone, Email, Twitter, Instagram, Website.
 =============================================================================================  
 ===================================== S T R U C T U R E =====================================  
 =============================================================================================  
-MVVM Clean architecture with Actions, Events, Domain layer and UseCases  
+•MVVM Clean architecture with Actions, Events, Domain layer and UseCases  
   
 -Actions  
-An interface that listens on the users input and delivers it to view models  
+An interface that listens on the users input and delivers it to ViewModels.  
   
 -Events  
-An interface that orders the view to do something  
+An interface that orders the view to do something.  
   
 -Domain layer  
 DTOs (Data Transfer Object) are used to retrieve and convert API's response to objects.  
@@ -83,25 +83,25 @@ Each UseCase has one and only one public method and can have none, one or multip
 Sorting, filtering, fetching and validating data is done in use cases.  
 UseCases are categorized by usage.  
   
-Using:  
+••Using:  
 -Retrofit2  
-Different apis and repositories are separated  
+Different apis and repositories are separated.  
   
 -Coil  
-There is binding extensions in BindingAdapterUtils  
+There is binding extensions in BindingAdapterUtils.  
   
 -XML  
   
 -Hilt  
   
 -DataStore  
-PrefManager is responsible to save and load data using DataStore  
+PrefManager is responsible to save and load data using DataStore.  
   
 -Flow  
-Used for connection between UseCases and ViewModels and XMLs  
+Used for connection between UseCases and ViewModels and XMLs.  
   
 -CPP  
-Used to hide sensitive strings like base API and tokens  
+Used to hide sensitive strings like base API and tokens.  
   
 -LanguageManager  
 Custom classes that handle the language and font changing function.  
@@ -120,10 +120,10 @@ It can be developed to view an empty state.
 -Data-Binding  
 All screens only contain ViewModel variable.  
 List items (rows) also contain the model for the specific item.  
-Fonts and constant strings are referenced by vm.app.m.someString  
-Click listeners are referenced by () -> vm.action.someAction()  
+Fonts and constant strings are referenced by vm.app.m.someString.  
+Click listeners are referenced by () -> vm.action.someAction().  
 Fonts and image urls should be set using BindingAdapter extension functions.  
-Dynamic strings are referenced to a MutableStateFlow in ViewModels using vm.someString  
+Dynamic strings are referenced to a MutableStateFlow in ViewModels using vm.someString.  
   
 -BottomSheets  
 It is being used instead of dialogs.  
@@ -141,14 +141,14 @@ There are multiple useful extension files available.
 AppExtensions is the app specific extensions but the other ones can be used in any project.  
 Search before adding a snippet.  
   
-App creation flow:  
+•••App creation flow:  
 -Idea  
 -Sketch  
 -Prototype Version + Api  
 -Design + Backend Development  
 -Production Version  
   
-Best practices:  
+••••Best practices:  
 -RecyclerViews  
 Three types of item is predicted to be used.  
 Failure, Loading and Normal view.  
@@ -197,29 +197,33 @@ Code style and shortcuts are configured.
 Share the same setting in team and make sure to check Reformat Code, Rearrange Code and Optimize Import before commit.  
   
 Some useful shortcuts are:  
-Command+O -> Close other tabs  
-Option+A -> Clone caret above   
-Option+Z -> Clone caret below  
-Double Option+(hold or tap)Up -> Clone caret above  
-Double Option+(hold or tap)Down -> Clone caret below  
-Control+C -> Stop application  
-Control+X -> Clean  
-Control+Z -> Run  
-Control+Option+O -> Optimize imports  
-Command+Option+L -> Format code  
-Command+K -> Commit  
-Command+Shift+K -> Push  
-Command+Shift+F -> Search in codes  
-Double Shift -> Search in files  
-Option+Up -> Select more  
-Option+Down -> Select less  
-Shift+Enter -> Goto next line  
-Command+D -> Duplicate line/selected  
-Control+Tab -> Change tab  
-Control+Command+G -> Find all occurrences in page  
-Command+Q -> Magic!  
+Command + O                             -> Close other tabs  
+Option + A                              -> Clone caret above  
+Option + Z                              -> Clone caret below  
+Double Option + (hold or tap) Up        -> Clone caret above  
+Double Option + (hold or tap) Down      -> Clone caret below  
+Option + Left/Right                     -> Navigate to next/previous word  
+Option + Shift + Left/Right             -> Select next/previous word  
+Command + Left/Right                    -> Navigate to first/end of the line  
+Command + Shift + Left/Right            -> Select to start/end of the line  
+Control + C                             -> Stop application  
+Control + X                             -> Clean  
+Control + Z                             -> Run  
+Control + Option + O                    -> Optimize imports  
+Command + Option + L                    -> Format code  
+Command + K                             -> Commit  
+Command + Shift + K                     -> Push  
+Command + Shift + F                     -> Search in codes  
+Double Shift                            -> Search in files  
+Option + Up                             -> Select more  
+Option + Down                           -> Select less  
+Shift + Enter                           -> Goto next line  
+Command + D                             -> Duplicate line/selected  
+Control + Tab                           -> Change tab  
+Control + Command + G                   -> Find all occurrences in page  
+Command + Q                             -> Magic!  
   
   
   
-Happy Coding!  
+•••••Happy Coding!  
   

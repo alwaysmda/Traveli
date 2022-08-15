@@ -5,4 +5,5 @@ data class TransactionUseCases(
     val chargeUseCase: ChargeUseCase,
     val checkoutUseCase: CheckoutUseCase,
     val getBalanceUseCase: GetBalanceUseCase,
+    val getChargePriceListUseCase: GetChargePriceListUseCase,
 )

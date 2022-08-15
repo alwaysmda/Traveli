@@ -122,6 +122,7 @@ object AppModule {
             ChargeUseCase(app, transactionRepository, prefManager),
             CheckoutUseCase(app, transactionRepository, prefManager),
             GetBalanceUseCase(app, transactionRepository, prefManager),
+            GetChargePriceListUseCase(app, transactionRepository),
         )
     }
 }

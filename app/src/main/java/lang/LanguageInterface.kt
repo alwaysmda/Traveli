@@ -71,7 +71,15 @@ interface LanguageInterface {
     val confirmCheckoutDesc1: String
     val confirmCheckoutDesc2: String
     val checkoutComplete: String
+    val chargeAccount: String
+    val customAmount: String
+    val priceCannotBeLowerThanX1: String
+    val priceCannotBeLowerThanX2: String
+    val priceCannotBeHigherThanX1: String
+    val priceCannotBeHigherThanX2: String
 
+    fun priceCannotBeLowerThanX(value: String) = "$priceCannotBeLowerThanX1 $value $priceCannotBeLowerThanX2"
+    fun priceCannotBeHigherThanX(value: String) = "$priceCannotBeHigherThanX1 $value $priceCannotBeHigherThanX2"
     fun confirmCheckoutDesc(value: String) = "$confirmCheckoutDesc1 $value $confirmCheckoutDesc2"
     fun paramString(param: String) = "$appName $param"
 }

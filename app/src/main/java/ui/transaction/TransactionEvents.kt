@@ -1,5 +1,6 @@
 package ui.transaction
 
+import domain.model.ChargePrice
 import domain.model.Transaction
 import ui.base.BaseEvent
 
@@ -25,4 +26,5 @@ sealed class TransactionEvents : BaseEvent() {
     class UpdateTransactionList(val transactionList: List<Transaction>) : TransactionEvents()
     class SetTransactionListFailure(val message: String) : TransactionEvents()
     object SetTransactionListLoading : TransactionEvents()
+    class ShowChargeSheet(val chargePrice: ChargePrice) : TransactionEvents()
 }
