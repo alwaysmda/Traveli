@@ -67,6 +67,13 @@ class TravelListViewModel @Inject constructor(app: ApplicationClass, private val
 
     }
 
+    override fun onTravelItemClick(travelPreview: TravelPreview, pos: Int) {
+        viewModelScope.launch {
+            _event.send(TravelListEvent.NavToTravelDetail(travelPreview))
+        }
+    }
+
+
     private fun getTravelList(type: String) {
         travelUseCases.getTravelByTypeUseCase(type, 0).onEach {
             when (it) {

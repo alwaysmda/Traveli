@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.xodus.traveli.R
@@ -56,14 +57,17 @@ class TravelListFragment : BaseFragment<FragmentTravelListBinding, TravelListEve
             viewModel.apply {
                 event.collect {
                     when (it) {
-                        is TravelListEvent.TravelListError  -> {
+                        is TravelListEvent.TravelListError   -> {
                             binding.cwRvTravel.setStatus(ContentWrapper.WrapperStatus.Failure(it.message))
                         }
-                        TravelListEvent.TravelListLoading   -> {}
-                        is TravelListEvent.TravelListUpdate -> {
+                        TravelListEvent.TravelListLoading    -> {
+                            binding.cwRvTravel.setStatus(ContentWrapper.WrapperStatus.Loading)
+                        }
+                        is TravelListEvent.TravelListUpdate  -> {
                             binding.cwRvTravel.setStatus(ContentWrapper.WrapperStatus.Success)
                             travelAdapter.submitList(it.travelList)
                         }
+                        is TravelListEvent.NavToTravelDetail -> findNavController().navigate(TravelListFragmentDirections.actionTravelListFragmentToTravelDetailFragment(it.travelPreview))
                     }
                 }
             }
@@ -71,7 +75,10 @@ class TravelListFragment : BaseFragment<FragmentTravelListBinding, TravelListEve
     }
 
     private fun setUpRecyclerView() {
-        travelAdapter = VerticalSquareTravelAdapter(baseActivity)
+        travelAdapter = VerticalSquareTravelAdapter(baseActivity) { travelPreview, pos ->
+            viewModel.action.onTravelItemClick(travelPreview, pos)
+
+        }
         binding.rvTravel.adapter = travelAdapter
 
     }

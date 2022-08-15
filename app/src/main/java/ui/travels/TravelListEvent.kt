@@ -11,4 +11,8 @@ sealed class TravelListEvent : BaseEvent() {
     //error
     data class TravelListError(val message: String) : TravelListEvent()
 
+    //nav
+    data class NavToTravelDetail(val travelPreview: TravelPreview) : TravelListEvent()
+
+
 }
